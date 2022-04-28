@@ -17,12 +17,14 @@ import javax.swing.table.JTableHeader;
 import java.awt.Font;
 import java.awt.Frame;
 
+import model.Agent;
 import model.AgentManager;
 import model.Map;
 import model.MapManager;
 
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Set;
 import java.awt.event.MouseAdapter;
 import javax.swing.ImageIcon;
 import java.awt.Component;

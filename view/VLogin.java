@@ -281,7 +281,7 @@ public class VLogin extends JFrame implements ActionListener {
 			this.setState(Frame.ICONIFIED);
 		} else if (e.getSource().equals(btnLogin)) {
 			String user = txtUser.getText();
-			VPestaniasAgente vPestaniasAgente = new VPestaniasAgente(user , mapData);
+			VPestaniasAgente vPestaniasAgente = new VPestaniasAgente(user , mapData, agentData);
 			vPestaniasAgente.setVisible(true);
 			this.dispose();
 		}
