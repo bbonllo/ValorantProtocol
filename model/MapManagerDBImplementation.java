@@ -79,10 +79,10 @@ public class MapManagerDBImplementation implements MapManager {
 		Map mapIntro = null;
 
 		openConnection();
-		String SEARCHProp = "SELECT * from propietario";
+		String SEARCHMap = "SELECT * from map";
 
 		try {
-			stmt = con.prepareStatement(SEARCHProp);
+			stmt = con.prepareStatement(SEARCHMap);
 			rs = stmt.executeQuery();
 
 			while (rs.next()) {
