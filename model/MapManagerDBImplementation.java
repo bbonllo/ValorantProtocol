@@ -79,10 +79,10 @@ public class MapManagerDBImplementation implements MapManager {
 		Map mapIntro = null;
 
 		openConnection();
-		String SEARCHProp = "SELECT * from propietario";
+		String SEARCHMap = "SELECT * from map";
 
 		try {
-			stmt = con.prepareStatement(SEARCHProp);
+			stmt = con.prepareStatement(SEARCHMap);
 			rs = stmt.executeQuery();
 
 			while (rs.next()) {
@@ -98,7 +98,7 @@ public class MapManagerDBImplementation implements MapManager {
 
 			closeConnection();
 		} catch (SQLException e) {
-			String msg = "Error en el alta del propietario";
+			String msg = "Error en recuperar todos los mapas";
 			ExceptionManager x = new ExceptionManager(msg);
 			throw x;
 		}

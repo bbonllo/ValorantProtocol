@@ -11,6 +11,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Font;
 import java.awt.Frame;
 
+import model.AgentManager;
 import model.Map;
 import model.MapManager;
 
@@ -37,6 +38,7 @@ import javax.swing.JScrollBar;
 
 public class VPestaniasAgente extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
+	private AgentManager agentData;
 	private MapManager mapData;
 	private JPanel contentPane;
 	private KButton btnMinimize;
@@ -50,9 +52,11 @@ public class VPestaniasAgente extends JFrame implements ActionListener {
 	 * Create the frame.
 	 * 
 	 * @param user
+	 * @param agentData 
 	 * @param mapData
 	 */
-	public VPestaniasAgente(String user, MapManager map) {
+	public VPestaniasAgente(String user, MapManager map, AgentManager agent) {
+		agentData = agent;
 		mapData = map;
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(VLogin.class.getResource("/resources/rotGamesLogo.png")));
@@ -226,7 +230,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource().equals(btnClose)) {
-			VLogin vMain = new VLogin(mapData);
+			VLogin vMain = new VLogin(mapData, agentData);
 			vMain.setVisible(true);
 			this.dispose();
 		} else if (e.getSource().equals(btnMinimize)) {

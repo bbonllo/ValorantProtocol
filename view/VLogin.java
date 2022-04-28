@@ -13,6 +13,7 @@ import java.awt.Frame;
 
 import com.k33ptoo.components.KButton;
 
+import model.AgentManager;
 import model.MapManager;
 import model.MapManagerDBImplementation;
 
@@ -30,6 +31,7 @@ import javax.swing.border.LineBorder;
 
 public class VLogin extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
+	private AgentManager agentData;
 	private MapManager mapData;
 	private JPanel contentPane;
 	private JTextField txtUser;
@@ -62,9 +64,11 @@ public class VLogin extends JFrame implements ActionListener {
 	 * Create the frame.
 	 * 
 	 * @param map
+	 * @param agent 
 	 */
 
-	public VLogin(MapManager map) {
+	public VLogin(MapManager map, AgentManager agent) {
+		agentData = agent;
 		mapData = map;
 		setIconImage(Toolkit.getDefaultToolkit().getImage(VLogin.class.getResource("/resources/rotGamesLogo.png")));
 		setResizable(false);
