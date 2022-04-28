@@ -182,7 +182,7 @@ public class VLogin extends JFrame implements ActionListener {
 		p.add(btnLogin);
 
 		/*
-		 * Usuario y contraseña
+		 * Usuario y contraseÃ±a
 		 * 
 		 */
 
