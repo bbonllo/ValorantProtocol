@@ -285,7 +285,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener {
 		if (agents.size() > 0) {
 			String matrizTabla[][] = new String[1][agents.size()];
 			for (int i = 0; i < agents.size(); i++) {
-				matrizTabla[1][i] = agents.get(i).getAgentCode() + " - " + agents.get(i).getAgentName();
+				matrizTabla[1][i] = agents.get(i).getAgentCode() + " - " + agents.get(i).getAgentName(); //no entiendo porque no va
 			}
 
 			scrollPane = new JScrollPane();
