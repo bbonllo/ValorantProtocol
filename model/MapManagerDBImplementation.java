@@ -98,7 +98,7 @@ public class MapManagerDBImplementation implements MapManager {
 
 			closeConnection();
 		} catch (SQLException e) {
-			String msg = "Error en el alta del propietario";
+			String msg = "Error en recuperar todos los mapas";
 			ExceptionManager x = new ExceptionManager(msg);
 			throw x;
 		}

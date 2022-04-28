@@ -2,6 +2,6 @@ package model;
 
 public interface ViewManager {
 	
-	public void openView(MapManager map);
+	public void openView(MapManager map, AgentManager agent);
 
 }
