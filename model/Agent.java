@@ -1,7 +1,7 @@
 package model;
 
 
-public class Agent {
+public class Agent implements Comparable<Agent>{
 
 	private int agentCode;
     private String agentPasswd; // no podemos tener getPasswd por razones obvias
@@ -124,6 +124,17 @@ public class Agent {
 
 	public void setAgentIsOnMission(boolean agentIsOnMission) {
 		this.agentIsOnMission = agentIsOnMission;
+	}
+
+	@Override
+	public int compareTo(Agent o) {
+		if (agentCode > o.getAgentCode()) {
+			return 1;
+		} else if (agentCode == o.getAgentCode()) {
+			return 0;
+		}else {
+			return -1;
+		}
 	}
 
 	

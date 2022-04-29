@@ -24,6 +24,8 @@ import model.MapManager;
 
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 import java.awt.event.MouseAdapter;
 import javax.swing.ImageIcon;
@@ -31,6 +33,8 @@ import java.awt.Component;
 import java.awt.Toolkit;
 
 import com.k33ptoo.components.KButton;
+
+import exceptions.ExceptionManager;
 
 import java.awt.Cursor;
 
@@ -57,6 +61,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener {
 	private JPanel panelRegisterAgent;
 	private JPanel panelRemoveAgent;
 	private JPanel panelModifyAgent;
+	int cont = 0;
 
 	private JScrollPane scrollPane;
 	private JTable table;
@@ -65,7 +70,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener {
 	 * Create the frame.
 	 * 
 	 * @param user
-	 * @param agentData 
+	 * @param agentData
 	 * @param mapData
 	 */
 	public VPestaniasAgente(String user, MapManager map, AgentManager agent) {
@@ -281,45 +286,52 @@ public class VPestaniasAgente extends JFrame implements ActionListener {
 		 * 
 		 */
 
-		Set<Agent> agents = agentData.getAllAgents();
-		if (agents.size() > 0) {
-			String matrizTabla[][] = new String[1][agents.size()];
-			for (int i = 0; i < agents.size(); i++) {
-				matrizTabla[1][i] = agents.get(i).getAgentCode() + " - " + agents.get(i).getAgentName(); //no entiendo porque no va
-			}
-
-			scrollPane = new JScrollPane();
-			scrollPane.setBounds(1770, 74, 150, 1006); // 90 para que solo salgan 3 agents
-			p.add(scrollPane);
-
-			String titulo[] = { "Agentes" };
-
-			table = new JTable(matrizTabla, titulo);
-
-			table.setSelectionBackground(new Color(0, 230, 168));
-			table.setSelectionForeground(Color.WHITE);
-			table.setRowMargin(0);
-			table.setRowHeight(22);
-			table.setShowVerticalLines(false);
-			table.setFont(new Font("Tahoma", Font.PLAIN, 12));
-			table.setEnabled(false);
-			DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-			centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-			for (int i = 0; i < 5; i++) {
-				table.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
-			}
-			p.add(table);
-			scrollPane.setViewportView(table);
-
-			JTableHeader tableHeader = table.getTableHeader();
-			tableHeader.setBackground(new Color(0, 191, 140));
-			tableHeader.setForeground(Color.WHITE);
-			tableHeader.setFont(new Font("Tahoma", Font.BOLD, 15));
-			tableHeader.setBorder(null);
-			tableHeader.setEnabled(false);
-		} else {
-			JOptionPane.showMessageDialog(this, "Propietario sin agents", "", JOptionPane.WARNING_MESSAGE);
+		Set<Agent> agents = null;
+		try {
+			agents = agentData.getAllAgents();
+		} catch (ExceptionManager e1) {
+			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(this, e1.getMessage(), "Error", JOptionPane.WARNING_MESSAGE);
 		}
+		List<Agent> agentsOrder = new ArrayList<Agent>(agents);
+		Collections.sort(agentsOrder);
+		String matrizTabla[][] = new String[agents.size()][1];
+
+		for (Agent newAgent : agentsOrder) {
+			matrizTabla[cont][0] = newAgent.getAgentCode() + " - " + newAgent.getAgentName();
+			cont++;
+		}
+
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(1770, 74, 150, 1006);
+		p.add(scrollPane);
+
+		String titulo[] = { "Agentes" };
+
+		table = new JTable(matrizTabla, titulo);
+
+		// table.setModel(null);
+		table.setSelectionBackground(new Color(0, 230, 168));
+		table.setSelectionForeground(Color.WHITE);
+		table.setRowMargin(0);
+		table.setRowHeight(30);
+		table.setShowVerticalLines(false);
+		table.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 18));
+		table.setEnabled(false);
+		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+		centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+
+		table.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+
+		JTableHeader tableHeader = table.getTableHeader();
+		tableHeader.setBackground(new Color(0, 191, 140));
+		tableHeader.setForeground(Color.WHITE);
+		tableHeader.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 15));
+		tableHeader.setBorder(null);
+		tableHeader.setEnabled(false);
+
+		p.add(table);
+		scrollPane.setViewportView(table);
 
 		/*
 		 * Boton pestaña Agente
