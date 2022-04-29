@@ -37,15 +37,20 @@ public class AgentManagerDBImplementation implements AgentManager {
 	@Override
 	public Agent getAgentByID(int agentCode) {
 		ResultSet rs = null;
+		ResultSet rs2 = null;
 		Agent getAgent = null;
+		Ability ability = new Ability();
+		AbilityUltimate abilityUltimate = new AbilityUltimate();
+		Ability[] agentAbilities = new Ability[4];
+		int cont = 0;
 
 		openConnection();
-		String SEARCHAgent = "SELECT * from Agent where agentCode = ?";
+		final String SEARCHAgent = "SELECT * from Agent where agentCode = ?";
 
 		try {
 			stmt = con.prepareStatement(SEARCHAgent);
 			stmt.setInt(1, agentCode);
-			
+
 			rs = stmt.executeQuery();
 			if (rs.next()) {
 				getAgent = new Agent();
@@ -54,9 +59,29 @@ public class AgentManagerDBImplementation implements AgentManager {
 				getAgent.setAgentName(rs.getString("agentName"));
 				getAgent.setAgentNationality(rs.getString("agentNationality"));
 				getAgent.setAgentRol(rs.getString("agentRol"));
-				
-				
-				
+
+				final String SEARCHAgentsAbility = "SELECT * from ability where agentCode = ?";
+
+				stmt = con.prepareStatement(SEARCHAgentsAbility);
+				stmt.setInt(1, agentCode);
+
+				rs2 = stmt.executeQuery();
+				if (rs2.next()) {
+					if (cont == 3) {
+						abilityUltimate.setAbilityName(rs2.getString("abilityName"));
+						abilityUltimate.setAbilityDescription(rs2.getString("abilityDescription"));
+						abilityUltimate.setAbilityUltimateRequiredOrbs(rs2.getInt("orbNum"));
+						agentAbilities[cont] = abilityUltimate;
+					} else {
+						ability.setAbilityName(rs2.getString("abilityName"));
+						ability.setAbilityDescription(rs2.getString("abilityDescription"));
+						agentAbilities[cont] = ability;
+						cont++;
+					}
+
+				}
+				getAgent.setAgentAbilities(agentAbilities);   
+
 			} else
 				getAgent = null;
 
@@ -69,13 +94,102 @@ public class AgentManagerDBImplementation implements AgentManager {
 			e.printStackTrace();
 		}
 		return getAgent;
-		
+
 	}
 
 	@Override
 	public void registerAgent(Agent registerAgent) {
-		// TODO Auto-generated method stub
+		Ability ability1;
+		Ability ability2;
+		Ability ability3;
+		AbilityUltimate ability4;
+		Ability[] agentAbilities = new Ability[4];
 
+		// Abrimos la conexión
+		this.openConnection();
+
+		// Meto los valores del agente dentro del stmt:
+		try {
+			final String INSERTAgent = "INSERT INTO agent(agentCode, agetPasswd, agentName, agentNationality, agentRol, agentIsAdmin, agentIsOnMission, agentIsActive) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+			stmt = con.prepareStatement(INSERTAgent);
+
+			stmt.setInt(1, registerAgent.getAgentCode());
+			stmt.setString(2, registerAgent.getAgentPasswd());
+			stmt.setString(3, registerAgent.getAgentName());
+			stmt.setString(3, registerAgent.getAgentName());
+			stmt.setString(4, registerAgent.getAgentNationality());
+			stmt.setString(5, registerAgent.getAgentRol());
+			stmt.setBoolean(6, registerAgent.isAgentIsAdmin());
+			stmt.setBoolean(7, registerAgent.isAgentIsOnMission());
+			stmt.setBoolean(8, registerAgent.isAgentIsOnActive());
+
+			stmt.executeUpdate();
+
+			agentAbilities = registerAgent.getAgentAbilities();
+
+			ability1 = agentAbilities[0];
+			ability2 = agentAbilities[1];
+			ability3 = agentAbilities[2];
+			ability4 = (AbilityUltimate) agentAbilities[3];
+
+			// INSERTAR HABILIDADES DEL AGENTE
+
+			// HABILIDAD 1
+			final String INSERTAbility1 = "INSERT INTO ability(abilityName, agentCode, abilityDescription, orbnum) VALUES(?, ?, ?, null)";
+
+			stmt = con.prepareStatement(INSERTAbility1);
+
+			stmt.setString(1, ability1.getAbilityName());
+			stmt.setInt(2, registerAgent.getAgentCode());
+			stmt.setString(3, ability1.getAbilityDescription());
+
+			stmt.executeUpdate();
+
+			// HABILIDAD 2
+			final String INSERTAbility2 = "INSERT INTO ability(abilityName, agentCode, abilityDescription, orbnum) VALUES(?, ?, ?, null)";
+
+			stmt = con.prepareStatement(INSERTAbility2);
+
+			stmt.setString(1, ability2.getAbilityName());
+			stmt.setInt(2, registerAgent.getAgentCode());
+			stmt.setString(3, ability2.getAbilityDescription());
+
+			stmt.executeUpdate();
+
+			// HABILIDAD 3
+			final String INSERTAbility3 = "INSERT INTO ability(abilityName, agentCode, abilityDescription, orbnum) VALUES(?, ?, ?, null)";
+
+			stmt = con.prepareStatement(INSERTAbility3);
+
+			stmt.setString(1, ability3.getAbilityName());
+			stmt.setInt(2, registerAgent.getAgentCode());
+			stmt.setString(3, ability3.getAbilityDescription());
+
+			stmt.executeUpdate();
+
+			// HABILIDAD ULTIMATE
+			final String INSERTAbility4 = "INSERT INTO ability(abilityName, agentCode, abilityDescription, orbnum) VALUES(?, ?, ?, ?)";
+
+			stmt = con.prepareStatement(INSERTAbility4);
+
+			stmt.setString(1, ability4.getAbilityName());
+			stmt.setInt(2, registerAgent.getAgentCode());
+			stmt.setString(3, ability4.getAbilityDescription());
+			stmt.setInt(4, ability4.getAbilityUltimateRequiredOrbs());
+
+			stmt.executeUpdate();
+
+		} catch (SQLException e1) {
+			System.out.println("Error en alta SQL");
+			e1.printStackTrace();
+		} finally {
+			try {
+				this.closeConnection();
+			} catch (SQLException e) {
+				System.out.println("Error en cierre de la BD");
+				e.printStackTrace();
+			}
+		}
 	}
 
 	@Override
@@ -86,7 +200,21 @@ public class AgentManagerDBImplementation implements AgentManager {
 
 	@Override
 	public void deleteAgent(int agentCode) {
-		// TODO Auto-generated method stub
+
+		openConnection();
+		final String deleteAgent = "update agent set agentIsOnMission = true where agentCode = ?;";
+
+		try {
+			stmt = con.prepareStatement(deleteAgent);
+			stmt.setInt(1, agentCode);
+
+			stmt.executeUpdate();
+
+			closeConnection();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
@@ -125,7 +253,33 @@ public class AgentManagerDBImplementation implements AgentManager {
 	@Override
 	public Set<Agent> getAllActiveAgents() {
 		// TODO Auto-generated method stub
-		return null;
+
+		Set<Agent> ActiveAgents = new HashSet<>();
+		ResultSet rs = null;
+		Agent agentIntro = null;
+
+		openConnection();
+		String SEARCHAllAgents = "select * from agent where agentIsActive = true";
+
+		try {
+			stmt = con.prepareStatement(SEARCHAllAgents);
+			rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				agentIntro = new Agent();
+				agentIntro.setAgentCode(rs.getInt("agentCode"));
+				agentIntro.setAgentName(rs.getString("agentName"));
+			}
+
+			if (rs != null)
+				rs.close();
+
+			closeConnection();
+		} catch (SQLException e) {
+			String msg = "Error en recoger a todos los agentes";
+			ExceptionManager x = new ExceptionManager(msg);
+		}
+		return ActiveAgents;
 	}
 
 	@Override
