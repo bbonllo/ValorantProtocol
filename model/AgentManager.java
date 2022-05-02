@@ -12,11 +12,16 @@ public interface AgentManager {
 
 	public void modifyAgent(Agent modifyAgent);
 
-	public void deleteAgent(int agentCode);
+	public void makeAgentActive(int agentCode);
 
 	public Set<Agent> getAllAgents() throws ExceptionManager;
 
 	public Set<Agent> getAllActiveAgents();
 
-	public Agent Login(String username, String passwd);
+	public Agent Login(int agentCode, String passwd);
+	
+	public void makeAgentInactive(int agentCode);
+	
+	public Set<Agent> getTeammates(int agentCode);
+	
 }

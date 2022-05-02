@@ -80,7 +80,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 					}
 
 				}
-				getAgent.setAgentAbilities(agentAbilities);   
+				getAgent.setAgentAbilities(agentAbilities);
 
 			} else
 				getAgent = null;
@@ -194,15 +194,14 @@ public class AgentManagerDBImplementation implements AgentManager {
 
 	@Override
 	public void modifyAgent(Agent modifyAgent) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void deleteAgent(int agentCode) {
+	public void makeAgentInactive(int agentCode) {
 
 		openConnection();
-		final String deleteAgent = "update agent set agentIsOnMission = true where agentCode = ?;";
+		final String deleteAgent = "update agent set agentIsActive = false where agentCode = ?;";
 
 		try {
 			stmt = con.prepareStatement(deleteAgent);
@@ -216,6 +215,25 @@ public class AgentManagerDBImplementation implements AgentManager {
 			e.printStackTrace();
 		}
 
+	}
+
+	@Override
+	public void makeAgentActive(int agentCode) {
+
+		openConnection();
+		final String deleteAgent = "update agent set agentIsActive = true where agentCode = ?;";
+
+		try {
+			stmt = con.prepareStatement(deleteAgent);
+			stmt.setInt(1, agentCode);
+
+			stmt.executeUpdate();
+
+			closeConnection();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -236,6 +254,8 @@ public class AgentManagerDBImplementation implements AgentManager {
 				agentIntro = new Agent();
 				agentIntro.setAgentCode(rs.getInt("agentCode"));
 				agentIntro.setAgentName(rs.getString("agentName"));
+				agents.add(agentIntro);
+
 			}
 
 			if (rs != null)
@@ -254,7 +274,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 	public Set<Agent> getAllActiveAgents() {
 		// TODO Auto-generated method stub
 
-		Set<Agent> ActiveAgents = new HashSet<>();
+		Set<Agent> activeAgents = new HashSet<>();
 		ResultSet rs = null;
 		Agent agentIntro = null;
 
@@ -269,6 +289,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 				agentIntro = new Agent();
 				agentIntro.setAgentCode(rs.getInt("agentCode"));
 				agentIntro.setAgentName(rs.getString("agentName"));
+				activeAgents.add(agentIntro);
 			}
 
 			if (rs != null)
@@ -279,12 +300,103 @@ public class AgentManagerDBImplementation implements AgentManager {
 			String msg = "Error en recoger a todos los agentes";
 			ExceptionManager x = new ExceptionManager(msg);
 		}
-		return ActiveAgents;
+		return activeAgents;
 	}
 
 	@Override
-	public Agent Login(String username, String passwd) {
-		// TODO Auto-generated method stub
-		return null;
+	public Agent Login(int agentCode, String passwd) {
+
+		ResultSet rs = null;
+		ResultSet rs2 = null;
+		Agent getAgent = null;
+		Ability ability = new Ability();
+		AbilityUltimate abilityUltimate = new AbilityUltimate();
+		Ability[] agentAbilities = new Ability[4];
+		int cont = 0;
+
+		openConnection();
+		final String SEARCHAgent = "SELECT * from Agent where agentCode = ? and agentPasswd = ?";
+
+		try {
+			stmt = con.prepareStatement(SEARCHAgent);
+			stmt.setInt(1, agentCode);
+			stmt.setString(1, passwd);
+
+			rs = stmt.executeQuery();
+			if (rs.next()) {
+				getAgent = new Agent();
+				getAgent.setAgentCode(agentCode);
+				getAgent.setAgentPasswd("yakisieras");
+				getAgent.setAgentName(rs.getString("agentName"));
+				getAgent.setAgentNationality(rs.getString("agentNationality"));
+				getAgent.setAgentRol(rs.getString("agentRol"));
+
+				final String SEARCHAgentsAbility = "SELECT * from ability where agentCode = ?";
+
+				stmt = con.prepareStatement(SEARCHAgentsAbility);
+				stmt.setInt(1, agentCode);
+
+				rs2 = stmt.executeQuery();
+				if (rs2.next()) {
+					if (cont == 3) {
+						abilityUltimate.setAbilityName(rs2.getString("abilityName"));
+						abilityUltimate.setAbilityDescription(rs2.getString("abilityDescription"));
+						abilityUltimate.setAbilityUltimateRequiredOrbs(rs2.getInt("orbNum"));
+						agentAbilities[cont] = abilityUltimate;
+					} else {
+						ability.setAbilityName(rs2.getString("abilityName"));
+						ability.setAbilityDescription(rs2.getString("abilityDescription"));
+						agentAbilities[cont] = ability;
+						cont++;
+					}
+
+				}
+				getAgent.setAgentAbilities(agentAbilities);
+
+			} else
+				getAgent = null;
+
+			if (rs != null)
+				rs.close();
+
+			closeConnection();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return getAgent;
 	}
+
+	@Override
+	public Set<Agent> getTeammates(int agentCode) {
+		Set<Agent> teammates = new HashSet<>();
+		ResultSet rs = null;
+		Agent teammate = null;
+
+		openConnection();
+		String SEARCHteammates = "select * from agent where agentCode in(select agentCode from agent_on_mission where missionCode in(select missionCode from agent_on_mission where agentCode = ?";
+
+		try {
+			stmt = con.prepareStatement(SEARCHteammates);
+			stmt.setInt(1, agentCode);
+			rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				teammate = new Agent();
+				teammate.setAgentCode(rs.getInt("agentCode"));
+				teammate.setAgentName(rs.getString("agentName"));
+				teammates.add(teammate);
+			}
+
+			if (rs != null)
+				rs.close();
+
+			closeConnection();
+		} catch (SQLException e) {
+			String msg = "Error en recoger a todos los agentes";
+			ExceptionManager x = new ExceptionManager(msg);
+		}
+		return teammates;
+	}
+
 }
