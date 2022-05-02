@@ -96,7 +96,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 	public Set<Agent> getAllAgents() throws ExceptionManager {
 
 		// ArrayList<Agent> agentsList
-		Set<Agent> agents = new HashSet<>();
+		Set<Agent> activeAgents = new HashSet<>();
 		ResultSet rs = null;
 		Agent agentIntro = null;
 
@@ -108,11 +108,11 @@ public class AgentManagerDBImplementation implements AgentManager {
 			rs = stmt.executeQuery();
 
 			while (rs.next()) {
-				
+
 				agentIntro = new Agent();
 				agentIntro.setAgentCode(rs.getInt("agentCode"));
 				agentIntro.setAgentName(rs.getString("agentName"));
-				agents.add(agentIntro);
+				activeAgents.add(agentIntro);
 			}
 
 			if (rs != null)
@@ -124,7 +124,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 			ExceptionManager x = new ExceptionManager(msg);
 			throw x;
 		}
-		return agents;
+		return activeAgents;
 	}
 
 	@Override

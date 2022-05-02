@@ -23,6 +23,7 @@ import model.Map;
 import model.MapManager;
 
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -40,7 +41,7 @@ import java.awt.Cursor;
 
 import javax.swing.JButton;
 
-public class VPestaniasAgente extends JFrame implements ActionListener {
+public class VPestaniasAgente extends JFrame implements ActionListener, MouseListener {
 	private static final long serialVersionUID = 1L;
 	private AgentManager agentData;
 	private MapManager mapData;
@@ -163,6 +164,10 @@ public class VPestaniasAgente extends JFrame implements ActionListener {
 				btnClose.kFillButton = false; // Hacer transparente el boton
 			}
 		});
+
+		JPanel panelTable = new JPanel();
+		panelTable.setBounds(1770, 74, 150, 1006);
+		p.add(panelTable);
 		panelMission = new JPanel();
 		panelMission.setLayout(null);
 		panelMission.setBounds(0, 74, 1770, 1006);
@@ -304,23 +309,26 @@ public class VPestaniasAgente extends JFrame implements ActionListener {
 
 		scrollPane = new JScrollPane();
 		scrollPane.setBounds(1770, 74, 150, 1006);
-		p.add(scrollPane);
+		panelTable.add(scrollPane);
+		panelTable.add(table); // quitar comentario para que funcione el design
 
 		String titulo[] = { "Agentes" };
 
 		table = new JTable(matrizTabla, titulo);
 
-		// table.setModel(null);
 		table.setSelectionBackground(new Color(0, 230, 168));
 		table.setSelectionForeground(Color.WHITE);
 		table.setRowMargin(0);
 		table.setRowHeight(30);
+		table.setRowSelectionAllowed(true);
 		table.setShowVerticalLines(false);
 		table.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 18));
 		table.setEnabled(false);
+		
+		//panelTable.add(table); // quitar comentario para que funcione el programa
+		scrollPane.setViewportView(table);
 		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 		centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-
 		table.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
 
 		JTableHeader tableHeader = table.getTableHeader();
@@ -329,9 +337,8 @@ public class VPestaniasAgente extends JFrame implements ActionListener {
 		tableHeader.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 15));
 		tableHeader.setBorder(null);
 		tableHeader.setEnabled(false);
-
-		p.add(table);
-		scrollPane.setViewportView(table);
+		table.addMouseListener(this);
+		table.isCellEditable(agents.size(), 1);
 
 		/*
 		 * Boton pestaña Agente
@@ -432,5 +439,41 @@ public class VPestaniasAgente extends JFrame implements ActionListener {
 			panelWeapon.setVisible(false);
 			panelMap.setVisible(true);
 		}
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		if (e.getSource().equals(table)) {
+			if (e.getClickCount() == 2) {
+				JTable target = (JTable) e.getSource();
+				int row = target.getSelectedRow();
+
+			}
+		}
+
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+
 	}
 }
