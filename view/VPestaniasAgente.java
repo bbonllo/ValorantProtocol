@@ -68,7 +68,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener {
 	 * @param agentData 
 	 * @param mapData
 	 */
-	public VPestaniasAgente(String user, MapManager map, AgentManager agent) {
+	public VPestaniasAgente(int user, MapManager map, AgentManager agent) {
 		agentData = agent;
 		mapData = map;
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -285,7 +285,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener {
 		if (agents.size() > 0) {
 			String matrizTabla[][] = new String[1][agents.size()];
 			for (int i = 0; i < agents.size(); i++) {
-				matrizTabla[1][i] = agents.get(i).getAgentCode() + " - " + agents.get(i).getAgentName();
+				matrizTabla[1][i] = ((Agent) agents).get(i).getAgentCode() + " - " + ((Agent) agents).get(i).getAgentName();
 			}
 
 			scrollPane = new JScrollPane();

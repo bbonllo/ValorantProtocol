@@ -116,7 +116,6 @@ public class AgentManagerDBImplementation implements AgentManager {
 			stmt.setInt(1, registerAgent.getAgentCode());
 			stmt.setString(2, registerAgent.getAgentPasswd());
 			stmt.setString(3, registerAgent.getAgentName());
-			stmt.setString(3, registerAgent.getAgentName());
 			stmt.setString(4, registerAgent.getAgentNationality());
 			stmt.setString(5, registerAgent.getAgentRol());
 			stmt.setBoolean(6, registerAgent.isAgentIsAdmin());
@@ -193,8 +192,94 @@ public class AgentManagerDBImplementation implements AgentManager {
 	}
 
 	@Override
-	public void modifyAgent(Agent modifyAgent) {
+	public void modifyAgent(Agent modifyAgent) {	
+		Ability ability1;
+		Ability ability2;
+		Ability ability3;
+		AbilityUltimate ability4;
+		Ability[] agentAbilities = new Ability[4];
 
+		// Abrimos la conexión
+		this.openConnection();
+
+		// Meto los valores del agente dentro del stmt:
+		try {
+			final String INSERTAgent = "update agent set agentName = ?, agentNationality = ?, agentRol = ? where agentCode = ?";
+			stmt = con.prepareStatement(INSERTAgent);
+
+		
+			stmt.setString(1, modifyAgent.getAgentName());
+			stmt.setString(2, modifyAgent.getAgentNationality());
+			stmt.setString(3, modifyAgent.getAgentRol());
+			stmt.setInt(4, modifyAgent.getAgentCode());
+
+			stmt.executeUpdate();
+
+			agentAbilities = modifyAgent.getAgentAbilities();
+
+			ability1 = agentAbilities[0];
+			ability2 = agentAbilities[1];
+			ability3 = agentAbilities[2];
+			ability4 = (AbilityUltimate) agentAbilities[3];
+
+			// INSERTAR HABILIDADES DEL AGENTE
+
+			// HABILIDAD 1
+			final String INSERTAbility1 = "update ability set AbilityName = ?, AbilityDescription = ? where agentCode = ?"; 
+
+			stmt = con.prepareStatement(INSERTAbility1);
+
+			stmt.setString(1, ability1.getAbilityName());
+			stmt.setString(3, ability1.getAbilityDescription());
+			stmt.setInt(3, modifyAgent.getAgentCode());
+
+			stmt.executeUpdate();
+
+			// HABILIDAD 2
+			final String INSERTAbility2 = "update ability set AbilityName = ?, AbilityDescription = ? where agentCode = ?"; 
+
+			stmt = con.prepareStatement(INSERTAbility2);
+
+			stmt.setString(1, ability2.getAbilityName());
+			stmt.setString(3, ability2.getAbilityDescription());
+			stmt.setInt(3, modifyAgent.getAgentCode());
+
+			stmt.executeUpdate();
+
+			// HABILIDAD 3
+			final String INSERTAbility3 = "update ability set AbilityName = ?, AbilityDescription = ? where agentCode = ?"; 
+
+			stmt = con.prepareStatement(INSERTAbility3);
+
+			stmt.setString(1, ability3.getAbilityName());
+			stmt.setString(3, ability3.getAbilityDescription());
+			stmt.setInt(3, modifyAgent.getAgentCode());
+
+			stmt.executeUpdate();
+
+			// HABILIDAD ULTIMATE
+			final String INSERTAbility4 = "update ability set AbilityName = ?, AbilityDescription = ?, orbNum = ? where agentCode = ?"; 
+
+			stmt = con.prepareStatement(INSERTAbility4);
+
+			stmt.setString(1, ability4.getAbilityName());
+			stmt.setString(2, ability4.getAbilityDescription());
+			stmt.setInt(3, ability4.getAbilityUltimateRequiredOrbs());
+			stmt.setInt(4, modifyAgent.getAgentCode());
+
+			stmt.executeUpdate();
+
+		} catch (SQLException e1) {
+			System.out.println("Error en alta SQL");
+			e1.printStackTrace();
+		} finally {
+			try {
+				this.closeConnection();
+			} catch (SQLException e) {
+				System.out.println("Error en cierre de la BD");
+				e.printStackTrace();
+			}
+		}
 	}
 
 	@Override
