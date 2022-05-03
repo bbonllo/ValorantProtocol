@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Font;
@@ -13,6 +14,7 @@ import java.awt.Frame;
 
 import com.k33ptoo.components.KButton;
 
+import model.Agent;
 import model.AgentManager;
 import model.MapManager;
 import model.MapManagerDBImplementation;
@@ -64,7 +66,7 @@ public class VLogin extends JFrame implements ActionListener {
 	 * Create the frame.
 	 * 
 	 * @param map
-	 * @param agent 
+	 * @param agent
 	 */
 
 	public VLogin(MapManager map, AgentManager agent) {
@@ -280,11 +282,18 @@ public class VLogin extends JFrame implements ActionListener {
 		} else if (e.getSource().equals(btnMinimize)) {
 			this.setState(Frame.ICONIFIED);
 		} else if (e.getSource().equals(btnLogin)) {
-			int user = Integer.parseInt(txtUser.getText());
-		
-			VPestaniasAgente vPestaniasAgente = new VPestaniasAgente(user , mapData, agentData);
-			vPestaniasAgente.setVisible(true);
-			this.dispose();
+			int agentCode = Integer.parseInt(txtUser.getText());
+			String agentPasswd = new String(txtPasswd.getPassword());
+			Agent loginAgent = agentData.login(agentCode, agentPasswd);
+			if (loginAgent == null) {
+				JOptionPane.showMessageDialog(this, "uwu", "NO EXISTE EL USUARIO FRIKI", JOptionPane.WARNING_MESSAGE);
+			} else if(loginAgent.isAgentIsAdmin() == true ) {
+				VPestaniasAgente vPestaniasAgente = new VPestaniasAgente(loginAgent, mapData, agentData);
+				vPestaniasAgente.setVisible(true);
+				this.dispose();
+			}else {
+				JOptionPane.showMessageDialog(this, "uwu", "si no eres admin fuera friki", JOptionPane.WARNING_MESSAGE);
+			}
 		}
 	}
 }

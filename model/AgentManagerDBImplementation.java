@@ -389,7 +389,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 	}
 
 	@Override
-	public Agent Login(int agentCode, String passwd) {
+	public Agent login(int agentCode, String passwd) {
 
 		ResultSet rs = null;
 		ResultSet rs2 = null;
@@ -405,7 +405,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 		try {
 			stmt = con.prepareStatement(SEARCHAgent);
 			stmt.setInt(1, agentCode);
-			stmt.setString(1, passwd);
+			stmt.setString(2, passwd);
 
 			rs = stmt.executeQuery();
 			if (rs.next()) {
@@ -430,7 +430,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 						agentAbilities[cont] = abilityUltimate;
 					} else {
 						ability.setAbilityName(rs2.getString("abilityName"));
-						ability.setAbilityDescription(rs2.getString("abilityDescription"));
+						ability.setAbilityDescription(rs2.getString("abilityDesciption"));
 						agentAbilities[cont] = ability;
 						cont++;
 					}

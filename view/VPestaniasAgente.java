@@ -24,6 +24,8 @@ import model.MapManager;
 
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 import java.awt.event.MouseAdapter;
 import javax.swing.ImageIcon;
@@ -31,6 +33,8 @@ import java.awt.Component;
 import java.awt.Toolkit;
 
 import com.k33ptoo.components.KButton;
+
+import exceptions.ExceptionManager;
 
 import java.awt.Cursor;
 
@@ -60,15 +64,16 @@ public class VPestaniasAgente extends JFrame implements ActionListener {
 
 	private JScrollPane scrollPane;
 	private JTable table;
+	int cont = 0;
 
 	/**
 	 * Create the frame.
 	 * 
-	 * @param user
+	 * @param loginAgent
 	 * @param agentData 
 	 * @param mapData
 	 */
-	public VPestaniasAgente(int user, MapManager map, AgentManager agent) {
+	public VPestaniasAgente(Agent loginAgent, MapManager map, AgentManager agent) {
 		agentData = agent;
 		mapData = map;
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -175,7 +180,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener {
 
 		JLabel lblBackgroundPanelMission = new JLabel("");
 		lblBackgroundPanelMission
-				.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/appBackgroundPanel.jpg")));
+				.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/appBackgroundPanel.jpg"))); 
 		lblBackgroundPanelMission.setBounds(0, 0, 1770, 1006);
 		panelMission.add(lblBackgroundPanelMission);
 		panelWeapon = new JPanel();
@@ -281,18 +286,30 @@ public class VPestaniasAgente extends JFrame implements ActionListener {
 		 * 
 		 */
 
-		Set<Agent> agents = agentData.getAllAgents();
-		if (agents.size() > 0) {
-			String matrizTabla[][] = new String[1][agents.size()];
-			for (int i = 0; i < agents.size(); i++) {
-				matrizTabla[1][i] = ((Agent) agents).get(i).getAgentCode() + " - " + ((Agent) agents).get(i).getAgentName();
-			}
+		Set<Agent> agents = null;
+		try {
+			agents = agentData.getAllAgents();
+		} catch (ExceptionManager e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
+			List<Agent> agentsOrder = new ArrayList<Agent>(agents);
+	        Collections.sort(agentsOrder);
+	        String matrizTabla[][] = new String[agents.size()][1];
+
+	        for (Agent newAgent : agentsOrder) {
+	            
+				matrizTabla[cont][0] = newAgent.getAgentCode() + " - " + newAgent.getAgentName();
+	            cont++;
+	        }
+
+	        String titulo[] = { "Agentes" };
 			scrollPane = new JScrollPane();
 			scrollPane.setBounds(1770, 74, 150, 1006); // 90 para que solo salgan 3 agents
 			p.add(scrollPane);
 
-			String titulo[] = { "Agentes" };
+			
 
 			table = new JTable(matrizTabla, titulo);
 
@@ -305,9 +322,9 @@ public class VPestaniasAgente extends JFrame implements ActionListener {
 			table.setEnabled(false);
 			DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 			centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-			for (int i = 0; i < 5; i++) {
-				table.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
-			}
+			
+				table.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+			
 			p.add(table);
 			scrollPane.setViewportView(table);
 
@@ -317,9 +334,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener {
 			tableHeader.setFont(new Font("Tahoma", Font.BOLD, 15));
 			tableHeader.setBorder(null);
 			tableHeader.setEnabled(false);
-		} else {
-			JOptionPane.showMessageDialog(this, "Propietario sin agents", "", JOptionPane.WARNING_MESSAGE);
-		}
+	
 
 		/*
 		 * Boton pestaña Agente

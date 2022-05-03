@@ -18,7 +18,7 @@ public interface AgentManager {
 
 	public Set<Agent> getAllActiveAgents();
 
-	public Agent Login(int agentCode, String passwd);
+	public Agent login(int agentCode, String passwd);
 	
 	public void makeAgentInactive(int agentCode);
 	
