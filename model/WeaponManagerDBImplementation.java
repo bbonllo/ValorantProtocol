@@ -9,49 +9,49 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-public class WeaponManagerDBImplementation implements WeaponManager{
-	
-	//Variables
+public class WeaponManagerDBImplementation implements WeaponManager {
+
+	// Variables
 	private Connection con;
 	private PreparedStatement stmt;
-	
+
 	// SQL operations
-	final String INSERTwep = "INSERT INTO weapon(weaponName, weaponDamage, weaponType, weaponSubType, weaponIsActive) VALUES( ?, ?, ?, ?, ?, ?)";
-	final String LISTwep = "SELECT * FROM weapon WHERE weaponName = ?";
-	final String LISTweps = "SELECT * FROM weapon";
-	final String UPDATEwep = "UPDATE weapon SET weaponDamage= ? , weaponType= ? , weaponSubType= ? , weaponIsActive= ? WHERE weaponName = ?";
-	final String DELETEwep = "DELETE FROM weapon WHERE weaponName = ?";
-	
+	final String INSERTweapon = "INSERT INTO weapon(weaponName, weaponDamage, weaponType, weaponSubType, weaponIsActive) VALUES( ?, ?, ?, ?, ?, ?)";
+	final String LISTweapon = "SELECT * FROM weapon WHERE weaponName = ?";
+	final String LISTweapons = "SELECT * FROM weapon";
+	final String UPDATEweapon = "UPDATE weapon SET weaponDamage= ? , weaponType= ? , weaponSubType= ? , weaponIsActive= ? WHERE weaponName = ?";
+	final String DELETEweapon = "DELETE FROM weapon WHERE weaponName = ?";
+
 	// Method to open the connection
-	private void openConnection(){
-		 try {
-		  String url ="jdbc:mysql://localhost:3306/valorant_protocol?serverTimezone=Europe/Madrid&useSSL=false";
-		  con =  DriverManager.getConnection(url,"root" ,"abcd*1234");
+	private void openConnection() {
+		try {
+			String url = "jdbc:mysql://localhost:3306/valorant_protocol?serverTimezone=Europe/Madrid&useSSL=false";
+			con = DriverManager.getConnection(url, "root", "abcd*1234");
 
 		} catch (SQLException e) {
 			System.out.println("Error al intentar abrir la BD");
-		 }	
 		}
+	}
 
 	// Method to close the connection
-	 private void closeConnection() throws SQLException {
+	private void closeConnection() throws SQLException {
 		if (stmt != null)
 			stmt.close();
 		if (con != null)
 			con.close();
 	}
-	
+
 	@Override
 	public void addWeapon(Weapon weapon) {
 		// TODO Auto-generated method stub
-		
+
 		// Open the connection
 		this.openConnection();
-		
+
 		// Code
 		try {
-			stmt = con.prepareStatement(INSERTwep);
-			
+			stmt = con.prepareStatement(INSERTweapon);
+
 			stmt.setString(1, weapon.getWeaponName());
 			stmt.setInt(2, weapon.getWeaponDamage());
 			stmt.setString(3, weapon.getWeaponType());
@@ -62,7 +62,7 @@ public class WeaponManagerDBImplementation implements WeaponManager{
 			e1.printStackTrace();
 		} finally {
 			try {
-		// Close the connection
+				// Close the connection
 				this.closeConnection();
 			} catch (SQLException e) {
 				System.out.println("Error en cierre de la BD");
@@ -70,32 +70,33 @@ public class WeaponManagerDBImplementation implements WeaponManager{
 			}
 		}
 	}
-	
+
 	@Override
 	public Weapon getWeaponByName(String name) {
 		// Variables
 		ResultSet rs = null;
-		Weapon wep = null;
-		
+		Weapon weapon = null;
+
 		// Open the connection
 		this.openConnection();
-		
+
 		// Code
 		try {
-			stmt = con.prepareStatement(LISTwep);
-			
+			stmt = con.prepareStatement(LISTweapon);
+
+			stmt.setString(1, name);
 			rs = stmt.executeQuery();
-			
-			if(rs.next()) {
-				wep = new Weapon(name, rs.getInt("WeaponDamage"), rs.getString("weaponType"), 
+
+			if (rs.next()) {
+				weapon = new Weapon(name, rs.getInt("WeaponDamage"), rs.getString("weaponType"),
 						rs.getString("weaponSubType"), rs.getBoolean("weaponIsActive"));
-			}else 
-				wep = null;
-			
-		}catch (SQLException e1) {
+			} else
+				weapon = null;
+
+		} catch (SQLException e1) {
 			System.out.println("Error en alta SQL");
 			e1.printStackTrace();
-		}finally {
+		} finally {
 			// Cerramos ResultSet
 			if (rs != null) {
 				try {
@@ -111,31 +112,30 @@ public class WeaponManagerDBImplementation implements WeaponManager{
 				e.printStackTrace();
 			}
 		}
-		return wep;
+		return weapon;
 	}
 
 	@Override
 	public boolean modifyWeapon(Weapon weapon) {
 		// TODO Auto-generated method stub
-		boolean changes=false;
-		
-		
+		boolean changes = false;
+
 		// Open the connection
 		this.openConnection();
-		
+
 		// Code
 		try {
-			stmt = con.prepareStatement(UPDATEwep);
-			
-			stmt.setString(1, weapon.getWeaponName());
-			stmt.setInt(2, weapon.getWeaponDamage());
-			stmt.setString(3, weapon.getWeaponType());
-			stmt.setString(4, weapon.getWeaponSubType());
-			stmt.setBoolean(5, weapon.isWeaponIsActive());
-			
-			if (stmt.executeUpdate()==1) 
-				changes=true;
-		}catch (SQLException e1) {
+			stmt = con.prepareStatement(UPDATEweapon);
+
+			stmt.setInt(1, weapon.getWeaponDamage());
+			stmt.setString(2, weapon.getWeaponType());
+			stmt.setString(3, weapon.getWeaponSubType());
+			stmt.setBoolean(4, weapon.isWeaponIsActive());
+			stmt.setString(5, weapon.getWeaponName());
+
+			if (stmt.executeUpdate() == 1)
+				changes = true;
+		} catch (SQLException e1) {
 			System.out.println("Error en la modificación SQL");
 			e1.printStackTrace();
 		} finally {
@@ -153,16 +153,16 @@ public class WeaponManagerDBImplementation implements WeaponManager{
 	@Override
 	public void deleteWeapon(String name) {
 		// TODO Auto-generated method stub
-		
+
 		// Open the connection
 		this.openConnection();
-		
+
 		// Code
 		try {
-			stmt = con.prepareStatement(DELETEwep);
+			stmt = con.prepareStatement(DELETEweapon);
 			stmt.setString(1, name);
 			stmt.executeUpdate();
-		}catch (SQLException e1) {
+		} catch (SQLException e1) {
 			System.out.println("Error en la modificación SQL");
 			e1.printStackTrace();
 		} finally {
@@ -179,31 +179,31 @@ public class WeaponManagerDBImplementation implements WeaponManager{
 	@Override
 	public Set<Weapon> getAllWeapon() {
 		// TODO Auto-generated method stub
-		
+
 		// Variables
 		ResultSet rs = null;
-		Weapon wep;
-		Set<Weapon> weps = new HashSet<>();
-		
+		Weapon weapon;
+		Set<Weapon> weapons = new HashSet<>();
+
 		// Open the connection
 		this.openConnection();
-		
+
 		// Code
 		try {
-			stmt = con.prepareStatement(LISTweps);
-			
+			stmt = con.prepareStatement(LISTweapons);
+
 			rs = stmt.executeQuery();
-			
-			while(rs.next()) {
-				wep = new Weapon();
-				wep.setWeaponName(rs.getString("weaponName"));
-				wep.setWeaponDamage(rs.getInt("weaponDamage"));
-				wep.setWeaponType(rs.getString("weaponSubType"));
-				wep.setWeaponSubType(rs.getString("weaponSubType"));
-				wep.setWeaponIsActive(false);
-				weps.add(wep);
+
+			while (rs.next()) {
+				weapon = new Weapon();
+				weapon.setWeaponName(rs.getString("weaponName"));
+				weapon.setWeaponDamage(rs.getInt("weaponDamage"));
+				weapon.setWeaponType(rs.getString("weaponSubType"));
+				weapon.setWeaponSubType(rs.getString("weaponSubType"));
+				weapon.setWeaponIsActive(false);
+				weapons.add(weapon);
 			}
-			
+
 		} catch (SQLException e) {
 			System.out.println("Error de SQL");
 			e.printStackTrace();
@@ -224,33 +224,32 @@ public class WeaponManagerDBImplementation implements WeaponManager{
 				e.printStackTrace();
 			}
 		}
-		return weps;
+		return weapons;
 	}
-
 
 	@Override
 	public Set<String> getAllSidearms() {
 		// TODO Auto-generated method stub
-		
-		//Variables
+
+		// Variables
 		ResultSet rs = null;
-		String wep;
-		Set<String> weps = new HashSet<>();
-		
+		String weapon;
+		Set<String> weapons = new HashSet<>();
+
 		// Open the connection
 		this.openConnection();
-		
+
 		// Code
 		try {
-			stmt = con.prepareStatement(LISTweps);
-			
+			stmt = con.prepareStatement(LISTweapons);
+
 			rs = stmt.executeQuery();
-			
-			while(rs.next()) {
-				wep = rs.getString("weaponName");
-				weps.add(wep);
+
+			while (rs.next()) {
+				weapon = rs.getString("weaponName");
+				weapons.add(weapon);
 			}
-			
+
 		} catch (SQLException e) {
 			System.out.println("Error de SQL");
 			e.printStackTrace();
@@ -271,40 +270,39 @@ public class WeaponManagerDBImplementation implements WeaponManager{
 				e.printStackTrace();
 			}
 		}
-		return weps;
+		return weapons;
 	}
-
 
 	@Override
 	public Set<Weapon> getAllPrimary() {
 		// TODO Auto-generated method stub
-		
+
 		// Variables
 		ResultSet rs = null;
-		Weapon wep;
-		Set<Weapon> weps = new HashSet<>();
-		
+		Weapon weapon;
+		Set<Weapon> weapons = new HashSet<>();
+
 		// Open the connection
 		this.openConnection();
-		
+
 		// Code
 		try {
-			stmt = con.prepareStatement(LISTweps);
-			
+			stmt = con.prepareStatement(LISTweapons);
+
 			rs = stmt.executeQuery();
-			
-			while(rs.next()) {
-				if(rs.getString("weaponType").equalsIgnoreCase("primary")) {
-					wep = new Weapon();
-					wep.setWeaponName(rs.getString("weaponName"));
-					wep.setWeaponDamage(rs.getInt("weaponDamage"));
-					wep.setWeaponType(rs.getString("weaponSubType"));
-					wep.setWeaponSubType(rs.getString("weaponSubType"));
-					wep.setWeaponIsActive(false);
-					weps.add(wep);
+
+			while (rs.next()) {
+				if (rs.getString("weaponType").equalsIgnoreCase("primary")) {
+					weapon = new Weapon();
+					weapon.setWeaponName(rs.getString("weaponName"));
+					weapon.setWeaponDamage(rs.getInt("weaponDamage"));
+					weapon.setWeaponType(rs.getString("weaponSubType"));
+					weapon.setWeaponSubType(rs.getString("weaponSubType"));
+					weapon.setWeaponIsActive(false);
+					weapons.add(weapon);
 				}
 			}
-			
+
 		} catch (SQLException e) {
 			System.out.println("Error de SQL");
 			e.printStackTrace();
@@ -325,9 +323,7 @@ public class WeaponManagerDBImplementation implements WeaponManager{
 				e.printStackTrace();
 			}
 		}
-		return weps;
+		return weapons;
 	}
 
-	
-	
 }
