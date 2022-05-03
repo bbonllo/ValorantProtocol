@@ -27,7 +27,7 @@ public class WeaponsTest {
 
 	@Test
 	public void testModifyWeapon() {
-		assertTrue(wepMan.modifyWeapon(wep));
+		assertFalse(wepMan.modifyWeapon(wep));
 	}
 
 	@Test
