@@ -19,7 +19,6 @@ import java.awt.Frame;
 
 import model.Agent;
 import model.AgentManager;
-import model.Map;
 import model.MapManager;
 import model.WeaponManager;
 
@@ -30,12 +29,15 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.awt.event.MouseAdapter;
+
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import java.awt.Component;
 import java.awt.Toolkit;
 
 import com.k33ptoo.components.KButton;
 
+import components.RowsRenderer;
 import exceptions.ExceptionManager;
 
 import java.awt.Cursor;
@@ -265,6 +267,58 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 				.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/appBackgroundPanel.jpg")));
 		lblBackgroundPanelAgent.setBounds(0, 0, 1770, 1006);
 		panelAgent.add(lblBackgroundPanelAgent);
+		panelMission = new JPanel();
+		panelMission.setLayout(null);
+		panelMission.setBounds(0, 74, 1770, 1006);
+		p.add(panelMission);
+
+		panelHistoricMission = new JPanel();
+		panelHistoricMission.setLayout(null);
+		panelHistoricMission.setBounds(0, 50, 1770, 956);
+		panelMission.add(panelHistoricMission);
+
+		lblNewLabel = new JLabel("panelHistoricMissionhjghjghjghjghj");
+		lblNewLabel.setBounds(130, 159, 284, 114);
+		panelHistoricMission.add(lblNewLabel);
+
+		panelBackgroundHistoricMission = new JLabel("");
+		panelBackgroundHistoricMission
+				.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/appBackgroundUnderPanel.jpg")));
+		panelBackgroundHistoricMission.setBounds(0, 0, 1770, 956);
+		panelHistoricMission.add(panelBackgroundHistoricMission);
+
+		panelRegisterMission = new JPanel();
+		panelRegisterMission.setBounds(0, 50, 1770, 956);
+		panelMission.add(panelRegisterMission);
+		panelRegisterMission.setLayout(null);
+
+		lblPanelregistermission = new JLabel("panelRegisterMissionxfggfdfgf");
+		lblPanelregistermission.setBounds(240, 160, 284, 114);
+		panelRegisterMission.add(lblPanelregistermission);
+
+		panelBackgroundRegisterMission = new JLabel("");
+		panelBackgroundRegisterMission
+				.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/appBackgroundUnderPanel.jpg")));
+		panelBackgroundRegisterMission.setBounds(0, 0, 1770, 956);
+		panelRegisterMission.add(panelBackgroundRegisterMission);
+
+		btnHistoricMission = new JButton("Historial");
+		btnHistoricMission.setBorder(null);
+		btnHistoricMission.setBounds(884, 0, 177, 50);
+		btnHistoricMission.addActionListener(this);
+		panelMission.add(btnHistoricMission);
+
+		btnRegisterMission = new JButton("Alta");
+		btnRegisterMission.setBorder(null);
+		btnRegisterMission.setBounds(707, 0, 177, 50);
+		btnRegisterMission.addActionListener(this);
+		panelMission.add(btnRegisterMission);
+
+		JLabel lblBackgroundPanelMission = new JLabel("");
+		lblBackgroundPanelMission
+				.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/appBackgroundPanel.jpg")));
+		lblBackgroundPanelMission.setBounds(0, 0, 1770, 1006);
+		panelMission.add(lblBackgroundPanelMission);
 		panelWeapon = new JPanel();
 		panelWeapon.setLayout(null);
 		panelWeapon.setBounds(0, 74, 1770, 1006);
@@ -348,58 +402,6 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 				.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/appBackgroundPanel.jpg")));
 		lblBackgroundPanelMap.setBounds(0, 0, 1920, 1006);
 		panelMap.add(lblBackgroundPanelMap);
-		panelMission = new JPanel();
-		panelMission.setLayout(null);
-		panelMission.setBounds(0, 74, 1770, 1006);
-		p.add(panelMission);
-
-		panelHistoricMission = new JPanel();
-		panelHistoricMission.setLayout(null);
-		panelHistoricMission.setBounds(0, 50, 1770, 956);
-		panelMission.add(panelHistoricMission);
-
-		lblNewLabel = new JLabel("panelHistoricMissionhjghjghjghjghj");
-		lblNewLabel.setBounds(130, 159, 284, 114);
-		panelHistoricMission.add(lblNewLabel);
-
-		panelBackgroundHistoricMission = new JLabel("");
-		panelBackgroundHistoricMission
-				.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/appBackgroundUnderPanel.jpg")));
-		panelBackgroundHistoricMission.setBounds(0, 0, 1770, 956);
-		panelHistoricMission.add(panelBackgroundHistoricMission);
-
-		panelRegisterMission = new JPanel();
-		panelRegisterMission.setBounds(0, 50, 1770, 956);
-		panelMission.add(panelRegisterMission);
-		panelRegisterMission.setLayout(null);
-
-		lblPanelregistermission = new JLabel("panelRegisterMissionxfggfdfgf");
-		lblPanelregistermission.setBounds(240, 160, 284, 114);
-		panelRegisterMission.add(lblPanelregistermission);
-
-		panelBackgroundRegisterMission = new JLabel("");
-		panelBackgroundRegisterMission
-				.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/appBackgroundUnderPanel.jpg")));
-		panelBackgroundRegisterMission.setBounds(0, 0, 1770, 956);
-		panelRegisterMission.add(panelBackgroundRegisterMission);
-
-		btnHistoricMission = new JButton("Historial");
-		btnHistoricMission.setBorder(null);
-		btnHistoricMission.setBounds(858, 0, 177, 50);
-		btnHistoricMission.addActionListener(this);
-		panelMission.add(btnHistoricMission);
-
-		btnRegisterMission = new JButton("Alta");
-		btnRegisterMission.setBorder(null);
-		btnRegisterMission.setBounds(681, 0, 177, 50);
-		btnRegisterMission.addActionListener(this);
-		panelMission.add(btnRegisterMission);
-
-		JLabel lblBackgroundPanelMission = new JLabel("");
-		lblBackgroundPanelMission
-				.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/appBackgroundPanel.jpg")));
-		lblBackgroundPanelMission.setBounds(0, 0, 1770, 1006);
-		panelMission.add(lblBackgroundPanelMission);
 
 		lblHandCursor = new JLabel("");
 		lblHandCursor.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -431,52 +433,70 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		 * 
 		 */
 
-		Set<Agent> agents = null;
 		try {
-			agents = agentData.getAllAgents();
+			Set<Agent> agents = agentData.getAllAgents();
+
+			List<Agent> agentsOrder = new ArrayList<Agent>(agents);
+			Collections.sort(agentsOrder);
+			String matrizTabla[][] = new String[agents.size()][1];
+
+			for (Agent newAgent : agentsOrder) {
+				matrizTabla[cont][0] = newAgent.getAgentCode() + " - " + newAgent.getAgentName();
+				cont++;
+			}
+
+			String titulo[] = { "Agentes" };
+			scrollPane = new JScrollPane();
+			scrollPane.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			scrollPane.setBounds(1770, 74, 150, 1006);
+			p.add(scrollPane);
+
+			table = new JTable(matrizTabla, titulo) {
+				/*
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+
+				// ***********************METODO PARA HACER QUE LA TABLA NO SEA EDITABLE, Y ASI
+				// HACER DOBLE CLICK************************************
+				// Para ello sobreescribimos el metodo que ya tiene la clase
+				// JTable.isCellEditable
+				public boolean isCellEditable(int row, int column) {
+					for (int i = 0; i < table.getRowCount(); i++) {
+						if (row == i) {
+							return false;
+						}
+					}
+					return true;
+				}
+			};
+
+			RowsRenderer rRowsRenderer = new RowsRenderer(4);
+			DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+			table.setDefaultRenderer(Object.class, rRowsRenderer);
+			table.setSelectionBackground(new Color(0, 230, 168));
+			table.setSelectionForeground(Color.WHITE);
+			table.setRowMargin(0);
+			table.setRowHeight(30);
+			table.setShowVerticalLines(false);
+			table.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 18));
+			table.isCellEditable(agentsOrder.size(), 1);
+			table.addMouseListener(this);
+			centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+
+			table.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+			scrollPane.setViewportView(table);
+
+			JTableHeader tableHeader = table.getTableHeader();
+			tableHeader.setBackground(new Color(0, 191, 140));
+			tableHeader.setForeground(Color.WHITE);
+			tableHeader.setFont(new Font("Tahoma", Font.BOLD, 15));
+			tableHeader.setBorder(null);
+			tableHeader.setEnabled(false);
 		} catch (ExceptionManager e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-
-		List<Agent> agentsOrder = new ArrayList<Agent>(agents);
-		Collections.sort(agentsOrder);
-		String matrizTabla[][] = new String[agents.size()][1];
-
-		for (Agent newAgent : agentsOrder) {
-			matrizTabla[cont][0] = newAgent.getAgentCode() + " - " + newAgent.getAgentName();
-			cont++;
-		}
-
-		String titulo[] = { "Agentes" };
-		scrollPane = new JScrollPane();
-		scrollPane.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		scrollPane.setBounds(1770, 74, 150, 1006);
-		p.add(scrollPane);
-
-		table = new JTable(matrizTabla, titulo);
-
-		table.setSelectionBackground(new Color(0, 230, 168));
-		table.setSelectionForeground(Color.WHITE);
-		table.setRowMargin(0);
-		table.setRowHeight(30);
-		table.setShowVerticalLines(false);
-		table.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 18));
-		table.setEnabled(false);
-		table.addMouseListener(this);
-		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-		centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-
-		table.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
-		scrollPane.setViewportView(table);
-
-		JTableHeader tableHeader = table.getTableHeader();
-		tableHeader.setBackground(new Color(0, 191, 140));
-		tableHeader.setForeground(Color.WHITE);
-		tableHeader.setFont(new Font("Tahoma", Font.BOLD, 15));
-		tableHeader.setBorder(null);
-		tableHeader.setEnabled(false);
-
 		/*
 		 * Boton pestaña Agente
 		 */
@@ -612,9 +632,21 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource().equals(table)) {
 			if (e.getClickCount() == 2) {
+				Agent newAgent = new Agent();
+				Icon newIcon = new ImageIcon(VPestaniasAgente.class.getResource("/resources/rotGamesLogo100x52.png"));
 				table = (JTable) e.getSource();
 				int row = table.getSelectedRow();
-				JOptionPane.showMessageDialog(this, "dfgdfg", "gfg" + row, JOptionPane.WARNING_MESSAGE);
+				if (row < 7) {
+					row += 1;
+					newAgent = agentData.getAgentByID(row);
+					JOptionPane.showMessageDialog(this, newAgent.getAgentName() + " " + newAgent.getAgentCode(),
+							"Agente", JOptionPane.DEFAULT_OPTION, newIcon);
+				} else {
+					row += 2;
+					newAgent = agentData.getAgentByID(row);
+					JOptionPane.showMessageDialog(this, newAgent.getAgentName() + " " + newAgent.getAgentCode(),
+							"Agente", JOptionPane.DEFAULT_OPTION, newIcon);
+				}
 			}
 		}
 
