@@ -21,6 +21,7 @@ import model.Agent;
 import model.AgentManager;
 import model.Map;
 import model.MapManager;
+import model.WeaponManager;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -46,6 +47,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 	private static final long serialVersionUID = 1L;
 	private AgentManager agentData;
 	private MapManager mapData;
+	private WeaponManager weaponData;
 	private JPanel contentPane;
 	private KButton btnMinimize;
 	private KButton btnClose;
@@ -71,8 +73,6 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 	private JPanel panelRegisterAgent;
 	private JPanel panelRemoveAgent;
 	private JPanel panelModifyAgent;
-	int cont = 0;
-
 	private JScrollPane scrollPane;
 	private JTable table;
 	private JLabel lblAgentData_1;
@@ -93,17 +93,20 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 	private JLabel lblPanelregistermission;
 	private JLabel lblNewLabel_2;
 	private JLabel lblNewLabel_3;
+	int cont = 0;
 
 	/**
 	 * Create the frame.
 	 * 
 	 * @param user
+	 * @param weapon
 	 * @param agentData
 	 * @param mapData
 	 */
-	public VPestaniasAgente(String user, MapManager map, AgentManager agent) {
+	public VPestaniasAgente(String user, MapManager map, AgentManager agent, WeaponManager weapon) {
 		agentData = agent;
 		mapData = map;
+		weaponData = weapon;
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(VLogin.class.getResource("/resources/rotGamesLogo.png")));
 		setResizable(false);
@@ -547,7 +550,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource().equals(btnClose)) {
-			VLogin vMain = new VLogin(mapData, agentData);
+			VLogin vMain = new VLogin(mapData, agentData, weaponData);
 			vMain.setVisible(true);
 			this.dispose();
 		} else if (e.getSource().equals(btnMinimize)) {

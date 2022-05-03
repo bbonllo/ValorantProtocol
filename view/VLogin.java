@@ -16,6 +16,7 @@ import com.k33ptoo.components.KButton;
 import model.AgentManager;
 import model.MapManager;
 import model.MapManagerDBImplementation;
+import model.WeaponManager;
 
 import java.awt.event.MouseMotionAdapter;
 import java.awt.event.MouseEvent;
@@ -33,6 +34,7 @@ public class VLogin extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private AgentManager agentData;
 	private MapManager mapData;
+	private WeaponManager weaponData;
 	private JPanel contentPane;
 	private JTextField txtUser;
 	private JPasswordField txtPasswd;
@@ -65,11 +67,13 @@ public class VLogin extends JFrame implements ActionListener {
 	 * 
 	 * @param map
 	 * @param agent 
+	 * @param weapon 
 	 */
 
-	public VLogin(MapManager map, AgentManager agent) {
+	public VLogin(MapManager map, AgentManager agent, WeaponManager weapon) {
 		agentData = agent;
 		mapData = map;
+		weaponData = weapon;
 		setIconImage(Toolkit.getDefaultToolkit().getImage(VLogin.class.getResource("/resources/rotGamesLogo.png")));
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -281,7 +285,7 @@ public class VLogin extends JFrame implements ActionListener {
 			this.setState(Frame.ICONIFIED);
 		} else if (e.getSource().equals(btnLogin)) {
 			String user = txtUser.getText();
-			VPestaniasAgente vPestaniasAgente = new VPestaniasAgente(user , mapData, agentData);
+			VPestaniasAgente vPestaniasAgente = new VPestaniasAgente(user , mapData, agentData, weaponData);
 			vPestaniasAgente.setVisible(true);
 			this.dispose();
 		}

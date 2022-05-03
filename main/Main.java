@@ -6,15 +6,18 @@ import model.MapManager;
 import model.MapManagerDBImplementation;
 import model.ViewManager;
 import model.ViewManagerImplementation;
+import model.WeaponManager;
+import model.WeaponManagerDBImplementation;
 
 public class Main {
 
 	public static void main(String[] args) {
 		MapManager map = new MapManagerDBImplementation();
 		AgentManager agent = new AgentManagerDBImplementation();
+		WeaponManager weapon = new WeaponManagerDBImplementation();
 		
 		ViewManager view = new ViewManagerImplementation();
-		view.openView(map, agent);
+		view.openView(map, agent, weapon);
 		
 	}
 
