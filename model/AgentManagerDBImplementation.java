@@ -59,15 +59,21 @@ public class AgentManagerDBImplementation implements AgentManager {
 				getAgent.setAgentName(rs.getString("agentName"));
 				getAgent.setAgentNationality(rs.getString("agentNationality"));
 				getAgent.setAgentRol(rs.getString("agentRol"));
+				getAgent.setAgentIsAdmin(rs.getBoolean("agentIsAdmin"));
+				getAgent.setAgentIsOnMission(rs.getBoolean("agentIsOnMission"));
+				getAgent.setAgentIsOnMission(rs.getBoolean("agentIsActive"));
 
-				final String SEARCHAgentsAbility = "SELECT * from ability where agentCode = ?";
+				final String SEARCHAgentsAbility = "SELECT * from ability where agentCode = ? order by orbNum asc";
 
 				stmt = con.prepareStatement(SEARCHAgentsAbility);
 				stmt.setInt(1, agentCode);
 
 				rs2 = stmt.executeQuery();
-				if (rs2.next()) {
-					if (cont == 3) {
+				int cont1 = 0;
+				while (rs2.next()) {
+					
+					
+					if (cont1 == 3) {
 						abilityUltimate.setAbilityName(rs2.getString("abilityName"));
 						abilityUltimate.setAbilityDescription(rs2.getString("abilityDescription"));
 						abilityUltimate.setAbilityUltimateRequiredOrbs(rs2.getInt("orbNum"));
@@ -75,12 +81,14 @@ public class AgentManagerDBImplementation implements AgentManager {
 					} else {
 						ability.setAbilityName(rs2.getString("abilityName"));
 						ability.setAbilityDescription(rs2.getString("abilityDescription"));
-						agentAbilities[cont] = ability;
-						cont++;
-					}
 
+						agentAbilities[cont] = ability;
+						cont1++;
+						
+					}
 				}
 				getAgent.setAgentAbilities(agentAbilities);
+
 
 			} else
 				getAgent = null;
@@ -397,7 +405,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 		Ability ability = new Ability();
 		AbilityUltimate abilityUltimate = new AbilityUltimate();
 		Ability[] agentAbilities = new Ability[4];
-		int cont = 0;
+		
 
 		openConnection();
 		final String SEARCHAgent = "SELECT * from Agent where agentCode = ? and agentPasswd = ?";
@@ -415,14 +423,20 @@ public class AgentManagerDBImplementation implements AgentManager {
 				getAgent.setAgentName(rs.getString("agentName"));
 				getAgent.setAgentNationality(rs.getString("agentNationality"));
 				getAgent.setAgentRol(rs.getString("agentRol"));
+				getAgent.setAgentIsAdmin(rs.getBoolean("agentIsAdmin"));
+				getAgent.setAgentIsOnMission(rs.getBoolean("agentIsOnMission"));
+				getAgent.setAgentIsOnMission(rs.getBoolean("agentIsActive"));
 
-				final String SEARCHAgentsAbility = "SELECT * from ability where agentCode = ?";
+				final String SEARCHAgentsAbility = "SELECT * from ability where agentCode = ? order by orbNum asc";
 
 				stmt = con.prepareStatement(SEARCHAgentsAbility);
 				stmt.setInt(1, agentCode);
 
 				rs2 = stmt.executeQuery();
-				if (rs2.next()) {
+				int cont = 0;
+				while (rs2.next()) {
+					
+					
 					if (cont == 3) {
 						abilityUltimate.setAbilityName(rs2.getString("abilityName"));
 						abilityUltimate.setAbilityDescription(rs2.getString("abilityDescription"));
@@ -430,11 +444,12 @@ public class AgentManagerDBImplementation implements AgentManager {
 						agentAbilities[cont] = abilityUltimate;
 					} else {
 						ability.setAbilityName(rs2.getString("abilityName"));
-						ability.setAbilityDescription(rs2.getString("abilityDesciption"));
+						ability.setAbilityDescription(rs2.getString("abilityDescription"));
+
 						agentAbilities[cont] = ability;
 						cont++;
+						
 					}
-
 				}
 				getAgent.setAgentAbilities(agentAbilities);
 
