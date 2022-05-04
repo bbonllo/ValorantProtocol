@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Font;
@@ -13,6 +14,9 @@ import java.awt.Frame;
 
 import com.k33ptoo.components.KButton;
 
+import model.Ability;
+import model.AbilityUltimate;
+import model.Agent;
 import model.AgentManager;
 import model.MapManager;
 import model.MapManagerDBImplementation;
@@ -52,15 +56,6 @@ public class VLogin extends JFrame implements ActionListener {
 	private JLabel lblIconBackground;
 	private int x_pressed = 0;
 	private int y_pressed = 0;
-
-	/**
-	 * Launch the application.
-	 * 
-	 * public static void main(String[] args) { EventQueue.invokeLater(new
-	 * Runnable() { public void run() { try { VMain frame = new VMain();
-	 * frame.setVisible(true); } catch (Exception e) { e.printStackTrace(); } } });
-	 * }
-	 */
 
 	/**
 	 * Create the frame.
@@ -284,10 +279,19 @@ public class VLogin extends JFrame implements ActionListener {
 		} else if (e.getSource().equals(btnMinimize)) {
 			this.setState(Frame.ICONIFIED);
 		} else if (e.getSource().equals(btnLogin)) {
-			String user = txtUser.getText();
-			VPestaniasAgente vPestaniasAgente = new VPestaniasAgente(user , mapData, agentData, weaponData);
-			vPestaniasAgente.setVisible(true);
-			this.dispose();
+			int agentCode = Integer.parseInt(txtUser.getText());
+			String agentPasswd = new String(txtPasswd.getPassword());
+			Agent loginAgent = agentData.login(agentCode, agentPasswd);
+			
+			if (loginAgent == null) {
+				JOptionPane.showMessageDialog(this,"NO EXISTE EL USUARIO FRIKI","uwu", JOptionPane.INFORMATION_MESSAGE);
+			} else if(loginAgent.isAgentIsAdmin() == true ) {
+				VPestaniasAgente vPestaniasAgente = new VPestaniasAgente(loginAgent, mapData, agentData);
+				vPestaniasAgente.setVisible(true);
+				this.dispose();
+			}else {
+				JOptionPane.showMessageDialog(this, "no eres admin friki" , "uwu", JOptionPane.WARNING_MESSAGE);
+			}
 		}
 	}
 }

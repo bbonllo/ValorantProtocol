@@ -1,21 +1,19 @@
 package model;
 
-
-public class Agent implements Comparable<Agent>{
+public class Agent implements Comparable<Agent> {
 
 	private int agentCode;
-    private String agentPasswd; // no podemos tener getPasswd por razones obvias
+	private String agentPasswd; // no podemos tener getPasswd por razones obvias
 	private String agentName;
 	private String agentNationality;
 	private String agentRol; /*
-								 * Se controlara que solo pueda ser de
-								 * uno de los 4 roles (Duelista, Iniciador, Controlador,Centinela)
+								 * Se controlara que solo pueda ser de uno de los 4 roles (Duelista, Iniciador,
+								 * Controlador,Centinela)
 								 */
 	private Ability[] agentAbilities = new Ability[4]; // se controlara que no tenga mas de una habilidad ultimate;
 	private boolean agentIsAdmin;
 	private boolean agentIsOnMission;
 	private boolean agentIsOnActive;
-	
 
 	/*
 	 * Constructor
@@ -132,11 +130,7 @@ public class Agent implements Comparable<Agent>{
 			return 1;
 		} else if (agentCode == o.getAgentCode()) {
 			return 0;
-		}else {
+		} else
 			return -1;
-		}
 	}
-
-	
-
 }

@@ -316,7 +316,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 
 		JLabel lblBackgroundPanelMission = new JLabel("");
 		lblBackgroundPanelMission
-				.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/appBackgroundPanel.jpg")));
+				.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/appBackgroundPanel.jpg"))); 
 		lblBackgroundPanelMission.setBounds(0, 0, 1770, 1006);
 		panelMission.add(lblBackgroundPanelMission);
 		panelWeapon = new JPanel();
@@ -483,7 +483,6 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 			table.isCellEditable(agentsOrder.size(), 1);
 			table.addMouseListener(this);
 			centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-
 			table.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
 			scrollPane.setViewportView(table);
 
