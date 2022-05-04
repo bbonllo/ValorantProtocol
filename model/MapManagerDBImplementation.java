@@ -10,7 +10,6 @@ import java.util.Set;
 
 import exceptions.ExceptionManager;
 
-
 public class MapManagerDBImplementation implements MapManager {
 
 	private Connection con;
@@ -51,7 +50,7 @@ public class MapManagerDBImplementation implements MapManager {
 				mapIntro = new Map();
 				mapIntro.setMapName(mapName);
 				mapIntro.setMapDesc(rs.getString("mapDesc"));
-				mapIntro.setMapCoords(rs.getString("mapCoords"));
+				// mapIntro.setMapCoords(rs.getString("mapCoords"));
 			} else
 				mapIntro = null;
 

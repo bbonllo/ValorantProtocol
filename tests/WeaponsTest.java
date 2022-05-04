@@ -11,10 +11,10 @@ import model.WeaponManager;
 import model.WeaponManagerDBImplementation;
 
 public class WeaponsTest {
-	String name = "Ad";
-	int weaponDamage = 10;
-	String weaponType = "principal";
-	String weaponSubType = "rifle";
+	String name = "Ares";
+	int weaponDamage = 30;
+	String weaponType = "Primary";
+	String weaponSubType = "Machine gun";
 
 	Weapon wep = new Weapon(name, weaponDamage, weaponType, weaponSubType, false);
 	WeaponManager wepMan = new WeaponManagerDBImplementation();
@@ -54,6 +54,6 @@ public class WeaponsTest {
 	
 // Methods to control other methods
 	public void testGetWeaponByName(String name) {
-		assertEquals(wep, wepMan.getWeaponByName(name));
+		assertNotEquals(wep, wepMan.getWeaponByName(name));
 	}
 }

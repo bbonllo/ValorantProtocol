@@ -12,13 +12,12 @@ import model.WeaponManagerDBImplementation;
 public class Main {
 
 	public static void main(String[] args) {
-		
-		// Data
+		// Data manipulation
 		MapManager map = new MapManagerDBImplementation();
 		AgentManager agent = new AgentManagerDBImplementation();
 		WeaponManager weapon = new WeaponManagerDBImplementation();
-		
-		// View 
+
+		// View manipulation
 		ViewManager view = new ViewManagerImplementation();
 		view.openView(map, agent, weapon);
 		
