@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Font;
 import java.awt.Frame;
+import java.awt.JobAttributes;
 
 import com.k33ptoo.components.KButton;
 
@@ -33,6 +34,8 @@ import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.border.LineBorder;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class VLogin extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
@@ -61,8 +64,8 @@ public class VLogin extends JFrame implements ActionListener {
 	 * Create the frame.
 	 * 
 	 * @param map
-	 * @param agent 
-	 * @param weapon 
+	 * @param agent
+	 * @param weapon
 	 */
 
 	public VLogin(MapManager map, AgentManager agent, WeaponManager weapon) {
@@ -212,6 +215,14 @@ public class VLogin extends JFrame implements ActionListener {
 		p.add(lblPassword);
 
 		txtPasswd = new JPasswordField();
+		txtPasswd.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					login();
+				}
+			}
+		});
 		txtPasswd.setHorizontalAlignment(SwingConstants.CENTER);
 		txtPasswd.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		txtPasswd.setBackground(Color.WHITE);
@@ -279,18 +290,35 @@ public class VLogin extends JFrame implements ActionListener {
 		} else if (e.getSource().equals(btnMinimize)) {
 			this.setState(Frame.ICONIFIED);
 		} else if (e.getSource().equals(btnLogin)) {
-			int agentCode = Integer.parseInt(txtUser.getText());
-			String agentPasswd = new String(txtPasswd.getPassword());
-			Agent loginAgent = agentData.login(agentCode, agentPasswd);
-			
-			if (loginAgent == null) {
-				JOptionPane.showMessageDialog(this,"NO EXISTE EL USUARIO FRIKI","uwu", JOptionPane.INFORMATION_MESSAGE);
-			} else if(loginAgent.isAgentIsAdmin() == true ) {
-				VPestaniasAgente vPestaniasAgente = new VPestaniasAgente(loginAgent, mapData, agentData);
-				vPestaniasAgente.setVisible(true);
-				this.dispose();
-			}else {
-				JOptionPane.showMessageDialog(this, "no eres admin friki" , "uwu", JOptionPane.WARNING_MESSAGE);
+			login();
+		}
+	}
+
+	private void login() {
+		if (txtUser.getText().isEmpty() || txtPasswd.getPassword().length == 0) {
+			JOptionPane.showMessageDialog(this, "Campo usuario o contraseña no rellenado", "Error",
+					JOptionPane.INFORMATION_MESSAGE);
+		} else {
+			try {
+				int agentCode = Integer.parseInt(txtUser.getText());
+
+				String agentPasswd = new String(txtPasswd.getPassword());
+				Agent loginAgent = agentData.login(agentCode, agentPasswd);
+
+				if (loginAgent == null) {
+					JOptionPane.showMessageDialog(this, "Credenciales incorrectas", "Error",
+							JOptionPane.INFORMATION_MESSAGE);
+				} else if (loginAgent.isAgentIsAdmin() == true) {
+					VPestaniasAgente vPestaniasAgente = new VPestaniasAgente(loginAgent, mapData, agentData,
+							weaponData);
+					vPestaniasAgente.setVisible(true);
+					this.dispose();
+				} else {
+					JOptionPane.showMessageDialog(this, "no eres admin friki", "uwu", JOptionPane.WARNING_MESSAGE);
+				}
+			} catch (NumberFormatException e1) {
+				JOptionPane.showMessageDialog(this, "Usuario tiene que ser un entero", "Error",
+						JOptionPane.WARNING_MESSAGE);
 			}
 		}
 	}
