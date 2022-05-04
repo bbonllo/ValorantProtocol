@@ -286,7 +286,7 @@ public class VLogin extends JFrame implements ActionListener {
 			if (loginAgent == null) {
 				JOptionPane.showMessageDialog(this,"NO EXISTE EL USUARIO FRIKI","uwu", JOptionPane.INFORMATION_MESSAGE);
 			} else if(loginAgent.isAgentIsAdmin() == true ) {
-				VPestaniasAgente vPestaniasAgente = new VPestaniasAgente(loginAgent, mapData, agentData);
+				VPestaniasAgente vPestaniasAgente = new VPestaniasAgente(loginAgent, mapData, agentData, weaponData);
 				vPestaniasAgente.setVisible(true);
 				this.dispose();
 			}else {

@@ -100,12 +100,12 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 	/**
 	 * Create the frame.
 	 * 
-	 * @param user
+	 * @param loginAgent
 	 * @param weapon
 	 * @param agentData
 	 * @param mapData
 	 */
-	public VPestaniasAgente(String user, MapManager map, AgentManager agent, WeaponManager weapon) {
+	public VPestaniasAgente(Agent loginAgent, MapManager map, AgentManager agent, WeaponManager weapon) {
 		agentData = agent;
 		mapData = map;
 		weaponData = weapon;
