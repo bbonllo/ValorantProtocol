@@ -6,7 +6,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import exceptions.ExceptionManager;
@@ -84,11 +88,9 @@ public class AgentManagerDBImplementation implements AgentManager {
 
 						agentAbilities[cont] = ability;
 						cont1++;
-						
 					}
 				}
 				getAgent.setAgentAbilities(agentAbilities);
-
 
 			} else
 				getAgent = null;
@@ -113,7 +115,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 		AbilityUltimate ability4;
 		Ability[] agentAbilities = new Ability[4];
 
-		// Abrimos la conexión
+		// Abrimos la conexiï¿½n
 		this.openConnection();
 
 		// Meto los valores del agente dentro del stmt:
@@ -207,7 +209,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 		AbilityUltimate ability4;
 		Ability[] agentAbilities = new Ability[4];
 
-		// Abrimos la conexión
+		// Abrimos la conexiï¿½n
 		this.openConnection();
 
 		// Meto los valores del agente dentro del stmt:
@@ -332,23 +334,24 @@ public class AgentManagerDBImplementation implements AgentManager {
 	@Override
 	public Set<Agent> getAllAgents() throws ExceptionManager {
 
-		Set<Agent> agents = new HashSet<>();
+		// ArrayList<Agent> agentsList
+		Set<Agent> activeAgents = new HashSet<>();
 		ResultSet rs = null;
 		Agent agentIntro = null;
 
 		openConnection();
-		String SEARCHAllAgents = "SELECT * from agent";
+		String SEARCHAllAgents = "SELECT * from agent order by agentCode";
 
 		try {
 			stmt = con.prepareStatement(SEARCHAllAgents);
 			rs = stmt.executeQuery();
 
 			while (rs.next()) {
+
 				agentIntro = new Agent();
 				agentIntro.setAgentCode(rs.getInt("agentCode"));
 				agentIntro.setAgentName(rs.getString("agentName"));
-				agents.add(agentIntro);
-
+				activeAgents.add(agentIntro);
 			}
 
 			if (rs != null)
@@ -360,7 +363,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 			ExceptionManager x = new ExceptionManager(msg);
 			throw x;
 		}
-		return agents;
+		return activeAgents;
 	}
 
 	@Override

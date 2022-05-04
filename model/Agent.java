@@ -133,5 +133,4 @@ public class Agent implements Comparable<Agent> {
 		} else
 			return -1;
 	}
-
 }

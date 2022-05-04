@@ -20,6 +20,7 @@ import model.Agent;
 import model.AgentManager;
 import model.MapManager;
 import model.MapManagerDBImplementation;
+import model.WeaponManager;
 
 import java.awt.event.MouseMotionAdapter;
 import java.awt.event.MouseEvent;
@@ -37,6 +38,7 @@ public class VLogin extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private AgentManager agentData;
 	private MapManager mapData;
+	private WeaponManager weaponData;
 	private JPanel contentPane;
 	private JTextField txtUser;
 	private JPasswordField txtPasswd;
@@ -56,24 +58,17 @@ public class VLogin extends JFrame implements ActionListener {
 	private int y_pressed = 0;
 
 	/**
-	 * Launch the application.
-	 * 
-	 * public static void main(String[] args) { EventQueue.invokeLater(new
-	 * Runnable() { public void run() { try { VMain frame = new VMain();
-	 * frame.setVisible(true); } catch (Exception e) { e.printStackTrace(); } } });
-	 * }
-	 */
-
-	/**
 	 * Create the frame.
 	 * 
 	 * @param map
-	 * @param agent
+	 * @param agent 
+	 * @param weapon 
 	 */
 
-	public VLogin(MapManager map, AgentManager agent) {
+	public VLogin(MapManager map, AgentManager agent, WeaponManager weapon) {
 		agentData = agent;
 		mapData = map;
+		weaponData = weapon;
 		setIconImage(Toolkit.getDefaultToolkit().getImage(VLogin.class.getResource("/resources/rotGamesLogo.png")));
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -287,7 +282,6 @@ public class VLogin extends JFrame implements ActionListener {
 			int agentCode = Integer.parseInt(txtUser.getText());
 			String agentPasswd = new String(txtPasswd.getPassword());
 			Agent loginAgent = agentData.login(agentCode, agentPasswd);
-			
 			
 			if (loginAgent == null) {
 				JOptionPane.showMessageDialog(this,"NO EXISTE EL USUARIO FRIKI","uwu", JOptionPane.INFORMATION_MESSAGE);

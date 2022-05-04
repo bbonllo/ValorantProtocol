@@ -19,31 +19,37 @@ import java.awt.Frame;
 
 import model.Agent;
 import model.AgentManager;
-import model.Map;
 import model.MapManager;
+import model.WeaponManager;
 
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.awt.event.MouseAdapter;
+
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import java.awt.Component;
 import java.awt.Toolkit;
 
 import com.k33ptoo.components.KButton;
 
+import components.RowsRenderer;
 import exceptions.ExceptionManager;
 
 import java.awt.Cursor;
 
 import javax.swing.JButton;
+import javax.swing.border.LineBorder;
 
-public class VPestaniasAgente extends JFrame implements ActionListener {
+public class VPestaniasAgente extends JFrame implements ActionListener, MouseListener {
 	private static final long serialVersionUID = 1L;
 	private AgentManager agentData;
 	private MapManager mapData;
+	private WeaponManager weaponData;
 	private JPanel contentPane;
 	private KButton btnMinimize;
 	private KButton btnClose;
@@ -51,6 +57,14 @@ public class VPestaniasAgente extends JFrame implements ActionListener {
 	private JButton btnMission;
 	private JButton btnWeapon;
 	private JButton btnMap;
+	private JButton btnRegisterAgent;
+	private JButton btnModifyAgent;
+	private JButton btnRemoveAgent;
+	private JButton btnRegisterWeapon;
+	private JButton btnModifyWeapon;
+	private JButton btnRemoveWeapon;
+	private JButton btnRegisterMission;
+	private JButton btnHistoricMission;
 	private JPanel panelAgent;
 	private JPanel panelMission;
 	private JPanel panelWeapon;
@@ -61,21 +75,40 @@ public class VPestaniasAgente extends JFrame implements ActionListener {
 	private JPanel panelRegisterAgent;
 	private JPanel panelRemoveAgent;
 	private JPanel panelModifyAgent;
-
 	private JScrollPane scrollPane;
 	private JTable table;
+	private JLabel lblAgentData_1;
+	private JLabel lblBackgroundPanelAgentRegister;
+	private JLabel lblBackgroundPanelAgentRegister_1;
+	private JLabel lblBackgroundPanelAgentRegister_2;
+	private JPanel panelRegisterWeapon;
+	private JPanel panelRemoveWeapon;
+	private JPanel panelModifyWeapon;
+	private JLabel panelBackgroundRegisterWeapon;
+	private JLabel panelBackgroundModifyWeapon;
+	private JLabel panelBackgroundRemoveWeapon;
+	private JPanel panelRegisterMission;
+	private JLabel panelBackgroundRegisterMission;
+	private JPanel panelHistoricMission;
+	private JLabel panelBackgroundHistoricMission;
+	private JLabel lblNewLabel;
+	private JLabel lblPanelregistermission;
+	private JLabel lblNewLabel_2;
+	private JLabel lblNewLabel_3;
 	int cont = 0;
 
 	/**
 	 * Create the frame.
 	 * 
-	 * @param loginAgent
-	 * @param agentData 
+	 * @param user
+	 * @param weapon
+	 * @param agentData
 	 * @param mapData
 	 */
-	public VPestaniasAgente(Agent loginAgent, MapManager map, AgentManager agent) {
+	public VPestaniasAgente(String user, MapManager map, AgentManager agent, WeaponManager weapon) {
 		agentData = agent;
 		mapData = map;
+		weaponData = weapon;
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(VLogin.class.getResource("/resources/rotGamesLogo.png")));
 		setResizable(false);
@@ -163,19 +196,122 @@ public class VPestaniasAgente extends JFrame implements ActionListener {
 				btnClose.kFillButton = false; // Hacer transparente el boton
 			}
 		});
+		panelAgent = new JPanel();
+		panelAgent.setBounds(0, 74, 1770, 1006);
+		p.add(panelAgent);
+		panelAgent.setLayout(null);
+
+		btnModifyAgent = new JButton("Modificacion");
+		btnModifyAgent.setBorder(null);
+		btnModifyAgent.setBounds(974, 0, 177, 50);
+		btnModifyAgent.addActionListener(this);
+
+		panelRegisterAgent = new JPanel();
+		panelRegisterAgent.setBounds(0, 50, 1770, 956);
+		panelAgent.add(panelRegisterAgent);
+		panelRegisterAgent.setLayout(null);
+
+		lblAgentData_1 = new JLabel("");
+		lblAgentData_1.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		lblAgentData_1.setBounds(908, 25, 816, 907);
+		panelRegisterAgent.add(lblAgentData_1);
+
+		JLabel lblAgentData = new JLabel("");
+		lblAgentData.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		lblAgentData.setBounds(44, 25, 816, 907);
+		panelRegisterAgent.add(lblAgentData);
+
+		lblBackgroundPanelAgentRegister = new JLabel("");
+		lblBackgroundPanelAgentRegister
+				.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/appBackgroundUnderPanel.jpg")));
+		lblBackgroundPanelAgentRegister.setBounds(0, 0, 1770, 956);
+		panelRegisterAgent.add(lblBackgroundPanelAgentRegister);
+
+		panelRemoveAgent = new JPanel();
+		panelRemoveAgent.setBounds(0, 50, 1770, 956);
+		panelAgent.add(panelRemoveAgent);
+		panelRemoveAgent.setLayout(null);
+
+		lblBackgroundPanelAgentRegister_2 = new JLabel("");
+		lblBackgroundPanelAgentRegister_2
+				.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/appBackgroundUnderPanel.jpg")));
+		lblBackgroundPanelAgentRegister_2.setBounds(0, 0, 1770, 956);
+		panelRemoveAgent.add(lblBackgroundPanelAgentRegister_2);
+
+		panelModifyAgent = new JPanel();
+		panelModifyAgent.setBounds(0, 50, 1770, 956);
+		panelAgent.add(panelModifyAgent);
+		panelModifyAgent.setLayout(null);
+
+		lblBackgroundPanelAgentRegister_1 = new JLabel("");
+		lblBackgroundPanelAgentRegister_1
+				.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/appBackgroundUnderPanel.jpg")));
+		lblBackgroundPanelAgentRegister_1.setBounds(0, 0, 1770, 956);
+		panelModifyAgent.add(lblBackgroundPanelAgentRegister_1);
+		panelAgent.add(btnModifyAgent);
+
+		btnRegisterAgent = new JButton("Alta");
+		btnRegisterAgent.setBorder(null);
+		btnRegisterAgent.setBounds(620, 0, 177, 50);
+		btnRegisterAgent.addActionListener(this);
+		panelAgent.add(btnRegisterAgent);
+
+		btnRemoveAgent = new JButton("Baja");
+		btnRemoveAgent.setBorder(null);
+		btnRemoveAgent.setBounds(797, 0, 177, 50);
+		btnRemoveAgent.addActionListener(this);
+		panelAgent.add(btnRemoveAgent);
+
+		JLabel lblBackgroundPanelAgent = new JLabel("");
+		lblBackgroundPanelAgent
+				.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/appBackgroundPanel.jpg")));
+		lblBackgroundPanelAgent.setBounds(0, 0, 1770, 1006);
+		panelAgent.add(lblBackgroundPanelAgent);
 		panelMission = new JPanel();
 		panelMission.setLayout(null);
 		panelMission.setBounds(0, 74, 1770, 1006);
 		p.add(panelMission);
 
-		JButton btnHistoricMission = new JButton("Historial");
+		panelHistoricMission = new JPanel();
+		panelHistoricMission.setLayout(null);
+		panelHistoricMission.setBounds(0, 50, 1770, 956);
+		panelMission.add(panelHistoricMission);
+
+		lblNewLabel = new JLabel("panelHistoricMissionhjghjghjghjghj");
+		lblNewLabel.setBounds(130, 159, 284, 114);
+		panelHistoricMission.add(lblNewLabel);
+
+		panelBackgroundHistoricMission = new JLabel("");
+		panelBackgroundHistoricMission
+				.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/appBackgroundUnderPanel.jpg")));
+		panelBackgroundHistoricMission.setBounds(0, 0, 1770, 956);
+		panelHistoricMission.add(panelBackgroundHistoricMission);
+
+		panelRegisterMission = new JPanel();
+		panelRegisterMission.setBounds(0, 50, 1770, 956);
+		panelMission.add(panelRegisterMission);
+		panelRegisterMission.setLayout(null);
+
+		lblPanelregistermission = new JLabel("panelRegisterMissionxfggfdfgf");
+		lblPanelregistermission.setBounds(240, 160, 284, 114);
+		panelRegisterMission.add(lblPanelregistermission);
+
+		panelBackgroundRegisterMission = new JLabel("");
+		panelBackgroundRegisterMission
+				.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/appBackgroundUnderPanel.jpg")));
+		panelBackgroundRegisterMission.setBounds(0, 0, 1770, 956);
+		panelRegisterMission.add(panelBackgroundRegisterMission);
+
+		btnHistoricMission = new JButton("Historial");
 		btnHistoricMission.setBorder(null);
-		btnHistoricMission.setBounds(783, 0, 177, 50);
+		btnHistoricMission.setBounds(884, 0, 177, 50);
+		btnHistoricMission.addActionListener(this);
 		panelMission.add(btnHistoricMission);
 
-		JButton btnRegisterMission = new JButton("Alta");
+		btnRegisterMission = new JButton("Alta");
 		btnRegisterMission.setBorder(null);
-		btnRegisterMission.setBounds(606, 0, 177, 50);
+		btnRegisterMission.setBounds(707, 0, 177, 50);
+		btnRegisterMission.addActionListener(this);
 		panelMission.add(btnRegisterMission);
 
 		JLabel lblBackgroundPanelMission = new JLabel("");
@@ -188,19 +324,67 @@ public class VPestaniasAgente extends JFrame implements ActionListener {
 		panelWeapon.setBounds(0, 74, 1770, 1006);
 		p.add(panelWeapon);
 
-		JButton btnModifyWeapon = new JButton("Modificacion");
+		panelRegisterWeapon = new JPanel();
+		panelRegisterWeapon.setBounds(0, 50, 1770, 956);
+		panelWeapon.add(panelRegisterWeapon);
+		panelRegisterWeapon.setLayout(null);
+
+		lblNewLabel_3 = new JLabel("New labeldffdgdfgdfg");
+		lblNewLabel_3.setBounds(151, 359, 286, 131);
+		panelRegisterWeapon.add(lblNewLabel_3);
+
+		panelBackgroundRegisterWeapon = new JLabel("");
+		panelBackgroundRegisterWeapon
+				.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/appBackgroundUnderPanel.jpg")));
+		panelBackgroundRegisterWeapon.setBounds(0, 0, 1770, 956);
+		panelRegisterWeapon.add(panelBackgroundRegisterWeapon);
+
+		panelModifyWeapon = new JPanel();
+		panelModifyWeapon.setBounds(0, 50, 1770, 956);
+		panelWeapon.add(panelModifyWeapon);
+		panelModifyWeapon.setLayout(null);
+
+		JLabel lblNewLabel_1 = new JLabel("New labeldffdgdfgdfg");
+		lblNewLabel_1.setBounds(83, 89, 286, 131);
+		panelModifyWeapon.add(lblNewLabel_1);
+
+		panelBackgroundModifyWeapon = new JLabel("");
+		panelBackgroundModifyWeapon
+				.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/appBackgroundUnderPanel.jpg")));
+		panelBackgroundModifyWeapon.setBounds(0, 0, 1770, 956);
+		panelModifyWeapon.add(panelBackgroundModifyWeapon);
+
+		panelRemoveWeapon = new JPanel();
+		panelRemoveWeapon.setBounds(0, 50, 1770, 956);
+		panelWeapon.add(panelRemoveWeapon);
+		panelRemoveWeapon.setLayout(null);
+
+		lblNewLabel_2 = new JLabel("New labeldffdgdfgdfg");
+		lblNewLabel_2.setBounds(0, 0, 286, 131);
+		panelRemoveWeapon.add(lblNewLabel_2);
+
+		panelBackgroundRemoveWeapon = new JLabel("");
+		panelBackgroundRemoveWeapon
+				.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/appBackgroundUnderPanel.jpg")));
+		panelBackgroundRemoveWeapon.setBounds(0, 0, 1770, 956);
+		panelRemoveWeapon.add(panelBackgroundRemoveWeapon);
+
+		btnModifyWeapon = new JButton("Modificacion");
 		btnModifyWeapon.setBorder(null);
-		btnModifyWeapon.setBounds(872, 0, 177, 50);
+		btnModifyWeapon.setBounds(974, 0, 177, 50);
+		btnModifyWeapon.addActionListener(this);
 		panelWeapon.add(btnModifyWeapon);
 
-		JButton btnRegisterWeapon = new JButton("Alta");
+		btnRegisterWeapon = new JButton("Alta");
 		btnRegisterWeapon.setBorder(null);
-		btnRegisterWeapon.setBounds(545, 0, 177, 50);
+		btnRegisterWeapon.setBounds(620, 0, 177, 50);
+		btnRegisterWeapon.addActionListener(this);
 		panelWeapon.add(btnRegisterWeapon);
 
-		JButton btnRemoveWeapon = new JButton("Baja");
+		btnRemoveWeapon = new JButton("Baja");
 		btnRemoveWeapon.setBorder(null);
-		btnRemoveWeapon.setBounds(722, 0, 177, 50);
+		btnRemoveWeapon.setBounds(797, 0, 177, 50);
+		btnRemoveWeapon.addActionListener(this);
 		panelWeapon.add(btnRemoveWeapon);
 
 		JLabel lblBackgroundPanelWeapon = new JLabel("");
@@ -218,43 +402,6 @@ public class VPestaniasAgente extends JFrame implements ActionListener {
 				.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/appBackgroundPanel.jpg")));
 		lblBackgroundPanelMap.setBounds(0, 0, 1920, 1006);
 		panelMap.add(lblBackgroundPanelMap);
-		panelAgent = new JPanel();
-		panelAgent.setBounds(0, 74, 1770, 1006);
-		p.add(panelAgent);
-		panelAgent.setLayout(null);
-
-		JButton btnModifyAgent = new JButton("Modificacion");
-		btnModifyAgent.setBorder(null);
-		btnModifyAgent.setBounds(899, 0, 177, 50);
-		panelAgent.add(btnModifyAgent);
-
-		JButton btnRegisterAgent = new JButton("Alta");
-		btnRegisterAgent.setBorder(null);
-		btnRegisterAgent.setBounds(545, 0, 177, 50);
-		panelAgent.add(btnRegisterAgent);
-
-		JButton btnRemoveAgent = new JButton("Baja");
-		btnRemoveAgent.setBorder(null);
-		btnRemoveAgent.setBounds(722, 0, 177, 50);
-		panelAgent.add(btnRemoveAgent);
-
-		JLabel lblBackgroundPanelAgent = new JLabel("");
-		lblBackgroundPanelAgent
-				.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/appBackgroundPanel.jpg")));
-		lblBackgroundPanelAgent.setBounds(0, 0, 1770, 1006);
-		panelAgent.add(lblBackgroundPanelAgent);
-
-		panelRegisterAgent = new JPanel();
-		panelRegisterAgent.setBounds(0, 50, 1770, 956);
-		panelAgent.add(panelRegisterAgent);
-
-		panelRemoveAgent = new JPanel();
-		panelRemoveAgent.setBounds(0, 50, 1770, 956);
-		panelAgent.add(panelRemoveAgent);
-
-		panelModifyAgent = new JPanel();
-		panelModifyAgent.setBounds(0, 50, 1770, 956);
-		panelAgent.add(panelModifyAgent);
 
 		lblHandCursor = new JLabel("");
 		lblHandCursor.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -286,46 +433,57 @@ public class VPestaniasAgente extends JFrame implements ActionListener {
 		 * 
 		 */
 
-		Set<Agent> agents = null;
 		try {
-			agents = agentData.getAllAgents();
-		} catch (ExceptionManager e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+			Set<Agent> agents = agentData.getAllAgents();
 
 			List<Agent> agentsOrder = new ArrayList<Agent>(agents);
-	        Collections.sort(agentsOrder);
-	        String matrizTabla[][] = new String[agents.size()][1];
+			Collections.sort(agentsOrder);
+			String matrizTabla[][] = new String[agents.size()][1];
 
-	        for (Agent newAgent : agentsOrder) {
-	            
+			for (Agent newAgent : agentsOrder) {
 				matrizTabla[cont][0] = newAgent.getAgentCode() + " - " + newAgent.getAgentName();
-	            cont++;
-	        }
+				cont++;
+			}
 
-	        String titulo[] = { "Agentes" };
+			String titulo[] = { "Agentes" };
 			scrollPane = new JScrollPane();
-			scrollPane.setBounds(1770, 74, 150, 1006); // 90 para que solo salgan 3 agents
+			scrollPane.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			scrollPane.setBounds(1770, 74, 150, 1006);
 			p.add(scrollPane);
 
-			
+			table = new JTable(matrizTabla, titulo) {
+				/*
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
 
-			table = new JTable(matrizTabla, titulo);
+				// ***********************METODO PARA HACER QUE LA TABLA NO SEA EDITABLE, Y ASI
+				// HACER DOBLE CLICK************************************
+				// Para ello sobreescribimos el metodo que ya tiene la clase
+				// JTable.isCellEditable
+				public boolean isCellEditable(int row, int column) {
+					for (int i = 0; i < table.getRowCount(); i++) {
+						if (row == i) {
+							return false;
+						}
+					}
+					return true;
+				}
+			};
 
+			RowsRenderer rRowsRenderer = new RowsRenderer(4);
+			DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+			table.setDefaultRenderer(Object.class, rRowsRenderer);
 			table.setSelectionBackground(new Color(0, 230, 168));
 			table.setSelectionForeground(Color.WHITE);
 			table.setRowMargin(0);
-			table.setRowHeight(22);
+			table.setRowHeight(30);
 			table.setShowVerticalLines(false);
-			table.setFont(new Font("Tahoma", Font.PLAIN, 12));
-			table.setEnabled(false);
-			DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+			table.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 18));
+			table.isCellEditable(agentsOrder.size(), 1);
+			table.addMouseListener(this);
 			centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-			
-				table.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
-			
-			p.add(table);
+			table.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
 			scrollPane.setViewportView(table);
 
 			JTableHeader tableHeader = table.getTableHeader();
@@ -334,7 +492,10 @@ public class VPestaniasAgente extends JFrame implements ActionListener {
 			tableHeader.setFont(new Font("Tahoma", Font.BOLD, 15));
 			tableHeader.setBorder(null);
 			tableHeader.setEnabled(false);
-	
+		} catch (ExceptionManager e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
 		/*
 		 * Boton pestaña Agente
@@ -345,7 +506,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener {
 		btnAgent.setForeground(Color.WHITE);
 		btnAgent.setBackground(new Color(0, 0, 102));
 		btnAgent.setBorder(null);
-		btnAgent.setBounds(456, 0, 177, 74);
+		btnAgent.setBounds(531, 0, 177, 74);
 		btnAgent.addActionListener(this);
 		p.add(btnAgent);
 
@@ -357,7 +518,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener {
 		btnMission.setForeground(Color.WHITE);
 		btnMission.setBackground(new Color(0, 0, 102));
 		btnMission.setBorder(null);
-		btnMission.setBounds(633, 0, 177, 74);
+		btnMission.setBounds(708, 0, 177, 74);
 		btnMission.addActionListener(this);
 		p.add(btnMission);
 
@@ -369,7 +530,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener {
 		btnWeapon.setForeground(Color.WHITE);
 		btnWeapon.setBackground(new Color(0, 0, 102));
 		btnWeapon.setBorder(null);
-		btnWeapon.setBounds(810, 0, 177, 74);
+		btnWeapon.setBounds(885, 0, 177, 74);
 		btnWeapon.addActionListener(this);
 		p.add(btnWeapon);
 
@@ -381,7 +542,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener {
 		btnMap.setForeground(Color.WHITE);
 		btnMap.setBackground(new Color(0, 0, 102));
 		btnMap.setBorder(null);
-		btnMap.setBounds(987, 0, 177, 74);
+		btnMap.setBounds(1062, 0, 177, 74);
 		btnMap.addActionListener(this);
 		p.add(btnMap);
 		p.add(btnClose);
@@ -409,7 +570,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource().equals(btnClose)) {
-			VLogin vMain = new VLogin(mapData, agentData);
+			VLogin vMain = new VLogin(mapData, agentData, weaponData);
 			vMain.setVisible(true);
 			this.dispose();
 		} else if (e.getSource().equals(btnMinimize)) {
@@ -434,6 +595,87 @@ public class VPestaniasAgente extends JFrame implements ActionListener {
 			panelMission.setVisible(false);
 			panelWeapon.setVisible(false);
 			panelMap.setVisible(true);
+		} else if (e.getSource().equals(btnRegisterAgent)) {
+			panelRegisterAgent.setVisible(true);
+			panelModifyAgent.setVisible(false);
+			panelRemoveAgent.setVisible(false);
+		} else if (e.getSource().equals(btnModifyAgent)) {
+			panelRegisterAgent.setVisible(false);
+			panelModifyAgent.setVisible(true);
+			panelRemoveAgent.setVisible(false);
+		} else if (e.getSource().equals(btnRemoveAgent)) {
+			panelRegisterAgent.setVisible(false);
+			panelModifyAgent.setVisible(false);
+			panelRemoveAgent.setVisible(true);
+		} else if (e.getSource().equals(btnRegisterWeapon)) {
+			panelRegisterWeapon.setVisible(true);
+			panelModifyWeapon.setVisible(false);
+			panelRemoveWeapon.setVisible(false);
+		} else if (e.getSource().equals(btnModifyWeapon)) {
+			panelRegisterWeapon.setVisible(false);
+			panelModifyWeapon.setVisible(true);
+			panelRemoveWeapon.setVisible(false);
+		} else if (e.getSource().equals(btnRemoveWeapon)) {
+			panelRegisterWeapon.setVisible(false);
+			panelModifyWeapon.setVisible(false);
+			panelRemoveWeapon.setVisible(true);
+		} else if (e.getSource().equals(btnRegisterMission)) {
+			panelRegisterMission.setVisible(true);
+			panelHistoricMission.setVisible(false);
+		} else if (e.getSource().equals(btnHistoricMission)) {
+			panelRegisterMission.setVisible(false);
+			panelHistoricMission.setVisible(true);
 		}
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		if (e.getSource().equals(table)) {
+			if (e.getClickCount() == 2) {
+				try {
+					Set<Agent> agents = agentData.getAllAgents();
+					List<Agent> agentsOrder = new ArrayList<Agent>(agents);
+					Collections.sort(agentsOrder);
+					
+					Agent newAgent = new Agent();
+					table = (JTable) e.getSource();
+					int row = table.getSelectedRow();
+
+					Icon newIcon = new ImageIcon(
+							VPestaniasAgente.class.getResource("/resources/rotGamesLogo100x52.png"));
+					newAgent = agentsOrder.get(row);
+					JOptionPane.showMessageDialog(this, newAgent.getAgentName() + " " + newAgent.getAgentCode(),
+							"Agente", JOptionPane.DEFAULT_OPTION, newIcon);
+				} catch (ExceptionManager e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		}
+
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+
 	}
 }
