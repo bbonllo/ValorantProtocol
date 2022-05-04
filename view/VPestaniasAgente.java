@@ -44,6 +44,9 @@ import java.awt.Cursor;
 
 import javax.swing.JButton;
 import javax.swing.border.LineBorder;
+import javax.swing.JTextField;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class VPestaniasAgente extends JFrame implements ActionListener, MouseListener {
 	private static final long serialVersionUID = 1L;
@@ -77,7 +80,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 	private JPanel panelModifyAgent;
 	private JScrollPane scrollPane;
 	private JTable table;
-	private JLabel lblAgentData_1;
+	private JLabel lblAgentHabilities;
 	private JLabel lblBackgroundPanelAgentRegister;
 	private JLabel lblBackgroundPanelAgentRegister_1;
 	private JLabel lblBackgroundPanelAgentRegister_2;
@@ -95,6 +98,14 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 	private JLabel lblPanelregistermission;
 	private JLabel lblNewLabel_2;
 	private JLabel lblNewLabel_3;
+	private JComboBox<?> comboBoxRol;
+	private JLabel lblAgentDataCode;
+	private JTextField txtCode;
+	private JLabel lblAgentDataName;
+	private JTextField txtName;
+	private JLabel lblAgentDataNationality;
+	private JTextField txtNationality;
+	private JLabel lblAgentDataRol;
 	int cont = 0;
 
 	/**
@@ -210,14 +221,65 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		panelRegisterAgent.setBounds(0, 50, 1770, 956);
 		panelAgent.add(panelRegisterAgent);
 		panelRegisterAgent.setLayout(null);
+		
+		comboBoxRol = new JComboBox();
+		comboBoxRol.setModel(new DefaultComboBoxModel(new String[] {"Duelist", "Sentinel", "Controller", "Initiator"}));
+		comboBoxRol.setBounds(278, 291, 191, 30);
+		comboBoxRol.setSelectedIndex(-1);
+		panelRegisterAgent.add(comboBoxRol);
+		
+		lblAgentDataRol = new JLabel("Rol del agente");
+		lblAgentDataRol.setForeground(Color.WHITE);
+		lblAgentDataRol.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
+		lblAgentDataRol.setBounds(91, 281, 207, 53);
+		panelRegisterAgent.add(lblAgentDataRol);
+		
+		txtNationality = new JTextField();
+		txtNationality.setColumns(10);
+		txtNationality.setBounds(278, 240, 191, 30);
+		panelRegisterAgent.add(txtNationality);
+		
+		lblAgentDataNationality = new JLabel("Nacionalidad del agente");
+		lblAgentDataNationality.setForeground(Color.WHITE);
+		lblAgentDataNationality.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
+		lblAgentDataNationality.setBounds(91, 230, 207, 53);
+		panelRegisterAgent.add(lblAgentDataNationality);
+		
+		txtName = new JTextField();
+		txtName.setColumns(10);
+		txtName.setBounds(278, 189, 191, 30);
+		panelRegisterAgent.add(txtName);
+		
+		lblAgentDataName = new JLabel("Nombre del agente");
+		lblAgentDataName.setForeground(Color.WHITE);
+		lblAgentDataName.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
+		lblAgentDataName.setBounds(91, 179, 207, 53);
+		panelRegisterAgent.add(lblAgentDataName);
+		
+		txtCode = new JTextField();
+		txtCode.setBounds(278, 138, 191, 30);
+		panelRegisterAgent.add(txtCode);
+		txtCode.setColumns(10);
+		
+		lblAgentDataCode = new JLabel("Codigo del agente");
+		lblAgentDataCode.setForeground(Color.WHITE);
+		lblAgentDataCode.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
+		lblAgentDataCode.setBounds(91, 128, 207, 53);
+		panelRegisterAgent.add(lblAgentDataCode);
+		
+		JLabel lblAgentDataTitle = new JLabel("Datos del agente");
+		lblAgentDataTitle.setForeground(Color.WHITE);
+		lblAgentDataTitle.setBounds(91, 64, 405, 53);
+		lblAgentDataTitle.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 18));
+		panelRegisterAgent.add(lblAgentDataTitle);
 
-		lblAgentData_1 = new JLabel("");
-		lblAgentData_1.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-		lblAgentData_1.setBounds(908, 25, 816, 907);
-		panelRegisterAgent.add(lblAgentData_1);
+		lblAgentHabilities = new JLabel("");
+		lblAgentHabilities.setBorder(new LineBorder(Color.WHITE, 2));
+		lblAgentHabilities.setBounds(908, 25, 816, 907);
+		panelRegisterAgent.add(lblAgentHabilities);
 
 		JLabel lblAgentData = new JLabel("");
-		lblAgentData.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		lblAgentData.setBorder(new LineBorder(Color.WHITE, 2));
 		lblAgentData.setBounds(44, 25, 816, 907);
 		panelRegisterAgent.add(lblAgentData);
 
