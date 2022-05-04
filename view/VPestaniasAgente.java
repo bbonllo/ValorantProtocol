@@ -497,6 +497,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+
 		/*
 		 * Boton pestaña Agente
 		 */
@@ -632,20 +633,23 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource().equals(table)) {
 			if (e.getClickCount() == 2) {
-				Agent newAgent = new Agent();
-				Icon newIcon = new ImageIcon(VPestaniasAgente.class.getResource("/resources/rotGamesLogo100x52.png"));
-				table = (JTable) e.getSource();
-				int row = table.getSelectedRow();
-				if (row < 7) {
-					row += 1;
-					newAgent = agentData.getAgentByID(row);
+				try {
+					Set<Agent> agents = agentData.getAllAgents();
+					List<Agent> agentsOrder = new ArrayList<Agent>(agents);
+					Collections.sort(agentsOrder);
+					
+					Agent newAgent = new Agent();
+					table = (JTable) e.getSource();
+					int row = table.getSelectedRow();
+
+					Icon newIcon = new ImageIcon(
+							VPestaniasAgente.class.getResource("/resources/rotGamesLogo100x52.png"));
+					newAgent = agentsOrder.get(row);
 					JOptionPane.showMessageDialog(this, newAgent.getAgentName() + " " + newAgent.getAgentCode(),
 							"Agente", JOptionPane.DEFAULT_OPTION, newIcon);
-				} else {
-					row += 2;
-					newAgent = agentData.getAgentByID(row);
-					JOptionPane.showMessageDialog(this, newAgent.getAgentName() + " " + newAgent.getAgentCode(),
-							"Agente", JOptionPane.DEFAULT_OPTION, newIcon);
+				} catch (ExceptionManager e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
 			}
 		}
