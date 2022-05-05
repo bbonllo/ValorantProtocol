@@ -1111,7 +1111,8 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 			btnAccept.addActionListener(this);
 			panelModifyAgent.add(btnAccept);
 
-			JComboBox comboBox = new JComboBox();
+			diag = new JDialog();
+			JComboBox comboBoxModif = new JComboBox();
 			try {
 				Set<Agent> agents = agentData.getAllAgents();
 
@@ -1119,32 +1120,52 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 				Collections.sort(agentsOrder);
 
 				for (Agent newAgent : agentsOrder) {
-					comboBox.addItem(newAgent.getAgentName() + " // " + newAgent.getAgentCode());
+					comboBoxModif.addItem(newAgent.getAgentName() + " // " + newAgent.getAgentCode());
 				}
 			} catch (ExceptionManager e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+			comboBoxModif.setSelectedIndex(-1);
 			Object[] options = new Object[] {};
-			JOptionPane jop = new JOptionPane("Please Select", JOptionPane.QUESTION_MESSAGE,
+			JOptionPane jop = new JOptionPane("Selecciona un agente", JOptionPane.QUESTION_MESSAGE,
 					JOptionPane.OK_CANCEL_OPTION, null, options, -1);
-			jop.add(comboBox);
+			jop.add(comboBoxModif);
 			jop.add(btnAccept);
 
-			diag = new JDialog();
 			diag.setModal(true);
+			diag.setBounds(780, 400, 89, 23);
 			diag.getContentPane().add(jop);
 			diag.pack();
 			diag.setVisible(true);
 
-			String getAgente = comboBox.getSelectedItem().toString();
+			try {
+				String getAgente = comboBoxModif.getSelectedItem().toString();
 
-			/**
-			 * JOptionPane.showConfirmDialog(null, comboBox, "Fav Sports",
-			 * JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE);
-			 */
-			// System.out.println(JOptionPane.showConfirmDialog(null, comboBox, "Seleccione
-			// el agente", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE));
+				String[] separatedGetAgent = getAgente.split(" ");
+
+				Agent newAgent = new Agent();
+				newAgent = agentData.getAgentByID(Integer.parseInt(separatedGetAgent[2]));
+
+				txtCodeModif.setText(newAgent.getAgentCode() + "");
+				txtCodeModif.setEditable(false);
+				txtNameModif.setText(newAgent.getAgentName());
+				txtNationalityModif.setText(newAgent.getAgentNationality());
+				comboBoxRolModif.setModel(
+						new DefaultComboBoxModel(new String[] { "Duelist", "Sentinel", "Controller", "Initiator" }));
+				comboBoxRolModif.setSelectedItem(newAgent.getAgentRol());
+				if (newAgent.isAgentIsAdmin()) {
+					chckbxNewCheckBoxModif.setSelected(true);
+					chckbxNewCheckBoxModif.setEnabled(false);
+				} else {
+					chckbxNewCheckBoxModif.setSelected(false);
+					chckbxNewCheckBoxModif.setEnabled(false);
+				}
+
+			} catch (Exception e1) {
+				JOptionPane.showMessageDialog(this, "Selecciona un agente", "Error", JOptionPane.INFORMATION_MESSAGE);
+			}
+
 		} else if (e.getSource().equals(btnRemoveAgent)) {
 			panelRegisterAgent.setVisible(false);
 			panelModifyAgent.setVisible(false);
