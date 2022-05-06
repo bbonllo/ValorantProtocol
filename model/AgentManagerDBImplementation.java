@@ -50,6 +50,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 
 		openConnection();
 		final String SEARCHAgent = "SELECT * from Agent where agentCode = ?";
+		
 
 		try {
 			stmt = con.prepareStatement(SEARCHAgent);
