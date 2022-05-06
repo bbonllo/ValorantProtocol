@@ -25,7 +25,7 @@ DROP TABLE IF EXISTS `ability`;
 CREATE TABLE `ability` (
   `abilityName` varchar(20) NOT NULL DEFAULT '',
   `agentCode` int(11) NOT NULL,
-  `abilityDesciption` varchar(500) DEFAULT NULL,
+  `abilityDescription` varchar(500) DEFAULT NULL,
   `orbNum` int(11) DEFAULT NULL,
   PRIMARY KEY (`abilityName`,`agentCode`),
   KEY `agentCode` (`agentCode`),
@@ -69,7 +69,7 @@ CREATE TABLE `agent` (
 
 LOCK TABLES `agent` WRITE;
 /*!40000 ALTER TABLE `agent` DISABLE KEYS */;
-INSERT INTO `agent` VALUES (0,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(1,'abcd*1234','Brimstone','American','Controller',1,0,1),(2,'venenito','Viper','American','Controller',1,0,1),(3,'omengatitouwu','Omen','Unknown','Controller',1,0,1),(4,'abcd*1234','Killjoy','German','Sentinel',1,0,1),(5,'n0ra*1234','Cypher','Moroccan','Sentinel',1,0,1),(6,'nightowl123','Sova','Russian','Initiator',1,0,1),(7,'abcd*1234','Sage','Chinese','Sentinel',1,0,1),(9,'F1r3b0y','Phoenix','British','Duelist',0,0,1),(10,'W1ndG1rl','Jett','Korean','Duelist',0,0,1),(11,'VampireQueen','Reyna','Mexican','Duelist',0,0,1),(12,'BOOOM','Raze','Brazilian','Duelist',0,0,1),(13,'1234','Breach','Swede','Initiator',1,0,1),(14,'HAWKOUT123','Skye','Australian','Initiator',0,0,1),(15,'dimensionalboy','Yoru','Japanese','Duelist',0,0,1),(16,'StarG1rl','Astra','Ghanaian','Controller',0,0,1),(17,'toastbot','KAY/O','Unknown','Initiator',0,0,1),(18,'baguette','Chamber','French','Sentinel',0,0,1),(19,'Rayosuperpoderoso','Neon','Filipino','Duelist',0,0,1);
+INSERT INTO `agent` VALUES (1,'abcd*1234','Brimstone','American','Controller',1,1,1),(2,'venenito','Viper','American','Controller',1,1,1),(3,'omengatitouwu','Omen','Unknown','Controller',1,1,1),(4,'abcd*1234','Killjoy','German','Sentinel',1,1,1),(5,'n0ra*1234','Cypher','Moroccan','Sentinel',1,1,1),(6,'nightowl123','Sova','Russian','Initiator',1,0,1),(7,'abcd*1234','Sage','Chinese','Sentinel',1,0,1),(9,'F1r3b0y','Phoenix','British','Duelist',0,0,1),(10,'W1ndG1rl','Jett','Korean','Duelist',0,0,1),(11,'VampireQueen','Reyna','Mexican','Duelist',0,0,1),(12,'BOOOM','Raze','Brazilian','Duelist',0,0,1),(13,'1234','Breach','Swede','Initiator',1,0,1),(14,'HAWKOUT123','Skye','Australian','Initiator',0,0,1),(15,'dimensionalboy','Yoru','Japanese','Duelist',0,0,1),(16,'StarG1rl','Astra','Ghanaian','Controller',0,0,1),(17,'toastbot','KAY/O','Unknown','Initiator',0,0,1),(18,'baguette','Chamber','French','Sentinel',0,0,1),(19,'Rayosuperpoderoso','Neon','Filipino','Duelist',0,0,1);
 /*!40000 ALTER TABLE `agent` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -82,9 +82,9 @@ DROP TABLE IF EXISTS `agent_on_mission`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `agent_on_mission` (
   `missionCode` int(11) NOT NULL DEFAULT '0',
-  `agentCode` int(11) DEFAULT NULL,
+  `agentCode` int(11) NOT NULL DEFAULT '0',
   `WeaponName` varchar(16) NOT NULL,
-  PRIMARY KEY (`WeaponName`,`missionCode`),
+  PRIMARY KEY (`WeaponName`,`missionCode`,`agentCode`),
   KEY `missionCode` (`missionCode`),
   KEY `agentCode` (`agentCode`),
   CONSTRAINT `agent_on_mission_ibfk_1` FOREIGN KEY (`missionCode`) REFERENCES `mission` (`missionCode`),
@@ -99,6 +99,7 @@ CREATE TABLE `agent_on_mission` (
 
 LOCK TABLES `agent_on_mission` WRITE;
 /*!40000 ALTER TABLE `agent_on_mission` DISABLE KEYS */;
+INSERT INTO `agent_on_mission` VALUES (2,1,'Classic'),(2,2,'Classic'),(2,3,'Classic'),(2,4,'Classic'),(2,5,'Classic'),(2,1,'Vandal'),(2,2,'Vandal'),(2,3,'Vandal'),(2,4,'Vandal'),(2,5,'Vandal');
 /*!40000 ALTER TABLE `agent_on_mission` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -123,6 +124,7 @@ CREATE TABLE `attack_mission` (
 
 LOCK TABLES `attack_mission` WRITE;
 /*!40000 ALTER TABLE `attack_mission` DISABLE KEYS */;
+INSERT INTO `attack_mission` VALUES (2,NULL);
 /*!40000 ALTER TABLE `attack_mission` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -148,6 +150,32 @@ CREATE TABLE `defend_mission` (
 LOCK TABLES `defend_mission` WRITE;
 /*!40000 ALTER TABLE `defend_mission` DISABLE KEYS */;
 /*!40000 ALTER TABLE `defend_mission` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `log_record`
+--
+
+DROP TABLE IF EXISTS `log_record`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `log_record` (
+  `agentcode1` int(11) DEFAULT NULL,
+  `agentcode2` int(11) DEFAULT NULL,
+  `agentcode3` int(11) DEFAULT NULL,
+  `agentcode4` int(11) DEFAULT NULL,
+  `agentcode5` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `log_record`
+--
+
+LOCK TABLES `log_record` WRITE;
+/*!40000 ALTER TABLE `log_record` DISABLE KEYS */;
+INSERT INTO `log_record` VALUES (3,1,2,4,5);
+/*!40000 ALTER TABLE `log_record` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -190,7 +218,7 @@ CREATE TABLE `mission` (
   PRIMARY KEY (`missionCode`),
   KEY `mapName` (`mapName`),
   CONSTRAINT `mission_ibfk_1` FOREIGN KEY (`mapName`) REFERENCES `map` (`mapName`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -199,6 +227,7 @@ CREATE TABLE `mission` (
 
 LOCK TABLES `mission` WRITE;
 /*!40000 ALTER TABLE `mission` DISABLE KEYS */;
+INSERT INTO `mission` VALUES (2,'SPLIT','2010-10-10','2011-11-11',0);
 /*!40000 ALTER TABLE `mission` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -238,4 +267,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-26 10:20:43
+-- Dump completed on 2022-05-06  8:21:26
