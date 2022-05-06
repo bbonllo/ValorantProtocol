@@ -1,7 +1,7 @@
 ﻿DELIMITER $$
 
 DROP PROCEDURE IF EXISTS `valorant_protocol`.`bring` $$
-CREATE PROCEDURE `bring`(in wUserAgent INT)
+CREATE PROCEDURE `valorant_protocol`.`bring`(in wUserAgent INT)
 BEGIN
 DECLARE currentMission INT DEFAULT 0;
 DECLARE  agentCod1 INT DEFAULT 0;

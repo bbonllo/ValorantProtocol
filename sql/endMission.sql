@@ -1,7 +1,7 @@
 ﻿DELIMITER $$
 
 DROP PROCEDURE IF EXISTS `valorant_protocol`.`endMission` $$
-CREATE PROCEDURE `endMission`(in wMissionCode integer, in wType char)
+CREATE PROCEDURE `valorant_protocol`.`endMission`(in wMissionCode integer, in wType char)
 BEGIN
 
   update mission set missionFinished = true where missionCode = wMissionCode;
