@@ -1,4 +1,4 @@
-package model;
+package controlador;
 
 import view.VLogin;
 

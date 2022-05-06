@@ -17,10 +17,9 @@ import javax.swing.table.JTableHeader;
 import java.awt.Font;
 import java.awt.Frame;
 
+import model.Ability;
+import model.AbilityUltimate;
 import model.Agent;
-import model.AgentManager;
-import model.MapManager;
-import model.WeaponManager;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -38,8 +37,10 @@ import java.awt.Toolkit;
 import com.k33ptoo.components.KButton;
 
 import components.RowsRenderer;
+import controlador.AgentManager;
+import controlador.MapManager;
+import controlador.WeaponManager;
 import exceptions.ExceptionManager;
-import jdk.jshell.Diag;
 
 import java.awt.Cursor;
 
@@ -52,16 +53,11 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JCheckBox;
 import javax.swing.SwingConstants;
 import javax.swing.JPasswordField;
-import javax.swing.JTextPane;
-import javax.swing.DropMode;
 import javax.swing.JTextArea;
 import javax.swing.JSpinner;
-import javax.swing.SpinnerDateModel;
-import javax.swing.SpinnerModel;
 
-import java.util.Date;
-import java.util.Calendar;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.JScrollBar;
 
 public class VPestaniasAgente extends JFrame implements ActionListener, MouseListener {
 	private static final long serialVersionUID = 1L;
@@ -94,6 +90,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 	private JPanel panelModifyAgent;
 	private JPanel panelRemoveAgent;
 	private JScrollPane scrollPane;
+	private JScrollPane scrollPane2;
 	private JTable table;
 	private JLabel lblAgentHabilities;
 	private JLabel lblBackgroundPanelAgentRegister;
@@ -112,7 +109,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 	private JLabel lblPanelregistermission;
 	private JLabel lblNewLabel_2;
 	private JLabel lblNewLabel_3;
-	private JComboBox<?> comboBoxRol;
+	private JComboBox<String> comboBoxRol;
 	private JLabel lblAgentDataCode;
 	private JTextField txtCode;
 	private JLabel lblAgentDataName;
@@ -149,7 +146,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 	private JTextField txtHabilityName3Modif;
 	private JTextArea textAreaHabilityDescription3Modif;
 	private JLabel lblAgentHabilitiesDescription3Modif;
-	private JTextArea textAreaHabilityDescription2_1;
+	private JTextArea textAreaHabilityDescription2Modif;
 	private JLabel lblAgentHabilitiesName2Modif;
 	private JTextField txtHabilityName2Modif;
 	private JLabel lblAgentHabilitiesDescription2Modif;
@@ -159,13 +156,13 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 	private JLabel lblAgentHabilitiesName1Modif;
 	private JLabel lblAgentHabilitiesTitleModif;
 	private JButton btnModif;
-	private JPasswordField passwordFieldModif;
 	private JPasswordField passwordFieldConfirmModif;
+	private JPasswordField passwordFieldModif;
 	private JLabel lblAgentDataPasswd2Modif;
 	private JLabel lblAgentDataPasswd1Modif;
 	private JLabel lblAgentDataAdminModif;
 	private JCheckBox chckbxNewCheckBoxModif;
-	private JComboBox comboBoxRolModif;
+	private JComboBox<String> comboBoxRolModif;
 	private JLabel lblAgentDataRolModif;
 	private JTextField txtNationalityModif;
 	private JLabel lblAgentDataNationalityModif;
@@ -350,11 +347,11 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		lblAgentHabilitiesDescription3Modif.setBounds(998, 569, 207, 53);
 		panelModifyAgent.add(lblAgentHabilitiesDescription3Modif);
 
-		textAreaHabilityDescription2_1 = new JTextArea();
-		textAreaHabilityDescription2_1.setWrapStyleWord(true);
-		textAreaHabilityDescription2_1.setLineWrap(true);
-		textAreaHabilityDescription2_1.setBounds(1378, 294, 207, 138);
-		panelModifyAgent.add(textAreaHabilityDescription2_1);
+		textAreaHabilityDescription2Modif = new JTextArea();
+		textAreaHabilityDescription2Modif.setWrapStyleWord(true);
+		textAreaHabilityDescription2Modif.setLineWrap(true);
+		textAreaHabilityDescription2Modif.setBounds(1378, 294, 207, 138);
+		panelModifyAgent.add(textAreaHabilityDescription2Modif);
 
 		lblAgentHabilitiesName2Modif = new JLabel("Nombre de la habilidad 2");
 		lblAgentHabilitiesName2Modif.setForeground(Color.WHITE);
@@ -410,13 +407,13 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		btnModif.setBounds(1584, 874, 140, 40);
 		panelModifyAgent.add(btnModif);
 
-		passwordFieldModif = new JPasswordField();
-		passwordFieldModif.setBounds(497, 535, 207, 30);
-		panelModifyAgent.add(passwordFieldModif);
-
 		passwordFieldConfirmModif = new JPasswordField();
-		passwordFieldConfirmModif.setBounds(151, 535, 207, 30);
+		passwordFieldConfirmModif.setBounds(497, 535, 207, 30);
 		panelModifyAgent.add(passwordFieldConfirmModif);
+
+		passwordFieldModif = new JPasswordField();
+		passwordFieldModif.setBounds(151, 535, 207, 30);
+		panelModifyAgent.add(passwordFieldModif);
 
 		lblAgentDataPasswd2Modif = new JLabel("Confirmar contraseña");
 		lblAgentDataPasswd2Modif.setForeground(Color.WHITE);
@@ -443,7 +440,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		chckbxNewCheckBoxModif.setBounds(151, 397, 16, 15);
 		panelModifyAgent.add(chckbxNewCheckBoxModif);
 
-		comboBoxRolModif = new JComboBox();
+		comboBoxRolModif = new JComboBox<String>();
 		comboBoxRolModif.setSelectedIndex(-1);
 		comboBoxRolModif.setBounds(497, 291, 207, 30);
 		panelModifyAgent.add(comboBoxRolModif);
@@ -683,9 +680,9 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		chckbxNewCheckBox.setBounds(151, 397, 16, 15);
 		panelRegisterAgent.add(chckbxNewCheckBox);
 
-		comboBoxRol = new JComboBox();
-		comboBoxRol
-				.setModel(new DefaultComboBoxModel(new String[] { "Duelist", "Sentinel", "Controller", "Initiator" }));
+		comboBoxRol = new JComboBox<String>();
+		comboBoxRol.setModel(
+				new DefaultComboBoxModel<String>(new String[] { "Duelist", "Sentinel", "Controller", "Initiator" }));
 		comboBoxRol.setBounds(497, 291, 207, 30);
 		comboBoxRol.setSelectedIndex(-1);
 		panelRegisterAgent.add(comboBoxRol);
@@ -1112,7 +1109,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 			panelModifyAgent.add(btnAccept);
 
 			diag = new JDialog();
-			JComboBox comboBoxModif = new JComboBox();
+			JComboBox<String> comboBoxModif = new JComboBox<String>();
 			try {
 				Set<Agent> agents = agentData.getAllAgents();
 
@@ -1126,7 +1123,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			comboBoxModif.setSelectedIndex(-1);
+			comboBoxModif.setSelectedIndex(0);
 			Object[] options = new Object[] {};
 			JOptionPane jop = new JOptionPane("Selecciona un agente", JOptionPane.QUESTION_MESSAGE,
 					JOptionPane.OK_CANCEL_OPTION, null, options, -1);
@@ -1139,32 +1136,40 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 			diag.pack();
 			diag.setVisible(true);
 
-			try {
-				String getAgente = comboBoxModif.getSelectedItem().toString();
+			// try {
+			String getAgente = comboBoxModif.getSelectedItem().toString();
 
-				String[] separatedGetAgent = getAgente.split(" ");
+			String[] separatedGetAgent = getAgente.split(" ");
 
-				Agent newAgent = new Agent();
-				newAgent = agentData.getAgentByID(Integer.parseInt(separatedGetAgent[2]));
+			Agent newAgent = new Agent();
+			newAgent = agentData.getAgentByID(Integer.parseInt(separatedGetAgent[2]));
 
-				txtCodeModif.setText(newAgent.getAgentCode() + "");
-				txtCodeModif.setEditable(false);
-				txtNameModif.setText(newAgent.getAgentName());
-				txtNationalityModif.setText(newAgent.getAgentNationality());
-				comboBoxRolModif.setModel(
-						new DefaultComboBoxModel(new String[] { "Duelist", "Sentinel", "Controller", "Initiator" }));
-				comboBoxRolModif.setSelectedItem(newAgent.getAgentRol());
-				if (newAgent.isAgentIsAdmin()) {
-					chckbxNewCheckBoxModif.setSelected(true);
-					chckbxNewCheckBoxModif.setEnabled(false);
-				} else {
-					chckbxNewCheckBoxModif.setSelected(false);
-					chckbxNewCheckBoxModif.setEnabled(false);
-				}
-
-			} catch (Exception e1) {
-				JOptionPane.showMessageDialog(this, "Selecciona un agente", "Error", JOptionPane.INFORMATION_MESSAGE);
+			Ability[] newArrayHabilities = newAgent.getAgentAbilities();
+			txtCodeModif.setText(newAgent.getAgentCode() + "");
+			txtCodeModif.setEditable(false);
+			txtNameModif.setText(newAgent.getAgentName());
+			// passwordFieldModif.setText(newAgent.getAgentPasswd());
+			// passwordFieldConfirmModif.setText(newAgent.getAgentPasswd());
+			txtNationalityModif.setText(newAgent.getAgentNationality());
+			comboBoxRolModif.setModel(new DefaultComboBoxModel<String>(
+					new String[] { "Duelist", "Sentinel", "Controller", "Initiator" }));
+			comboBoxRolModif.setSelectedItem(newAgent.getAgentRol());
+			chckbxNewCheckBoxModif.setEnabled(false);
+			if (newAgent.isAgentIsAdmin()) {
+				chckbxNewCheckBoxModif.setSelected(true);
+			} else {
+				chckbxNewCheckBoxModif.setSelected(false);
 			}
+			txtHabilityName1Modif.setText(newArrayHabilities[0].getAbilityName());
+			textAreaHabilityDescription1Modif.setText(newArrayHabilities[0].getAbilityDescription());
+			txtHabilityName2Modif.setText(newArrayHabilities[1].getAbilityName());
+			textAreaHabilityDescription2Modif.setText(newArrayHabilities[1].getAbilityDescription());
+			txtHabilityName3Modif.setText(newArrayHabilities[2].getAbilityName());
+			textAreaHabilityDescription3Modif.setText(newArrayHabilities[2].getAbilityDescription());
+			txtHabilityName4Modif.setText(newArrayHabilities[3].getAbilityName());
+			textAreaHabilityDescription4Modif.setText(newArrayHabilities[3].getAbilityDescription());
+			spinnerModif.setModel(new SpinnerNumberModel(
+					((AbilityUltimate) newArrayHabilities[3]).getAbilityUltimateRequiredOrbs(), 5, 8, 1));
 
 		} else if (e.getSource().equals(btnRemoveAgent)) {
 			panelRegisterAgent.setVisible(false);
