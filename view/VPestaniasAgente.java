@@ -60,6 +60,7 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.JScrollBar;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
+import javax.swing.JSeparator;
 
 public class VPestaniasAgente extends JFrame implements ActionListener, MouseListener {
 	private static final long serialVersionUID = 1L;
@@ -76,9 +77,6 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 	private JButton btnRegisterAgent;
 	private JButton btnModifyAgent;
 	private JButton btnRemoveAgent;
-	private JButton btnRegisterWeapon;
-	private JButton btnModifyWeapon;
-	private JButton btnRemoveWeapon;
 	private JButton btnRegisterMission;
 	private JButton btnHistoricMission;
 	private JPanel panelAgent;
@@ -99,18 +97,13 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 	private JLabel lblBackgroundPanelAgentRegister;
 	private JLabel lblBackgroundPanelAgentRegister_2;
 	private JPanel panelRegisterWeapon;
-	private JPanel panelRemoveWeapon;
-	private JPanel panelModifyWeapon;
 	private JLabel panelBackgroundRegisterWeapon;
-	private JLabel panelBackgroundModifyWeapon;
-	private JLabel panelBackgroundRemoveWeapon;
 	private JPanel panelRegisterMission;
 	private JLabel panelBackgroundRegisterMission;
 	private JPanel panelHistoricMission;
 	private JLabel panelBackgroundHistoricMission;
 	private JLabel lblNewLabel;
 	private JLabel lblPanelregistermission;
-	private JLabel lblNewLabel_2;
 	private JComboBox<String> comboBoxRol;
 	private JLabel lblAgentDataCode;
 	private JTextField txtCode;
@@ -180,6 +173,8 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 	private JCheckBox chckbxNewCheckBoxModif_1;
 	private JRadioButton rdbtnWeaponSidearm;
 	private JRadioButton rdbtnWeaponPrimary;
+	private JButton btnConfirm;
+	private JButton btnClean;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private JLabel lblDamageSubtype;
 	private JComboBox<String> comboBoxWeaponSubtype;
@@ -294,56 +289,75 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		panelRegisterWeapon.setLayout(null);
 
 		rdbtnWeaponSidearm = new JRadioButton("Secundaria");
+		rdbtnWeaponSidearm.setForeground(Color.WHITE);
 		buttonGroup.add(rdbtnWeaponSidearm);
 		rdbtnWeaponSidearm.setOpaque(false);
 		rdbtnWeaponSidearm.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
-		rdbtnWeaponSidearm.setBounds(666, 362, 109, 23);
+		rdbtnWeaponSidearm.setBounds(360, 317, 109, 23);
 		rdbtnWeaponSidearm.addActionListener(this);
+
+		JButton btnAddWeapon = new JButton("New button");
+		btnAddWeapon.setBackground(Color.RED);
+		btnAddWeapon.setForeground(Color.WHITE);
+		btnAddWeapon.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
+		btnAddWeapon.setBorder(null);
+		btnAddWeapon.setBounds(388, 753, 112, 30);
+		panelRegisterWeapon.add(btnAddWeapon);
+
+		JSeparator separator = new JSeparator();
+		separator.setOrientation(SwingConstants.VERTICAL);
+		separator.setBounds(578, 23, 2, 900);
+		panelRegisterWeapon.add(separator);
 
 		comboBoxWeaponSubtype = new JComboBox<String>();
 		comboBoxWeaponSubtype.setModel(
 				new DefaultComboBoxModel<String>(new String[] { "Rifle", "SMG", "Sniper", "Shotgun", "Machine gun" }));
 		comboBoxWeaponSubtype.setSelectedIndex(-1);
-		comboBoxWeaponSubtype.setBounds(525, 411, 281, 30);
+		comboBoxWeaponSubtype.setBounds(219, 366, 281, 30);
 		panelRegisterWeapon.add(comboBoxWeaponSubtype);
 
 		lblDamageSubtype = new JLabel("Subtipo");
+		lblDamageSubtype.setForeground(Color.WHITE);
 		lblDamageSubtype.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
-		lblDamageSubtype.setBounds(403, 401, 112, 53);
+		lblDamageSubtype.setBounds(97, 356, 112, 53);
 		panelRegisterWeapon.add(lblDamageSubtype);
 		panelRegisterWeapon.add(rdbtnWeaponSidearm);
 
 		rdbtnWeaponPrimary = new JRadioButton("Primaria");
+		rdbtnWeaponPrimary.setForeground(Color.WHITE);
 		buttonGroup.add(rdbtnWeaponPrimary);
 		rdbtnWeaponPrimary.setOpaque(false);
 		rdbtnWeaponPrimary.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
-		rdbtnWeaponPrimary.setBounds(525, 362, 109, 23);
+		rdbtnWeaponPrimary.setBounds(219, 317, 109, 23);
 		rdbtnWeaponPrimary.addActionListener(this);
 		panelRegisterWeapon.add(rdbtnWeaponPrimary);
 
 		JLabel lblDamageType = new JLabel("Tipo");
+		lblDamageType.setForeground(Color.WHITE);
 		lblDamageType.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
-		lblDamageType.setBounds(403, 348, 112, 53);
+		lblDamageType.setBounds(97, 303, 112, 53);
 		panelRegisterWeapon.add(lblDamageType);
 
 		txtDamageWeapon = new JTextField();
 		txtDamageWeapon.setColumns(10);
-		txtDamageWeapon.setBounds(525, 306, 281, 30);
+		txtDamageWeapon.setBounds(219, 261, 281, 30);
 		panelRegisterWeapon.add(txtDamageWeapon);
 
 		JLabel lblDamageWeapon = new JLabel("Daño");
+		lblDamageWeapon.setForeground(Color.WHITE);
 		lblDamageWeapon.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
-		lblDamageWeapon.setBounds(403, 296, 112, 53);
+		lblDamageWeapon.setBounds(97, 251, 112, 53);
 		panelRegisterWeapon.add(lblDamageWeapon);
 
 		txtNameWeapon = new JTextField();
-		txtNameWeapon.setBounds(525, 255, 281, 30);
+		txtNameWeapon.setBounds(219, 210, 281, 30);
 		panelRegisterWeapon.add(txtNameWeapon);
 		txtNameWeapon.setColumns(10);
 
 		JLabel lblNameWeapon = new JLabel("Nombre");
+		lblNameWeapon.setForeground(Color.WHITE);
 		lblNameWeapon.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
-		lblNameWeapon.setBounds(403, 245, 112, 53);
+		lblNameWeapon.setBounds(97, 200, 112, 53);
 		panelRegisterWeapon.add(lblNameWeapon);
 
 		panelBackgroundRegisterWeapon = new JLabel("");
@@ -351,54 +365,6 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 				.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/appBackgroundUnderPanel.jpg")));
 		panelBackgroundRegisterWeapon.setBounds(0, 0, 1770, 956);
 		panelRegisterWeapon.add(panelBackgroundRegisterWeapon);
-
-		panelModifyWeapon = new JPanel();
-		panelModifyWeapon.setBounds(0, 50, 1770, 956);
-		panelWeapon.add(panelModifyWeapon);
-		panelModifyWeapon.setLayout(null);
-
-		JLabel lblNewLabel_1 = new JLabel("New labeldffdgdfgdfg");
-		lblNewLabel_1.setBounds(83, 89, 286, 131);
-		panelModifyWeapon.add(lblNewLabel_1);
-
-		panelBackgroundModifyWeapon = new JLabel("");
-		panelBackgroundModifyWeapon
-				.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/appBackgroundUnderPanel.jpg")));
-		panelBackgroundModifyWeapon.setBounds(0, 0, 1770, 956);
-		panelModifyWeapon.add(panelBackgroundModifyWeapon);
-
-		panelRemoveWeapon = new JPanel();
-		panelRemoveWeapon.setBounds(0, 50, 1770, 956);
-		panelWeapon.add(panelRemoveWeapon);
-		panelRemoveWeapon.setLayout(null);
-
-		lblNewLabel_2 = new JLabel("New labeldffdgdfgdfg");
-		lblNewLabel_2.setBounds(0, 0, 286, 131);
-		panelRemoveWeapon.add(lblNewLabel_2);
-
-		panelBackgroundRemoveWeapon = new JLabel("");
-		panelBackgroundRemoveWeapon
-				.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/appBackgroundUnderPanel.jpg")));
-		panelBackgroundRemoveWeapon.setBounds(0, 0, 1770, 956);
-		panelRemoveWeapon.add(panelBackgroundRemoveWeapon);
-
-		btnModifyWeapon = new JButton("Modificacion");
-		btnModifyWeapon.setBorder(null);
-		btnModifyWeapon.setBounds(974, 0, 177, 50);
-		btnModifyWeapon.addActionListener(this);
-		panelWeapon.add(btnModifyWeapon);
-
-		btnRegisterWeapon = new JButton("Alta");
-		btnRegisterWeapon.setBorder(null);
-		btnRegisterWeapon.setBounds(620, 0, 177, 50);
-		btnRegisterWeapon.addActionListener(this);
-		panelWeapon.add(btnRegisterWeapon);
-
-		btnRemoveWeapon = new JButton("Baja");
-		btnRemoveWeapon.setBorder(null);
-		btnRemoveWeapon.setBounds(797, 0, 177, 50);
-		btnRemoveWeapon.addActionListener(this);
-		panelWeapon.add(btnRemoveWeapon);
 
 		JLabel lblBackgroundPanelWeapon = new JLabel("");
 		lblBackgroundPanelWeapon
@@ -529,20 +495,22 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		lblAgentHabilitiesTitle.setBounds(1098, 64, 405, 53);
 		panelRegisterAgent.add(lblAgentHabilitiesTitle);
 
-		JButton btnClean = new JButton("Limiar datos");
+		btnClean = new JButton("Limiar datos");
 		btnClean.setForeground(Color.WHITE);
 		btnClean.setBackground(new Color(255, 0, 0));
 		btnClean.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 12));
 		btnClean.setBorder(null);
 		btnClean.setBounds(1409, 874, 140, 40);
+		btnClean.addActionListener(this);
 		panelRegisterAgent.add(btnClean);
 
-		JButton btnConfirm = new JButton("Añadir agente");
+		btnConfirm = new JButton("Añadir agente");
 		btnConfirm.setForeground(Color.WHITE);
-		btnConfirm.setBackground(new Color(255, 0, 0));
+		btnConfirm.setBackground(Color.RED);
 		btnConfirm.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 12));
 		btnConfirm.setBorder(null);
 		btnConfirm.setBounds(1584, 874, 140, 40);
+		btnConfirm.addActionListener(this);
 		panelRegisterAgent.add(btnConfirm);
 
 		txtPasswd2 = new JPasswordField();
@@ -975,13 +943,11 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		 */
 
 		try {
-			Set<Agent> agents = agentData.getAllAgents();
-
-			List<Agent> agentsOrder = new ArrayList<Agent>(agents);
-			Collections.sort(agentsOrder);
+			List<Agent> agents = agentData.getAllAgents();
+			Collections.sort(agents);
 			String matrizTabla[][] = new String[agents.size()][1];
 
-			for (Agent newAgent : agentsOrder) {
+			for (Agent newAgent : agents) {
 				matrizTabla[cont][0] = newAgent.getAgentName() + " // " + newAgent.getAgentCode();
 				cont++;
 			}
@@ -1021,7 +987,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 			table.setRowHeight(30);
 			table.setShowVerticalLines(false);
 			table.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 18));
-			table.isCellEditable(agentsOrder.size(), 1);
+			table.isCellEditable(agents.size(), 1);
 			table.addMouseListener(this);
 			centerRenderer.setHorizontalAlignment(JLabel.CENTER);
 			table.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
@@ -1141,6 +1107,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 			panelModifyAgent.setVisible(false);
 			panelRemoveAgent.setVisible(false);
 		} else if (e.getSource().equals(btnModifyAgent)) {
+			clean();
 			panelRegisterAgent.setVisible(false);
 			panelModifyAgent.setVisible(true);
 			panelRemoveAgent.setVisible(false);
@@ -1153,12 +1120,10 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 			diag = new JDialog();
 			JComboBox<String> comboBoxModif = new JComboBox<String>();
 			try {
-				Set<Agent> agents = agentData.getAllAgents();
+				List<Agent> agents = agentData.getAllAgents();
+				Collections.sort(agents);
 
-				List<Agent> agentsOrder = new ArrayList<Agent>(agents);
-				Collections.sort(agentsOrder);
-
-				for (Agent newAgent : agentsOrder) {
+				for (Agent newAgent : agents) {
 					comboBoxModif.addItem(newAgent.getAgentName() + " // " + newAgent.getAgentCode());
 				}
 			} catch (ExceptionManager e1) {
@@ -1190,8 +1155,6 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 			txtCodeModif.setText(newAgent.getAgentCode() + "");
 			txtCodeModif.setEditable(false);
 			txtNameModif.setText(newAgent.getAgentName());
-			// passwordFieldModif.setText(newAgent.getAgentPasswd());
-			// passwordFieldConfirmModif.setText(newAgent.getAgentPasswd());
 			txtNationalityModif.setText(newAgent.getAgentNationality());
 			comboBoxRolModif.setModel(new DefaultComboBoxModel<String>(
 					new String[] { "Duelist", "Sentinel", "Controller", "Initiator" }));
@@ -1212,6 +1175,10 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 			textAreaHabilityDescription4Modif.setText(newArrayHabilities[3].getAbilityDescription());
 			spinnerModif.setModel(new SpinnerNumberModel(
 					((AbilityUltimate) newArrayHabilities[3]).getAbilityUltimateRequiredOrbs(), 5, 8, 1));
+			passwordFieldConfirmModif.setText("HolaCarmen");
+			passwordFieldConfirmModif.setEditable(false);
+			passwordFieldModif.setText("Ponme10PLS");
+			passwordFieldModif.setEditable(false);
 
 		} else if (e.getSource().equals(btnRemoveAgent)) {
 			panelRegisterAgent.setVisible(false);
@@ -1219,18 +1186,6 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 			panelRemoveAgent.setVisible(true);
 			VRemoveAgent vRemoveAgent = new VRemoveAgent(this, true, agentData);
 			vRemoveAgent.setVisible(true);
-		} else if (e.getSource().equals(btnRegisterWeapon)) {
-			panelRegisterWeapon.setVisible(true);
-			panelModifyWeapon.setVisible(false);
-			panelRemoveWeapon.setVisible(false);
-		} else if (e.getSource().equals(btnModifyWeapon)) {
-			panelRegisterWeapon.setVisible(false);
-			panelModifyWeapon.setVisible(true);
-			panelRemoveWeapon.setVisible(false);
-		} else if (e.getSource().equals(btnRemoveWeapon)) {
-			panelRegisterWeapon.setVisible(false);
-			panelModifyWeapon.setVisible(false);
-			panelRemoveWeapon.setVisible(true);
 		} else if (e.getSource().equals(btnRegisterMission)) {
 			panelRegisterMission.setVisible(true);
 			panelHistoricMission.setVisible(false);
@@ -1254,9 +1209,8 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		if (e.getSource().equals(table)) {
 			if (e.getClickCount() == 2) {
 				try {
-					Set<Agent> agents = agentData.getAllAgents();
-					List<Agent> agentsOrder = new ArrayList<Agent>(agents);
-					Collections.sort(agentsOrder);
+					List<Agent> agents = agentData.getAllAgents();
+					Collections.sort(agents);
 
 					Agent newAgent = new Agent();
 					table = (JTable) e.getSource();
@@ -1264,7 +1218,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 
 					Icon newIcon = new ImageIcon(
 							VPestaniasAgente.class.getResource("/resources/rotGamesLogo100x52.png"));
-					newAgent = agentsOrder.get(row);
+					newAgent = agents.get(row);
 					JOptionPane.showMessageDialog(this, newAgent.getAgentName() + " " + newAgent.getAgentCode(),
 							"Agente", JOptionPane.DEFAULT_OPTION, newIcon);
 				} catch (ExceptionManager e1) {
@@ -1298,5 +1252,24 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
 
+	}
+
+	private void clean() {
+		txtCodeModif.setText("");
+		txtNameModif.setText("");
+		txtNationalityModif.setText("");
+		comboBoxRolModif.setSelectedIndex(-1);
+		chckbxNewCheckBoxModif.setSelected(false);
+		chckbxNewCheckBoxModif.setSelected(false);
+		txtHabilityName1Modif.setText("");
+		textAreaHabilityDescription1Modif.setText("");
+		txtHabilityName2Modif.setText("");
+		textAreaHabilityDescription2Modif.setText("");
+		txtHabilityName3Modif.setText("");
+		textAreaHabilityDescription3Modif.setText("");
+		txtHabilityName4Modif.setText("");
+		textAreaHabilityDescription4Modif.setText("");
+		passwordFieldConfirmModif.setText("");
+		passwordFieldModif.setText("");
 	}
 }

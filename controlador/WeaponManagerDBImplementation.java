@@ -6,8 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import model.Weapon;
 
@@ -179,13 +178,13 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 	}
 
 	@Override
-	public Set<Weapon> getAllWeapon() {
+	public List<Weapon> getAllWeapon() {
 		// TODO Auto-generated method stub
 
 		// Variables
 		ResultSet rs = null;
 		Weapon weapon;
-		Set<Weapon> weapons = new HashSet<>();
+		List<Weapon> weapons = new ArrayList<>();
 
 		// Open the connection
 		this.openConnection();
@@ -230,13 +229,13 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 	}
 
 	@Override
-	public Set<String> getAllSidearms() {
+	public List<String> getAllSidearms() {
 		// TODO Auto-generated method stub
 
 		// Variables
 		ResultSet rs = null;
 		String weapon;
-		Set<String> weapons = new HashSet<>();
+		List<String> weapons = new ArrayList<>();
 
 		// Open the connection
 		this.openConnection();
@@ -276,13 +275,13 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 	}
 
 	@Override
-	public Set<Weapon> getAllPrimary() {
+	public List<Weapon> getAllPrimary() {
 		// TODO Auto-generated method stub
 
 		// Variables
 		ResultSet rs = null;
 		Weapon weapon;
-		Set<Weapon> weapons = new HashSet<>();
+		List<Weapon> weapons = new ArrayList<>();
 
 		// Open the connection
 		this.openConnection();

@@ -13,10 +13,8 @@ import model.Agent;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -54,9 +52,7 @@ public class VRemoveAgent extends JDialog implements ActionListener {
 
 		comboBox = new JComboBox<String>();
 		try {
-			Set<Agent> agents = agentData.getAllAgents();
-
-			List<Agent> agentsOrder = new ArrayList<Agent>(agents);
+			List<Agent> agentsOrder = agentData.getAllAgents();
 			Collections.sort(agentsOrder);
 
 			for (Agent newAgent : agentsOrder) {
@@ -91,6 +87,7 @@ public class VRemoveAgent extends JDialog implements ActionListener {
 			} else
 				JOptionPane.showMessageDialog(this, "Borrado de agente cancelado", "Borrado",
 						JOptionPane.INFORMATION_MESSAGE);
+			this.dispose();
 		}
 
 	}
