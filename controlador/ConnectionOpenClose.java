@@ -8,7 +8,7 @@ import java.util.ResourceBundle;
 
 import exceptions.ExceptionManager;
 
-public class ConecctionOpenClose {
+public class ConnectionOpenClose {
 
 	protected ResourceBundle configFile;
 	protected String url;
@@ -17,7 +17,7 @@ public class ConecctionOpenClose {
 	protected Connection con;
 	protected PreparedStatement stmt;
 
-	public ConecctionOpenClose() {
+	public ConnectionOpenClose() {
 		configFile = ResourceBundle.getBundle("controlador/config");
 		url = configFile.getString("URL");
 		user = configFile.getString("USER");

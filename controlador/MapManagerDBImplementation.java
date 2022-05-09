@@ -15,7 +15,7 @@ public class MapManagerDBImplementation implements MapManager {
 
 	private Connection con;
 	private PreparedStatement stmt;
-	private ConecctionOpenClose conection = new ConecctionOpenClose();
+	private ConnectionOpenClose conection = new ConnectionOpenClose();
 
 
 	@Override
