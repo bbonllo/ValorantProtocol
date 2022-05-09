@@ -4,8 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import model.MapManager;
-import model.MapManagerDBImplementation;
+import controlador.MapManager;
+import controlador.MapManagerDBImplementation;
 
 public class MapTest {
 	String name = "Split";

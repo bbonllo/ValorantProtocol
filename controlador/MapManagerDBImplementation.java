@@ -1,4 +1,4 @@
-package model;
+package controlador;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,36 +9,26 @@ import java.util.HashSet;
 import java.util.Set;
 
 import exceptions.ExceptionManager;
+import model.Map;
 
 public class MapManagerDBImplementation implements MapManager {
 
 	private Connection con;
 	private PreparedStatement stmt;
+	private ConnectionOpenClose conection = new ConnectionOpenClose();
 
-	private void openConnection() {
-		try {
-			String url = "jdbc:mysql://localhost:3306/valorant_protocol?serverTimezone=Europe/Madrid&useSSL=false";
-			con = DriverManager.getConnection(url, "root", "abcd*1234");
-		} catch (SQLException e) {
-			System.out.println("Error en la conexion");
-			e.printStackTrace();
-		}
-
-	}
-
-	private void closeConnection() throws SQLException {
-		if (stmt != null)
-			stmt.close();
-		if (con != null)
-			con.close();
-	}
 
 	@Override
 	public Map getMapByName(String mapName) {
 		ResultSet rs = null;
 		Map mapIntro = null;
 
-		openConnection();
+		try {
+			con = conection.openConnection();
+		} catch (ExceptionManager e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		String SEARCHMap = "SELECT * from map where mapName = ?";
 
 		try {
@@ -57,8 +47,11 @@ public class MapManagerDBImplementation implements MapManager {
 			if (rs != null)
 				rs.close();
 
-			closeConnection();
+			conection.closeConnection(stmt, con);
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -77,7 +70,12 @@ public class MapManagerDBImplementation implements MapManager {
 		ResultSet rs = null;
 		Map mapIntro = null;
 
-		openConnection();
+		try {
+			con = conection.openConnection();
+		} catch (ExceptionManager e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		String SEARCHMap = "SELECT * from map";
 
 		try {
@@ -95,11 +93,14 @@ public class MapManagerDBImplementation implements MapManager {
 			if (rs != null)
 				rs.close();
 
-			closeConnection();
+			conection.closeConnection(stmt, con);
 		} catch (SQLException e) {
 			String msg = "Error en recuperar todos los mapas";
 			ExceptionManager x = new ExceptionManager(msg);
 			throw x;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return maps;
 	}

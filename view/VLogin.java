@@ -15,13 +15,13 @@ import java.awt.JobAttributes;
 
 import com.k33ptoo.components.KButton;
 
+import controlador.AgentManager;
+import controlador.MapManager;
+import controlador.MapManagerDBImplementation;
+import controlador.WeaponManager;
 import model.Ability;
 import model.AbilityUltimate;
 import model.Agent;
-import model.AgentManager;
-import model.MapManager;
-import model.MapManagerDBImplementation;
-import model.WeaponManager;
 
 import java.awt.event.MouseMotionAdapter;
 import java.awt.event.MouseEvent;

@@ -1,8 +1,10 @@
-package model;
+package controlador;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Set;
+
+import model.Weapon;
 
 public interface WeaponManager {
 	public void addWeapon(Weapon weapon);

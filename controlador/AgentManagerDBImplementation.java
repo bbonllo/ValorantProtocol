@@ -1,5 +1,5 @@
 
-package model;
+package controlador;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,6 +14,9 @@ import java.util.List;
 import java.util.Set;
 
 import exceptions.ExceptionManager;
+import model.Ability;
+import model.AbilityUltimate;
+import model.Agent;
 
 public class AgentManagerDBImplementation implements AgentManager {
 
@@ -43,14 +46,12 @@ public class AgentManagerDBImplementation implements AgentManager {
 		ResultSet rs = null;
 		ResultSet rs2 = null;
 		Agent getAgent = null;
-		Ability ability = new Ability();
 		AbilityUltimate abilityUltimate = new AbilityUltimate();
 		Ability[] agentAbilities = new Ability[4];
 		int cont = 0;
 
 		openConnection();
 		final String SEARCHAgent = "SELECT * from Agent where agentCode = ?";
-		
 
 		try {
 			stmt = con.prepareStatement(SEARCHAgent);
@@ -74,25 +75,22 @@ public class AgentManagerDBImplementation implements AgentManager {
 				stmt.setInt(1, agentCode);
 
 				rs2 = stmt.executeQuery();
-				int cont1 = 0;
 				while (rs2.next()) {
-					
-					
-					if (cont1 == 3) {
+
+					if (cont == 3) {
 						abilityUltimate.setAbilityName(rs2.getString("abilityName"));
 						abilityUltimate.setAbilityDescription(rs2.getString("abilityDescription"));
 						abilityUltimate.setAbilityUltimateRequiredOrbs(rs2.getInt("orbNum"));
 						agentAbilities[cont] = abilityUltimate;
 					} else {
+						Ability ability = new Ability();
 						ability.setAbilityName(rs2.getString("abilityName"));
 						ability.setAbilityDescription(rs2.getString("abilityDescription"));
-
 						agentAbilities[cont] = ability;
-						cont1++;
 					}
+					cont++;
 				}
 				getAgent.setAgentAbilities(agentAbilities);
-
 			} else
 				getAgent = null;
 
@@ -203,7 +201,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 	}
 
 	@Override
-	public void modifyAgent(Agent modifyAgent) {	
+	public void modifyAgent(Agent modifyAgent) {
 		Ability ability1;
 		Ability ability2;
 		Ability ability3;
@@ -218,7 +216,6 @@ public class AgentManagerDBImplementation implements AgentManager {
 			final String INSERTAgent = "update agent set agentName = ?, agentNationality = ?, agentRol = ? where agentCode = ?";
 			stmt = con.prepareStatement(INSERTAgent);
 
-		
 			stmt.setString(1, modifyAgent.getAgentName());
 			stmt.setString(2, modifyAgent.getAgentNationality());
 			stmt.setString(3, modifyAgent.getAgentRol());
@@ -236,7 +233,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 			// INSERTAR HABILIDADES DEL AGENTE
 
 			// HABILIDAD 1
-			final String INSERTAbility1 = "update ability set AbilityName = ?, AbilityDescription = ? where agentCode = ?"; 
+			final String INSERTAbility1 = "update ability set AbilityName = ?, AbilityDescription = ? where agentCode = ?";
 
 			stmt = con.prepareStatement(INSERTAbility1);
 
@@ -247,7 +244,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 			stmt.executeUpdate();
 
 			// HABILIDAD 2
-			final String INSERTAbility2 = "update ability set AbilityName = ?, AbilityDescription = ? where agentCode = ?"; 
+			final String INSERTAbility2 = "update ability set AbilityName = ?, AbilityDescription = ? where agentCode = ?";
 
 			stmt = con.prepareStatement(INSERTAbility2);
 
@@ -258,7 +255,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 			stmt.executeUpdate();
 
 			// HABILIDAD 3
-			final String INSERTAbility3 = "update ability set AbilityName = ?, AbilityDescription = ? where agentCode = ?"; 
+			final String INSERTAbility3 = "update ability set AbilityName = ?, AbilityDescription = ? where agentCode = ?";
 
 			stmt = con.prepareStatement(INSERTAbility3);
 
@@ -269,7 +266,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 			stmt.executeUpdate();
 
 			// HABILIDAD ULTIMATE
-			final String INSERTAbility4 = "update ability set AbilityName = ?, AbilityDescription = ?, orbNum = ? where agentCode = ?"; 
+			final String INSERTAbility4 = "update ability set AbilityName = ?, AbilityDescription = ?, orbNum = ? where agentCode = ?";
 
 			stmt = con.prepareStatement(INSERTAbility4);
 
@@ -409,7 +406,6 @@ public class AgentManagerDBImplementation implements AgentManager {
 		Ability ability = new Ability();
 		AbilityUltimate abilityUltimate = new AbilityUltimate();
 		Ability[] agentAbilities = new Ability[4];
-		
 
 		openConnection();
 		final String SEARCHAgent = "SELECT * from Agent where agentCode = ? and agentPasswd = ?";
@@ -439,8 +435,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 				rs2 = stmt.executeQuery();
 				int cont = 0;
 				while (rs2.next()) {
-					
-					
+
 					if (cont == 3) {
 						abilityUltimate.setAbilityName(rs2.getString("abilityName"));
 						abilityUltimate.setAbilityDescription(rs2.getString("abilityDescription"));
@@ -452,7 +447,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 
 						agentAbilities[cont] = ability;
 						cont++;
-						
+
 					}
 				}
 				getAgent.setAgentAbilities(agentAbilities);
