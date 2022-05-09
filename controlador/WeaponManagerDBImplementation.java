@@ -1,4 +1,4 @@
-package model;
+package controlador;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+
+import model.Weapon;
 
 public class WeaponManagerDBImplementation implements WeaponManager {
 

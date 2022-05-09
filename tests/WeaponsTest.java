@@ -6,9 +6,9 @@ import java.sql.SQLException;
 
 import org.junit.Test;
 
+import controlador.WeaponManager;
+import controlador.WeaponManagerDBImplementation;
 import model.Weapon;
-import model.WeaponManager;
-import model.WeaponManagerDBImplementation;
 
 public class WeaponsTest {
 	String name = "Ares";

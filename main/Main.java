@@ -1,15 +1,13 @@
 package main;
 
-import java.time.LocalDate;
-
-import model.AgentManager;
-import model.AgentManagerDBImplementation;
-import model.MapManager;
-import model.MapManagerDBImplementation;
-import model.ViewManager;
-import model.ViewManagerImplementation;
-import model.WeaponManager;
-import model.WeaponManagerDBImplementation;
+import controlador.AgentManager;
+import controlador.AgentManagerDBImplementation;
+import controlador.MapManager;
+import controlador.MapManagerDBImplementation;
+import controlador.ViewManager;
+import controlador.ViewManagerImplementation;
+import controlador.WeaponManager;
+import controlador.WeaponManagerDBImplementation;
 
 public class Main {
 

@@ -1,4 +1,4 @@
-package model;
+package controlador;
 
 public interface ViewManager {
 	
