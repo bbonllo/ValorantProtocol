@@ -1,9 +1,10 @@
-package model;
+package controlador;
 
 import java.util.List;
 import java.util.Set;
 
 import exceptions.ExceptionManager;
+import model.Mission;
 
 public interface MissionManager {
 

@@ -1,8 +1,9 @@
-package model;
+package controlador;
 
 import java.util.Set;
 
 import exceptions.ExceptionManager;
+import model.Map;
 
 public interface MapManager {
 	

@@ -1,5 +1,5 @@
 
-package model;
+package controlador;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -10,6 +10,9 @@ import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
 import exceptions.ExceptionManager;
+import model.Ability;
+import model.AbilityUltimate;
+import model.Agent;
 
 public class AgentManagerDBImplementation implements AgentManager {
 
@@ -39,7 +42,6 @@ public class AgentManagerDBImplementation implements AgentManager {
 		ResultSet rs = null;
 		ResultSet rs2 = null;
 		Agent getAgent = null;
-		Ability ability = new Ability();
 		AbilityUltimate abilityUltimate = new AbilityUltimate();
 		Ability[] agentAbilities = new Ability[4];
 		int cont = 0;
@@ -69,24 +71,23 @@ public class AgentManagerDBImplementation implements AgentManager {
 				stmt.setInt(1, agentCode);
 
 				rs2 = stmt.executeQuery();
-				int cont1 = 0;
 				while (rs2.next()) {
 
-					if (cont1 == 3) {
+					if (cont == 3) {
+
 						abilityUltimate.setAbilityName(rs2.getString("abilityName"));
 						abilityUltimate.setAbilityDescription(rs2.getString("abilityDescription"));
 						abilityUltimate.setAbilityUltimateRequiredOrbs(rs2.getInt("orbNum"));
 						agentAbilities[cont] = abilityUltimate;
 					} else {
+						Ability ability = new Ability();
 						ability.setAbilityName(rs2.getString("abilityName"));
 						ability.setAbilityDescription(rs2.getString("abilityDescription"));
-
 						agentAbilities[cont] = ability;
-						cont1++;
 					}
+					cont++;
 				}
 				getAgent.setAgentAbilities(agentAbilities);
-
 			} else
 				getAgent = null;
 

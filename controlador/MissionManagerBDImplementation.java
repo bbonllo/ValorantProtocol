@@ -1,31 +1,31 @@
-package model;
+package controlador;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+
+import model.Mission;
 
 public class MissionManagerBDImplementation implements MissionManager{
 
 	@Override
 	public Mission getMissionByCod(String codM) {
 		ResultSet rs = null;
-		Weapon weapon = null;
+		Mission getMission  = null;
 
 		// Open the connection
-		this.openConnection();
 
 		// Code
 		try {
-			stmt = con.prepareStatement(LISTweapon);
+			stmt = con.prepareStatement(LISTMission);
 
 			stmt.setString(1, name);
 			rs = stmt.executeQuery();
 
 			if (rs.next()) {
-				weapon = new Weapon(name, rs.getInt("WeaponDamage"), rs.getString("weaponType"),
-						rs.getString("weaponSubType"), rs.getBoolean("weaponIsActive"));
+			
 			} else
-				weapon = null;
+			
 
 		} catch (SQLException e1) {
 			System.out.println("Error en alta SQL");
@@ -46,7 +46,7 @@ public class MissionManagerBDImplementation implements MissionManager{
 				e.printStackTrace();
 			}
 		}
-		return weapon;
+		return getMission;
 	}
 
 	@Override

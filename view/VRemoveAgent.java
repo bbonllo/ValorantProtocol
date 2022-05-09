@@ -1,18 +1,16 @@
 package view;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import controlador.AgentManager;
 import exceptions.ExceptionManager;
 import model.Agent;
-import model.AgentManager;
 
-import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -25,7 +23,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
-import javax.swing.DefaultComboBoxModel;
 
 public class VRemoveAgent extends JDialog implements ActionListener {
 
@@ -36,7 +33,7 @@ public class VRemoveAgent extends JDialog implements ActionListener {
 	private final JPanel contentPanel = new JPanel();
 	private AgentManager agentData;
 	private JButton btnRemove;
-	private JComboBox comboBox;
+	private JComboBox<String> comboBox;
 
 	/**
 	 * Create the dialog.
@@ -55,7 +52,7 @@ public class VRemoveAgent extends JDialog implements ActionListener {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 
-		comboBox = new JComboBox();
+		comboBox = new JComboBox<String>();
 		try {
 			Set<Agent> agents = agentData.getAllAgents();
 

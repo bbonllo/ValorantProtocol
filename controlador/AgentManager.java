@@ -1,9 +1,10 @@
-package model;
+package controlador;
 
 import java.sql.Array;
 import java.util.Set;
 
 import exceptions.ExceptionManager;
+import model.Agent;
 
 public interface AgentManager {
 
