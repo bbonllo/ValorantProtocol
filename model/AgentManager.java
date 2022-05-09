@@ -1,5 +1,6 @@
 package model;
 
+import java.sql.Array;
 import java.util.Set;
 
 import exceptions.ExceptionManager;
@@ -22,6 +23,6 @@ public interface AgentManager {
 	
 	public void makeAgentInactive(int agentCode);
 	
-	public Set<Agent> getTeammates(int agentCode);
+	public int[] getTeammates(int agentCode);
 	
 }
