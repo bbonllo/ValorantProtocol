@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+import exceptions.ExceptionManager;
 import model.Weapon;
 
 public class WeaponManagerDBImplementation implements WeaponManager {
@@ -16,6 +17,7 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 	// Variables
 	private Connection con;
 	private PreparedStatement stmt;
+	private ConnectionOpenClose conection = new ConnectionOpenClose();
 
 	// SQL operations
 	final String INSERTweapon = "INSERT INTO weapon(weaponName, weaponDamage, weaponType, weaponSubType, weaponIsActive) VALUES( ?, ?, ?, ?, ?, ?)";
@@ -24,31 +26,19 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 	final String UPDATEweapon = "UPDATE weapon SET weaponDamage= ? , weaponType= ? , weaponSubType= ? , weaponIsActive= ? WHERE weaponName = ?";
 	final String DELETEweapon = "DELETE FROM weapon WHERE weaponName = ?";
 
-	// Method to open the connection
-	private void openConnection() {
-		try {
-			String url = "jdbc:mysql://localhost:3306/valorant_protocol?serverTimezone=Europe/Madrid&useSSL=false";
-			con = DriverManager.getConnection(url, "root", "abcd*1234");
-
-		} catch (SQLException e) {
-			System.out.println("Error al intentar abrir la BD");
-		}
-	}
-
-	// Method to close the connection
-	private void closeConnection() throws SQLException {
-		if (stmt != null)
-			stmt.close();
-		if (con != null)
-			con.close();
-	}
+	
 
 	@Override
 	public void addWeapon(Weapon weapon) {
 		// TODO Auto-generated method stub
 
 		// Open the connection
-		this.openConnection();
+		try {
+			con = conection.openConnection();
+		} catch (ExceptionManager e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
 		// Code
 		try {
@@ -65,11 +55,12 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 		} finally {
 			try {
 				// Close the connection
-				this.closeConnection();
-			} catch (SQLException e) {
-				System.out.println("Error en cierre de la BD");
+				
+				conection.closeConnection(stmt, con);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			} 
 		}
 	}
 
@@ -80,7 +71,12 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 		Weapon weapon = null;
 
 		// Open the connection
-		this.openConnection();
+		try {
+			con = conection.openConnection();
+		} catch (ExceptionManager e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
 		// Code
 		try {
@@ -108,11 +104,11 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 				}
 			}
 			try {
-				this.closeConnection();
-			} catch (SQLException e) {
-				System.out.println("Error en el cierre de la BD");
+				conection.closeConnection(stmt, con);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			} 
 		}
 		return weapon;
 	}
@@ -123,7 +119,12 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 		boolean changes = false;
 
 		// Open the connection
-		this.openConnection();
+		try {
+			con = conection.openConnection();
+		} catch (ExceptionManager e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
 		// Code
 		try {
@@ -143,11 +144,11 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 		} finally {
 			try {
 				// Close Connection
-				this.closeConnection();
-			} catch (SQLException e) {
-				System.out.println("Error en cierre de la BD");
+				conection.closeConnection(stmt, con);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			} 
 		}
 		return changes;
 	}
@@ -157,7 +158,12 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 		// TODO Auto-generated method stub
 
 		// Open the connection
-		this.openConnection();
+		try {
+			con = conection.openConnection();
+		} catch (ExceptionManager e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
 		// Code
 		try {
@@ -170,11 +176,11 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 		} finally {
 			try {
 				// Close Connection
-				this.closeConnection();
-			} catch (SQLException e) {
-				System.out.println("Error en cierre de la BD");
+				conection.closeConnection(stmt, con);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			} 
 		}
 	}
 
@@ -188,7 +194,12 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 		Set<Weapon> weapons = new HashSet<>();
 
 		// Open the connection
-		this.openConnection();
+		try {
+			con = conection.openConnection();
+		} catch (ExceptionManager e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
 		// Code
 		try {
@@ -220,11 +231,11 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 			}
 			try {
 				// Close Connection
-				this.closeConnection();
-			} catch (SQLException e) {
-				System.out.println("Error en el cierre de la BD");
+				conection.closeConnection(stmt, con);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			} 
 		}
 		return weapons;
 	}
@@ -239,7 +250,12 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 		Set<String> weapons = new HashSet<>();
 
 		// Open the connection
-		this.openConnection();
+		try {
+			con = conection.openConnection();
+		} catch (ExceptionManager e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
 		// Code
 		try {
@@ -266,11 +282,11 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 			}
 			try {
 				// Close connection
-				this.closeConnection();
-			} catch (SQLException e) {
-				System.out.println("Error en el cierre de la BD");
+				conection.closeConnection(stmt, con);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			} 
 		}
 		return weapons;
 	}
@@ -285,7 +301,12 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 		Set<Weapon> weapons = new HashSet<>();
 
 		// Open the connection
-		this.openConnection();
+		try {
+			con = conection.openConnection();
+		} catch (ExceptionManager e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
 		// Code
 		try {
@@ -319,11 +340,11 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 			}
 			try {
 				// Close connection
-				this.closeConnection();
-			} catch (SQLException e) {
-				System.out.println("Error en el cierre de la BD");
+				conection.closeConnection(stmt, con);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			} 
 		}
 		return weapons;
 	}
