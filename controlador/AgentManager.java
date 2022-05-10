@@ -1,6 +1,11 @@
 package controlador;
 
+<<<<<<< HEAD
 import java.util.List;
+=======
+import java.sql.Array;
+import java.util.Set;
+>>>>>>> 7e3907b59808802c78856ca6e0a1309bd3276d04
 
 import exceptions.ExceptionManager;
 import model.Agent;
@@ -22,7 +27,13 @@ public interface AgentManager {
 	public Agent login(int agentCode, String passwd);
 
 	public void makeAgentInactive(int agentCode);
+<<<<<<< HEAD
 
 	public List<Agent> getTeammates(int agentCode);
 
+=======
+	
+	public int[] getTeammates(int agentCode);
+	
+>>>>>>> 7e3907b59808802c78856ca6e0a1309bd3276d04
 }
