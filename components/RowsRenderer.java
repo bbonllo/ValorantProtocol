@@ -22,10 +22,12 @@ public class RowsRenderer extends DefaultTableCellRenderer {
 		setBackground(Color.white);
 		table.setForeground(Color.black);
 		super.getTableCellRendererComponent(table, value, selected, focused, row, column);
-		if (table.getValueAt(row, columna).equals("false")) {
-			this.setForeground(Color.ORANGE);
-		} else if (table.getValueAt(row, columna).equals("true")) {
-			this.setForeground(Color.GREEN);
+		if (table.getValueAt(row, columna) != null) {
+			if (table.getValueAt(row, columna).equals("false")) {
+				this.setForeground(Color.ORANGE);
+			} else if (table.getValueAt(row, columna).equals("true")) {
+				this.setForeground(Color.GREEN);
+			}
 		}
 		return this;
 	}

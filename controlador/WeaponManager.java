@@ -15,7 +15,7 @@ public interface WeaponManager {
 
 	public List<Weapon> getAllWeapon();
 
-	public List<String> getAllSidearms();
+	public List<Weapon> getAllSidearms();
 
 	public List<Weapon> getAllPrimary();
 }

@@ -20,6 +20,8 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 	final String INSERTweapon = "INSERT INTO weapon(weaponName, weaponDamage, weaponType, weaponSubType, weaponIsActive) VALUES( ?, ?, ?, ?, ?, ?)";
 	final String LISTweapon = "SELECT * FROM weapon WHERE weaponName = ?";
 	final String LISTweapons = "SELECT * FROM weapon";
+	final String LISTweaponsPrimary = "SELECT * FROM weapon where weaponType = 'Primary'";
+	final String LISTweaponsSidearm = "SELECT * FROM weapon where weaponType = 'Secondary'";
 	final String UPDATEweapon = "UPDATE weapon SET weaponDamage= ? , weaponType= ? , weaponSubType= ? , weaponIsActive= ? WHERE weaponName = ?";
 	final String DELETEweapon = "DELETE FROM weapon WHERE weaponName = ?";
 
@@ -199,7 +201,7 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 				weapon = new Weapon();
 				weapon.setWeaponName(rs.getString("weaponName"));
 				weapon.setWeaponDamage(rs.getInt("weaponDamage"));
-				weapon.setWeaponType(rs.getString("weaponSubType"));
+				weapon.setWeaponType(rs.getString("weaponType"));
 				weapon.setWeaponSubType(rs.getString("weaponSubType"));
 				weapon.setWeaponIsActive(false);
 				weapons.add(weapon);
@@ -229,25 +231,29 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 	}
 
 	@Override
-	public List<String> getAllSidearms() {
+	public List<Weapon> getAllSidearms() {
 		// TODO Auto-generated method stub
 
 		// Variables
 		ResultSet rs = null;
-		String weapon;
-		List<String> weapons = new ArrayList<>();
+		Weapon weapon = null;
+		List<Weapon> weapons = new ArrayList<>();
 
 		// Open the connection
 		this.openConnection();
 
 		// Code
 		try {
-			stmt = con.prepareStatement(LISTweapons);
+			stmt = con.prepareStatement(LISTweaponsSidearm);
 
 			rs = stmt.executeQuery();
 
 			while (rs.next()) {
-				weapon = rs.getString("weaponName");
+				weapon = new Weapon();
+				weapon.setWeaponName(rs.getString("weaponName"));
+				weapon.setWeaponType(rs.getString("weaponType"));
+				weapon.setWeaponSubType(rs.getString("weaponSubType"));
+				weapon.setWeaponDamage(rs.getInt("weaponDamage"));
 				weapons.add(weapon);
 			}
 
@@ -288,20 +294,18 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 
 		// Code
 		try {
-			stmt = con.prepareStatement(LISTweapons);
+			stmt = con.prepareStatement(LISTweaponsPrimary);
 
 			rs = stmt.executeQuery();
 
 			while (rs.next()) {
-				if (rs.getString("weaponType").equalsIgnoreCase("primary")) {
-					weapon = new Weapon();
-					weapon.setWeaponName(rs.getString("weaponName"));
-					weapon.setWeaponDamage(rs.getInt("weaponDamage"));
-					weapon.setWeaponType(rs.getString("weaponSubType"));
-					weapon.setWeaponSubType(rs.getString("weaponSubType"));
-					weapon.setWeaponIsActive(false);
-					weapons.add(weapon);
-				}
+				weapon = new Weapon();
+				weapon.setWeaponName(rs.getString("weaponName"));
+				weapon.setWeaponDamage(rs.getInt("weaponDamage"));
+				weapon.setWeaponType(rs.getString("weaponType"));
+				weapon.setWeaponSubType(rs.getString("weaponSubType"));
+				weapon.setWeaponIsActive(false);
+				weapons.add(weapon);
 			}
 
 		} catch (SQLException e) {
