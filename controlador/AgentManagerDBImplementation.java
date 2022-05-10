@@ -1,14 +1,18 @@
 
 package controlador;
 
-import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+
 import exceptions.ExceptionManager;
 import model.Ability;
 import model.AbilityUltimate;
@@ -74,7 +78,6 @@ public class AgentManagerDBImplementation implements AgentManager {
 				while (rs2.next()) {
 
 					if (cont == 3) {
-
 						abilityUltimate.setAbilityName(rs2.getString("abilityName"));
 						abilityUltimate.setAbilityDescription(rs2.getString("abilityDescription"));
 						abilityUltimate.setAbilityUltimateRequiredOrbs(rs2.getInt("orbNum"));
@@ -464,34 +467,24 @@ public class AgentManagerDBImplementation implements AgentManager {
 	}
 
 	@Override
-<<<<<<< HEAD
 	public List<Agent> getTeammates(int agentCode) {
 		List<Agent> teammates = new ArrayList<>();
-=======
-	public int[] getTeammates(int agentCode) {
-		int i = 0;
-		int[] teammates = new int[5];
->>>>>>> 7e3907b59808802c78856ca6e0a1309bd3276d04
 		ResultSet rs = null;
+		Agent teammate = null;
 
 		openConnection();
-		String SEARCHteammates = "{CALL bring(?)}";
-		String getTeammates = "Select * from log_record";
+		String SEARCHteammates = "select * from agent where agentCode in(select agentCode from agent_on_mission where missionCode in(select missionCode from agent_on_mission where agentCode = ?";
 
 		try {
-			CallableStatement cst = con.prepareCall(SEARCHteammates);
-			cst.setInt(1, agentCode);
-			cst.execute();
-
-			stmt = con.prepareStatement(getTeammates);
-
+			stmt = con.prepareStatement(SEARCHteammates);
+			stmt.setInt(1, agentCode);
 			rs = stmt.executeQuery();
 
 			while (rs.next()) {
-
-				teammates[i] = (rs.getInt("agentCode"));
-				i++;
-
+				teammate = new Agent();
+				teammate.setAgentCode(rs.getInt("agentCode"));
+				teammate.setAgentName(rs.getString("agentName"));
+				teammates.add(teammate);
 			}
 
 			if (rs != null)
