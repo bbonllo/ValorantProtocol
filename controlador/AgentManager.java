@@ -9,11 +9,11 @@ public interface AgentManager {
 
 	public Agent getAgentByID(int agentCode);
 
-	public void registerAgent(Agent registerAgent);
+	public boolean registerAgent(Agent registerAgent);
 
-	public void modifyAgent(Agent modifyAgent);
+	public boolean modifyAgent(Agent modifyAgent);
 
-	public void makeAgentActive(int agentCode);
+	public boolean makeAgentActive(int agentCode);
 
 	public List<Agent> getAllAgents() throws ExceptionManager;
 
@@ -24,5 +24,4 @@ public interface AgentManager {
 	public void makeAgentInactive(int agentCode);
 
 	public List<Agent> getTeammates(int agentCode);
-
 }
