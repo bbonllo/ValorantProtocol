@@ -184,6 +184,8 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 	private JLabel lblDamageSubtype;
 	private JComboBox<String> comboBoxWeaponSubtype;
 	private JComboBox<String> comboBoxWeaponType;
+	private JLabel lblAscentMap;
+	private JLabel lblFractureMap;
 
 	/**
 	 * Create the frame.
@@ -284,6 +286,51 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 				btnClose.kFillButton = false; // Hacer transparente el boton
 			}
 		});
+		panelMap = new JPanel();
+		panelMap.setLayout(null);
+		panelMap.setBounds(0, 74, 1770, 1006);
+		p.add(panelMap);
+				
+				lblFractureMap = new JLabel("");
+				lblFractureMap.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+				lblFractureMap.setBounds(1115, 210, 480, 240);
+				panelMap.add(lblFractureMap);
+				
+				lblAscentMap = new JLabel("");
+				lblAscentMap.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+				lblAscentMap.setBounds(1115, 448, 480, 480);
+				panelMap.add(lblAscentMap);
+				
+				JLabel lblBreezeMap = new JLabel("");
+				lblBreezeMap.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+				lblBreezeMap.setBounds(637, 688, 480, 240);
+				panelMap.add(lblBreezeMap);
+				
+				JLabel lblIceboxMap = new JLabel("");
+				lblIceboxMap.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+				lblIceboxMap.setBounds(637, 448, 480, 242);
+				panelMap.add(lblIceboxMap);
+				
+				JLabel lblHeavenMap = new JLabel("");
+				lblHeavenMap.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+				lblHeavenMap.setBounds(637, 210, 480, 240);
+				panelMap.add(lblHeavenMap);
+				
+				JLabel lblSplitMap = new JLabel("");
+				lblSplitMap.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+				lblSplitMap.setBounds(159, 688, 480, 240);
+				panelMap.add(lblSplitMap);
+				
+				JLabel lblBindMap = new JLabel("");
+				lblBindMap.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+				lblBindMap.setBounds(159, 210, 480, 480);
+				panelMap.add(lblBindMap);
+		
+				JLabel lblBackgroundPanelMap = new JLabel("");
+				lblBackgroundPanelMap
+						.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/appBackgroundPanel.jpg")));
+				lblBackgroundPanelMap.setBounds(0, 0, 1920, 1006);
+				panelMap.add(lblBackgroundPanelMap);
 		panelWeapon = new JPanel();
 		panelWeapon.setLayout(null);
 		panelWeapon.setBounds(0, 74, 1770, 1006);
@@ -887,16 +934,6 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 				.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/appBackgroundPanel.jpg")));
 		lblBackgroundPanelAgent.setBounds(0, 0, 1770, 1006);
 		panelAgent.add(lblBackgroundPanelAgent);
-		panelMap = new JPanel();
-		panelMap.setLayout(null);
-		panelMap.setBounds(0, 74, 1770, 1006);
-		p.add(panelMap);
-
-		JLabel lblBackgroundPanelMap = new JLabel("");
-		lblBackgroundPanelMap
-				.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/appBackgroundPanel.jpg")));
-		lblBackgroundPanelMap.setBounds(0, 0, 1920, 1006);
-		panelMap.add(lblBackgroundPanelMap);
 		panelMission = new JPanel();
 		panelMission.setLayout(null);
 		panelMission.setBounds(0, 74, 1770, 1006);
@@ -1017,7 +1054,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 			RowsRenderer rRowsRendererAgents = new RowsRenderer(4);
 			DefaultTableCellRenderer centerRendererAgents = new DefaultTableCellRenderer();
 			table.setDefaultRenderer(Object.class, rRowsRendererAgents);
-			table.setSelectionBackground(new Color(0, 230, 168));
+			table.setSelectionBackground(Color.RED);
 			table.setSelectionForeground(Color.WHITE);
 			table.setRowMargin(0);
 			table.setRowHeight(30);
@@ -1030,7 +1067,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 			scrollPane.setViewportView(table);
 
 			JTableHeader tableHeaderAgents = table.getTableHeader();
-			tableHeaderAgents.setBackground(new Color(0, 191, 140));
+			tableHeaderAgents.setBackground(new Color(217, 0, 0));
 			tableHeaderAgents.setForeground(Color.WHITE);
 			tableHeaderAgents.setFont(new Font("Tahoma", Font.BOLD, 15));
 			tableHeaderAgents.setBorder(null);
@@ -1238,6 +1275,24 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 			lblDamageSubtype.setVisible(false);
 		} else if (e.getSource().equals(comboBoxWeaponType)) {
 			cargarTablaWeapons();
+		} else if (e.getSource().equals(btnAddWeapon)) {
+			/*
+			 * 
+			 * Falta
+			 * 
+			 */
+		} else if (e.getSource().equals(btnDeleteWeapon)) {
+			/*
+			 * 
+			 * Falta
+			 * 
+			 */
+		} else if (e.getSource().equals(btnModifyWeapon)) {
+			/*
+			 * 
+			 * Falta
+			 * 
+			 */
 		}
 
 	}
@@ -1341,8 +1396,8 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 				matrizTablaArmas[contWeapons][0] = newWeapon.getWeaponName();
 				matrizTablaArmas[contWeapons][1] = newWeapon.getWeaponType();
 				matrizTablaArmas[contWeapons][2] = newWeapon.getWeaponSubType();
-				matrizTablaArmas[contWeapons][3] = (newWeapon.getWeaponDamage() * 4) + "//"
-						+ newWeapon.getWeaponDamage() + "//" + ((newWeapon.getWeaponDamage() * 85) / 100);
+				matrizTablaArmas[contWeapons][3] = (newWeapon.getWeaponDamage() * 4) + " // "
+						+ newWeapon.getWeaponDamage() + " // " + ((newWeapon.getWeaponDamage() * 85) / 100);
 				contWeapons++;
 			}
 			break;
@@ -1353,8 +1408,8 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 				matrizTablaArmas[contWeapons][0] = newWeapon.getWeaponName();
 				matrizTablaArmas[contWeapons][1] = newWeapon.getWeaponType();
 				matrizTablaArmas[contWeapons][2] = newWeapon.getWeaponSubType();
-				matrizTablaArmas[contWeapons][3] = (newWeapon.getWeaponDamage() * 4) + "//"
-						+ newWeapon.getWeaponDamage() + "//" + ((newWeapon.getWeaponDamage() * 85) / 100);
+				matrizTablaArmas[contWeapons][3] = (newWeapon.getWeaponDamage() * 4) + " // "
+						+ newWeapon.getWeaponDamage() + " // " + ((newWeapon.getWeaponDamage() * 85) / 100);
 				contWeapons++;
 			}
 			break;
@@ -1365,8 +1420,8 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 				matrizTablaArmas[contWeapons][0] = newWeapon.getWeaponName();
 				matrizTablaArmas[contWeapons][1] = newWeapon.getWeaponType();
 				matrizTablaArmas[contWeapons][2] = newWeapon.getWeaponSubType();
-				matrizTablaArmas[contWeapons][3] = (newWeapon.getWeaponDamage() * 4) + "//"
-						+ newWeapon.getWeaponDamage() + "//" + ((newWeapon.getWeaponDamage() * 85) / 100);
+				matrizTablaArmas[contWeapons][3] = (newWeapon.getWeaponDamage() * 4) + " // "
+						+ newWeapon.getWeaponDamage() + " // " + ((newWeapon.getWeaponDamage() * 85) / 100);
 				contWeapons++;
 			}
 			break;
@@ -1398,7 +1453,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		RowsRenderer rRowsRenderer = new RowsRenderer(3);
 		DefaultTableCellRenderer centerRendererWeapons = new DefaultTableCellRenderer();
 		tableWeapons.setDefaultRenderer(Object.class, rRowsRenderer);
-		tableWeapons.setSelectionBackground(new Color(0, 230, 168));
+		tableWeapons.setSelectionBackground(Color.RED);
 		tableWeapons.setSelectionForeground(Color.WHITE);
 		tableWeapons.setRowMargin(0);
 		tableWeapons.setRowHeight(30);
@@ -1421,7 +1476,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		scrollPaneWeapons.setViewportView(tableWeapons);
 
 		JTableHeader tableHeader = tableWeapons.getTableHeader();
-		tableHeader.setBackground(new Color(0, 191, 140));
+		tableHeader.setBackground(new Color(217, 0, 0));
 		tableHeader.setForeground(Color.WHITE);
 		tableHeader.setFont(new Font("Tahoma", Font.BOLD, 15));
 		tableHeader.setBorder(null);
@@ -1455,8 +1510,12 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 	private void searchWeapon(String weaponName) {
 		if (weaponData.getWeaponByName(weaponName) == null) {
 			btnAddWeapon.setEnabled(true);
+			btnDeleteWeapon.setEnabled(false);
+			btnModifyWeapon.setEnabled(false);
 		} else {
 			btnAddWeapon.setEnabled(false);
+			btnDeleteWeapon.setEnabled(true);
+			btnModifyWeapon.setEnabled(true);
 		}
 	}
 
