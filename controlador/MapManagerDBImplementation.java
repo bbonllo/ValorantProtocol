@@ -60,7 +60,6 @@ public class MapManagerDBImplementation implements MapManager {
 
 	@Override
 	public void makeStadisctic(String mapName) {
-		// TODO Auto-generated method stub
 
 	}
 

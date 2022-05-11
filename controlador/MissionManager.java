@@ -4,22 +4,24 @@ import java.util.List;
 import java.util.Set;
 
 import exceptions.ExceptionManager;
+import model.AttackMission;
+import model.DefendMission;
 import model.Mission;
 
 public interface MissionManager {
 
-	public Mission getMissionByCod(String codM);
+	public Mission getMissionByCod(int codM);
 
-	public void registerMission(Mission wMisson);
+	public int registerMission(Mission wMisson, char type);
+	
+	public void sendAgentToMission(int codM, int codA, String primaryWeapon, String secondaryWeapon);
 
-	public void modifyMisionDate(Mission modifyMission);
-
-	public void EndMission(String codM);
+	public void endMission(int codM, char type);
 
 	public List<Mission> getAllMissions();
 
-	public List<Mission> getAllActiveMissions();
+	public List<AttackMission> getAllAttackMissions();
 
-	public List<Mission> getAllFinishedMissions();
+	public List<DefendMission> getAllDefendMissions();
 
 }

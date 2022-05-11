@@ -116,7 +116,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 
 		// Meto los valores del agente dentro del stmt:
 		try {
-			final String INSERTAgent = "INSERT INTO agent(agentCode, agetPasswd, agentName, agentNationality, agentRol, agentIsAdmin, agentIsOnMission, agentIsActive) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+			final String INSERTAgent = "INSERT INTO agent(agentCode, agentPasswd, agentName, agentNationality, agentRol, agentIsAdmin, agentIsOnMission, agentIsActive) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 			stmt = con.prepareStatement(INSERTAgent);
 
 			stmt.setInt(1, registerAgent.getAgentCode());
