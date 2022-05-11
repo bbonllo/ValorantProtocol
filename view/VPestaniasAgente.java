@@ -62,6 +62,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JSeparator;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.util.Locale;
 
 public class VPestaniasAgente extends JFrame implements ActionListener, MouseListener {
 	private static final long serialVersionUID = 1L;
@@ -104,8 +105,6 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 	private JLabel panelBackgroundRegisterMission;
 	private JPanel panelHistoricMission;
 	private JLabel panelBackgroundHistoricMission;
-	private JLabel lblNewLabel;
-	private JLabel lblPanelregistermission;
 	private JComboBox<String> comboBoxRol;
 	private JLabel lblAgentDataCode;
 	private JTextField txtCode;
@@ -186,6 +185,11 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 	private JComboBox<String> comboBoxWeaponType;
 	private JLabel lblAscentMap;
 	private JLabel lblFractureMap;
+	private JLabel lblMissionAgent3;
+	private JLabel lblMissionAgent2;
+	private JLabel lblMissionAgent1;
+	private JLabel lblMissionAgent4;
+	private JLabel lblMissionAgent5;
 
 	/**
 	 * Create the frame.
@@ -286,51 +290,120 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 				btnClose.kFillButton = false; // Hacer transparente el boton
 			}
 		});
+		panelMission = new JPanel();
+		panelMission.setLayout(null);
+		panelMission.setBounds(0, 74, 1770, 1006);
+		p.add(panelMission);
+
+		panelRegisterMission = new JPanel();
+		panelRegisterMission.setBounds(0, 50, 1770, 956);
+		panelMission.add(panelRegisterMission);
+		panelRegisterMission.setLayout(null);
+		
+		lblMissionAgent5 = new JLabel("Agente 5");
+		lblMissionAgent5.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMissionAgent5.setBounds(1483, 60, 150, 40);
+		panelRegisterMission.add(lblMissionAgent5);
+		
+		lblMissionAgent4 = new JLabel("Agente 4");
+		lblMissionAgent4.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMissionAgent4.setBounds(1146, 60, 150, 40);
+		panelRegisterMission.add(lblMissionAgent4);
+		
+		lblMissionAgent2 = new JLabel("Agente 2");
+		lblMissionAgent2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMissionAgent2.setBounds(472, 60, 150, 40);
+		panelRegisterMission.add(lblMissionAgent2);
+		
+		lblMissionAgent1 = new JLabel("Agente 1");
+		lblMissionAgent1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMissionAgent1.setBounds(135, 60, 150, 40);
+		panelRegisterMission.add(lblMissionAgent1);
+
+		lblMissionAgent3 = new JLabel("Agente 3");
+		lblMissionAgent3.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMissionAgent3.setBounds(809, 60, 150, 40);
+		panelRegisterMission.add(lblMissionAgent3);
+
+		panelBackgroundRegisterMission = new JLabel("");
+		panelBackgroundRegisterMission.setBounds(0, 0, 1770, 956);
+		panelBackgroundRegisterMission
+				.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/appBackgroundUnderPanel.jpg")));
+		panelRegisterMission.add(panelBackgroundRegisterMission);
+
+		panelHistoricMission = new JPanel();
+		panelHistoricMission.setLayout(null);
+		panelHistoricMission.setBounds(0, 50, 1770, 956);
+		panelMission.add(panelHistoricMission);
+
+		panelBackgroundHistoricMission = new JLabel("");
+		panelBackgroundHistoricMission
+				.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/appBackgroundUnderPanel.jpg")));
+		panelBackgroundHistoricMission.setBounds(0, 0, 1770, 956);
+		panelHistoricMission.add(panelBackgroundHistoricMission);
+
+		btnHistoricMission = new JButton("Historial");
+		btnHistoricMission.setBorder(null);
+		btnHistoricMission.setBounds(884, 0, 177, 50);
+		btnHistoricMission.addActionListener(this);
+		panelMission.add(btnHistoricMission);
+
+		btnRegisterMission = new JButton("Alta");
+		btnRegisterMission.setBorder(null);
+		btnRegisterMission.setBounds(707, 0, 177, 50);
+		btnRegisterMission.addActionListener(this);
+		panelMission.add(btnRegisterMission);
+
+		JLabel lblBackgroundPanelMission = new JLabel("");
+		lblBackgroundPanelMission
+				.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/appBackgroundPanel.jpg")));
+		lblBackgroundPanelMission.setBounds(0, 0, 1770, 1006);
+		panelMission.add(lblBackgroundPanelMission);
 		panelMap = new JPanel();
 		panelMap.setLayout(null);
 		panelMap.setBounds(0, 74, 1770, 1006);
 		p.add(panelMap);
-				
-				lblFractureMap = new JLabel("");
-				lblFractureMap.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-				lblFractureMap.setBounds(1115, 210, 480, 240);
-				panelMap.add(lblFractureMap);
-				
-				lblAscentMap = new JLabel("");
-				lblAscentMap.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-				lblAscentMap.setBounds(1115, 448, 480, 480);
-				panelMap.add(lblAscentMap);
-				
-				JLabel lblBreezeMap = new JLabel("");
-				lblBreezeMap.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-				lblBreezeMap.setBounds(637, 688, 480, 240);
-				panelMap.add(lblBreezeMap);
-				
-				JLabel lblIceboxMap = new JLabel("");
-				lblIceboxMap.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-				lblIceboxMap.setBounds(637, 448, 480, 242);
-				panelMap.add(lblIceboxMap);
-				
-				JLabel lblHeavenMap = new JLabel("");
-				lblHeavenMap.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-				lblHeavenMap.setBounds(637, 210, 480, 240);
-				panelMap.add(lblHeavenMap);
-				
-				JLabel lblSplitMap = new JLabel("");
-				lblSplitMap.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-				lblSplitMap.setBounds(159, 688, 480, 240);
-				panelMap.add(lblSplitMap);
-				
-				JLabel lblBindMap = new JLabel("");
-				lblBindMap.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-				lblBindMap.setBounds(159, 210, 480, 480);
-				panelMap.add(lblBindMap);
-		
-				JLabel lblBackgroundPanelMap = new JLabel("");
-				lblBackgroundPanelMap
-						.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/appBackgroundPanel.jpg")));
-				lblBackgroundPanelMap.setBounds(0, 0, 1920, 1006);
-				panelMap.add(lblBackgroundPanelMap);
+
+		lblFractureMap = new JLabel("");
+		lblFractureMap.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		lblFractureMap.setBounds(1115, 210, 480, 240);
+		panelMap.add(lblFractureMap);
+
+		lblAscentMap = new JLabel("");
+		lblAscentMap.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		lblAscentMap.setBounds(1115, 448, 480, 480);
+		panelMap.add(lblAscentMap);
+
+		JLabel lblBreezeMap = new JLabel("");
+		lblBreezeMap.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		lblBreezeMap.setBounds(637, 688, 480, 240);
+		panelMap.add(lblBreezeMap);
+
+		JLabel lblIceboxMap = new JLabel("");
+		lblIceboxMap.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		lblIceboxMap.setBounds(637, 448, 480, 242);
+		panelMap.add(lblIceboxMap);
+
+		JLabel lblHeavenMap = new JLabel("");
+		lblHeavenMap.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		lblHeavenMap.setBounds(637, 210, 480, 240);
+		panelMap.add(lblHeavenMap);
+
+		JLabel lblSplitMap = new JLabel("");
+		lblSplitMap.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		lblSplitMap.setBounds(159, 688, 480, 240);
+		panelMap.add(lblSplitMap);
+
+		JLabel lblBindMap = new JLabel("");
+		lblBindMap.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		lblBindMap.setBounds(159, 210, 480, 480);
+		panelMap.add(lblBindMap);
+
+		JLabel lblBackgroundPanelMap = new JLabel("");
+		lblBackgroundPanelMap
+				.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/appBackgroundPanel.jpg")));
+		lblBackgroundPanelMap.setBounds(0, 0, 1920, 1006);
+		panelMap.add(lblBackgroundPanelMap);
 		panelWeapon = new JPanel();
 		panelWeapon.setLayout(null);
 		panelWeapon.setBounds(0, 74, 1770, 1006);
@@ -934,58 +1007,6 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 				.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/appBackgroundPanel.jpg")));
 		lblBackgroundPanelAgent.setBounds(0, 0, 1770, 1006);
 		panelAgent.add(lblBackgroundPanelAgent);
-		panelMission = new JPanel();
-		panelMission.setLayout(null);
-		panelMission.setBounds(0, 74, 1770, 1006);
-		p.add(panelMission);
-
-		panelHistoricMission = new JPanel();
-		panelHistoricMission.setLayout(null);
-		panelHistoricMission.setBounds(0, 50, 1770, 956);
-		panelMission.add(panelHistoricMission);
-
-		lblNewLabel = new JLabel("panelHistoricMissionhjghjghjghjghj");
-		lblNewLabel.setBounds(130, 159, 284, 114);
-		panelHistoricMission.add(lblNewLabel);
-
-		panelBackgroundHistoricMission = new JLabel("");
-		panelBackgroundHistoricMission
-				.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/appBackgroundUnderPanel.jpg")));
-		panelBackgroundHistoricMission.setBounds(0, 0, 1770, 956);
-		panelHistoricMission.add(panelBackgroundHistoricMission);
-
-		panelRegisterMission = new JPanel();
-		panelRegisterMission.setBounds(0, 50, 1770, 956);
-		panelMission.add(panelRegisterMission);
-		panelRegisterMission.setLayout(null);
-
-		lblPanelregistermission = new JLabel("panelRegisterMissionxfggfdfgf");
-		lblPanelregistermission.setBounds(240, 160, 284, 114);
-		panelRegisterMission.add(lblPanelregistermission);
-
-		panelBackgroundRegisterMission = new JLabel("");
-		panelBackgroundRegisterMission
-				.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/appBackgroundUnderPanel.jpg")));
-		panelBackgroundRegisterMission.setBounds(0, 0, 1770, 956);
-		panelRegisterMission.add(panelBackgroundRegisterMission);
-
-		btnHistoricMission = new JButton("Historial");
-		btnHistoricMission.setBorder(null);
-		btnHistoricMission.setBounds(884, 0, 177, 50);
-		btnHistoricMission.addActionListener(this);
-		panelMission.add(btnHistoricMission);
-
-		btnRegisterMission = new JButton("Alta");
-		btnRegisterMission.setBorder(null);
-		btnRegisterMission.setBounds(707, 0, 177, 50);
-		btnRegisterMission.addActionListener(this);
-		panelMission.add(btnRegisterMission);
-
-		JLabel lblBackgroundPanelMission = new JLabel("");
-		lblBackgroundPanelMission
-				.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/appBackgroundPanel.jpg")));
-		lblBackgroundPanelMission.setBounds(0, 0, 1770, 1006);
-		panelMission.add(lblBackgroundPanelMission);
 
 		lblHandCursor = new JLabel("");
 		lblHandCursor.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
