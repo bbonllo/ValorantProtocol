@@ -333,10 +333,10 @@ public class AgentManagerDBImplementation implements AgentManager {
 	}
 
 	@Override
-	public Set<Agent> getAllAgents() throws ExceptionManager {
+	public List<Agent> getAllAgents() throws ExceptionManager {
 
 		// ArrayList<Agent> agentsList
-		Set<Agent> activeAgents = new HashSet<>();
+		List<Agent> activeAgents = new ArrayList<>();
 		ResultSet rs = null;
 		Agent agentIntro = null;
 
@@ -368,10 +368,10 @@ public class AgentManagerDBImplementation implements AgentManager {
 	}
 
 	@Override
-	public Set<Agent> getAllActiveAgents() {
+	public List<Agent> getAllActiveAgents() {
 		// TODO Auto-generated method stub
 
-		Set<Agent> activeAgents = new HashSet<>();
+		List<Agent> activeAgents = new ArrayList<>();
 		ResultSet rs = null;
 		Agent agentIntro = null;
 
@@ -470,8 +470,8 @@ public class AgentManagerDBImplementation implements AgentManager {
 	}
 
 	@Override
-	public Set<Agent> getTeammates(int agentCode) {
-		Set<Agent> teammates = new HashSet<>();
+	public List<Agent> getTeammates(int agentCode) {
+		List<Agent> teammates = new ArrayList<>();
 		ResultSet rs = null;
 		Agent teammate = null;
 

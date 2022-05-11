@@ -1,6 +1,6 @@
 package controlador;
 
-import java.util.Set;
+import java.util.List;
 
 import exceptions.ExceptionManager;
 import model.Agent;
@@ -15,14 +15,13 @@ public interface AgentManager {
 
 	public boolean makeAgentActive(int agentCode);
 
-	public Set<Agent> getAllAgents() throws ExceptionManager;
+	public List<Agent> getAllAgents() throws ExceptionManager;
 
-	public Set<Agent> getAllActiveAgents();
+	public List<Agent> getAllActiveAgents();
 
 	public Agent login(int agentCode, String passwd);
-	
-	public boolean makeAgentInactive(int agentCode);
-	
-	public Set<Agent> getTeammates(int agentCode);
-	
+
+	public void makeAgentInactive(int agentCode);
+
+	public List<Agent> getTeammates(int agentCode);
 }

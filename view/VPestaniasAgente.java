@@ -12,6 +12,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 import java.awt.Font;
@@ -20,13 +21,12 @@ import java.awt.Frame;
 import model.Ability;
 import model.AbilityUltimate;
 import model.Agent;
+import model.Weapon;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 import java.awt.event.MouseAdapter;
 
 import javax.swing.Icon;
@@ -57,9 +57,11 @@ import javax.swing.JTextArea;
 import javax.swing.JSpinner;
 
 import javax.swing.SpinnerNumberModel;
-import javax.swing.JScrollBar;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
+import javax.swing.JSeparator;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class VPestaniasAgente extends JFrame implements ActionListener, MouseListener {
 	private static final long serialVersionUID = 1L;
@@ -76,9 +78,6 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 	private JButton btnRegisterAgent;
 	private JButton btnModifyAgent;
 	private JButton btnRemoveAgent;
-	private JButton btnRegisterWeapon;
-	private JButton btnModifyWeapon;
-	private JButton btnRemoveWeapon;
 	private JButton btnRegisterMission;
 	private JButton btnHistoricMission;
 	private JPanel panelAgent;
@@ -92,25 +91,21 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 	private JPanel panelModifyAgent;
 	private JPanel panelRemoveAgent;
 	private JCheckBox chckbxNewCheckBoxModif;
-	private JScrollPane scrollPane;
-	private JScrollPane scrollPane2;
+	private JScrollPane scrollPane = new JScrollPane();
+	private JScrollPane scrollPaneWeapons = new JScrollPane();
 	private JTable table;
+	private JTable tableWeapons;
 	private JLabel lblAgentHabilities;
 	private JLabel lblBackgroundPanelAgentRegister;
 	private JLabel lblBackgroundPanelAgentRegister_2;
 	private JPanel panelRegisterWeapon;
-	private JPanel panelRemoveWeapon;
-	private JPanel panelModifyWeapon;
 	private JLabel panelBackgroundRegisterWeapon;
-	private JLabel panelBackgroundModifyWeapon;
-	private JLabel panelBackgroundRemoveWeapon;
 	private JPanel panelRegisterMission;
 	private JLabel panelBackgroundRegisterMission;
 	private JPanel panelHistoricMission;
 	private JLabel panelBackgroundHistoricMission;
 	private JLabel lblNewLabel;
 	private JLabel lblPanelregistermission;
-	private JLabel lblNewLabel_2;
 	private JComboBox<String> comboBoxRol;
 	private JLabel lblAgentDataCode;
 	private JTextField txtCode;
@@ -119,7 +114,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 	private JLabel lblAgentDataNationality;
 	private JTextField txtNationality;
 	private JLabel lblAgentDataRol;
-	int cont = 0;
+	int contAgents = 0;
 	private JLabel lblAgentDataPasswd2;
 	private JPasswordField txtPasswd1;
 	private JPasswordField txtPasswd2;
@@ -180,9 +175,17 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 	private JCheckBox chckbxNewCheckBoxModif_1;
 	private JRadioButton rdbtnWeaponSidearm;
 	private JRadioButton rdbtnWeaponPrimary;
+	private JButton btnConfirm;
+	private JButton btnClean;
+	private JButton btnAddWeapon;
+	private JButton btnDeleteWeapon;
+	private JButton btnModifyWeapon;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private JLabel lblDamageSubtype;
 	private JComboBox<String> comboBoxWeaponSubtype;
+	private JComboBox<String> comboBoxWeaponType;
+	private JLabel lblAscentMap;
+	private JLabel lblFractureMap;
 
 	/**
 	 * Create the frame.
@@ -283,6 +286,51 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 				btnClose.kFillButton = false; // Hacer transparente el boton
 			}
 		});
+		panelMap = new JPanel();
+		panelMap.setLayout(null);
+		panelMap.setBounds(0, 74, 1770, 1006);
+		p.add(panelMap);
+				
+				lblFractureMap = new JLabel("");
+				lblFractureMap.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+				lblFractureMap.setBounds(1115, 210, 480, 240);
+				panelMap.add(lblFractureMap);
+				
+				lblAscentMap = new JLabel("");
+				lblAscentMap.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+				lblAscentMap.setBounds(1115, 448, 480, 480);
+				panelMap.add(lblAscentMap);
+				
+				JLabel lblBreezeMap = new JLabel("");
+				lblBreezeMap.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+				lblBreezeMap.setBounds(637, 688, 480, 240);
+				panelMap.add(lblBreezeMap);
+				
+				JLabel lblIceboxMap = new JLabel("");
+				lblIceboxMap.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+				lblIceboxMap.setBounds(637, 448, 480, 242);
+				panelMap.add(lblIceboxMap);
+				
+				JLabel lblHeavenMap = new JLabel("");
+				lblHeavenMap.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+				lblHeavenMap.setBounds(637, 210, 480, 240);
+				panelMap.add(lblHeavenMap);
+				
+				JLabel lblSplitMap = new JLabel("");
+				lblSplitMap.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+				lblSplitMap.setBounds(159, 688, 480, 240);
+				panelMap.add(lblSplitMap);
+				
+				JLabel lblBindMap = new JLabel("");
+				lblBindMap.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+				lblBindMap.setBounds(159, 210, 480, 480);
+				panelMap.add(lblBindMap);
+		
+				JLabel lblBackgroundPanelMap = new JLabel("");
+				lblBackgroundPanelMap
+						.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/appBackgroundPanel.jpg")));
+				lblBackgroundPanelMap.setBounds(0, 0, 1920, 1006);
+				panelMap.add(lblBackgroundPanelMap);
 		panelWeapon = new JPanel();
 		panelWeapon.setLayout(null);
 		panelWeapon.setBounds(0, 74, 1770, 1006);
@@ -294,56 +342,107 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		panelRegisterWeapon.setLayout(null);
 
 		rdbtnWeaponSidearm = new JRadioButton("Secundaria");
+		rdbtnWeaponSidearm.setForeground(Color.WHITE);
 		buttonGroup.add(rdbtnWeaponSidearm);
 		rdbtnWeaponSidearm.setOpaque(false);
 		rdbtnWeaponSidearm.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
-		rdbtnWeaponSidearm.setBounds(666, 362, 109, 23);
+		rdbtnWeaponSidearm.setBounds(360, 317, 109, 23);
 		rdbtnWeaponSidearm.addActionListener(this);
+
+		comboBoxWeaponType = new JComboBox<String>();
+		comboBoxWeaponType
+				.setModel(new DefaultComboBoxModel<String>(new String[] { "All Weapons", "Primarias", "Secundarias" }));
+		comboBoxWeaponType.setSelectedIndex(-1);
+		comboBoxWeaponType.setBounds(600, 55, 204, 30);
+		comboBoxWeaponType.addActionListener(this);
+		panelRegisterWeapon.add(comboBoxWeaponType);
+
+		btnModifyWeapon = new JButton("Modificar arma");
+		btnModifyWeapon.setForeground(Color.WHITE);
+		btnModifyWeapon.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
+		btnModifyWeapon.setBorder(null);
+		btnModifyWeapon.setBackground(Color.RED);
+		btnModifyWeapon.setBounds(122, 753, 112, 30);
+		panelRegisterWeapon.add(btnModifyWeapon);
+
+		btnDeleteWeapon = new JButton("Borrar arma");
+		btnDeleteWeapon.setForeground(Color.WHITE);
+		btnDeleteWeapon.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
+		btnDeleteWeapon.setBorder(null);
+		btnDeleteWeapon.setBackground(Color.RED);
+		btnDeleteWeapon.setBounds(255, 753, 112, 30);
+		btnDeleteWeapon.addActionListener(this);
+		panelRegisterWeapon.add(btnDeleteWeapon);
+
+		btnAddWeapon = new JButton("Crear arma");
+		btnAddWeapon.setBackground(Color.RED);
+		btnAddWeapon.setForeground(Color.WHITE);
+		btnAddWeapon.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
+		btnAddWeapon.setBorder(null);
+		btnAddWeapon.setBounds(388, 753, 112, 30);
+		btnAddWeapon.addActionListener(this);
+		panelRegisterWeapon.add(btnAddWeapon);
+
+		JSeparator separator = new JSeparator();
+		separator.setOrientation(SwingConstants.VERTICAL);
+		separator.setBounds(578, 23, 2, 900);
+		panelRegisterWeapon.add(separator);
 
 		comboBoxWeaponSubtype = new JComboBox<String>();
 		comboBoxWeaponSubtype.setModel(
 				new DefaultComboBoxModel<String>(new String[] { "Rifle", "SMG", "Sniper", "Shotgun", "Machine gun" }));
 		comboBoxWeaponSubtype.setSelectedIndex(-1);
-		comboBoxWeaponSubtype.setBounds(525, 411, 281, 30);
+		comboBoxWeaponSubtype.setBounds(219, 366, 281, 30);
 		panelRegisterWeapon.add(comboBoxWeaponSubtype);
 
 		lblDamageSubtype = new JLabel("Subtipo");
+		lblDamageSubtype.setForeground(Color.WHITE);
 		lblDamageSubtype.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
-		lblDamageSubtype.setBounds(403, 401, 112, 53);
+		lblDamageSubtype.setBounds(97, 356, 112, 53);
 		panelRegisterWeapon.add(lblDamageSubtype);
 		panelRegisterWeapon.add(rdbtnWeaponSidearm);
 
 		rdbtnWeaponPrimary = new JRadioButton("Primaria");
+		rdbtnWeaponPrimary.setForeground(Color.WHITE);
 		buttonGroup.add(rdbtnWeaponPrimary);
 		rdbtnWeaponPrimary.setOpaque(false);
 		rdbtnWeaponPrimary.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
-		rdbtnWeaponPrimary.setBounds(525, 362, 109, 23);
+		rdbtnWeaponPrimary.setBounds(219, 317, 109, 23);
 		rdbtnWeaponPrimary.addActionListener(this);
 		panelRegisterWeapon.add(rdbtnWeaponPrimary);
 
 		JLabel lblDamageType = new JLabel("Tipo");
+		lblDamageType.setForeground(Color.WHITE);
 		lblDamageType.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
-		lblDamageType.setBounds(403, 348, 112, 53);
+		lblDamageType.setBounds(97, 303, 112, 53);
 		panelRegisterWeapon.add(lblDamageType);
 
 		txtDamageWeapon = new JTextField();
 		txtDamageWeapon.setColumns(10);
-		txtDamageWeapon.setBounds(525, 306, 281, 30);
+		txtDamageWeapon.setBounds(219, 261, 281, 30);
 		panelRegisterWeapon.add(txtDamageWeapon);
 
 		JLabel lblDamageWeapon = new JLabel("Daño");
+		lblDamageWeapon.setForeground(Color.WHITE);
 		lblDamageWeapon.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
-		lblDamageWeapon.setBounds(403, 296, 112, 53);
+		lblDamageWeapon.setBounds(97, 251, 112, 53);
 		panelRegisterWeapon.add(lblDamageWeapon);
 
 		txtNameWeapon = new JTextField();
-		txtNameWeapon.setBounds(525, 255, 281, 30);
+		txtNameWeapon.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				searchWeapon(txtNameWeapon.getText());
+			}
+		});
+		txtNameWeapon.setBounds(219, 210, 281, 30);
 		panelRegisterWeapon.add(txtNameWeapon);
 		txtNameWeapon.setColumns(10);
 
 		JLabel lblNameWeapon = new JLabel("Nombre");
+		lblNameWeapon.setForeground(Color.WHITE);
 		lblNameWeapon.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
-		lblNameWeapon.setBounds(403, 245, 112, 53);
+		lblNameWeapon.setBounds(97, 200, 112, 53);
 		panelRegisterWeapon.add(lblNameWeapon);
 
 		panelBackgroundRegisterWeapon = new JLabel("");
@@ -351,54 +450,6 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 				.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/appBackgroundUnderPanel.jpg")));
 		panelBackgroundRegisterWeapon.setBounds(0, 0, 1770, 956);
 		panelRegisterWeapon.add(panelBackgroundRegisterWeapon);
-
-		panelModifyWeapon = new JPanel();
-		panelModifyWeapon.setBounds(0, 50, 1770, 956);
-		panelWeapon.add(panelModifyWeapon);
-		panelModifyWeapon.setLayout(null);
-
-		JLabel lblNewLabel_1 = new JLabel("New labeldffdgdfgdfg");
-		lblNewLabel_1.setBounds(83, 89, 286, 131);
-		panelModifyWeapon.add(lblNewLabel_1);
-
-		panelBackgroundModifyWeapon = new JLabel("");
-		panelBackgroundModifyWeapon
-				.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/appBackgroundUnderPanel.jpg")));
-		panelBackgroundModifyWeapon.setBounds(0, 0, 1770, 956);
-		panelModifyWeapon.add(panelBackgroundModifyWeapon);
-
-		panelRemoveWeapon = new JPanel();
-		panelRemoveWeapon.setBounds(0, 50, 1770, 956);
-		panelWeapon.add(panelRemoveWeapon);
-		panelRemoveWeapon.setLayout(null);
-
-		lblNewLabel_2 = new JLabel("New labeldffdgdfgdfg");
-		lblNewLabel_2.setBounds(0, 0, 286, 131);
-		panelRemoveWeapon.add(lblNewLabel_2);
-
-		panelBackgroundRemoveWeapon = new JLabel("");
-		panelBackgroundRemoveWeapon
-				.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/appBackgroundUnderPanel.jpg")));
-		panelBackgroundRemoveWeapon.setBounds(0, 0, 1770, 956);
-		panelRemoveWeapon.add(panelBackgroundRemoveWeapon);
-
-		btnModifyWeapon = new JButton("Modificacion");
-		btnModifyWeapon.setBorder(null);
-		btnModifyWeapon.setBounds(974, 0, 177, 50);
-		btnModifyWeapon.addActionListener(this);
-		panelWeapon.add(btnModifyWeapon);
-
-		btnRegisterWeapon = new JButton("Alta");
-		btnRegisterWeapon.setBorder(null);
-		btnRegisterWeapon.setBounds(620, 0, 177, 50);
-		btnRegisterWeapon.addActionListener(this);
-		panelWeapon.add(btnRegisterWeapon);
-
-		btnRemoveWeapon = new JButton("Baja");
-		btnRemoveWeapon.setBorder(null);
-		btnRemoveWeapon.setBounds(797, 0, 177, 50);
-		btnRemoveWeapon.addActionListener(this);
-		panelWeapon.add(btnRemoveWeapon);
 
 		JLabel lblBackgroundPanelWeapon = new JLabel("");
 		lblBackgroundPanelWeapon
@@ -529,20 +580,22 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		lblAgentHabilitiesTitle.setBounds(1098, 64, 405, 53);
 		panelRegisterAgent.add(lblAgentHabilitiesTitle);
 
-		JButton btnClean = new JButton("Limiar datos");
+		btnClean = new JButton("Limiar datos");
 		btnClean.setForeground(Color.WHITE);
 		btnClean.setBackground(new Color(255, 0, 0));
 		btnClean.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 12));
 		btnClean.setBorder(null);
 		btnClean.setBounds(1409, 874, 140, 40);
+		btnClean.addActionListener(this);
 		panelRegisterAgent.add(btnClean);
 
-		JButton btnConfirm = new JButton("Añadir agente");
+		btnConfirm = new JButton("Añadir agente");
 		btnConfirm.setForeground(Color.WHITE);
-		btnConfirm.setBackground(new Color(255, 0, 0));
+		btnConfirm.setBackground(Color.RED);
 		btnConfirm.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 12));
 		btnConfirm.setBorder(null);
 		btnConfirm.setBounds(1584, 874, 140, 40);
+		btnConfirm.addActionListener(this);
 		panelRegisterAgent.add(btnConfirm);
 
 		txtPasswd2 = new JPasswordField();
@@ -933,16 +986,6 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 				.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/appBackgroundPanel.jpg")));
 		lblBackgroundPanelMission.setBounds(0, 0, 1770, 1006);
 		panelMission.add(lblBackgroundPanelMission);
-		panelMap = new JPanel();
-		panelMap.setLayout(null);
-		panelMap.setBounds(0, 74, 1770, 1006);
-		p.add(panelMap);
-
-		JLabel lblBackgroundPanelMap = new JLabel("");
-		lblBackgroundPanelMap
-				.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/appBackgroundPanel.jpg")));
-		lblBackgroundPanelMap.setBounds(0, 0, 1920, 1006);
-		panelMap.add(lblBackgroundPanelMap);
 
 		lblHandCursor = new JLabel("");
 		lblHandCursor.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -970,29 +1013,25 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		 */
 
 		/*
-		 * Tabla lateral
-		 * 
+		 * Tabla Lateral Agentes (677, 100, 962, 778)
 		 */
 
 		try {
-			Set<Agent> agents = agentData.getAllAgents();
+			List<Agent> agents = agentData.getAllAgents();
+			Collections.sort(agents);
+			String matrizTablaAgents[][] = new String[agents.size()][1];
 
-			List<Agent> agentsOrder = new ArrayList<Agent>(agents);
-			Collections.sort(agentsOrder);
-			String matrizTabla[][] = new String[agents.size()][1];
-
-			for (Agent newAgent : agentsOrder) {
-				matrizTabla[cont][0] = newAgent.getAgentName() + " // " + newAgent.getAgentCode();
-				cont++;
+			for (Agent newAgent : agents) {
+				matrizTablaAgents[contAgents][0] = newAgent.getAgentName() + " // " + newAgent.getAgentCode();
+				contAgents++;
 			}
 
-			String titulo[] = { "Agentes" };
-			scrollPane = new JScrollPane();
+			String tituloAgentes[] = { "Agentes" };
 			scrollPane.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			scrollPane.setBounds(1770, 74, 150, 1006);
 			p.add(scrollPane);
 
-			table = new JTable(matrizTabla, titulo) {
+			table = new JTable(matrizTablaAgents, tituloAgentes) {
 				/*
 				 * 
 				 */
@@ -1012,27 +1051,27 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 				}
 			};
 
-			RowsRenderer rRowsRenderer = new RowsRenderer(4);
-			DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-			table.setDefaultRenderer(Object.class, rRowsRenderer);
-			table.setSelectionBackground(new Color(0, 230, 168));
+			RowsRenderer rRowsRendererAgents = new RowsRenderer(4);
+			DefaultTableCellRenderer centerRendererAgents = new DefaultTableCellRenderer();
+			table.setDefaultRenderer(Object.class, rRowsRendererAgents);
+			table.setSelectionBackground(Color.RED);
 			table.setSelectionForeground(Color.WHITE);
 			table.setRowMargin(0);
 			table.setRowHeight(30);
 			table.setShowVerticalLines(false);
 			table.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 18));
-			table.isCellEditable(agentsOrder.size(), 1);
+			table.isCellEditable(agents.size(), 1);
 			table.addMouseListener(this);
-			centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-			table.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+			centerRendererAgents.setHorizontalAlignment(JLabel.CENTER);
+			table.getColumnModel().getColumn(0).setCellRenderer(centerRendererAgents);
 			scrollPane.setViewportView(table);
 
-			JTableHeader tableHeader = table.getTableHeader();
-			tableHeader.setBackground(new Color(0, 191, 140));
-			tableHeader.setForeground(Color.WHITE);
-			tableHeader.setFont(new Font("Tahoma", Font.BOLD, 15));
-			tableHeader.setBorder(null);
-			tableHeader.setEnabled(false);
+			JTableHeader tableHeaderAgents = table.getTableHeader();
+			tableHeaderAgents.setBackground(new Color(217, 0, 0));
+			tableHeaderAgents.setForeground(Color.WHITE);
+			tableHeaderAgents.setFont(new Font("Tahoma", Font.BOLD, 15));
+			tableHeaderAgents.setBorder(null);
+			tableHeaderAgents.setEnabled(false);
 		} catch (ExceptionManager e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -1141,6 +1180,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 			panelModifyAgent.setVisible(false);
 			panelRemoveAgent.setVisible(false);
 		} else if (e.getSource().equals(btnModifyAgent)) {
+			clean();
 			panelRegisterAgent.setVisible(false);
 			panelModifyAgent.setVisible(true);
 			panelRemoveAgent.setVisible(false);
@@ -1153,12 +1193,10 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 			diag = new JDialog();
 			JComboBox<String> comboBoxModif = new JComboBox<String>();
 			try {
-				Set<Agent> agents = agentData.getAllAgents();
+				List<Agent> agents = agentData.getAllAgents();
+				Collections.sort(agents);
 
-				List<Agent> agentsOrder = new ArrayList<Agent>(agents);
-				Collections.sort(agentsOrder);
-
-				for (Agent newAgent : agentsOrder) {
+				for (Agent newAgent : agents) {
 					comboBoxModif.addItem(newAgent.getAgentName() + " // " + newAgent.getAgentCode());
 				}
 			} catch (ExceptionManager e1) {
@@ -1190,8 +1228,6 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 			txtCodeModif.setText(newAgent.getAgentCode() + "");
 			txtCodeModif.setEditable(false);
 			txtNameModif.setText(newAgent.getAgentName());
-			// passwordFieldModif.setText(newAgent.getAgentPasswd());
-			// passwordFieldConfirmModif.setText(newAgent.getAgentPasswd());
 			txtNationalityModif.setText(newAgent.getAgentNationality());
 			comboBoxRolModif.setModel(new DefaultComboBoxModel<String>(
 					new String[] { "Duelist", "Sentinel", "Controller", "Initiator" }));
@@ -1212,6 +1248,10 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 			textAreaHabilityDescription4Modif.setText(newArrayHabilities[3].getAbilityDescription());
 			spinnerModif.setModel(new SpinnerNumberModel(
 					((AbilityUltimate) newArrayHabilities[3]).getAbilityUltimateRequiredOrbs(), 5, 8, 1));
+			passwordFieldConfirmModif.setText("HolaCarmen");
+			passwordFieldConfirmModif.setEditable(false);
+			passwordFieldModif.setText("Ponme10PLS");
+			passwordFieldModif.setEditable(false);
 
 		} else if (e.getSource().equals(btnRemoveAgent)) {
 			panelRegisterAgent.setVisible(false);
@@ -1219,18 +1259,6 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 			panelRemoveAgent.setVisible(true);
 			VRemoveAgent vRemoveAgent = new VRemoveAgent(this, true, agentData);
 			vRemoveAgent.setVisible(true);
-		} else if (e.getSource().equals(btnRegisterWeapon)) {
-			panelRegisterWeapon.setVisible(true);
-			panelModifyWeapon.setVisible(false);
-			panelRemoveWeapon.setVisible(false);
-		} else if (e.getSource().equals(btnModifyWeapon)) {
-			panelRegisterWeapon.setVisible(false);
-			panelModifyWeapon.setVisible(true);
-			panelRemoveWeapon.setVisible(false);
-		} else if (e.getSource().equals(btnRemoveWeapon)) {
-			panelRegisterWeapon.setVisible(false);
-			panelModifyWeapon.setVisible(false);
-			panelRemoveWeapon.setVisible(true);
 		} else if (e.getSource().equals(btnRegisterMission)) {
 			panelRegisterMission.setVisible(true);
 			panelHistoricMission.setVisible(false);
@@ -1245,6 +1273,26 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		} else if (e.getSource().equals(rdbtnWeaponSidearm)) {
 			comboBoxWeaponSubtype.setVisible(false);
 			lblDamageSubtype.setVisible(false);
+		} else if (e.getSource().equals(comboBoxWeaponType)) {
+			cargarTablaWeapons();
+		} else if (e.getSource().equals(btnAddWeapon)) {
+			/*
+			 * 
+			 * Falta
+			 * 
+			 */
+		} else if (e.getSource().equals(btnDeleteWeapon)) {
+			/*
+			 * 
+			 * Falta
+			 * 
+			 */
+		} else if (e.getSource().equals(btnModifyWeapon)) {
+			/*
+			 * 
+			 * Falta
+			 * 
+			 */
 		}
 
 	}
@@ -1254,9 +1302,8 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		if (e.getSource().equals(table)) {
 			if (e.getClickCount() == 2) {
 				try {
-					Set<Agent> agents = agentData.getAllAgents();
-					List<Agent> agentsOrder = new ArrayList<Agent>(agents);
-					Collections.sort(agentsOrder);
+					List<Agent> agents = agentData.getAllAgents();
+					Collections.sort(agents);
 
 					Agent newAgent = new Agent();
 					table = (JTable) e.getSource();
@@ -1264,12 +1311,37 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 
 					Icon newIcon = new ImageIcon(
 							VPestaniasAgente.class.getResource("/resources/rotGamesLogo100x52.png"));
-					newAgent = agentsOrder.get(row);
+					newAgent = agents.get(row);
 					JOptionPane.showMessageDialog(this, newAgent.getAgentName() + " " + newAgent.getAgentCode(),
 							"Agente", JOptionPane.DEFAULT_OPTION, newIcon);
 				} catch (ExceptionManager e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
+				}
+			}
+		} else if (e.getSource().equals(tableWeapons)) {
+			if (e.getClickCount() == 2) {
+				if (JOptionPane.showConfirmDialog(this, "¿Desea borrar o modificar este arma?", "Armas",
+						JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE) == 0) {
+					Weapon newWeapon = weaponData.getWeaponByName(
+							tableWeapons.getModel().getValueAt(tableWeapons.getSelectedRow(), 0).toString());
+					txtNameWeapon.setText(newWeapon.getWeaponName());
+					txtDamageWeapon.setText(newWeapon.getWeaponDamage() + "");
+					if (newWeapon.getWeaponType().equalsIgnoreCase("Primary")) {
+						rdbtnWeaponPrimary.setSelected(true);
+						rdbtnWeaponSidearm.setSelected(false);
+
+						comboBoxWeaponSubtype.setSelectedItem(newWeapon.getWeaponSubType());
+						comboBoxWeaponSubtype.setVisible(true);
+						lblDamageSubtype.setVisible(true);
+					} else {
+						rdbtnWeaponPrimary.setSelected(false);
+						rdbtnWeaponSidearm.setSelected(true);
+
+						comboBoxWeaponSubtype.setVisible(false);
+						lblDamageSubtype.setVisible(false);
+					}
+					btnAddWeapon.setEnabled(false);
 				}
 			}
 		}
@@ -1298,5 +1370,171 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
 
+	}
+
+	private void cargarTablaWeapons() {
+		String matrizTablaArmas[][] = null;
+		if (tableWeapons != null) {
+			clearTable(matrizTablaArmas);
+		}
+		int contWeapons = 0;
+		int selection = comboBoxWeaponType.getSelectedIndex();
+		List<Weapon> weapons = null;
+		List<Weapon> weaponsPrimary = null;
+		List<Weapon> weaponsSidearms = null;
+
+		String tituloWeapons[] = { "Nombre", "Tipo", "Subtipo", "Daño  (Cabeza / Cuerpo / Piernas)" };
+		scrollPaneWeapons.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		scrollPaneWeapons.setBounds(600, 100, 1150, 778);
+		panelBackgroundRegisterWeapon.add(scrollPaneWeapons);
+
+		switch (selection) {
+		case 0:
+			weapons = weaponData.getAllWeapon();
+			matrizTablaArmas = new String[weapons.size()][4];
+			for (Weapon newWeapon : weapons) {
+				matrizTablaArmas[contWeapons][0] = newWeapon.getWeaponName();
+				matrizTablaArmas[contWeapons][1] = newWeapon.getWeaponType();
+				matrizTablaArmas[contWeapons][2] = newWeapon.getWeaponSubType();
+				matrizTablaArmas[contWeapons][3] = (newWeapon.getWeaponDamage() * 4) + " // "
+						+ newWeapon.getWeaponDamage() + " // " + ((newWeapon.getWeaponDamage() * 85) / 100);
+				contWeapons++;
+			}
+			break;
+		case 1:
+			weaponsPrimary = weaponData.getAllPrimary();
+			matrizTablaArmas = new String[weaponsPrimary.size()][4];
+			for (Weapon newWeapon : weaponsPrimary) {
+				matrizTablaArmas[contWeapons][0] = newWeapon.getWeaponName();
+				matrizTablaArmas[contWeapons][1] = newWeapon.getWeaponType();
+				matrizTablaArmas[contWeapons][2] = newWeapon.getWeaponSubType();
+				matrizTablaArmas[contWeapons][3] = (newWeapon.getWeaponDamage() * 4) + " // "
+						+ newWeapon.getWeaponDamage() + " // " + ((newWeapon.getWeaponDamage() * 85) / 100);
+				contWeapons++;
+			}
+			break;
+		case 2:
+			weaponsSidearms = weaponData.getAllSidearms();
+			matrizTablaArmas = new String[weaponsSidearms.size()][4];
+			for (Weapon newWeapon : weaponsSidearms) {
+				matrizTablaArmas[contWeapons][0] = newWeapon.getWeaponName();
+				matrizTablaArmas[contWeapons][1] = newWeapon.getWeaponType();
+				matrizTablaArmas[contWeapons][2] = newWeapon.getWeaponSubType();
+				matrizTablaArmas[contWeapons][3] = (newWeapon.getWeaponDamage() * 4) + " // "
+						+ newWeapon.getWeaponDamage() + " // " + ((newWeapon.getWeaponDamage() * 85) / 100);
+				contWeapons++;
+			}
+			break;
+
+		default:
+			break;
+		}
+
+		tableWeapons = new JTable(matrizTablaArmas, tituloWeapons) {
+			/*
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			// ***********************METODO PARA HACER QUE LA TABLA NO SEA EDITABLE, Y ASI
+			// HACER DOBLE CLICK************************************
+			// Para ello sobreescribimos el metodo que ya tiene la clase
+			// JTable.isCellEditable
+			public boolean isCellEditable(int row, int column) {
+				for (int i = 0; i < tableWeapons.getRowCount(); i++) {
+					if (row == i) {
+						return false;
+					}
+				}
+				return true;
+			}
+		};
+
+		RowsRenderer rRowsRenderer = new RowsRenderer(3);
+		DefaultTableCellRenderer centerRendererWeapons = new DefaultTableCellRenderer();
+		tableWeapons.setDefaultRenderer(Object.class, rRowsRenderer);
+		tableWeapons.setSelectionBackground(Color.RED);
+		tableWeapons.setSelectionForeground(Color.WHITE);
+		tableWeapons.setRowMargin(0);
+		tableWeapons.setRowHeight(30);
+		tableWeapons.setShowVerticalLines(false);
+		tableWeapons.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 18));
+		switch (selection) {
+		case 0:
+			tableWeapons.isCellEditable(weapons.size(), 2);
+			break;
+		case 1:
+			tableWeapons.isCellEditable(weaponsPrimary.size(), 2);
+			break;
+		case 2:
+			tableWeapons.isCellEditable(weaponsSidearms.size(), 2);
+			break;
+		}
+		tableWeapons.addMouseListener(this);
+		centerRendererWeapons.setHorizontalAlignment(JLabel.CENTER);
+		tableWeapons.getColumnModel().getColumn(0).setCellRenderer(centerRendererWeapons);
+		scrollPaneWeapons.setViewportView(tableWeapons);
+
+		JTableHeader tableHeader = tableWeapons.getTableHeader();
+		tableHeader.setBackground(new Color(217, 0, 0));
+		tableHeader.setForeground(Color.WHITE);
+		tableHeader.setFont(new Font("Tahoma", Font.BOLD, 15));
+		tableHeader.setBorder(null);
+		tableHeader.setEnabled(false);
+
+	}
+
+	private void clearTable(String[][] matrizTablaArmas) {
+		String tituloWeapons[] = { "Nombre", "Tipo", "Subtipo", "Daño  (Cabeza / Cuerpo / Piernas)" };
+		tableWeapons = new JTable(null, tituloWeapons) {
+			/*
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			// ***********************METODO PARA HACER QUE LA TABLA NO SEA EDITABLE, Y ASI
+			// HACER DOBLE CLICK************************************
+			// Para ello sobreescribimos el metodo que ya tiene la clase
+			// JTable.isCellEditable
+			public boolean isCellEditable(int row, int column) {
+				for (int i = 0; i < tableWeapons.getRowCount(); i++) {
+					if (row == i) {
+						return false;
+					}
+				}
+				return true;
+			}
+		};
+	}
+
+	private void searchWeapon(String weaponName) {
+		if (weaponData.getWeaponByName(weaponName) == null) {
+			btnAddWeapon.setEnabled(true);
+			btnDeleteWeapon.setEnabled(false);
+			btnModifyWeapon.setEnabled(false);
+		} else {
+			btnAddWeapon.setEnabled(false);
+			btnDeleteWeapon.setEnabled(true);
+			btnModifyWeapon.setEnabled(true);
+		}
+	}
+
+	private void clean() {
+		txtCodeModif.setText("");
+		txtNameModif.setText("");
+		txtNationalityModif.setText("");
+		comboBoxRolModif.setSelectedIndex(-1);
+		chckbxNewCheckBoxModif.setSelected(false);
+		chckbxNewCheckBoxModif.setSelected(false);
+		txtHabilityName1Modif.setText("");
+		textAreaHabilityDescription1Modif.setText("");
+		txtHabilityName2Modif.setText("");
+		textAreaHabilityDescription2Modif.setText("");
+		txtHabilityName3Modif.setText("");
+		textAreaHabilityDescription3Modif.setText("");
+		txtHabilityName4Modif.setText("");
+		textAreaHabilityDescription4Modif.setText("");
+		passwordFieldConfirmModif.setText("");
+		passwordFieldModif.setText("");
 	}
 }

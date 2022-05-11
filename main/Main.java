@@ -20,9 +20,6 @@ public class Main {
 		// View manipulation
 		ViewManager view = new ViewManagerImplementation();
 		view.openView(map, agent, weapon);
-		
 	}
 
 }
-
-
