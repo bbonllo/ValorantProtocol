@@ -107,7 +107,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 	}
 
 	@Override
-	public boolean registerAgent(Agent registerAgent) {
+	public void registerAgent(Agent registerAgent) {
 		Ability ability1;
 		Ability ability2;
 		Ability ability3;
@@ -186,6 +186,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 			stmt.setInt(4, ability4.getAbilityUltimateRequiredOrbs());
 
 			stmt.executeUpdate();
+
 		} catch (SQLException e1) {
 			System.out.println("Error en alta SQL");
 			e1.printStackTrace();
@@ -197,11 +198,10 @@ public class AgentManagerDBImplementation implements AgentManager {
 				e.printStackTrace();
 			}
 		}
-		return true;
 	}
 
 	@Override
-	public boolean modifyAgent(Agent modifyAgent) {
+	public void modifyAgent(Agent modifyAgent) {
 		Ability ability1;
 		Ability ability2;
 		Ability ability3;
@@ -288,11 +288,10 @@ public class AgentManagerDBImplementation implements AgentManager {
 				e.printStackTrace();
 			}
 		}
-		return false;
 	}
 
 	@Override
-	public boolean makeAgentInactive(int agentCode) {
+	public void makeAgentInactive(int agentCode) {
 
 		openConnection();
 		final String deleteAgent = "update agent set agentIsActive = false where agentCode = ?;";
@@ -308,12 +307,11 @@ public class AgentManagerDBImplementation implements AgentManager {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return false;
 
 	}
 
 	@Override
-	public boolean makeAgentActive(int agentCode) {
+	public void makeAgentActive(int agentCode) {
 
 		openConnection();
 		final String deleteAgent = "update agent set agentIsActive = true where agentCode = ?;";
@@ -329,7 +327,6 @@ public class AgentManagerDBImplementation implements AgentManager {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return false;
 	}
 
 	@Override

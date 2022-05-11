@@ -301,26 +301,31 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		panelRegisterMission.setLayout(null);
 		
 		lblMissionAgent5 = new JLabel("Agente 5");
+		lblMissionAgent5.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
 		lblMissionAgent5.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMissionAgent5.setBounds(1483, 60, 150, 40);
 		panelRegisterMission.add(lblMissionAgent5);
 		
 		lblMissionAgent4 = new JLabel("Agente 4");
+		lblMissionAgent4.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
 		lblMissionAgent4.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMissionAgent4.setBounds(1146, 60, 150, 40);
 		panelRegisterMission.add(lblMissionAgent4);
 		
 		lblMissionAgent2 = new JLabel("Agente 2");
+		lblMissionAgent2.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
 		lblMissionAgent2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMissionAgent2.setBounds(472, 60, 150, 40);
 		panelRegisterMission.add(lblMissionAgent2);
 		
 		lblMissionAgent1 = new JLabel("Agente 1");
+		lblMissionAgent1.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
 		lblMissionAgent1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMissionAgent1.setBounds(135, 60, 150, 40);
 		panelRegisterMission.add(lblMissionAgent1);
 
 		lblMissionAgent3 = new JLabel("Agente 3");
+		lblMissionAgent3.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
 		lblMissionAgent3.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMissionAgent3.setBounds(809, 60, 150, 40);
 		panelRegisterMission.add(lblMissionAgent3);
