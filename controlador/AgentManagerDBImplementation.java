@@ -292,7 +292,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 	}
 
 	@Override
-	public boolean makeAgentInactive(int agentCode) {
+	public void makeAgentInactive(int agentCode) {
 
 		openConnection();
 		final String deleteAgent = "update agent set agentIsActive = false where agentCode = ?;";
@@ -308,7 +308,6 @@ public class AgentManagerDBImplementation implements AgentManager {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return false;
 
 	}
 

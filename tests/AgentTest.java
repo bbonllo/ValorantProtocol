@@ -2,6 +2,7 @@ package tests;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
 import java.util.Set;
 
 import org.junit.Before;
@@ -60,7 +61,7 @@ public class AgentTest {
 		assertTrue(isTrue);
 	}
 
-	@Test
+/*	@Test
 	public void testMakeAgentInactive() {
 		//Preparar datos
 		int agentCode = 21;
@@ -70,7 +71,7 @@ public class AgentTest {
 		//Preguntar por resultado assert
 		assertFalse(isTrue);	
 	}
-
+*/
 	@Test
 	public void testMakeAgentActive() {
 		//Preparar datos
@@ -87,7 +88,7 @@ public class AgentTest {
 		//Preparar datos
 		AgentManager agMan = new AgentManagerDBImplementation();
 		//Llamar al método a testear
-		Set<Agent> agents;
+		List<Agent> agents;
 		try {
 			agents = agMan.getAllAgents();
 			//Preguntar por resultado assert
@@ -104,7 +105,7 @@ public class AgentTest {
 		//Preparar datos
 		AgentManager agMan = new AgentManagerDBImplementation();
 		//Llamar al método a testear
-		Set<Agent> agents = agMan.getAllActiveAgents();
+		List<Agent> agents = agMan.getAllActiveAgents();
 		//Preguntar por resultado assert
 		assertNotNull(agents);
 	}
@@ -128,7 +129,7 @@ public class AgentTest {
 		String agentPasswd = "adadawd"; 
 		AgentManager agMan = new AgentManagerDBImplementation();
 		//Llamar al método a testear
-		Set<Agent> agents = agMan.getTeammates(agentCode);
+		List<Agent> agents = agMan.getTeammates(agentCode);
 		//Preguntar por resultado assert
 		assertNotNull(agents);
 	}

@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.Test;
@@ -62,7 +63,7 @@ public class WeaponsTest {
 		//Preparar datos
 		WeaponManager wepMan = new WeaponManagerDBImplementation();
 		//LLamar al método a testear
-		Set<Weapon> weps = wepMan.getAllWeapon();
+		List<Weapon> weps = wepMan.getAllWeapon();
 		//Preguntar por resultado assert
 		assertNotNull(weps);
 	}
@@ -72,7 +73,7 @@ public class WeaponsTest {
 		//Preparar datos
 		WeaponManager wepMan = new WeaponManagerDBImplementation();
 		//LLamar al método a testear
-		Set<String> weps = wepMan.getAllSidearms();
+		List<Weapon> weps = wepMan.getAllSidearms();
 		//Preguntar por resultado assert
 		assertNotNull(weps);
 	}
@@ -82,7 +83,7 @@ public class WeaponsTest {
 		//Preparar datos
 		WeaponManager wepMan = new WeaponManagerDBImplementation();
 		//LLamar al método a testear
-		Set<Weapon> weps = wepMan.getAllPrimary();
+		List<Weapon> weps = wepMan.getAllPrimary();
 		//Preguntar por resultado assert
 		assertNotNull(weps);
 		}
