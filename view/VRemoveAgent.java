@@ -13,10 +13,8 @@ import model.Agent;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -34,6 +32,7 @@ public class VRemoveAgent extends JDialog implements ActionListener {
 	private AgentManager agentData;
 	private JButton btnRemove;
 	private JComboBox<String> comboBox;
+	private Object[] opciones = { "Si", "No" };
 
 	/**
 	 * Create the dialog.
@@ -54,9 +53,7 @@ public class VRemoveAgent extends JDialog implements ActionListener {
 
 		comboBox = new JComboBox<String>();
 		try {
-			Set<Agent> agents = agentData.getAllAgents();
-
-			List<Agent> agentsOrder = new ArrayList<Agent>(agents);
+			List<Agent> agentsOrder = agentData.getAllAgents();
 			Collections.sort(agentsOrder);
 
 			for (Agent newAgent : agentsOrder) {
@@ -85,12 +82,14 @@ public class VRemoveAgent extends JDialog implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource().equals(btnRemove)) {
-			if (JOptionPane.showConfirmDialog(this, "¿Esta seguro de borrar a este agente?", "Borrar", 0) == 0) {
+			if (JOptionPane.showOptionDialog(this, "¿Esta seguro de borrar a este agente?", "Borrar",
+					JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]) == 0) {
 				JOptionPane.showMessageDialog(this, "Agente borrado correctamente", "Borrado",
 						JOptionPane.INFORMATION_MESSAGE);
 			} else
 				JOptionPane.showMessageDialog(this, "Borrado de agente cancelado", "Borrado",
 						JOptionPane.INFORMATION_MESSAGE);
+			this.dispose();
 		}
 
 	}

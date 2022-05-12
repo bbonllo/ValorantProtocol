@@ -7,7 +7,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import exceptions.ExceptionManager;
 import model.Ability;
@@ -69,8 +71,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 
 				stmt = con.prepareStatement(SEARCHAgentsAbility);
 				stmt.setInt(1, agentCode);
-				stmt.close();	
-
+				
 
 				rs2 = stmt.executeQuery();
 				while (rs2.next()) {
@@ -95,7 +96,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 
 			if (rs != null)
 				rs.close();
-
+			stmt.close();
 			closeConnection();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -131,14 +132,13 @@ public class AgentManagerDBImplementation implements AgentManager {
 			stmt.setBoolean(8, registerAgent.isAgentIsOnActive());
 
 			stmt.executeUpdate();
-			stmt.close();	
+			stmt.close();
 			agentAbilities = registerAgent.getAgentAbilities();
 
 			ability1 = agentAbilities[0];
 			ability2 = agentAbilities[1];
 			ability3 = agentAbilities[2];
 			ability4 = (AbilityUltimate) agentAbilities[3];
-			
 
 			// INSERTAR HABILIDADES DEL AGENTE
 
@@ -152,7 +152,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 			stmt.setString(3, ability1.getAbilityDescription());
 
 			stmt.executeUpdate();
-			stmt.close();	
+			stmt.close();
 			// HABILIDAD 2
 			final String INSERTAbility2 = "INSERT INTO ability(abilityName, agentCode, abilityDescription, orbnum) VALUES(?, ?, ?, null)";
 
@@ -163,7 +163,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 			stmt.setString(3, ability2.getAbilityDescription());
 
 			stmt.executeUpdate();
-			stmt.close();	
+			stmt.close();
 			// HABILIDAD 3
 			final String INSERTAbility3 = "INSERT INTO ability(abilityName, agentCode, abilityDescription, orbnum) VALUES(?, ?, ?, null)";
 
@@ -174,7 +174,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 			stmt.setString(3, ability3.getAbilityDescription());
 
 			stmt.executeUpdate();
-			stmt.close();	
+			stmt.close();
 			// HABILIDAD ULTIMATE
 			final String INSERTAbility4 = "INSERT INTO ability(abilityName, agentCode, abilityDescription, orbnum) VALUES(?, ?, ?, ?)";
 
@@ -186,7 +186,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 			stmt.setInt(4, ability4.getAbilityUltimateRequiredOrbs());
 
 			stmt.executeUpdate();
-			stmt.close();	
+			stmt.close();
 		} catch (SQLException e1) {
 			System.out.println("Error en alta SQL");
 			e1.printStackTrace();
@@ -198,6 +198,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 				e.printStackTrace();
 			}
 		}
+
 	}
 
 	@Override
@@ -222,7 +223,8 @@ public class AgentManagerDBImplementation implements AgentManager {
 			stmt.setInt(4, modifyAgent.getAgentCode());
 
 			stmt.executeUpdate();
-			stmt.close();	
+			stmt.close();
+
 			agentAbilities = modifyAgent.getAgentAbilities();
 
 			ability1 = agentAbilities[0];
@@ -238,33 +240,36 @@ public class AgentManagerDBImplementation implements AgentManager {
 			stmt = con.prepareStatement(INSERTAbility1);
 
 			stmt.setString(1, ability1.getAbilityName());
-			stmt.setString(3, ability1.getAbilityDescription());
+			stmt.setString(2, ability1.getAbilityDescription());
 			stmt.setInt(3, modifyAgent.getAgentCode());
 
 			stmt.executeUpdate();
-			stmt.close();	
+			stmt.close();
+
 			// HABILIDAD 2
 			final String INSERTAbility2 = "update ability set AbilityName = ?, AbilityDescription = ? where agentCode = ?";
 
 			stmt = con.prepareStatement(INSERTAbility2);
 
 			stmt.setString(1, ability2.getAbilityName());
-			stmt.setString(3, ability2.getAbilityDescription());
+			stmt.setString(2, ability2.getAbilityDescription());
 			stmt.setInt(3, modifyAgent.getAgentCode());
 
 			stmt.executeUpdate();
-			stmt.close();	
+			stmt.close();
+
 			// HABILIDAD 3
 			final String INSERTAbility3 = "update ability set AbilityName = ?, AbilityDescription = ? where agentCode = ?";
 
 			stmt = con.prepareStatement(INSERTAbility3);
 
 			stmt.setString(1, ability3.getAbilityName());
-			stmt.setString(3, ability3.getAbilityDescription());
+			stmt.setString(2, ability3.getAbilityDescription());
 			stmt.setInt(3, modifyAgent.getAgentCode());
 
 			stmt.executeUpdate();
-			stmt.close();	
+			stmt.close();
+
 			// HABILIDAD ULTIMATE
 			final String INSERTAbility4 = "update ability set AbilityName = ?, AbilityDescription = ?, orbNum = ? where agentCode = ?";
 
@@ -276,7 +281,8 @@ public class AgentManagerDBImplementation implements AgentManager {
 			stmt.setInt(4, modifyAgent.getAgentCode());
 
 			stmt.executeUpdate();
-			stmt.close();	
+			stmt.close();
+
 		} catch (SQLException e1) {
 			System.out.println("Error en alta SQL");
 			e1.printStackTrace();
@@ -288,6 +294,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 				e.printStackTrace();
 			}
 		}
+
 	}
 
 	@Override
@@ -301,7 +308,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 			stmt.setInt(1, agentCode);
 
 			stmt.executeUpdate();
-			stmt.close();	
+			stmt.close();
 			closeConnection();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -321,7 +328,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 			stmt.setInt(1, agentCode);
 
 			stmt.executeUpdate();
-			stmt.close();	
+			stmt.close();
 			closeConnection();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -330,10 +337,12 @@ public class AgentManagerDBImplementation implements AgentManager {
 	}
 
 	@Override
-	public Set<Agent> getAllAgents() throws ExceptionManager {
+	public List<Agent> getAllAgents() throws ExceptionManager {
+
 
 		// ArrayList<Agent> agentsList
-		Set<Agent> activeAgents = new HashSet<>();
+		List<Agent> agents = new ArrayList<>();
+
 		ResultSet rs = null;
 		Agent agentIntro = null;
 
@@ -343,34 +352,33 @@ public class AgentManagerDBImplementation implements AgentManager {
 		try {
 			stmt = con.prepareStatement(SEARCHAllAgents);
 			rs = stmt.executeQuery();
-			stmt.close();	
-
+			
 
 			while (rs.next()) {
 
 				agentIntro = new Agent();
 				agentIntro.setAgentCode(rs.getInt("agentCode"));
 				agentIntro.setAgentName(rs.getString("agentName"));
-				activeAgents.add(agentIntro);
+				agents.add(agentIntro);
 			}
 
 			if (rs != null)
 				rs.close();
-
+			stmt.close();
 			closeConnection();
 		} catch (SQLException e) {
 			String msg = "Error en recoger a todos los agentes";
 			ExceptionManager x = new ExceptionManager(msg);
 			throw x;
 		}
-		return activeAgents;
+		return agents;
 	}
 
 	@Override
-	public Set<Agent> getAllActiveAgents() {
+	public List<Agent> getAllActiveAgents() {
 		// TODO Auto-generated method stub
 
-		Set<Agent> activeAgents = new HashSet<>();
+		List<Agent> activeAgents = new ArrayList<>();
 		ResultSet rs = null;
 		Agent agentIntro = null;
 
@@ -380,8 +388,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 		try {
 			stmt = con.prepareStatement(SEARCHAllAgents);
 			rs = stmt.executeQuery();
-			stmt.close();	
-
+			stmt.close();
 
 			while (rs.next()) {
 				agentIntro = new Agent();
@@ -437,7 +444,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 				stmt.setInt(1, agentCode);
 
 				rs2 = stmt.executeQuery();
-				stmt.close();	
+				
 
 				int cont = 0;
 				while (rs2.next()) {
@@ -463,7 +470,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 
 			if (rs != null)
 				rs.close();
-
+			stmt.close();
 			closeConnection();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -491,7 +498,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 			stmt = con.prepareStatement(getTeammates);
 
 			rs = stmt.executeQuery();
-			stmt.close();	
+			stmt.close();
 
 			while (rs.next()) {
 
