@@ -61,8 +61,9 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 			stmt.setString(4, weapon.getWeaponSubType());
 			stmt.setBoolean(5, true);
 			stmt.executeUpdate();
+      
 			stmt.close();	
-			
+      
 		} catch (SQLException e1) {
 			System.out.println("Error en alta SQL");
 			e1.printStackTrace();
@@ -91,8 +92,7 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 			stmt = con.prepareStatement(LISTweapon);
 
 			stmt.setString(1, name);
-			rs = stmt.executeQuery();	
-
+			rs = stmt.executeQuery();
 
 			if (rs.next()) {
 				weapon = new Weapon(name, rs.getInt("WeaponDamage"), rs.getString("weaponType"),
@@ -149,9 +149,9 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 			if (stmt.executeUpdate() == 1) {
 				changes = true;
 				stmt.close();
-				}
+			}
 		} catch (SQLException e1) {
-			System.out.println("Error en la modificación SQL");
+			System.out.println("Error en la modificaciÃ³n SQL");
 			e1.printStackTrace();
 		} finally {
 			try {
@@ -177,10 +177,10 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 			stmt = con.prepareStatement(DELETEweapon);
 			stmt.setString(1, name);
 			stmt.executeUpdate();
-			stmt.close();	
+			stmt.close();
 
 		} catch (SQLException e1) {
-			System.out.println("Error en la modificación SQL");
+			System.out.println("Error en la modificaciÃ³n SQL");
 			e1.printStackTrace();
 		} finally {
 			try {
@@ -209,8 +209,7 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 		try {
 			stmt = con.prepareStatement(LISTweapons);
 
-			rs = stmt.executeQuery();	
-
+			rs = stmt.executeQuery();
 
 			while (rs.next()) {
 				weapon = new Weapon();
@@ -266,10 +265,7 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 		// Code
 		try {
 			stmt = con.prepareStatement(LISTweaponsSidearm);
-
 			rs = stmt.executeQuery();
-				
-
 
 			while (rs.next()) {
 				weapon = new Weapon();
@@ -326,9 +322,7 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 			stmt = con.prepareStatement(LISTweaponsPrimary);
 
 			rs = stmt.executeQuery();
-				
-
-
+      
 			while (rs.next()) {
 				weapon = new Weapon();
 				weapon.setWeaponName(rs.getString("weaponName"));
