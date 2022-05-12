@@ -3,7 +3,6 @@ package model;
 public class Map {
 
 	private String mapName;
-	private String mapCoords;
 	private String mapDesc;
 
 	// Constructor
@@ -11,10 +10,9 @@ public class Map {
 		super();
 	}
 
-	public Map(String mapName, String mapCoords, String mapDesc) {
+	public Map(String mapName, String mapDesc) {
 		super();
 		this.mapName = mapName;
-		this.mapCoords = mapCoords;
 		this.mapDesc = mapDesc;
 	}
 
@@ -25,14 +23,6 @@ public class Map {
 
 	public void setMapName(String mapName) {
 		this.mapName = mapName;
-	}
-
-	public String getMapCoords() {
-		return mapCoords;
-	}
-
-	public void setMapCoords(String mapCoords) {
-		this.mapCoords = mapCoords;
 	}
 
 	public String getMapDesc() {

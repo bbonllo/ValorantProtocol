@@ -1,12 +1,11 @@
 package controlador;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import exceptions.ExceptionManager;
 import model.Map;
@@ -16,7 +15,6 @@ public class MapManagerDBImplementation implements MapManager {
 	private Connection con;
 	private PreparedStatement stmt;
 	private ConnectionOpenClose conection = new ConnectionOpenClose();
-
 
 	@Override
 	public Map getMapByName(String mapName) {
@@ -65,8 +63,8 @@ public class MapManagerDBImplementation implements MapManager {
 	}
 
 	@Override
-	public Set<Map> getAllMaps() throws ExceptionManager {
-		Set<Map> maps = new HashSet<>();
+	public List<Map> getAllMaps() throws ExceptionManager {
+		List<Map> maps = new ArrayList<>();
 		ResultSet rs = null;
 		Map mapIntro = null;
 
@@ -86,18 +84,22 @@ public class MapManagerDBImplementation implements MapManager {
 				mapIntro = new Map();
 				mapIntro.setMapName(rs.getString("mapName"));
 				mapIntro.setMapDesc(rs.getString("mapDesc"));
-				mapIntro.setMapCoords(rs.getString("mapCoords"));
 				maps.add(mapIntro);
 			}
-
 			if (rs != null)
 				rs.close();
 
-			conection.closeConnection(stmt, con);
 		} catch (SQLException e) {
 			String msg = "Error en recuperar todos los mapas";
 			ExceptionManager x = new ExceptionManager(msg);
 			throw x;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		try {
+			conection.closeConnection(stmt, con);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

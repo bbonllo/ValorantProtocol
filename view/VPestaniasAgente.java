@@ -21,6 +21,7 @@ import java.awt.Frame;
 import model.Ability;
 import model.AbilityUltimate;
 import model.Agent;
+import model.Map;
 import model.Weapon;
 
 import java.awt.event.MouseEvent;
@@ -185,11 +186,29 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 	private JComboBox<String> comboBoxWeaponType;
 	private JLabel lblAscentMap;
 	private JLabel lblFractureMap;
+	private JComboBox<String> comboBoxMissionAgent5;
+	private JComboBox<String> comboBoxMissionAgent4;
+	private JComboBox<String> comboBoxMissionAgent3;
+	private JComboBox<String> comboBoxMissionAgent2;
+	private JComboBox<String> comboBoxMissionAgent1;
 	private JLabel lblMissionAgent3;
 	private JLabel lblMissionAgent2;
 	private JLabel lblMissionAgent1;
 	private JLabel lblMissionAgent4;
 	private JLabel lblMissionAgent5;
+	private JComboBox<String> comboBoxMissionPrimaryWeapon1;
+	private JComboBox<String> comboBoxMissionSidearmWeapon1;
+	private JComboBox<String> comboBoxMissionPrimaryWeapon2;
+	private JComboBox<String> comboBoxMissionSidearmWeapon2;
+	private JComboBox<String> comboBoxMissionPrimaryWeapon3;
+	private JComboBox<String> comboBoxMissionSidearmWeapon3;
+	private JComboBox<String> comboBoxMissionPrimaryWeapon4;
+	private JComboBox<String> comboBoxMissionSidearmWeapon4;
+	private JComboBox<String> comboBoxMissionPrimaryWeapon5;
+	private JComboBox<String> comboBoxMissionSidearmWeapon5;
+	private Object[] opciones = { "Si", "No" };
+	private JLabel lblMissionMapRegister;
+	private JComboBox<String> comboBoxMissionPrimaryMaps;
 
 	/**
 	 * Create the frame.
@@ -299,32 +318,166 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		panelRegisterMission.setBounds(0, 50, 1770, 956);
 		panelMission.add(panelRegisterMission);
 		panelRegisterMission.setLayout(null);
-		
+
+		comboBoxMissionAgent5 = new JComboBox<String>();
+		comboBoxMissionAgent5.setBounds(1483, 124, 150, 30);
+		try {
+			List<Agent> agents = agentData.getAllAgents();
+			Collections.sort(agents);
+
+			for (Agent newAgent : agents) {
+				comboBoxMissionAgent5.addItem(newAgent.getAgentName() + " // " + newAgent.getAgentCode());
+			}
+		} catch (ExceptionManager e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		comboBoxMissionPrimaryMaps = new JComboBox<String>();
+		comboBoxMissionPrimaryMaps.setSelectedIndex(-1);
+		comboBoxMissionPrimaryMaps.setBounds(199, 537, 250, 30);
+		panelRegisterMission.add(comboBoxMissionPrimaryMaps);
+
+		lblMissionMapRegister = new JLabel("Mapa de  mision");
+		lblMissionMapRegister.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMissionMapRegister.setForeground(Color.WHITE);
+		lblMissionMapRegister.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
+		lblMissionMapRegister.setBounds(247, 461, 150, 40);
+		panelRegisterMission.add(lblMissionMapRegister);
+
+		comboBoxMissionPrimaryWeapon2 = new JComboBox<String>();
+		comboBoxMissionPrimaryWeapon2.setSelectedIndex(-1);
+		comboBoxMissionPrimaryWeapon2.setBounds(397, 257, 150, 30);
+		panelRegisterMission.add(comboBoxMissionPrimaryWeapon2);
+
+		comboBoxMissionPrimaryWeapon4 = new JComboBox<String>();
+		comboBoxMissionPrimaryWeapon4.setSelectedIndex(-1);
+		comboBoxMissionPrimaryWeapon4.setBounds(1072, 257, 150, 30);
+		panelRegisterMission.add(comboBoxMissionPrimaryWeapon4);
+
+		comboBoxMissionSidearmWeapon5 = new JComboBox<String>();
+		comboBoxMissionSidearmWeapon5.setSelectedIndex(-1);
+		comboBoxMissionSidearmWeapon5.setBounds(1560, 257, 150, 30);
+		panelRegisterMission.add(comboBoxMissionSidearmWeapon5);
+
+		comboBoxMissionPrimaryWeapon3 = new JComboBox<String>();
+		comboBoxMissionPrimaryWeapon3.setSelectedIndex(-1);
+		comboBoxMissionPrimaryWeapon3.setBounds(734, 257, 150, 30);
+		panelRegisterMission.add(comboBoxMissionPrimaryWeapon3);
+
+		comboBoxMissionSidearmWeapon3 = new JComboBox<String>();
+		comboBoxMissionSidearmWeapon3.setSelectedIndex(-1);
+		comboBoxMissionSidearmWeapon3.setBounds(885, 257, 150, 30);
+		panelRegisterMission.add(comboBoxMissionSidearmWeapon3);
+
+		comboBoxMissionSidearmWeapon4 = new JComboBox<String>();
+		comboBoxMissionSidearmWeapon4.setSelectedIndex(-1);
+		comboBoxMissionSidearmWeapon4.setBounds(1223, 257, 150, 30);
+		panelRegisterMission.add(comboBoxMissionSidearmWeapon4);
+
+		comboBoxMissionSidearmWeapon2 = new JComboBox<String>();
+		comboBoxMissionSidearmWeapon2.setSelectedIndex(-1);
+		comboBoxMissionSidearmWeapon2.setBounds(548, 257, 150, 30);
+		panelRegisterMission.add(comboBoxMissionSidearmWeapon2);
+
+		comboBoxMissionPrimaryWeapon5 = new JComboBox<String>();
+		comboBoxMissionPrimaryWeapon5.setSelectedIndex(-1);
+		comboBoxMissionPrimaryWeapon5.setBounds(1409, 257, 150, 30);
+		panelRegisterMission.add(comboBoxMissionPrimaryWeapon5);
+
+		comboBoxMissionSidearmWeapon1 = new JComboBox<String>();
+		comboBoxMissionSidearmWeapon1.setSelectedIndex(-1);
+		comboBoxMissionSidearmWeapon1.setBounds(211, 257, 150, 30);
+		panelRegisterMission.add(comboBoxMissionSidearmWeapon1);
+
+		comboBoxMissionPrimaryWeapon1 = new JComboBox<String>();
+		comboBoxMissionPrimaryWeapon1.setSelectedIndex(-1);
+		comboBoxMissionPrimaryWeapon1.setBounds(60, 257, 150, 30);
+		panelRegisterMission.add(comboBoxMissionPrimaryWeapon1);
+
+		JLabel lblMissionWeaponRegister5 = new JLabel("Armas agente 5");
+		lblMissionWeaponRegister5.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMissionWeaponRegister5.setForeground(Color.WHITE);
+		lblMissionWeaponRegister5.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
+		lblMissionWeaponRegister5.setBounds(1483, 189, 150, 40);
+		panelRegisterMission.add(lblMissionWeaponRegister5);
+
+		JLabel lblMissionWeaponRegister3 = new JLabel("Armas agente 3");
+		lblMissionWeaponRegister3.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMissionWeaponRegister3.setForeground(Color.WHITE);
+		lblMissionWeaponRegister3.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
+		lblMissionWeaponRegister3.setBounds(809, 189, 150, 40);
+		panelRegisterMission.add(lblMissionWeaponRegister3);
+
+		JLabel lblMissionWeaponRegister4 = new JLabel("Armas agente 4");
+		lblMissionWeaponRegister4.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMissionWeaponRegister4.setForeground(Color.WHITE);
+		lblMissionWeaponRegister4.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
+		lblMissionWeaponRegister4.setBounds(1146, 189, 150, 40);
+		panelRegisterMission.add(lblMissionWeaponRegister4);
+
+		JLabel lblMissionWeaponRegister2 = new JLabel("Armas agente 2");
+		lblMissionWeaponRegister2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMissionWeaponRegister2.setForeground(Color.WHITE);
+		lblMissionWeaponRegister2.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
+		lblMissionWeaponRegister2.setBounds(472, 189, 150, 40);
+		panelRegisterMission.add(lblMissionWeaponRegister2);
+
+		JLabel lblMissionWeaponRegister1 = new JLabel("Armas agente 1");
+		lblMissionWeaponRegister1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMissionWeaponRegister1.setForeground(Color.WHITE);
+		lblMissionWeaponRegister1.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
+		lblMissionWeaponRegister1.setBounds(135, 189, 150, 40);
+		panelRegisterMission.add(lblMissionWeaponRegister1);
+		comboBoxMissionAgent5.setSelectedIndex(-1);
+		panelRegisterMission.add(comboBoxMissionAgent5);
+
+		comboBoxMissionAgent2 = new JComboBox<String>();
+		comboBoxMissionAgent2.setBounds(472, 124, 150, 30);
+		panelRegisterMission.add(comboBoxMissionAgent2);
+
+		comboBoxMissionAgent3 = new JComboBox<String>();
+		comboBoxMissionAgent3.setBounds(809, 124, 150, 30);
+		panelRegisterMission.add(comboBoxMissionAgent3);
+
+		comboBoxMissionAgent4 = new JComboBox<String>();
+		comboBoxMissionAgent4.setBounds(1146, 124, 150, 30);
+		panelRegisterMission.add(comboBoxMissionAgent4);
+
+		comboBoxMissionAgent1 = new JComboBox<String>();
+		comboBoxMissionAgent1.setBounds(135, 124, 150, 30);
+		panelRegisterMission.add(comboBoxMissionAgent1);
+
 		lblMissionAgent5 = new JLabel("Agente 5");
+		lblMissionAgent5.setForeground(Color.WHITE);
 		lblMissionAgent5.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
 		lblMissionAgent5.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMissionAgent5.setBounds(1483, 60, 150, 40);
 		panelRegisterMission.add(lblMissionAgent5);
-		
+
 		lblMissionAgent4 = new JLabel("Agente 4");
+		lblMissionAgent4.setForeground(Color.WHITE);
 		lblMissionAgent4.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
 		lblMissionAgent4.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMissionAgent4.setBounds(1146, 60, 150, 40);
 		panelRegisterMission.add(lblMissionAgent4);
-		
+
 		lblMissionAgent2 = new JLabel("Agente 2");
+		lblMissionAgent2.setForeground(Color.WHITE);
 		lblMissionAgent2.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
 		lblMissionAgent2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMissionAgent2.setBounds(472, 60, 150, 40);
 		panelRegisterMission.add(lblMissionAgent2);
-		
+
 		lblMissionAgent1 = new JLabel("Agente 1");
+		lblMissionAgent1.setForeground(Color.WHITE);
 		lblMissionAgent1.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
 		lblMissionAgent1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMissionAgent1.setBounds(135, 60, 150, 40);
 		panelRegisterMission.add(lblMissionAgent1);
 
 		lblMissionAgent3 = new JLabel("Agente 3");
+		lblMissionAgent3.setForeground(Color.WHITE);
 		lblMissionAgent3.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
 		lblMissionAgent3.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMissionAgent3.setBounds(809, 60, 150, 40);
@@ -1171,6 +1324,8 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		lblBackground.setBounds(0, 0, 1920, 1080);
 		p.add(lblBackground);
 
+		cargarComboBoxes();
+
 	}
 
 	@Override
@@ -1242,7 +1397,6 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 			diag.pack();
 			diag.setVisible(true);
 
-			// try {
 			String getAgente = comboBoxModif.getSelectedItem().toString();
 
 			String[] separatedGetAgent = getAgente.split(" ");
@@ -1323,6 +1477,137 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 
 	}
 
+	private void cargarComboBoxes() {
+
+		/*
+		 * Carga de Agentes
+		 */
+
+		List<Agent> agents = null;
+		try {
+			agents = agentData.getAllAgents();
+			Collections.sort(agents);
+		} catch (ExceptionManager e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		for (Agent newAgent : agents) {
+			comboBoxMissionAgent2.addItem(newAgent.getAgentName() + " // " + newAgent.getAgentCode());
+		}
+		comboBoxMissionAgent2.setSelectedIndex(-1);
+
+		for (Agent newAgent : agents) {
+			comboBoxMissionAgent4.addItem(newAgent.getAgentName() + " // " + newAgent.getAgentCode());
+		}
+		comboBoxMissionAgent4.setSelectedIndex(-1);
+
+		for (Agent newAgent : agents) {
+			comboBoxMissionAgent1.addItem(newAgent.getAgentName() + " // " + newAgent.getAgentCode());
+		}
+		comboBoxMissionAgent1.setSelectedIndex(-1);
+
+		for (Agent newAgent : agents) {
+			comboBoxMissionAgent3.addItem(newAgent.getAgentName() + " // " + newAgent.getAgentCode());
+		}
+		comboBoxMissionAgent3.setSelectedIndex(-1);
+
+		/*
+		 * Carga de Armas
+		 */
+		List<Weapon> primaryWeapons = weaponData.getAllPrimary();
+		List<Weapon> sidearmsWeapons = weaponData.getAllSidearms();
+
+		/*
+		 * Sidearms
+		 */
+		for (Weapon newWeapon : sidearmsWeapons) {
+			comboBoxMissionSidearmWeapon1.addItem(newWeapon.getWeaponName());
+		}
+		comboBoxMissionSidearmWeapon1.setSelectedIndex(0);
+
+		for (Weapon newWeapon : sidearmsWeapons) {
+			comboBoxMissionSidearmWeapon2.addItem(newWeapon.getWeaponName());
+		}
+		comboBoxMissionSidearmWeapon2.setSelectedIndex(0);
+
+		for (Weapon newWeapon : sidearmsWeapons) {
+			comboBoxMissionSidearmWeapon3.addItem(newWeapon.getWeaponName());
+		}
+		comboBoxMissionSidearmWeapon3.setSelectedIndex(0);
+
+		for (Weapon newWeapon : sidearmsWeapons) {
+			comboBoxMissionSidearmWeapon4.addItem(newWeapon.getWeaponName());
+		}
+		comboBoxMissionSidearmWeapon4.setSelectedIndex(0);
+
+		for (Weapon newWeapon : sidearmsWeapons) {
+			comboBoxMissionSidearmWeapon5.addItem(newWeapon.getWeaponName());
+		}
+		comboBoxMissionSidearmWeapon5.setSelectedIndex(0);
+
+		/*
+		 * Primary
+		 */
+		comboBoxMissionPrimaryWeapon1.addItem("");
+		comboBoxMissionPrimaryWeapon2.addItem("");
+		comboBoxMissionPrimaryWeapon3.addItem("");
+		comboBoxMissionPrimaryWeapon4.addItem("");
+		comboBoxMissionPrimaryWeapon5.addItem("");
+
+		for (Weapon newWeapon : primaryWeapons) {
+			comboBoxMissionPrimaryWeapon1.addItem(newWeapon.getWeaponName());
+		}
+		comboBoxMissionPrimaryWeapon1.setSelectedIndex(-1);
+
+		for (Weapon newWeapon : primaryWeapons) {
+			comboBoxMissionPrimaryWeapon2.addItem(newWeapon.getWeaponName());
+		}
+		comboBoxMissionPrimaryWeapon2.setSelectedIndex(-1);
+
+		for (Weapon newWeapon : primaryWeapons) {
+			comboBoxMissionPrimaryWeapon3.addItem(newWeapon.getWeaponName());
+		}
+		comboBoxMissionPrimaryWeapon3.setSelectedIndex(-1);
+
+		for (Weapon newWeapon : primaryWeapons) {
+			comboBoxMissionPrimaryWeapon4.addItem(newWeapon.getWeaponName());
+		}
+		comboBoxMissionPrimaryWeapon4.setSelectedIndex(-1);
+
+		for (Weapon newWeapon : primaryWeapons) {
+			comboBoxMissionPrimaryWeapon5.addItem(newWeapon.getWeaponName());
+		}
+		comboBoxMissionPrimaryWeapon5.setSelectedIndex(-1);
+
+		/*
+		 * Cargar Maps
+		 */
+
+		List<Map> maps = null;
+		try {
+			maps = mapData.getAllMaps();
+		} catch (ExceptionManager e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		for (Map newMap : maps) {
+			comboBoxMissionPrimaryMaps.addItem(newMap.getMapName());
+		}
+		comboBoxMissionPrimaryMaps.setSelectedIndex(-1);
+
+		/*
+		 * 
+		 * String getAgente = comboBoxMissionAgent1.getSelectedItem().toString();
+		 * 
+		 * String[] separatedGetAgent = getAgente.split(" ");
+		 * 
+		 * Agent newAgente = new Agent(); newAgente =
+		 * agentData.getAgentByID(Integer.parseInt(separatedGetAgent[2]));
+		 */
+	}
+
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource().equals(table)) {
@@ -1347,8 +1632,8 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 			}
 		} else if (e.getSource().equals(tableWeapons)) {
 			if (e.getClickCount() == 2) {
-				if (JOptionPane.showConfirmDialog(this, "¿Desea borrar o modificar este arma?", "Armas",
-						JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE) == 0) {
+				if (JOptionPane.showOptionDialog(this, "¿Desea borrar o modificar este arma?", "Armas",
+						JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opciones, opciones[0]) == 0) {
 					Weapon newWeapon = weaponData.getWeaponByName(
 							tableWeapons.getModel().getValueAt(tableWeapons.getSelectedRow(), 0).toString());
 					txtNameWeapon.setText(newWeapon.getWeaponName());
