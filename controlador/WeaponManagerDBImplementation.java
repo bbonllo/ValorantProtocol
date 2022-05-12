@@ -59,6 +59,9 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 			stmt.setString(3, weapon.getWeaponType());
 			stmt.setString(4, weapon.getWeaponSubType());
 			stmt.setBoolean(5, true);
+			stmt.executeUpdate();
+			stmt.close();	
+
 		} catch (SQLException e1) {
 			System.out.println("Error en alta SQL");
 			e1.printStackTrace();
@@ -88,6 +91,8 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 
 			stmt.setString(1, name);
 			rs = stmt.executeQuery();
+			stmt.close();	
+
 
 			if (rs.next()) {
 				weapon = new Weapon(name, rs.getInt("WeaponDamage"), rs.getString("weaponType"),
@@ -135,8 +140,10 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 			stmt.setBoolean(4, weapon.isWeaponIsActive());
 			stmt.setString(5, weapon.getWeaponName());
 
-			if (stmt.executeUpdate() == 1)
+			if (stmt.executeUpdate() == 1) {
 				changes = true;
+				stmt.close();
+				}
 		} catch (SQLException e1) {
 			System.out.println("Error en la modificación SQL");
 			e1.printStackTrace();
@@ -164,6 +171,8 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 			stmt = con.prepareStatement(DELETEweapon);
 			stmt.setString(1, name);
 			stmt.executeUpdate();
+			stmt.close();	
+
 		} catch (SQLException e1) {
 			System.out.println("Error en la modificación SQL");
 			e1.printStackTrace();
@@ -195,6 +204,8 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 			stmt = con.prepareStatement(LISTweapons);
 
 			rs = stmt.executeQuery();
+			stmt.close();	
+
 
 			while (rs.next()) {
 				weapon = new Weapon();
@@ -246,6 +257,8 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 			stmt = con.prepareStatement(LISTweapons);
 
 			rs = stmt.executeQuery();
+			stmt.close();	
+
 
 			while (rs.next()) {
 				weapon = rs.getString("weaponName");
@@ -292,6 +305,8 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 			stmt = con.prepareStatement(LISTweapons);
 
 			rs = stmt.executeQuery();
+			stmt.close();	
+
 
 			while (rs.next()) {
 				if (rs.getString("weaponType").equalsIgnoreCase("primary")) {

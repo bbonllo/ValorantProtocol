@@ -36,6 +36,8 @@ public class MapManagerDBImplementation implements MapManager {
 			stmt.setString(1, mapName);
 
 			rs = stmt.executeQuery();
+			stmt.close();	
+
 			if (rs.next()) {
 				mapIntro = new Map();
 				mapIntro.setMapName(mapName);
@@ -60,7 +62,11 @@ public class MapManagerDBImplementation implements MapManager {
 
 	@Override
 	public void makeStadisctic(String mapName) {
-
+		
+		String ATTACKMISSIONSTADISTIC = "select a.agentName from agent a, mission m, attack_mission am where agentCode in(select agentCode from agent_on_mission group by agentCode having count(agentCode)) and m.missionCode = am.AttackmissionCode and m.mapName = ? limit 3";
+		String DEFENDMISSIONSTADISTIC = "select a.agentName from agent a, mission m, defend_mission df where agentCode in(select agentCode from agent_on_mission group by agentCode having count(agentCode)) and m.missionCode = df.defendmissionCode and m.mapName = ? limit 3";
+		String ATTACKMISSIONWEAPONSTADISTIC = "select weaponName from agent_on_mission, agent a, mission m, attack_mission am where m.missionCode = am.attackmissionCode and m.mapName = ?  group by weaponName having count(weaponName) limit 3";
+		String DEFENDMISSIONWEAPONSTADISTIC = "select weaponName from agent_on_mission, agent a, mission m, defend_mission df where m.missionCode = df.defendmissionCode and m.mapName = ?  group by weaponName having count(weaponName) limit 3";
 	}
 
 	@Override
@@ -80,6 +86,8 @@ public class MapManagerDBImplementation implements MapManager {
 		try {
 			stmt = con.prepareStatement(SEARCHMap);
 			rs = stmt.executeQuery();
+			stmt.close();	
+
 
 			while (rs.next()) {
 				mapIntro = new Map();

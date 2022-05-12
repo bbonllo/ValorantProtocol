@@ -69,6 +69,8 @@ public class AgentManagerDBImplementation implements AgentManager {
 
 				stmt = con.prepareStatement(SEARCHAgentsAbility);
 				stmt.setInt(1, agentCode);
+				stmt.close();	
+
 
 				rs2 = stmt.executeQuery();
 				while (rs2.next()) {
@@ -129,13 +131,14 @@ public class AgentManagerDBImplementation implements AgentManager {
 			stmt.setBoolean(8, registerAgent.isAgentIsOnActive());
 
 			stmt.executeUpdate();
-
+			stmt.close();	
 			agentAbilities = registerAgent.getAgentAbilities();
 
 			ability1 = agentAbilities[0];
 			ability2 = agentAbilities[1];
 			ability3 = agentAbilities[2];
 			ability4 = (AbilityUltimate) agentAbilities[3];
+			
 
 			// INSERTAR HABILIDADES DEL AGENTE
 
@@ -149,7 +152,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 			stmt.setString(3, ability1.getAbilityDescription());
 
 			stmt.executeUpdate();
-
+			stmt.close();	
 			// HABILIDAD 2
 			final String INSERTAbility2 = "INSERT INTO ability(abilityName, agentCode, abilityDescription, orbnum) VALUES(?, ?, ?, null)";
 
@@ -160,7 +163,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 			stmt.setString(3, ability2.getAbilityDescription());
 
 			stmt.executeUpdate();
-
+			stmt.close();	
 			// HABILIDAD 3
 			final String INSERTAbility3 = "INSERT INTO ability(abilityName, agentCode, abilityDescription, orbnum) VALUES(?, ?, ?, null)";
 
@@ -171,7 +174,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 			stmt.setString(3, ability3.getAbilityDescription());
 
 			stmt.executeUpdate();
-
+			stmt.close();	
 			// HABILIDAD ULTIMATE
 			final String INSERTAbility4 = "INSERT INTO ability(abilityName, agentCode, abilityDescription, orbnum) VALUES(?, ?, ?, ?)";
 
@@ -183,7 +186,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 			stmt.setInt(4, ability4.getAbilityUltimateRequiredOrbs());
 
 			stmt.executeUpdate();
-
+			stmt.close();	
 		} catch (SQLException e1) {
 			System.out.println("Error en alta SQL");
 			e1.printStackTrace();
@@ -219,7 +222,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 			stmt.setInt(4, modifyAgent.getAgentCode());
 
 			stmt.executeUpdate();
-
+			stmt.close();	
 			agentAbilities = modifyAgent.getAgentAbilities();
 
 			ability1 = agentAbilities[0];
@@ -239,7 +242,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 			stmt.setInt(3, modifyAgent.getAgentCode());
 
 			stmt.executeUpdate();
-
+			stmt.close();	
 			// HABILIDAD 2
 			final String INSERTAbility2 = "update ability set AbilityName = ?, AbilityDescription = ? where agentCode = ?";
 
@@ -250,7 +253,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 			stmt.setInt(3, modifyAgent.getAgentCode());
 
 			stmt.executeUpdate();
-
+			stmt.close();	
 			// HABILIDAD 3
 			final String INSERTAbility3 = "update ability set AbilityName = ?, AbilityDescription = ? where agentCode = ?";
 
@@ -261,7 +264,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 			stmt.setInt(3, modifyAgent.getAgentCode());
 
 			stmt.executeUpdate();
-
+			stmt.close();	
 			// HABILIDAD ULTIMATE
 			final String INSERTAbility4 = "update ability set AbilityName = ?, AbilityDescription = ?, orbNum = ? where agentCode = ?";
 
@@ -273,7 +276,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 			stmt.setInt(4, modifyAgent.getAgentCode());
 
 			stmt.executeUpdate();
-
+			stmt.close();	
 		} catch (SQLException e1) {
 			System.out.println("Error en alta SQL");
 			e1.printStackTrace();
@@ -298,7 +301,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 			stmt.setInt(1, agentCode);
 
 			stmt.executeUpdate();
-
+			stmt.close();	
 			closeConnection();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -318,7 +321,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 			stmt.setInt(1, agentCode);
 
 			stmt.executeUpdate();
-
+			stmt.close();	
 			closeConnection();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -340,6 +343,8 @@ public class AgentManagerDBImplementation implements AgentManager {
 		try {
 			stmt = con.prepareStatement(SEARCHAllAgents);
 			rs = stmt.executeQuery();
+			stmt.close();	
+
 
 			while (rs.next()) {
 
@@ -375,6 +380,8 @@ public class AgentManagerDBImplementation implements AgentManager {
 		try {
 			stmt = con.prepareStatement(SEARCHAllAgents);
 			rs = stmt.executeQuery();
+			stmt.close();	
+
 
 			while (rs.next()) {
 				agentIntro = new Agent();
@@ -430,6 +437,8 @@ public class AgentManagerDBImplementation implements AgentManager {
 				stmt.setInt(1, agentCode);
 
 				rs2 = stmt.executeQuery();
+				stmt.close();	
+
 				int cont = 0;
 				while (rs2.next()) {
 
@@ -477,10 +486,12 @@ public class AgentManagerDBImplementation implements AgentManager {
 			CallableStatement cst = con.prepareCall(SEARCHteammates);
 			cst.setInt(1, agentCode);
 			cst.execute();
+			cst.close();
 
 			stmt = con.prepareStatement(getTeammates);
 
 			rs = stmt.executeQuery();
+			stmt.close();	
 
 			while (rs.next()) {
 
