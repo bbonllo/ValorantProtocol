@@ -339,7 +339,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 	@Override
 	public List<Agent> getAllAgents() throws ExceptionManager {
 
-		// ArrayList<Agent> agentsList
+		// ArrayList<Agent> agents List
 		List<Agent> activeAgents = new ArrayList<>();
 		ResultSet rs = null;
 		Agent agentIntro = null;
