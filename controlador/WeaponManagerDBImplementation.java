@@ -61,8 +61,9 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 			stmt.setString(4, weapon.getWeaponSubType());
 			stmt.setBoolean(5, true);
 			stmt.executeUpdate();
+      
 			stmt.close();	
-
+      
 		} catch (SQLException e1) {
 			System.out.println("Error en alta SQL");
 			e1.printStackTrace();
@@ -92,8 +93,6 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 
 			stmt.setString(1, name);
 			rs = stmt.executeQuery();
-			stmt.close();	
-
 
 			if (rs.next()) {
 				weapon = new Weapon(name, rs.getInt("WeaponDamage"), rs.getString("weaponType"),
@@ -112,6 +111,12 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 				} catch (SQLException ex) {
 					System.out.println("Error en cierre del ResultSet");
 				}
+			}
+			try {
+				stmt.close();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
 			try {
 				this.closeConnection();
@@ -144,9 +149,9 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 			if (stmt.executeUpdate() == 1) {
 				changes = true;
 				stmt.close();
-				}
+			}
 		} catch (SQLException e1) {
-			System.out.println("Error en la modificación SQL");
+			System.out.println("Error en la modificaciÃ³n SQL");
 			e1.printStackTrace();
 		} finally {
 			try {
@@ -172,10 +177,10 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 			stmt = con.prepareStatement(DELETEweapon);
 			stmt.setString(1, name);
 			stmt.executeUpdate();
-			stmt.close();	
+			stmt.close();
 
 		} catch (SQLException e1) {
-			System.out.println("Error en la modificación SQL");
+			System.out.println("Error en la modificaciÃ³n SQL");
 			e1.printStackTrace();
 		} finally {
 			try {
@@ -205,8 +210,6 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 			stmt = con.prepareStatement(LISTweapons);
 
 			rs = stmt.executeQuery();
-			stmt.close();	
-
 
 			while (rs.next()) {
 				weapon = new Weapon();
@@ -229,6 +232,12 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 				} catch (SQLException ex) {
 					System.out.println("Error en cierre del ResultSet");
 				}
+			}
+			try {
+				stmt.close();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
 			try {
 				// Close Connection
@@ -256,10 +265,7 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 		// Code
 		try {
 			stmt = con.prepareStatement(LISTweaponsSidearm);
-
 			rs = stmt.executeQuery();
-			stmt.close();	
-
 
 			while (rs.next()) {
 				weapon = new Weapon();
@@ -281,6 +287,12 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 				} catch (SQLException ex) {
 					System.out.println("Error en cierre del ResultSet");
 				}
+			}
+			try {
+				stmt.close();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
 			try {
 				// Close connection
@@ -310,9 +322,7 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 			stmt = con.prepareStatement(LISTweaponsPrimary);
 
 			rs = stmt.executeQuery();
-			stmt.close();	
-
-
+      
 			while (rs.next()) {
 				weapon = new Weapon();
 				weapon.setWeaponName(rs.getString("weaponName"));
@@ -334,6 +344,12 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 				} catch (SQLException ex) {
 					System.out.println("Error en cierre del ResultSet");
 				}
+			}
+			try {
+				stmt.close();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
 			try {
 				// Close connection
