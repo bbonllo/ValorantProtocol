@@ -198,7 +198,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 				e.printStackTrace();
 			}
 		}
-		
+
 	}
 
 	@Override
@@ -294,7 +294,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 				e.printStackTrace();
 			}
 		}
-		
+
 	}
 
 	@Override
@@ -318,7 +318,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 	}
 
 	@Override
-	public boolean makeAgentActive(int agentCode) {
+	public void makeAgentActive(int agentCode) {
 
 		openConnection();
 		final String deleteAgent = "update agent set agentIsActive = true where agentCode = ?;";
@@ -334,7 +334,6 @@ public class AgentManagerDBImplementation implements AgentManager {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return false;
 	}
 
 	@Override

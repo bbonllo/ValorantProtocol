@@ -13,7 +13,7 @@ public interface AgentManager {
 
 	public void modifyAgent(Agent modifyAgent);
 
-	public boolean makeAgentActive(int agentCode);
+	public void makeAgentActive(int agentCode);
 
 	public List<Agent> getAllAgents() throws ExceptionManager;
 

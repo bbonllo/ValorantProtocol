@@ -100,9 +100,10 @@ public class AgentTest {
 		int agentCode = 21;
 		AgentManager agMan = new AgentManagerDBImplementation();
 		//Llamar al método a testear
-		boolean isTrue = agMan.makeAgentActive(agentCode);
+		agMan.makeAgentActive(agentCode);
+		Agent ag = agMan.getAgentByID(agentCode);
 		//Preguntar por resultado assert
-		assertFalse(isTrue);	
+		assertTrue(ag.isAgentIsOnActive());	
 	}
 
 	@Test
