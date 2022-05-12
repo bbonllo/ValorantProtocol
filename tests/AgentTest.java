@@ -19,7 +19,7 @@ public class AgentTest {
 		// Preparar datos
 		int agentCode = 10;
 		AgentManager agMan = new AgentManagerDBImplementation();
-		// Llamar al método a testear
+		// Llamar al mÃ©todo a testear
 		Agent ag = agMan.getAgentByID(agentCode);
 		// Preguntar por resultado assert
 		assertNotNull(ag);
@@ -42,7 +42,7 @@ public class AgentTest {
 
 		AgentManager agMan = new AgentManagerDBImplementation();
 		Agent agent = new Agent(agentCode, agentPasswd, agentName, agentNationality, agentRol, abs, false, false);
-		// Llamar al método a testear
+		// Llamar al mÃ©todo a testear
 		agMan.registerAgent(agent);
 		Agent ag = agMan.getAgentByID(agentCode);
 		// Preguntar por resultado assert
@@ -72,7 +72,7 @@ public class AgentTest {
 		agent.setAgentNationality(agentNationality);
 		agent.setAgentRol(agentRol);
 		agent.setAgentAbilities(abs);
-		// Llamar al método a testear
+		// Llamar al mÃ©todo a testear
 		agMan.modifyAgent(agent);
 		Agent ag = agMan.getAgentByID(agentCode);
 		// Preguntar por resultado assert
@@ -84,7 +84,7 @@ public class AgentTest {
 		// Preparar datos
 		int agentCode = 21;
 		AgentManager agMan = new AgentManagerDBImplementation();
-		// Llamar al método a testear
+		// Llamar al mÃ©todo a testear
 		agMan.makeAgentInactive(agentCode);
 		Agent ag = agMan.getAgentByID(agentCode);
 		// Preguntar por resultado assert
@@ -96,7 +96,7 @@ public class AgentTest {
 		// Preparar datos
 		int agentCode = 21;
 		AgentManager agMan = new AgentManagerDBImplementation();
-		// Llamar al método a testear
+		// Llamar al mÃ©todo a testear
 		agMan.makeAgentActive(agentCode);
 		Agent ag = agMan.getAgentByID(agentCode);
 		// Preguntar por resultado assert
@@ -107,7 +107,7 @@ public class AgentTest {
 	public void testGetAllAgents() throws ExceptionManager {
 		// Preparar datos
 		AgentManager agMan = new AgentManagerDBImplementation();
-		// Llamar al método a testear
+		// Llamar al mÃ©todo a testear
 		List<Agent> agents;
 
 		agents = agMan.getAllAgents();
@@ -120,7 +120,7 @@ public class AgentTest {
 	public void testGetAllActiveAgents() {
 		// Preparar datos
 		AgentManager agMan = new AgentManagerDBImplementation();
-		// Llamar al método a testear
+		// Llamar al mÃ©todo a testear
 		List<Agent> agents = agMan.getAllActiveAgents();
 		// Preguntar por resultado assert
 		assertNotNull(agents);
@@ -132,7 +132,7 @@ public class AgentTest {
 		int agentCode = 21;
 		String agentPasswd = "adadawd";
 		AgentManager agMan = new AgentManagerDBImplementation();
-		// Llamar al método a testear
+		// Llamar al mÃ©todo a testear
 		Agent agent = agMan.login(agentCode, agentPasswd);
 		// Preguntar por resultado assert
 		assertNotNull(agent);
@@ -144,10 +144,9 @@ public class AgentTest {
 		int agentCode = 21;
 		String agentPasswd = "adadawd";
 		AgentManager agMan = new AgentManagerDBImplementation();
-		// Llamar al método a testear
+		//Llamar al mÃ©todo a testear
 		int[] agents = agMan.getTeammates(agentCode);
-		// Preguntar por resultado assert
+		//Preguntar por resultado assert
 		assertNotNull(agents);
 	}
-
 }

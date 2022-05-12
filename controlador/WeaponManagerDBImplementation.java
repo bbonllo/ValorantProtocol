@@ -61,8 +61,9 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 			stmt.setString(4, weapon.getWeaponSubType());
 			stmt.setBoolean(5, true);
 			stmt.executeUpdate();
-			stmt.close();
-
+      
+			stmt.close();	
+      
 		} catch (SQLException e1) {
 			System.out.println("Error en alta SQL");
 			e1.printStackTrace();
@@ -150,7 +151,7 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 				stmt.close();
 			}
 		} catch (SQLException e1) {
-			System.out.println("Error en la modificación SQL");
+			System.out.println("Error en la modificaciÃ³n SQL");
 			e1.printStackTrace();
 		} finally {
 			try {
@@ -179,7 +180,7 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 			stmt.close();
 
 		} catch (SQLException e1) {
-			System.out.println("Error en la modificación SQL");
+			System.out.println("Error en la modificaciÃ³n SQL");
 			e1.printStackTrace();
 		} finally {
 			try {
@@ -264,7 +265,6 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 		// Code
 		try {
 			stmt = con.prepareStatement(LISTweaponsSidearm);
-
 			rs = stmt.executeQuery();
 
 			while (rs.next()) {
@@ -322,7 +322,7 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 			stmt = con.prepareStatement(LISTweaponsPrimary);
 
 			rs = stmt.executeQuery();
-
+      
 			while (rs.next()) {
 				weapon = new Weapon();
 				weapon.setWeaponName(rs.getString("weaponName"));
