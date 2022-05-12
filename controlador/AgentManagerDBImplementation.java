@@ -1,18 +1,16 @@
 
 package controlador;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
 import exceptions.ExceptionManager;
 import model.Ability;
 import model.AbilityUltimate;
@@ -73,11 +71,13 @@ public class AgentManagerDBImplementation implements AgentManager {
 
 				stmt = con.prepareStatement(SEARCHAgentsAbility);
 				stmt.setInt(1, agentCode);
+				stmt.close();
 
 				rs2 = stmt.executeQuery();
 				while (rs2.next()) {
 
 					if (cont == 3) {
+
 						abilityUltimate.setAbilityName(rs2.getString("abilityName"));
 						abilityUltimate.setAbilityDescription(rs2.getString("abilityDescription"));
 						abilityUltimate.setAbilityUltimateRequiredOrbs(rs2.getInt("orbNum"));
@@ -339,8 +339,10 @@ public class AgentManagerDBImplementation implements AgentManager {
 	@Override
 	public List<Agent> getAllAgents() throws ExceptionManager {
 
-		// ArrayList<Agent> agents List
-		List<Agent> activeAgents = new ArrayList<>();
+
+		// ArrayList<Agent> agentsList
+		List<Agent> agents = new ArrayList<>();
+
 		ResultSet rs = null;
 		Agent agentIntro = null;
 
@@ -350,13 +352,14 @@ public class AgentManagerDBImplementation implements AgentManager {
 		try {
 			stmt = con.prepareStatement(SEARCHAllAgents);
 			rs = stmt.executeQuery();
+			stmt.close();
 
 			while (rs.next()) {
 
 				agentIntro = new Agent();
 				agentIntro.setAgentCode(rs.getInt("agentCode"));
 				agentIntro.setAgentName(rs.getString("agentName"));
-				activeAgents.add(agentIntro);
+				agents.add(agentIntro);
 			}
 
 			if (rs != null)
@@ -368,7 +371,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 			ExceptionManager x = new ExceptionManager(msg);
 			throw x;
 		}
-		return activeAgents;
+		return agents;
 	}
 
 	@Override
@@ -385,6 +388,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 		try {
 			stmt = con.prepareStatement(SEARCHAllAgents);
 			rs = stmt.executeQuery();
+			stmt.close();
 
 			while (rs.next()) {
 				agentIntro = new Agent();
@@ -440,6 +444,8 @@ public class AgentManagerDBImplementation implements AgentManager {
 				stmt.setInt(1, agentCode);
 
 				rs2 = stmt.executeQuery();
+				stmt.close();
+
 				int cont = 0;
 				while (rs2.next()) {
 
@@ -474,24 +480,31 @@ public class AgentManagerDBImplementation implements AgentManager {
 	}
 
 	@Override
-	public List<Agent> getTeammates(int agentCode) {
-		List<Agent> teammates = new ArrayList<>();
+	public int[] getTeammates(int agentCode) {
+		int i = 0;
+		int[] teammates = new int[5];
 		ResultSet rs = null;
-		Agent teammate = null;
 
 		openConnection();
-		String SEARCHteammates = "select * from agent where agentCode in(select agentCode from agent_on_mission where missionCode in(select missionCode from agent_on_mission where agentCode = ?";
+		String SEARCHteammates = "{CALL bring(?)}";
+		String getTeammates = "Select * from log_record";
 
 		try {
-			stmt = con.prepareStatement(SEARCHteammates);
-			stmt.setInt(1, agentCode);
+			CallableStatement cst = con.prepareCall(SEARCHteammates);
+			cst.setInt(1, agentCode);
+			cst.execute();
+			cst.close();
+
+			stmt = con.prepareStatement(getTeammates);
+
 			rs = stmt.executeQuery();
+			stmt.close();
 
 			while (rs.next()) {
-				teammate = new Agent();
-				teammate.setAgentCode(rs.getInt("agentCode"));
-				teammate.setAgentName(rs.getString("agentName"));
-				teammates.add(teammate);
+
+				teammates[i] = (rs.getInt("agentCode"));
+				i++;
+
 			}
 
 			if (rs != null)

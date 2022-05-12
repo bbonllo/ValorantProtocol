@@ -23,5 +23,6 @@ public interface AgentManager {
 
 	public void makeAgentInactive(int agentCode);
 
-	public List<Agent> getTeammates(int agentCode);
+	public int[] getTeammates(int agentCode);
+
 }
