@@ -146,7 +146,7 @@ public class AgentTest {
 		String agentPasswd = "adadawd"; 
 		AgentManager agMan = new AgentManagerDBImplementation();
 		//Llamar al método a testear
-		List<Agent> agents = agMan.getTeammates(agentCode);
+		int[] agents = agMan.getTeammates(agentCode);
 		//Preguntar por resultado assert
 		assertNotNull(agents);
 	}
