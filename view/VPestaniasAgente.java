@@ -209,6 +209,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 	private Object[] opciones = { "Si", "No" };
 	private JLabel lblMissionMapRegister;
 	private JComboBox<String> comboBoxMissionPrimaryMaps;
+	private JLabel lblNewLabel;
 
 	/**
 	 * Create the frame.
@@ -333,9 +334,13 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 			e1.printStackTrace();
 		}
 
+		lblNewLabel = new JLabel("");
+		lblNewLabel.setBounds(147, 524, 350, 197);
+		panelRegisterMission.add(lblNewLabel);
+
 		comboBoxMissionPrimaryMaps = new JComboBox<String>();
 		comboBoxMissionPrimaryMaps.setSelectedIndex(-1);
-		comboBoxMissionPrimaryMaps.setBounds(199, 537, 250, 30);
+		comboBoxMissionPrimaryMaps.setBounds(199, 740, 250, 30);
 		panelRegisterMission.add(comboBoxMissionPrimaryMaps);
 
 		lblMissionMapRegister = new JLabel("Mapa de  mision");
