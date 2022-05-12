@@ -84,7 +84,7 @@ public class MapManagerDBImplementation implements MapManager {
 		try {
 			stmt = con.prepareStatement(SEARCHMap);
 			rs = stmt.executeQuery();
-			stmt.close();	
+				
 
 
 			while (rs.next()) {
@@ -95,7 +95,7 @@ public class MapManagerDBImplementation implements MapManager {
 			}
 			if (rs != null)
 				rs.close();
-
+			stmt.close();
 		} catch (SQLException e) {
 			String msg = "Error en recuperar todos los mapas";
 			ExceptionManager x = new ExceptionManager(msg);

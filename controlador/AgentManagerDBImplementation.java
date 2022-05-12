@@ -71,7 +71,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 
 				stmt = con.prepareStatement(SEARCHAgentsAbility);
 				stmt.setInt(1, agentCode);
-				stmt.close();
+				
 
 				rs2 = stmt.executeQuery();
 				while (rs2.next()) {
@@ -96,7 +96,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 
 			if (rs != null)
 				rs.close();
-
+			stmt.close();
 			closeConnection();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -352,7 +352,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 		try {
 			stmt = con.prepareStatement(SEARCHAllAgents);
 			rs = stmt.executeQuery();
-			stmt.close();
+			
 
 			while (rs.next()) {
 
@@ -364,7 +364,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 
 			if (rs != null)
 				rs.close();
-
+			stmt.close();
 			closeConnection();
 		} catch (SQLException e) {
 			String msg = "Error en recoger a todos los agentes";
@@ -444,7 +444,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 				stmt.setInt(1, agentCode);
 
 				rs2 = stmt.executeQuery();
-				stmt.close();
+				
 
 				int cont = 0;
 				while (rs2.next()) {
@@ -470,7 +470,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 
 			if (rs != null)
 				rs.close();
-
+			stmt.close();
 			closeConnection();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
