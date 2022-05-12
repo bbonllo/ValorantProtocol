@@ -184,8 +184,6 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 	private JLabel lblDamageSubtype;
 	private JComboBox<String> comboBoxWeaponSubtype;
 	private JComboBox<String> comboBoxWeaponType;
-	private JLabel lblAscentMap;
-	private JLabel lblFractureMap;
 	private JComboBox<String> comboBoxMissionAgent5;
 	private JComboBox<String> comboBoxMissionAgent4;
 	private JComboBox<String> comboBoxMissionAgent3;
@@ -210,6 +208,13 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 	private JLabel lblMissionMapRegister;
 	private JComboBox<String> comboBoxMissionPrimaryMaps;
 	private JLabel lblNewLabel;
+	private JLabel lblBreezeMap;
+	private JLabel lblBindMap;
+	private JLabel lblIceboxMap;
+	private JLabel lblSplitMap;
+	private JLabel lblHeavenMap;
+	private JLabel lblAscentMap;
+	private JLabel lblFractureMap;
 
 	/**
 	 * Create the frame.
@@ -314,61 +319,68 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		panelMap.setLayout(null);
 		panelMap.setBounds(0, 74, 1770, 1006);
 		p.add(panelMap);
-		
-				lblFractureMap = new JLabel("");
-				lblFractureMap.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-				lblFractureMap.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/fracture.jpg")));
-				lblFractureMap.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-				lblFractureMap.setBounds(1115, 119, 480, 240);
-				panelMap.add(lblFractureMap);
-				
-						lblAscentMap = new JLabel("");
-						lblAscentMap.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-						lblAscentMap.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/ascent.jpg")));
-						lblAscentMap.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-						lblAscentMap.setBounds(1115, 357, 480, 480);
-						panelMap.add(lblAscentMap);
-						
-								JLabel lblBreezeMap = new JLabel("");
-								lblBreezeMap.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-								lblBreezeMap.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/breeze.jpg")));
-								lblBreezeMap.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-								lblBreezeMap.setBounds(637, 597, 480, 240);
-								panelMap.add(lblBreezeMap);
-								
-										JLabel lblIceboxMap = new JLabel("");
-										lblIceboxMap.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-										lblIceboxMap.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/icebox.jpg")));
-										lblIceboxMap.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-										lblIceboxMap.setBounds(637, 357, 480, 242);
-										panelMap.add(lblIceboxMap);
-										
-												JLabel lblHeavenMap = new JLabel("");
-												lblHeavenMap.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-												lblHeavenMap.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/heaven.jpg")));
-												lblHeavenMap.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-												lblHeavenMap.setBounds(637, 119, 480, 240);
-												panelMap.add(lblHeavenMap);
-												
-														JLabel lblSplitMap = new JLabel("");
-														lblSplitMap.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-														lblSplitMap.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/split.jpg")));
-														lblSplitMap.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-														lblSplitMap.setBounds(159, 597, 480, 240);
-														panelMap.add(lblSplitMap);
-														
-																JLabel lblBindMap = new JLabel("");
-																lblBindMap.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-																lblBindMap.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/bind.jpg")));
-																lblBindMap.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-																lblBindMap.setBounds(159, 119, 480, 480);
-																panelMap.add(lblBindMap);
-																
-																		JLabel lblBackgroundPanelMap = new JLabel("");
-																		lblBackgroundPanelMap
-																				.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/appBackgroundPanel.jpg")));
-																		lblBackgroundPanelMap.setBounds(0, 0, 1920, 1006);
-																		panelMap.add(lblBackgroundPanelMap);
+
+		lblFractureMap = new JLabel("");
+		lblFractureMap.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblFractureMap.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/fracture.jpg")));
+		lblFractureMap.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		lblFractureMap.setBounds(1115, 119, 480, 240);
+		lblFractureMap.addMouseListener(this);
+		panelMap.add(lblFractureMap);
+
+		lblAscentMap = new JLabel("");
+		lblAscentMap.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblAscentMap.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/ascent.jpg")));
+		lblAscentMap.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		lblAscentMap.setBounds(1115, 357, 480, 480);
+		lblAscentMap.addMouseListener(this);
+		panelMap.add(lblAscentMap);
+
+		lblBreezeMap = new JLabel("");
+		lblBreezeMap.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblBreezeMap.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/breeze.jpg")));
+		lblBreezeMap.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		lblBreezeMap.setBounds(637, 597, 480, 240);
+		lblBreezeMap.addMouseListener(this);
+		panelMap.add(lblBreezeMap);
+
+		lblIceboxMap = new JLabel("");
+		lblIceboxMap.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblIceboxMap.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/icebox.jpg")));
+		lblIceboxMap.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		lblIceboxMap.setBounds(637, 357, 480, 242);
+		lblIceboxMap.addMouseListener(this);
+		panelMap.add(lblIceboxMap);
+
+		lblHeavenMap = new JLabel("");
+		lblHeavenMap.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblHeavenMap.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/heaven.jpg")));
+		lblHeavenMap.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		lblHeavenMap.setBounds(637, 119, 480, 240);
+		lblHeavenMap.addMouseListener(this);
+		panelMap.add(lblHeavenMap);
+
+		lblSplitMap = new JLabel("");
+		lblSplitMap.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblSplitMap.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/split.jpg")));
+		lblSplitMap.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		lblSplitMap.setBounds(159, 597, 480, 240);
+		lblSplitMap.addMouseListener(this);
+		panelMap.add(lblSplitMap);
+
+		lblBindMap = new JLabel("");
+		lblBindMap.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblBindMap.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/bind.jpg")));
+		lblBindMap.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		lblBindMap.setBounds(159, 119, 480, 480);
+		lblBindMap.addMouseListener(this);
+		panelMap.add(lblBindMap);
+
+		JLabel lblBackgroundPanelMap = new JLabel("");
+		lblBackgroundPanelMap
+				.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/appBackgroundPanel.jpg")));
+		lblBackgroundPanelMap.setBounds(0, 0, 1920, 1006);
+		panelMap.add(lblBackgroundPanelMap);
 		panelMission = new JPanel();
 		panelMission.setLayout(null);
 		panelMission.setBounds(0, 74, 1770, 1006);
