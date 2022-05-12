@@ -3,9 +3,6 @@ package tests;
 import static org.junit.Assert.*;
 
 import java.util.List;
-import java.util.Set;
-
-import org.junit.Before;
 import org.junit.Test;
 
 import controlador.AgentManager;
@@ -103,23 +100,20 @@ public class AgentTest {
 		agMan.makeAgentActive(agentCode);
 		Agent ag = agMan.getAgentByID(agentCode);
 		//Preguntar por resultado assert
-		assertTrue(ag.isAgentIsOnActive());	
+		assertFalse(ag.isAgentIsOnActive());	
 	}
 
 	@Test
-	public void testGetAllAgents() {
+	public void testGetAllAgents() throws ExceptionManager {
 		//Preparar datos
 		AgentManager agMan = new AgentManagerDBImplementation();
 		//Llamar al método a testear
 		List<Agent> agents;
-		try {
-			agents = agMan.getAllAgents();
-			//Preguntar por resultado assert
-			assertNotNull(agents);
-		} catch (ExceptionManager e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
+		agents = agMan.getAllAgents();
+		//Preguntar por resultado assert
+		assertNotNull(agents);
+		
 		
 	}
 

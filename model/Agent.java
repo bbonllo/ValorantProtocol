@@ -24,18 +24,6 @@ public class Agent implements Comparable<Agent> {
 	}
 
 	public Agent(int agentCode, String agentPasswd, String agentName, String agentNationality, String agentRol,
-			boolean agentIsAdmin, boolean agentIsOnActive) {
-		super();
-		this.agentCode = agentCode;
-		this.agentPasswd = agentPasswd;
-		this.agentName = agentName;
-		this.agentNationality = agentNationality;
-		this.agentRol = agentRol;
-		this.agentIsAdmin = agentIsAdmin;
-		this.agentIsOnActive = agentIsOnActive;
-	}
-
-	public Agent(int agentCode, String agentPasswd, String agentName, String agentNationality, String agentRol,
 			Ability[] agentAbilities, boolean agentIsAdmin, boolean agentIsOnActive) {
 		super();
 		this.agentCode = agentCode;

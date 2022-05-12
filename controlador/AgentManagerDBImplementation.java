@@ -240,7 +240,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 			stmt = con.prepareStatement(INSERTAbility1);
 
 			stmt.setString(1, ability1.getAbilityName());
-			stmt.setString(3, ability1.getAbilityDescription());
+			stmt.setString(2, ability1.getAbilityDescription());
 			stmt.setInt(3, modifyAgent.getAgentCode());
 
 			stmt.executeUpdate();
@@ -252,7 +252,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 			stmt = con.prepareStatement(INSERTAbility2);
 
 			stmt.setString(1, ability2.getAbilityName());
-			stmt.setString(3, ability2.getAbilityDescription());
+			stmt.setString(2, ability2.getAbilityDescription());
 			stmt.setInt(3, modifyAgent.getAgentCode());
 
 			stmt.executeUpdate();
@@ -264,7 +264,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 			stmt = con.prepareStatement(INSERTAbility3);
 
 			stmt.setString(1, ability3.getAbilityName());
-			stmt.setString(3, ability3.getAbilityDescription());
+			stmt.setString(2, ability3.getAbilityDescription());
 			stmt.setInt(3, modifyAgent.getAgentCode());
 
 			stmt.executeUpdate();
@@ -308,7 +308,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 			stmt.setInt(1, agentCode);
 
 			stmt.executeUpdate();
-
+			stmt.close();
 			closeConnection();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -328,7 +328,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 			stmt.setInt(1, agentCode);
 
 			stmt.executeUpdate();
-
+			stmt.close();
 			closeConnection();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
