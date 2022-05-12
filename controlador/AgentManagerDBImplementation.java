@@ -107,7 +107,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 	}
 
 	@Override
-	public boolean registerAgent(Agent registerAgent) {
+	public void registerAgent(Agent registerAgent) {
 		Ability ability1;
 		Ability ability2;
 		Ability ability3;
@@ -132,7 +132,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 			stmt.setBoolean(8, registerAgent.isAgentIsOnActive());
 
 			stmt.executeUpdate();
-
+			stmt.close();
 			agentAbilities = registerAgent.getAgentAbilities();
 
 			ability1 = agentAbilities[0];
@@ -152,7 +152,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 			stmt.setString(3, ability1.getAbilityDescription());
 
 			stmt.executeUpdate();
-
+			stmt.close();
 			// HABILIDAD 2
 			final String INSERTAbility2 = "INSERT INTO ability(abilityName, agentCode, abilityDescription, orbnum) VALUES(?, ?, ?, null)";
 
@@ -163,7 +163,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 			stmt.setString(3, ability2.getAbilityDescription());
 
 			stmt.executeUpdate();
-
+			stmt.close();
 			// HABILIDAD 3
 			final String INSERTAbility3 = "INSERT INTO ability(abilityName, agentCode, abilityDescription, orbnum) VALUES(?, ?, ?, null)";
 
@@ -174,7 +174,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 			stmt.setString(3, ability3.getAbilityDescription());
 
 			stmt.executeUpdate();
-
+			stmt.close();
 			// HABILIDAD ULTIMATE
 			final String INSERTAbility4 = "INSERT INTO ability(abilityName, agentCode, abilityDescription, orbnum) VALUES(?, ?, ?, ?)";
 
@@ -186,6 +186,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 			stmt.setInt(4, ability4.getAbilityUltimateRequiredOrbs());
 
 			stmt.executeUpdate();
+			stmt.close();
 		} catch (SQLException e1) {
 			System.out.println("Error en alta SQL");
 			e1.printStackTrace();
@@ -197,11 +198,11 @@ public class AgentManagerDBImplementation implements AgentManager {
 				e.printStackTrace();
 			}
 		}
-		return true;
+		
 	}
 
 	@Override
-	public boolean modifyAgent(Agent modifyAgent) {
+	public void modifyAgent(Agent modifyAgent) {
 		Ability ability1;
 		Ability ability2;
 		Ability ability3;
@@ -222,6 +223,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 			stmt.setInt(4, modifyAgent.getAgentCode());
 
 			stmt.executeUpdate();
+			stmt.close();
 
 			agentAbilities = modifyAgent.getAgentAbilities();
 
@@ -242,6 +244,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 			stmt.setInt(3, modifyAgent.getAgentCode());
 
 			stmt.executeUpdate();
+			stmt.close();
 
 			// HABILIDAD 2
 			final String INSERTAbility2 = "update ability set AbilityName = ?, AbilityDescription = ? where agentCode = ?";
@@ -253,6 +256,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 			stmt.setInt(3, modifyAgent.getAgentCode());
 
 			stmt.executeUpdate();
+			stmt.close();
 
 			// HABILIDAD 3
 			final String INSERTAbility3 = "update ability set AbilityName = ?, AbilityDescription = ? where agentCode = ?";
@@ -264,6 +268,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 			stmt.setInt(3, modifyAgent.getAgentCode());
 
 			stmt.executeUpdate();
+			stmt.close();
 
 			// HABILIDAD ULTIMATE
 			final String INSERTAbility4 = "update ability set AbilityName = ?, AbilityDescription = ?, orbNum = ? where agentCode = ?";
@@ -276,6 +281,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 			stmt.setInt(4, modifyAgent.getAgentCode());
 
 			stmt.executeUpdate();
+			stmt.close();
 
 		} catch (SQLException e1) {
 			System.out.println("Error en alta SQL");
@@ -288,7 +294,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 				e.printStackTrace();
 			}
 		}
-		return false;
+		
 	}
 
 	@Override

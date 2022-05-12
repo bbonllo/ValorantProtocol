@@ -12,6 +12,7 @@ import controlador.AgentManager;
 import controlador.AgentManagerDBImplementation;
 import exceptions.ExceptionManager;
 import model.Ability;
+import model.AbilityUltimate;
 import model.Agent;
 
 public class AgentTest {
@@ -19,7 +20,7 @@ public class AgentTest {
 	@Test
 	public void testGetAgentByID() {
 		//Preparar datos
-		int agentCode = 23;
+		int agentCode = 10;
 		AgentManager agMan = new AgentManagerDBImplementation();
 		//Llamar al método a testear
 		Agent ag = agMan.getAgentByID(agentCode);
@@ -30,48 +31,69 @@ public class AgentTest {
 	@Test
 	public void testRegisterAgent() {
 		//Preparar datos
-		int agentCode = 24;
+		int agentCode = 23;
 		String agentPasswd = "adadawd"; 
 		String agentName = "adadada";
 		String agentNationality = "adadadad";
 		String agentRol = "Duelist";
-		Ability[] abs = new Ability[4];
+		
+		Ability ab1 = new Ability("test1", "mata");
+		Ability ab2 = new Ability("test2", "mata");
+		Ability ab3 = new Ability("test3", "mata");
+		Ability ab4 = new AbilityUltimate(4, "test4", "mata");
+		Ability[] abs = {ab1, ab2, ab3, ab4};
+		
 		AgentManager agMan = new AgentManagerDBImplementation();
-		Agent agent = new Agent(agentCode, agentPasswd, agentName, agentNationality, agentRol, false, false);
+		Agent agent = new Agent(agentCode, agentPasswd, agentName, agentNationality, agentRol, abs, false, false);
 		//Llamar al método a testear
-		boolean isTrue = agMan.registerAgent(agent);
+		agMan.registerAgent(agent);
+		Agent ag = agMan.getAgentByID(agentCode);
 		//Preguntar por resultado assert
-		assertTrue(isTrue);
+		assertFalse(ag.isAgentIsOnActive());
 	}
 
 	@Test
 	public void testModifyAgent() {
 		//Preparar datos
-		int agentCode = 21;
+		int agentCode = 24;
 		String agentPasswd = "adadawd"; 
 		String agentName = "adadada";
 		String agentNationality = "adadadad";
 		String agentRol = "Duelist";
-		Ability[] abs = new Ability[4];
+		
+		Ability ab1 = new Ability("test1", "mata");
+		Ability ab2 = new Ability("test2", "mata");
+		Ability ab3 = new Ability("test3", "mata");
+		Ability ab4 = new AbilityUltimate(4, "test4", "mata");
+		Ability[] abs = {ab1, ab2, ab3, ab4};
+		
 		AgentManager agMan = new AgentManagerDBImplementation();
-		Agent agent = new Agent(agentCode, agentPasswd, agentName, agentNationality, agentRol, false, false);
+		Agent agent = new Agent();
+		agent.setAgentCode(agentCode);
+		agent.setAgentPasswd(agentPasswd);
+		agent.setAgentName(agentName);
+		agent.setAgentNationality(agentNationality);
+		agent.setAgentRol(agentRol);
+		agent.setAgentAbilities(abs);
 		//Llamar al método a testear
-		boolean isTrue = agMan.modifyAgent(agent);
+		agMan.modifyAgent(agent);
+		Agent ag = agMan.getAgentByID(agentCode);
 		//Preguntar por resultado assert
-		assertTrue(isTrue);
+		assertNotNull(ag.getAgentCode());
 	}
 
-/*	@Test
+	@Test
 	public void testMakeAgentInactive() {
 		//Preparar datos
 		int agentCode = 21;
 		AgentManager agMan = new AgentManagerDBImplementation();
 		//Llamar al método a testear
-		boolean isTrue = agMan.makeAgentInactive(agentCode);
-		//Preguntar por resultado assert
-		assertFalse(isTrue);	
+		agMan.makeAgentInactive(agentCode);
+		Agent ag = agMan.getAgentByID(agentCode);
+		//Preguntar por resultado assert	
+		assertFalse(ag.isAgentIsOnActive());
 	}
-*/
+
 	@Test
 	public void testMakeAgentActive() {
 		//Preparar datos

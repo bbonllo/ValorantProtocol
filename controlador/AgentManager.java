@@ -9,9 +9,9 @@ public interface AgentManager {
 
 	public Agent getAgentByID(int agentCode);
 
-	public boolean registerAgent(Agent registerAgent);
+	public void registerAgent(Agent registerAgent);
 
-	public boolean modifyAgent(Agent modifyAgent);
+	public void modifyAgent(Agent modifyAgent);
 
 	public boolean makeAgentActive(int agentCode);
 

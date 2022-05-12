@@ -50,6 +50,9 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 			stmt.setString(3, weapon.getWeaponType());
 			stmt.setString(4, weapon.getWeaponSubType());
 			stmt.setBoolean(5, false);
+			
+			stmt.executeUpdate();
+			stmt.close();
 		} catch (SQLException e1) {
 			System.out.println("Error en alta SQL");
 			e1.printStackTrace();
