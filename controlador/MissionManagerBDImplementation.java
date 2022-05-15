@@ -6,16 +6,12 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import exceptions.ExceptionManager;
 import model.AttackMission;
 import model.DefendMission;
-import model.Map;
 import model.Mission;
 
 public class MissionManagerBDImplementation implements MissionManager {
@@ -42,8 +38,7 @@ public class MissionManagerBDImplementation implements MissionManager {
 			stmt = con.prepareStatement(LISTMission);
 			stmt.setInt(1, codM);
 			rs = stmt.executeQuery();
-			stmt.close();	
-
+			stmt.close();
 
 			if (rs.next()) {
 				getMission = new AttackMission();
@@ -60,7 +55,7 @@ public class MissionManagerBDImplementation implements MissionManager {
 			stmt = con.prepareStatement(LISTMission);
 			stmt.setInt(1, codM);
 			rs = stmt.executeQuery();
-			stmt.close();	
+			stmt.close();
 
 			if (rs.next()) {
 				getMission.setmapName(rs.getString("mapName"));
@@ -112,7 +107,7 @@ public class MissionManagerBDImplementation implements MissionManager {
 			cst.close();
 			stmt = con.prepareStatement(getMissionCode);
 			rs = stmt.executeQuery();
-			stmt.close();	
+			stmt.close();
 
 			if (rs.next()) {
 				missionCode = rs.getInt("Max(missionCode)");
@@ -212,7 +207,7 @@ public class MissionManagerBDImplementation implements MissionManager {
 		try {
 			stmt = con.prepareStatement(SEARCHAttackMission);
 			rs = stmt.executeQuery();
-			stmt.close();	
+			stmt.close();
 
 			while (rs.next()) {
 				missionIntro = new AttackMission();
@@ -234,7 +229,7 @@ public class MissionManagerBDImplementation implements MissionManager {
 		try {
 			stmt = con.prepareStatement(SEARCHDeffendMission);
 			rs2 = stmt.executeQuery();
-			stmt.close();	
+			stmt.close();
 
 			while (rs2.next()) {
 				missionIntro = new DefendMission();
@@ -286,8 +281,7 @@ public class MissionManagerBDImplementation implements MissionManager {
 		try {
 			stmt = con.prepareStatement(SEARCHAttackMission);
 			rs = stmt.executeQuery();
-			stmt.close();	
-
+			stmt.close();
 
 			while (rs.next()) {
 				missionIntro = new AttackMission();
@@ -333,8 +327,7 @@ public class MissionManagerBDImplementation implements MissionManager {
 		try {
 			stmt = con.prepareStatement(SEARCHDeffendMission);
 			rs = stmt.executeQuery();
-			stmt.close();	
-
+			stmt.close();
 
 			while (rs.next()) {
 				missionIntro = new DefendMission();

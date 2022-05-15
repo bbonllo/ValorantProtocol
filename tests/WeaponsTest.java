@@ -2,8 +2,6 @@ package tests;
 
 import static org.junit.Assert.*;
 
-import java.sql.SQLException;
-
 import org.junit.Test;
 
 import controlador.WeaponManager;
@@ -18,7 +16,7 @@ public class WeaponsTest {
 
 	Weapon wep = new Weapon(name, weaponDamage, weaponType, weaponSubType, false);
 	WeaponManager wepMan = new WeaponManagerDBImplementation();
-	
+
 	@Test
 	public void testAddWeapon() {
 		wepMan.addWeapon(wep);
@@ -49,9 +47,8 @@ public class WeaponsTest {
 	@Test
 	public void testGetAllPrimary() {
 		assertNotNull(wepMan.getAllPrimary());
-		}
-	
-	
+	}
+
 // Methods to control other methods
 	public void testGetWeaponByName(String name) {
 		assertNotEquals(wep, wepMan.getWeaponByName(name));

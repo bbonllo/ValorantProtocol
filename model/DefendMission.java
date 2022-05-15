@@ -1,7 +1,10 @@
 package model;
 
-
 public class DefendMission extends Mission {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int defendMissionCode;
 	private int defendedRadianite;
 
@@ -22,7 +25,7 @@ public class DefendMission extends Mission {
 	/*
 	 * Getters & Setters
 	 */
-	
+
 	public int getdefendedRadianite() {
 		return defendedRadianite;
 	}
@@ -38,7 +41,5 @@ public class DefendMission extends Mission {
 	public void setdefendedRadianite(int defendedRadianite) {
 		this.defendedRadianite = defendedRadianite;
 	}
-
-
 
 }

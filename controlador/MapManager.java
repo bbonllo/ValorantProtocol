@@ -15,9 +15,9 @@ public interface MapManager {
 	 * Para estadistica de mapas
 	 */
 
-	public int agentPercentageMapAttack(String mapName);
+	public List<Integer> agentPercentageMapAttack(String mapName);
 
-	public int agentPercentageMapDefend(String mapName);
+	public List<Integer> agentPercentageMapDefend(String mapName);
 
 	public List<String> getAttackMissionAgents(String mapName);
 

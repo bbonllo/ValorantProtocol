@@ -266,7 +266,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		btnMinimize.kEndColor = Color.WHITE;
 		btnMinimize.kFillButton = false;
 		btnMinimize.setFont(new Font("Tahoma", Font.BOLD, 12));
-		btnMinimize.setText("â€”");
+		btnMinimize.setText("—");
 		btnMinimize.setBounds(1826, 0, 47, 37);
 		btnMinimize.addActionListener(this);
 		btnMinimize.addMouseListener(new MouseAdapter() {
@@ -1661,7 +1661,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 			}
 		} else if (e.getSource().equals(tableWeapons)) {
 			if (e.getClickCount() == 2) {
-				if (JOptionPane.showOptionDialog(this, "Â¿Desea borrar o modificar este arma?", "Armas",
+				if (JOptionPane.showOptionDialog(this, "¿Desea borrar o modificar este arma?", "Armas",
 						JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opciones, opciones[0]) == 0) {
 					Weapon newWeapon = weaponData.getWeaponByName(
 							tableWeapons.getModel().getValueAt(tableWeapons.getSelectedRow(), 0).toString());
