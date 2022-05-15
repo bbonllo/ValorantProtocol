@@ -498,12 +498,14 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		panelHistoricMission.add(panelBackgroundHistoricMission);
 
 		btnHistoricMission = new JButton("Historial");
+		btnHistoricMission.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnHistoricMission.setBorder(null);
 		btnHistoricMission.setBounds(884, 0, 177, 50);
 		btnHistoricMission.addActionListener(this);
 		panelMission.add(btnHistoricMission);
 
 		btnRegisterMission = new JButton("Alta");
+		btnRegisterMission.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnRegisterMission.setBorder(null);
 		btnRegisterMission.setBounds(707, 0, 177, 50);
 		btnRegisterMission.addActionListener(this);
@@ -618,6 +620,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		panelRegisterWeapon.add(comboBoxWeaponType);
 
 		btnModifyWeapon = new JButton("Modificar arma");
+		btnModifyWeapon.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnModifyWeapon.setForeground(Color.WHITE);
 		btnModifyWeapon.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
 		btnModifyWeapon.setBorder(null);
@@ -626,6 +629,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		panelRegisterWeapon.add(btnModifyWeapon);
 
 		btnDeleteWeapon = new JButton("Borrar arma");
+		btnDeleteWeapon.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnDeleteWeapon.setForeground(Color.WHITE);
 		btnDeleteWeapon.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
 		btnDeleteWeapon.setBorder(null);
@@ -635,6 +639,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		panelRegisterWeapon.add(btnDeleteWeapon);
 
 		btnAddWeapon = new JButton("Crear arma");
+		btnAddWeapon.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnAddWeapon.setBackground(Color.RED);
 		btnAddWeapon.setForeground(Color.WHITE);
 		btnAddWeapon.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
@@ -722,6 +727,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		panelAgent.setLayout(null);
 
 		btnModifyAgent = new JButton("Modificacion");
+		btnModifyAgent.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnModifyAgent.setBorder(null);
 		btnModifyAgent.setBounds(974, 0, 177, 50);
 		btnModifyAgent.addActionListener(this);
@@ -841,6 +847,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		panelRegisterAgent.add(lblAgentHabilitiesTitle);
 
 		btnClean = new JButton("Limiar datos");
+		btnClean.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnClean.setForeground(Color.WHITE);
 		btnClean.setBackground(new Color(255, 0, 0));
 		btnClean.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 12));
@@ -850,6 +857,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		panelRegisterAgent.add(btnClean);
 
 		btnConfirm = new JButton("Añadir agente");
+		btnConfirm.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnConfirm.setForeground(Color.WHITE);
 		btnConfirm.setBackground(Color.RED);
 		btnConfirm.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 12));
@@ -1178,12 +1186,14 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		panelAgent.add(btnModifyAgent);
 
 		btnRegisterAgent = new JButton("Alta");
+		btnRegisterAgent.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnRegisterAgent.setBorder(null);
 		btnRegisterAgent.setBounds(620, 0, 177, 50);
 		btnRegisterAgent.addActionListener(this);
 		panelAgent.add(btnRegisterAgent);
 
 		btnRemoveAgent = new JButton("Baja");
+		btnRemoveAgent.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnRemoveAgent.setBorder(null);
 		btnRemoveAgent.setBounds(797, 0, 177, 50);
 		btnRemoveAgent.addActionListener(this);
@@ -1289,6 +1299,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		 * Boton pestaña Agente
 		 */
 		btnAgent = new JButton("Agente");
+		btnAgent.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnAgent.setBorderPainted(false);
 		btnAgent.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		btnAgent.setForeground(Color.WHITE);
@@ -1302,6 +1313,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		 * Boton pestaña Mision
 		 */
 		btnMission = new JButton("Mision");
+		btnMission.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnMission.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		btnMission.setForeground(Color.WHITE);
 		btnMission.setBackground(new Color(0, 0, 102));
@@ -1314,6 +1326,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		 * Boton pestaña Arma
 		 */
 		btnWeapon = new JButton("Arma");
+		btnWeapon.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnWeapon.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		btnWeapon.setForeground(Color.WHITE);
 		btnWeapon.setBackground(new Color(0, 0, 102));
@@ -1326,6 +1339,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		 * Boton pestaña Mapa
 		 */
 		btnMap = new JButton("Mapa");
+		btnMap.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnMap.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		btnMap.setForeground(Color.WHITE);
 		btnMap.setBackground(new Color(0, 0, 102));
