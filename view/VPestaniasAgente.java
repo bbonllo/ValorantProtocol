@@ -325,6 +325,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 
 		comboBoxMissionAgent5 = new JComboBox<String>();
 		comboBoxMissionAgent5.setBounds(1483, 124, 150, 30);
+		panelRegisterMission.add(comboBoxMissionAgent5);
 
 		lblNewLabel = new JLabel("");
 		lblNewLabel.setBounds(147, 524, 350, 197);
@@ -426,8 +427,6 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		lblMissionWeaponRegister1.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
 		lblMissionWeaponRegister1.setBounds(135, 189, 150, 40);
 		panelRegisterMission.add(lblMissionWeaponRegister1);
-		comboBoxMissionAgent5.setSelectedIndex(-1);
-		panelRegisterMission.add(comboBoxMissionAgent5);
 
 		comboBoxMissionAgent2 = new JComboBox<String>();
 		comboBoxMissionAgent2.setBounds(472, 124, 150, 30);
@@ -582,17 +581,6 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 				.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/appBackgroundPanel.jpg")));
 		lblBackgroundPanelMap.setBounds(0, 0, 1920, 1006);
 		panelMap.add(lblBackgroundPanelMap);
-		try {
-			List<Agent> agents = agentData.getAllAgents();
-			Collections.sort(agents);
-
-			for (Agent newAgent : agents) {
-				comboBoxMissionAgent5.addItem(newAgent.getAgentName() + " // " + newAgent.getAgentCode());
-			}
-		} catch (ExceptionManager e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
 		panelWeapon = new JPanel();
 		panelWeapon.setLayout(null);
 		panelWeapon.setBounds(0, 74, 1770, 1006);
@@ -1367,7 +1355,12 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		lblBackground.setBounds(0, 0, 1920, 1080);
 		p.add(lblBackground);
 
-		cargarComboBoxes();
+		try {
+			cargarComboBoxes();
+		} catch (ExceptionManager e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
 	}
 
@@ -1520,40 +1513,44 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 
 	}
 
-	private void cargarComboBoxes() {
+	private void cargarComboBoxes() throws ExceptionManager {
 
 		/*
 		 * Carga de Agentes
 		 */
 
-		List<Agent> agents = null;
-		try {
-			agents = agentData.getAllAgents();
-			Collections.sort(agents);
-		} catch (ExceptionManager e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		List<Agent> agents = agentData.getAllActiveAgents();
+		Collections.sort(agents);
 
 		for (Agent newAgent : agents) {
+			if (!newAgent.isAgentIsOnMission())
+				comboBoxMissionAgent1.addItem(newAgent.getAgentName() + " // " + newAgent.getAgentCode());
+		}
+		comboBoxMissionAgent1.setSelectedIndex(-1);
+
+		for (Agent newAgent : agents) {
+			if (!newAgent.isAgentIsOnMission())
 			comboBoxMissionAgent2.addItem(newAgent.getAgentName() + " // " + newAgent.getAgentCode());
 		}
 		comboBoxMissionAgent2.setSelectedIndex(-1);
 
 		for (Agent newAgent : agents) {
+			if (!newAgent.isAgentIsOnMission())
+			comboBoxMissionAgent3.addItem(newAgent.getAgentName() + " // " + newAgent.getAgentCode());
+		}
+		comboBoxMissionAgent3.setSelectedIndex(-1);
+
+		for (Agent newAgent : agents) {
+			if (!newAgent.isAgentIsOnMission())
 			comboBoxMissionAgent4.addItem(newAgent.getAgentName() + " // " + newAgent.getAgentCode());
 		}
 		comboBoxMissionAgent4.setSelectedIndex(-1);
 
 		for (Agent newAgent : agents) {
-			comboBoxMissionAgent1.addItem(newAgent.getAgentName() + " // " + newAgent.getAgentCode());
+			if (!newAgent.isAgentIsOnMission())
+			comboBoxMissionAgent5.addItem(newAgent.getAgentName() + " // " + newAgent.getAgentCode());
 		}
-		comboBoxMissionAgent1.setSelectedIndex(-1);
-
-		for (Agent newAgent : agents) {
-			comboBoxMissionAgent3.addItem(newAgent.getAgentName() + " // " + newAgent.getAgentCode());
-		}
-		comboBoxMissionAgent3.setSelectedIndex(-1);
+		comboBoxMissionAgent5.setSelectedIndex(-1);
 
 		/*
 		 * Carga de Armas
