@@ -35,6 +35,7 @@ public class MapManagerDBImplementation implements MapManager {
 
 			rs = stmt.executeQuery();
 
+
 			while (rs.next()) {
 				mapIntro = new Map();
 				mapIntro.setMapName(mapName);
@@ -56,6 +57,7 @@ public class MapManagerDBImplementation implements MapManager {
 	}
 
 	@Override
+
 	public List<Map> getAllMaps() throws ExceptionManager {
 		List<Map> maps = new ArrayList<>();
 		ResultSet rs = null;
