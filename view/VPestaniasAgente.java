@@ -16,6 +16,7 @@ import javax.swing.table.JTableHeader;
 
 import java.awt.Font;
 import java.awt.Frame;
+import java.awt.Image;
 
 import model.Ability;
 import model.AbilityUltimate;
@@ -25,6 +26,9 @@ import model.Weapon;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Collections;
 import java.util.List;
 import java.awt.event.MouseAdapter;
@@ -58,10 +62,14 @@ import javax.swing.JSpinner;
 
 import javax.swing.SpinnerNumberModel;
 import javax.swing.JRadioButton;
+import javax.imageio.ImageIO;
 import javax.swing.ButtonGroup;
 import javax.swing.JSeparator;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import javax.swing.SpinnerDateModel;
+import java.util.Date;
+import java.util.Calendar;
 
 public class VPestaniasAgente extends JFrame implements ActionListener, MouseListener {
 	private static final long serialVersionUID = 1L;
@@ -202,10 +210,12 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 	private JComboBox<String> comboBoxMissionSidearmWeapon4;
 	private JComboBox<String> comboBoxMissionPrimaryWeapon5;
 	private JComboBox<String> comboBoxMissionSidearmWeapon5;
-	private Object[] opciones = { "Si", "No" };
+	private Object[] options = { "Si", "No" };
+	private Object[] optionsActive = { "Hacer activo", "Cancelar" };
+	private Object[] optionsInActive = { "Hacer inactivo", "Cancelar" };
 	private JLabel lblMissionMapRegister;
-	private JComboBox<String> comboBoxMissionPrimaryMaps;
-	private JLabel lblNewLabel;
+	private JComboBox<String> comboBoxMissionMaps;
+	private JLabel lblMapIcon;
 	private JLabel lblBreezeMap;
 	private JLabel lblBindMap;
 	private JLabel lblIceboxMap;
@@ -266,7 +276,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		btnMinimize.kEndColor = Color.WHITE;
 		btnMinimize.kFillButton = false;
 		btnMinimize.setFont(new Font("Tahoma", Font.BOLD, 12));
-		btnMinimize.setText("�");
+		btnMinimize.setText("—");
 		btnMinimize.setBounds(1826, 0, 47, 37);
 		btnMinimize.addActionListener(this);
 		btnMinimize.addMouseListener(new MouseAdapter() {
@@ -323,18 +333,42 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		panelMission.add(panelRegisterMission);
 		panelRegisterMission.setLayout(null);
 
+		ImageIcon imageIconAttack = new ImageIcon(VMap.class.getResource("/resources/rotGamesLogo100x52.png"));
+		ImageIcon imageIconDefend = new ImageIcon(VMap.class.getResource("/resources/rotGamesLogo100x52.png"));
+
+		JRadioButton rdbtnNewRadioButton = new JRadioButton(imageIconAttack);
+		rdbtnNewRadioButton.setOpaque(false);
+		rdbtnNewRadioButton.setBounds(694, 516, 377, 47);
+		panelRegisterMission.add(rdbtnNewRadioButton);
+
+		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton(imageIconDefend);
+		rdbtnNewRadioButton_1.setOpaque(false);
+		rdbtnNewRadioButton_1.setBounds(694, 611, 369, 47);
+		panelRegisterMission.add(rdbtnNewRadioButton_1);
+
+		JSpinner spinner_1_1 = new JSpinner();
+		spinner_1_1.setBounds(1416, 757, 294, 30);
+		panelRegisterMission.add(spinner_1_1);
+
+		JSpinner spinner_1 = new JSpinner();
+		spinner_1.setModel(new SpinnerDateModel(new Date(1652652000000L), new Date(1652652000000L),
+				new Date(221857048800000L), Calendar.DAY_OF_YEAR));
+		spinner_1.setBounds(1416, 549, 294, 30);
+		panelRegisterMission.add(spinner_1);
+
 		comboBoxMissionAgent5 = new JComboBox<String>();
 		comboBoxMissionAgent5.setBounds(1483, 124, 150, 30);
 		panelRegisterMission.add(comboBoxMissionAgent5);
 
-		lblNewLabel = new JLabel("");
-		lblNewLabel.setBounds(147, 524, 350, 197);
-		panelRegisterMission.add(lblNewLabel);
+		lblMapIcon = new JLabel("");
+		lblMapIcon.setBorder(new LineBorder(new Color(0, 0, 0)));
+		lblMapIcon.setBounds(147, 524, 350, 197);
+		panelRegisterMission.add(lblMapIcon);
 
-		comboBoxMissionPrimaryMaps = new JComboBox<String>();
-		comboBoxMissionPrimaryMaps.setSelectedIndex(-1);
-		comboBoxMissionPrimaryMaps.setBounds(199, 740, 250, 30);
-		panelRegisterMission.add(comboBoxMissionPrimaryMaps);
+		comboBoxMissionMaps = new JComboBox<String>();
+		comboBoxMissionMaps.setBounds(199, 740, 250, 30);
+		comboBoxMissionMaps.addActionListener(this);
+		panelRegisterMission.add(comboBoxMissionMaps);
 
 		lblMissionMapRegister = new JLabel("Mapa de  mision");
 		lblMissionMapRegister.setHorizontalAlignment(SwingConstants.CENTER);
@@ -675,7 +709,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		txtDamageWeapon.setBounds(219, 261, 281, 30);
 		panelRegisterWeapon.add(txtDamageWeapon);
 
-		JLabel lblDamageWeapon = new JLabel("Daño");
+		JLabel lblDamageWeapon = new JLabel("DaÃ±o");
 		lblDamageWeapon.setForeground(Color.WHITE);
 		lblDamageWeapon.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
 		lblDamageWeapon.setBounds(97, 251, 112, 53);
@@ -844,7 +878,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		btnClean.addActionListener(this);
 		panelRegisterAgent.add(btnClean);
 
-		btnConfirm = new JButton("Añadir agente");
+		btnConfirm = new JButton("AÃ±adir agente");
 		btnConfirm.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnConfirm.setForeground(Color.WHITE);
 		btnConfirm.setBackground(Color.RED);
@@ -868,13 +902,13 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		txtPasswd1.setBounds(151, 535, 207, 30);
 		panelRegisterAgent.add(txtPasswd1);
 
-		lblAgentDataPasswd2 = new JLabel("Confirmar contraseña");
+		lblAgentDataPasswd2 = new JLabel("Confirmar contraseÃ±a");
 		lblAgentDataPasswd2.setForeground(Color.WHITE);
 		lblAgentDataPasswd2.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
 		lblAgentDataPasswd2.setBounds(497, 474, 207, 53);
 		panelRegisterAgent.add(lblAgentDataPasswd2);
 
-		JLabel lblAgentDataPasswd1 = new JLabel("Contraseña");
+		JLabel lblAgentDataPasswd1 = new JLabel("ContraseÃ±a");
 		lblAgentDataPasswd1.setForeground(Color.WHITE);
 		lblAgentDataPasswd1.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
 		lblAgentDataPasswd1.setBounds(151, 474, 207, 53);
@@ -1083,13 +1117,13 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		passwordFieldModif.setBounds(151, 535, 207, 30);
 		panelModifyAgent.add(passwordFieldModif);
 
-		lblAgentDataPasswd2Modif = new JLabel("Confirmar contraseña");
+		lblAgentDataPasswd2Modif = new JLabel("Confirmar contraseÃ±a");
 		lblAgentDataPasswd2Modif.setForeground(Color.WHITE);
 		lblAgentDataPasswd2Modif.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
 		lblAgentDataPasswd2Modif.setBounds(497, 474, 207, 53);
 		panelModifyAgent.add(lblAgentDataPasswd2Modif);
 
-		lblAgentDataPasswd1Modif = new JLabel("Contraseña");
+		lblAgentDataPasswd1Modif = new JLabel("ContraseÃ±a");
 		lblAgentDataPasswd1Modif.setForeground(Color.WHITE);
 		lblAgentDataPasswd1Modif.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
 		lblAgentDataPasswd1Modif.setBounds(151, 474, 207, 53);
@@ -1228,11 +1262,15 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 			String matrizTablaAgents[][] = new String[agents.size()][1];
 
 			for (Agent newAgent : agents) {
-				matrizTablaAgents[contAgents][0] = newAgent.getAgentName() + " // " + newAgent.getAgentCode();
+				if (newAgent.isAgentIsOnActive())
+					matrizTablaAgents[contAgents][0] = newAgent.getAgentName() + " // " + newAgent.getAgentCode();
+				else
+					matrizTablaAgents[contAgents][0] = "X " + newAgent.getAgentName() + " // " + newAgent.getAgentCode()
+							+ " X";
 				contAgents++;
 			}
 
-			String tituloAgentes[] = { "Agentes" };
+			String tituloAgentes[] = { "Tods los agentes" };
 			scrollPane.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			scrollPane.setBounds(1770, 74, 150, 1006);
 			p.add(scrollPane);
@@ -1284,7 +1322,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		}
 
 		/*
-		 * Boton pestaña Agente
+		 * Boton pestaÃ±a Agente
 		 */
 		btnAgent = new JButton("Agente");
 		btnAgent.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -1298,7 +1336,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		p.add(btnAgent);
 
 		/*
-		 * Boton pestaña Mision
+		 * Boton pestaÃ±a Mision
 		 */
 		btnMission = new JButton("Mision");
 		btnMission.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -1311,7 +1349,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		p.add(btnMission);
 
 		/*
-		 * Boton pestaña Arma
+		 * Boton pestaÃ±a Arma
 		 */
 		btnWeapon = new JButton("Arma");
 		btnWeapon.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -1324,7 +1362,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		p.add(btnWeapon);
 
 		/*
-		 * Boton pestaña Mapa
+		 * Boton pestaÃ±a Mapa
 		 */
 		btnMap = new JButton("Mapa");
 		btnMap.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -1509,8 +1547,11 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 			 * Falta
 			 * 
 			 */
+		} else if (e.getSource().equals(comboBoxMissionMaps)) {
+			String newMap = comboBoxMissionMaps.getSelectedItem().toString();
+			String iconMap = "/resources/Loading_Screen_" + newMap + ".jpg";
+			lblMapIcon.setIcon(new ImageIcon(VMap.class.getResource(iconMap)));
 		}
-
 	}
 
 	private void cargarComboBoxes() throws ExceptionManager {
@@ -1530,25 +1571,25 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 
 		for (Agent newAgent : agents) {
 			if (!newAgent.isAgentIsOnMission())
-			comboBoxMissionAgent2.addItem(newAgent.getAgentName() + " // " + newAgent.getAgentCode());
+				comboBoxMissionAgent2.addItem(newAgent.getAgentName() + " // " + newAgent.getAgentCode());
 		}
 		comboBoxMissionAgent2.setSelectedIndex(-1);
 
 		for (Agent newAgent : agents) {
 			if (!newAgent.isAgentIsOnMission())
-			comboBoxMissionAgent3.addItem(newAgent.getAgentName() + " // " + newAgent.getAgentCode());
+				comboBoxMissionAgent3.addItem(newAgent.getAgentName() + " // " + newAgent.getAgentCode());
 		}
 		comboBoxMissionAgent3.setSelectedIndex(-1);
 
 		for (Agent newAgent : agents) {
 			if (!newAgent.isAgentIsOnMission())
-			comboBoxMissionAgent4.addItem(newAgent.getAgentName() + " // " + newAgent.getAgentCode());
+				comboBoxMissionAgent4.addItem(newAgent.getAgentName() + " // " + newAgent.getAgentCode());
 		}
 		comboBoxMissionAgent4.setSelectedIndex(-1);
 
 		for (Agent newAgent : agents) {
 			if (!newAgent.isAgentIsOnMission())
-			comboBoxMissionAgent5.addItem(newAgent.getAgentName() + " // " + newAgent.getAgentCode());
+				comboBoxMissionAgent5.addItem(newAgent.getAgentName() + " // " + newAgent.getAgentCode());
 		}
 		comboBoxMissionAgent5.setSelectedIndex(-1);
 
@@ -1633,19 +1674,9 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		}
 
 		for (Map newMap : maps) {
-			comboBoxMissionPrimaryMaps.addItem(newMap.getMapName());
+			comboBoxMissionMaps.addItem(newMap.getMapName());
 		}
-		comboBoxMissionPrimaryMaps.setSelectedIndex(-1);
-
-		/*
-		 * 
-		 * String getAgente = comboBoxMissionAgent1.getSelectedItem().toString();
-		 * 
-		 * String[] separatedGetAgent = getAgente.split(" ");
-		 * 
-		 * Agent newAgente = new Agent(); newAgente =
-		 * agentData.getAgentByID(Integer.parseInt(separatedGetAgent[2]));
-		 */
+		comboBoxMissionMaps.setSelectedIndex(0);
 	}
 
 	@Override
@@ -1655,7 +1686,6 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 				try {
 					List<Agent> agents = agentData.getAllAgents();
 					Collections.sort(agents);
-
 					Agent newAgent = new Agent();
 					table = (JTable) e.getSource();
 					int row = table.getSelectedRow();
@@ -1663,8 +1693,23 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 					Icon newIcon = new ImageIcon(
 							VPestaniasAgente.class.getResource("/resources/rotGamesLogo100x52.png"));
 					newAgent = agents.get(row);
-					JOptionPane.showMessageDialog(this, newAgent.getAgentName() + " " + newAgent.getAgentCode(),
-							"Agente", JOptionPane.DEFAULT_OPTION, newIcon);
+					if (newAgent.isAgentIsOnActive()) {
+						if (JOptionPane.showOptionDialog(this, "¿Desea hacer este agente inactivo?",
+								newAgent.getAgentName() + " " + newAgent.getAgentCode(), JOptionPane.YES_NO_OPTION,
+								JOptionPane.INFORMATION_MESSAGE, newIcon, optionsInActive, optionsInActive[0]) == 0)
+							agentData.makeAgentInactive(newAgent.getAgentCode());
+						else
+							JOptionPane.showMessageDialog(this, "El agente seguira activo", "Agente",
+									JOptionPane.INFORMATION_MESSAGE);
+					} else {
+						if (JOptionPane.showOptionDialog(this, "¿Desea hacer este agente activo?",
+								newAgent.getAgentName() + " " + newAgent.getAgentCode(), JOptionPane.YES_NO_OPTION,
+								JOptionPane.INFORMATION_MESSAGE, newIcon, optionsActive, optionsActive[0]) == 0)
+							agentData.makeAgentActive(newAgent.getAgentCode());
+						else
+							JOptionPane.showMessageDialog(this, "El agente seguira inactivo", "Agente",
+									JOptionPane.INFORMATION_MESSAGE);
+					}
 				} catch (ExceptionManager e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -1672,8 +1717,8 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 			}
 		} else if (e.getSource().equals(tableWeapons)) {
 			if (e.getClickCount() == 2) {
-				if (JOptionPane.showOptionDialog(this, "�Desea borrar o modificar este arma?", "Armas",
-						JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opciones, opciones[0]) == 0) {
+				if (JOptionPane.showOptionDialog(this, "¿Desea borrar o modificar este arma?", "Armas",
+						JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]) == 0) {
 					Weapon newWeapon = weaponData.getWeaponByName(
 							tableWeapons.getModel().getValueAt(tableWeapons.getSelectedRow(), 0).toString());
 					txtNameWeapon.setText(newWeapon.getWeaponName());
@@ -1754,7 +1799,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		List<Weapon> weaponsPrimary = null;
 		List<Weapon> weaponsSidearms = null;
 
-		String tituloWeapons[] = { "Nombre", "Tipo", "Subtipo", "Daño  (Cabeza / Cuerpo / Piernas)" };
+		String tituloWeapons[] = { "Nombre", "Tipo", "Subtipo", "DaÃ±o  (Cabeza / Cuerpo / Piernas)" };
 		scrollPaneWeapons.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		scrollPaneWeapons.setBounds(600, 100, 1150, 778);
 		panelBackgroundRegisterWeapon.add(scrollPaneWeapons);

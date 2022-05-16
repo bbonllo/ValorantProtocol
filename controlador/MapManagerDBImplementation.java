@@ -101,7 +101,7 @@ public class MapManagerDBImplementation implements MapManager {
 
 	@Override
 	public List<String> getAttackMissionAgents(String mapName) {
-		String ATTACKMISSIONSTADISTIC = "select a.agentName from agent a, mission m, attack_mission am where agentCode in(select agentCode from agent_on_mission group by agentCode having count(agentCode)) and m.missionCode = am.AttackmissionCode and m.mapName = ? order by a.agentCode asc limit 3";
+		String ATTACKMISSIONSTADISTIC = "select distinct a.agentName from agent a, mission m, attack_mission am, agent_on_mission aom where a.agentCode in(select agentCode from agent_on_mission group by agentCode having count(agentCode)) and a.agentCode=aom.agentCode and m.missionCode = am.attackMissionCode and am.attackMissionCode = aom.missionCode and m.mapName = ? order by a.agentCode asc limit 3";
 		ArrayList<String> nameAgents = new ArrayList<>();
 		ResultSet rs = null;
 		String nameAgent;
@@ -139,7 +139,7 @@ public class MapManagerDBImplementation implements MapManager {
 
 	@Override
 	public List<String> getDefendMissionAgents(String mapName) {
-		String DEFENDMISSIONSTADISTIC = "select a.agentName from agent a, mission m, defend_mission df where agentCode in(select agentCode from agent_on_mission group by agentCode having count(agentCode)) and m.missionCode = df.defendmissionCode and m.mapName = ? order by a.agentCode asc limit 3";
+		String DEFENDMISSIONSTADISTIC = "select distinct a.agentName from agent a, mission m, defend_mission am, agent_on_mission aom where a.agentCode in(select agentCode from agent_on_mission group by agentCode having count(agentCode)) and a.agentCode=aom.agentCode and m.missionCode = am.defendMissionCode and am.defendMissionCode = aom.missionCode and m.mapName = ? order by a.agentCode asc limit 3";
 		ArrayList<String> nameAgents = new ArrayList<>();
 		ResultSet rs = null;
 		String nameAgent;
