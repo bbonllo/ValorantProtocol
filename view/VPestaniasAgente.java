@@ -12,7 +12,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 import java.awt.Font;
@@ -63,7 +62,6 @@ import javax.swing.ButtonGroup;
 import javax.swing.JSeparator;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import java.util.Locale;
 
 public class VPestaniasAgente extends JFrame implements ActionListener, MouseListener {
 	private static final long serialVersionUID = 1L;
@@ -184,8 +182,6 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 	private JLabel lblDamageSubtype;
 	private JComboBox<String> comboBoxWeaponSubtype;
 	private JComboBox<String> comboBoxWeaponType;
-	private JLabel lblAscentMap;
-	private JLabel lblFractureMap;
 	private JComboBox<String> comboBoxMissionAgent5;
 	private JComboBox<String> comboBoxMissionAgent4;
 	private JComboBox<String> comboBoxMissionAgent3;
@@ -210,6 +206,13 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 	private JLabel lblMissionMapRegister;
 	private JComboBox<String> comboBoxMissionPrimaryMaps;
 	private JLabel lblNewLabel;
+	private JLabel lblBreezeMap;
+	private JLabel lblBindMap;
+	private JLabel lblIceboxMap;
+	private JLabel lblSplitMap;
+	private JLabel lblHavenMap;
+	private JLabel lblAscentMap;
+	private JLabel lblFractureMap;
 
 	/**
 	 * Create the frame.
@@ -263,7 +266,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		btnMinimize.kEndColor = Color.WHITE;
 		btnMinimize.kFillButton = false;
 		btnMinimize.setFont(new Font("Tahoma", Font.BOLD, 12));
-		btnMinimize.setText("—");
+		btnMinimize.setText("�");
 		btnMinimize.setBounds(1826, 0, 47, 37);
 		btnMinimize.addActionListener(this);
 		btnMinimize.addMouseListener(new MouseAdapter() {
@@ -310,6 +313,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 				btnClose.kFillButton = false; // Hacer transparente el boton
 			}
 		});
+
 		panelMap = new JPanel();
 		panelMap.setLayout(null);
 		panelMap.setBounds(0, 74, 1770, 1006);
@@ -369,6 +373,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 				.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/appBackgroundPanel.jpg")));
 		lblBackgroundPanelMap.setBounds(0, 0, 1920, 1006);
 		panelMap.add(lblBackgroundPanelMap);
+
 		panelMission = new JPanel();
 		panelMission.setLayout(null);
 		panelMission.setBounds(0, 74, 1770, 1006);
@@ -381,17 +386,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 
 		comboBoxMissionAgent5 = new JComboBox<String>();
 		comboBoxMissionAgent5.setBounds(1483, 124, 150, 30);
-		try {
-			List<Agent> agents = agentData.getAllAgents();
-			Collections.sort(agents);
-
-			for (Agent newAgent : agents) {
-				comboBoxMissionAgent5.addItem(newAgent.getAgentName() + " // " + newAgent.getAgentCode());
-			}
-		} catch (ExceptionManager e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		panelRegisterMission.add(comboBoxMissionAgent5);
 
 		lblNewLabel = new JLabel("");
 		lblNewLabel.setBounds(147, 524, 350, 197);
@@ -493,8 +488,6 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		lblMissionWeaponRegister1.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
 		lblMissionWeaponRegister1.setBounds(135, 189, 150, 40);
 		panelRegisterMission.add(lblMissionWeaponRegister1);
-		comboBoxMissionAgent5.setSelectedIndex(-1);
-		panelRegisterMission.add(comboBoxMissionAgent5);
 
 		comboBoxMissionAgent2 = new JComboBox<String>();
 		comboBoxMissionAgent2.setBounds(472, 124, 150, 30);
@@ -565,12 +558,14 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		panelHistoricMission.add(panelBackgroundHistoricMission);
 
 		btnHistoricMission = new JButton("Historial");
+		btnHistoricMission.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnHistoricMission.setBorder(null);
 		btnHistoricMission.setBounds(884, 0, 177, 50);
 		btnHistoricMission.addActionListener(this);
 		panelMission.add(btnHistoricMission);
 
 		btnRegisterMission = new JButton("Alta");
+		btnRegisterMission.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnRegisterMission.setBorder(null);
 		btnRegisterMission.setBounds(707, 0, 177, 50);
 		btnRegisterMission.addActionListener(this);
@@ -581,6 +576,72 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 				.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/appBackgroundPanel.jpg")));
 		lblBackgroundPanelMission.setBounds(0, 0, 1770, 1006);
 		panelMission.add(lblBackgroundPanelMission);
+		panelMap = new JPanel();
+		panelMap.setLayout(null);
+		panelMap.setBounds(0, 74, 1770, 1006);
+		p.add(panelMap);
+
+		lblFractureMap = new JLabel("");
+		lblFractureMap.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblFractureMap.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/fracture.jpg")));
+		lblFractureMap.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		lblFractureMap.setBounds(1115, 119, 480, 240);
+		lblFractureMap.addMouseListener(this);
+		panelMap.add(lblFractureMap);
+
+		lblAscentMap = new JLabel("");
+		lblAscentMap.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblAscentMap.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/ascent.jpg")));
+		lblAscentMap.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		lblAscentMap.setBounds(1115, 357, 480, 480);
+		lblAscentMap.addMouseListener(this);
+		panelMap.add(lblAscentMap);
+
+		lblBreezeMap = new JLabel("");
+		lblBreezeMap.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblBreezeMap.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/breeze.jpg")));
+		lblBreezeMap.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		lblBreezeMap.setBounds(637, 597, 480, 240);
+		lblBreezeMap.addMouseListener(this);
+		panelMap.add(lblBreezeMap);
+
+		lblIceboxMap = new JLabel("");
+		lblIceboxMap.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblIceboxMap.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/icebox.jpg")));
+		lblIceboxMap.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		lblIceboxMap.setBounds(637, 357, 480, 242);
+		lblIceboxMap.addMouseListener(this);
+		panelMap.add(lblIceboxMap);
+
+		lblHavenMap = new JLabel("");
+		lblHavenMap.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblHavenMap.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/heaven.jpg")));
+		lblHavenMap.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		lblHavenMap.setBounds(637, 119, 480, 240);
+		lblHavenMap.addMouseListener(this);
+		panelMap.add(lblHavenMap);
+
+		lblSplitMap = new JLabel("");
+		lblSplitMap.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblSplitMap.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/split.jpg")));
+		lblSplitMap.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		lblSplitMap.setBounds(159, 597, 480, 240);
+		lblSplitMap.addMouseListener(this);
+		panelMap.add(lblSplitMap);
+
+		lblBindMap = new JLabel("");
+		lblBindMap.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblBindMap.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/bind.jpg")));
+		lblBindMap.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		lblBindMap.setBounds(159, 119, 480, 480);
+		lblBindMap.addMouseListener(this);
+		panelMap.add(lblBindMap);
+
+		JLabel lblBackgroundPanelMap = new JLabel("");
+		lblBackgroundPanelMap
+				.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/appBackgroundPanel.jpg")));
+		lblBackgroundPanelMap.setBounds(0, 0, 1920, 1006);
+		panelMap.add(lblBackgroundPanelMap);
 		panelWeapon = new JPanel();
 		panelWeapon.setLayout(null);
 		panelWeapon.setBounds(0, 74, 1770, 1006);
@@ -608,6 +669,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		panelRegisterWeapon.add(comboBoxWeaponType);
 
 		btnModifyWeapon = new JButton("Modificar arma");
+		btnModifyWeapon.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnModifyWeapon.setForeground(Color.WHITE);
 		btnModifyWeapon.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
 		btnModifyWeapon.setBorder(null);
@@ -616,6 +678,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		panelRegisterWeapon.add(btnModifyWeapon);
 
 		btnDeleteWeapon = new JButton("Borrar arma");
+		btnDeleteWeapon.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnDeleteWeapon.setForeground(Color.WHITE);
 		btnDeleteWeapon.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
 		btnDeleteWeapon.setBorder(null);
@@ -625,6 +688,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		panelRegisterWeapon.add(btnDeleteWeapon);
 
 		btnAddWeapon = new JButton("Crear arma");
+		btnAddWeapon.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnAddWeapon.setBackground(Color.RED);
 		btnAddWeapon.setForeground(Color.WHITE);
 		btnAddWeapon.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
@@ -712,6 +776,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		panelAgent.setLayout(null);
 
 		btnModifyAgent = new JButton("Modificacion");
+		btnModifyAgent.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnModifyAgent.setBorder(null);
 		btnModifyAgent.setBounds(974, 0, 177, 50);
 		btnModifyAgent.addActionListener(this);
@@ -831,6 +896,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		panelRegisterAgent.add(lblAgentHabilitiesTitle);
 
 		btnClean = new JButton("Limiar datos");
+		btnClean.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnClean.setForeground(Color.WHITE);
 		btnClean.setBackground(new Color(255, 0, 0));
 		btnClean.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 12));
@@ -840,6 +906,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		panelRegisterAgent.add(btnClean);
 
 		btnConfirm = new JButton("Añadir agente");
+		btnConfirm.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnConfirm.setForeground(Color.WHITE);
 		btnConfirm.setBackground(Color.RED);
 		btnConfirm.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 12));
@@ -1168,12 +1235,14 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		panelAgent.add(btnModifyAgent);
 
 		btnRegisterAgent = new JButton("Alta");
+		btnRegisterAgent.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnRegisterAgent.setBorder(null);
 		btnRegisterAgent.setBounds(620, 0, 177, 50);
 		btnRegisterAgent.addActionListener(this);
 		panelAgent.add(btnRegisterAgent);
 
 		btnRemoveAgent = new JButton("Baja");
+		btnRemoveAgent.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnRemoveAgent.setBorder(null);
 		btnRemoveAgent.setBounds(797, 0, 177, 50);
 		btnRemoveAgent.addActionListener(this);
@@ -1279,6 +1348,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		 * Boton pestaña Agente
 		 */
 		btnAgent = new JButton("Agente");
+		btnAgent.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnAgent.setBorderPainted(false);
 		btnAgent.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		btnAgent.setForeground(Color.WHITE);
@@ -1292,6 +1362,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		 * Boton pestaña Mision
 		 */
 		btnMission = new JButton("Mision");
+		btnMission.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnMission.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		btnMission.setForeground(Color.WHITE);
 		btnMission.setBackground(new Color(0, 0, 102));
@@ -1304,6 +1375,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		 * Boton pestaña Arma
 		 */
 		btnWeapon = new JButton("Arma");
+		btnWeapon.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnWeapon.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		btnWeapon.setForeground(Color.WHITE);
 		btnWeapon.setBackground(new Color(0, 0, 102));
@@ -1316,6 +1388,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		 * Boton pestaña Mapa
 		 */
 		btnMap = new JButton("Mapa");
+		btnMap.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnMap.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		btnMap.setForeground(Color.WHITE);
 		btnMap.setBackground(new Color(0, 0, 102));
@@ -1343,7 +1416,12 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		lblBackground.setBounds(0, 0, 1920, 1080);
 		p.add(lblBackground);
 
-		cargarComboBoxes();
+		try {
+			cargarComboBoxes();
+		} catch (ExceptionManager e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
 	}
 
@@ -1496,40 +1574,44 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 
 	}
 
-	private void cargarComboBoxes() {
+	private void cargarComboBoxes() throws ExceptionManager {
 
 		/*
 		 * Carga de Agentes
 		 */
 
-		List<Agent> agents = null;
-		try {
-			agents = agentData.getAllAgents();
-			Collections.sort(agents);
-		} catch (ExceptionManager e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		List<Agent> agents = agentData.getAllActiveAgents();
+		Collections.sort(agents);
 
 		for (Agent newAgent : agents) {
+			if (!newAgent.isAgentIsOnMission())
+				comboBoxMissionAgent1.addItem(newAgent.getAgentName() + " // " + newAgent.getAgentCode());
+		}
+		comboBoxMissionAgent1.setSelectedIndex(-1);
+
+		for (Agent newAgent : agents) {
+			if (!newAgent.isAgentIsOnMission())
 			comboBoxMissionAgent2.addItem(newAgent.getAgentName() + " // " + newAgent.getAgentCode());
 		}
 		comboBoxMissionAgent2.setSelectedIndex(-1);
 
 		for (Agent newAgent : agents) {
+			if (!newAgent.isAgentIsOnMission())
+			comboBoxMissionAgent3.addItem(newAgent.getAgentName() + " // " + newAgent.getAgentCode());
+		}
+		comboBoxMissionAgent3.setSelectedIndex(-1);
+
+		for (Agent newAgent : agents) {
+			if (!newAgent.isAgentIsOnMission())
 			comboBoxMissionAgent4.addItem(newAgent.getAgentName() + " // " + newAgent.getAgentCode());
 		}
 		comboBoxMissionAgent4.setSelectedIndex(-1);
 
 		for (Agent newAgent : agents) {
-			comboBoxMissionAgent1.addItem(newAgent.getAgentName() + " // " + newAgent.getAgentCode());
+			if (!newAgent.isAgentIsOnMission())
+			comboBoxMissionAgent5.addItem(newAgent.getAgentName() + " // " + newAgent.getAgentCode());
 		}
-		comboBoxMissionAgent1.setSelectedIndex(-1);
-
-		for (Agent newAgent : agents) {
-			comboBoxMissionAgent3.addItem(newAgent.getAgentName() + " // " + newAgent.getAgentCode());
-		}
-		comboBoxMissionAgent3.setSelectedIndex(-1);
+		comboBoxMissionAgent5.setSelectedIndex(-1);
 
 		/*
 		 * Carga de Armas
@@ -1651,7 +1733,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 			}
 		} else if (e.getSource().equals(tableWeapons)) {
 			if (e.getClickCount() == 2) {
-				if (JOptionPane.showOptionDialog(this, "¿Desea borrar o modificar este arma?", "Armas",
+				if (JOptionPane.showOptionDialog(this, "�Desea borrar o modificar este arma?", "Armas",
 						JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opciones, opciones[0]) == 0) {
 					Weapon newWeapon = weaponData.getWeaponByName(
 							tableWeapons.getModel().getValueAt(tableWeapons.getSelectedRow(), 0).toString());
@@ -1674,8 +1756,28 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 					btnAddWeapon.setEnabled(false);
 				}
 			}
+		} else if (e.getSource().equals(lblBreezeMap)) {
+			VMap vMap = new VMap(mapData, this, true, "Breeze");
+			vMap.setVisible(true);
+		} else if (e.getSource().equals(lblBindMap)) {
+			VMap vMap = new VMap(mapData, this, true, "Bind");
+			vMap.setVisible(true);
+		} else if (e.getSource().equals(lblIceboxMap)) {
+			VMap vMap = new VMap(mapData, this, true, "Icebox");
+			vMap.setVisible(true);
+		} else if (e.getSource().equals(lblSplitMap)) {
+			VMap vMap = new VMap(mapData, this, true, "Split");
+			vMap.setVisible(true);
+		} else if (e.getSource().equals(lblHavenMap)) {
+			VMap vMap = new VMap(mapData, this, true, "Haven");
+			vMap.setVisible(true);
+		} else if (e.getSource().equals(lblAscentMap)) {
+			VMap vMap = new VMap(mapData, this, true, "Ascent");
+			vMap.setVisible(true);
+		} else if (e.getSource().equals(lblFractureMap)) {
+			VMap vMap = new VMap(mapData, this, true, "Fracture");
+			vMap.setVisible(true);
 		}
-
 	}
 
 	@Override

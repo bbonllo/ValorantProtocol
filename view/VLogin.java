@@ -11,16 +11,12 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Font;
 import java.awt.Frame;
-import java.awt.JobAttributes;
 
 import com.k33ptoo.components.KButton;
 
 import controlador.AgentManager;
 import controlador.MapManager;
-import controlador.MapManagerDBImplementation;
 import controlador.WeaponManager;
-import model.Ability;
-import model.AbilityUltimate;
 import model.Agent;
 
 import java.awt.event.MouseMotionAdapter;
@@ -188,7 +184,7 @@ public class VLogin extends JFrame implements ActionListener {
 		p.add(btnLogin);
 
 		/*
-		 * Usuario y contraseÃ±a
+		 * Usuario y contraseÃƒÂ±a
 		 * 
 		 */
 
@@ -296,7 +292,7 @@ public class VLogin extends JFrame implements ActionListener {
 
 	private void login() {
 		if (txtUser.getText().isEmpty() || txtPasswd.getPassword().length == 0) {
-			JOptionPane.showMessageDialog(this, "Campo usuario o contraseña no rellenado", "Error",
+			JOptionPane.showMessageDialog(this, "Campo usuario o contraseÃ±a no rellenado", "Error",
 					JOptionPane.INFORMATION_MESSAGE);
 		} else {
 			try {

@@ -1,4 +1,3 @@
-
 package controlador;
 
 import java.sql.CallableStatement;
@@ -8,9 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import exceptions.ExceptionManager;
 import model.Ability;
 import model.AbilityUltimate;
@@ -71,7 +68,6 @@ public class AgentManagerDBImplementation implements AgentManager {
 
 				stmt = con.prepareStatement(SEARCHAgentsAbility);
 				stmt.setInt(1, agentCode);
-				
 
 				rs2 = stmt.executeQuery();
 				while (rs2.next()) {
@@ -339,7 +335,6 @@ public class AgentManagerDBImplementation implements AgentManager {
 	@Override
 	public List<Agent> getAllAgents() throws ExceptionManager {
 
-
 		// ArrayList<Agent> agentsList
 		List<Agent> agents = new ArrayList<>();
 
@@ -352,7 +347,6 @@ public class AgentManagerDBImplementation implements AgentManager {
 		try {
 			stmt = con.prepareStatement(SEARCHAllAgents);
 			rs = stmt.executeQuery();
-			
 
 			while (rs.next()) {
 
@@ -445,7 +439,6 @@ public class AgentManagerDBImplementation implements AgentManager {
 				stmt.setInt(1, agentCode);
 
 				rs2 = stmt.executeQuery();
-				
 
 				int cont = 0;
 				while (rs2.next()) {
