@@ -394,6 +394,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 				agentIntro = new Agent();
 				agentIntro.setAgentCode(rs.getInt("agentCode"));
 				agentIntro.setAgentName(rs.getString("agentName"));
+				agentIntro.setAgentIsOnMission(rs.getBoolean("agentIsOnMission"));
 				activeAgents.add(agentIntro);
 			}
 

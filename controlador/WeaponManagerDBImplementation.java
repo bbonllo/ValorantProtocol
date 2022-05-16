@@ -217,7 +217,7 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 				weapon.setWeaponDamage(rs.getInt("weaponDamage"));
 				weapon.setWeaponType(rs.getString("weaponType"));
 				weapon.setWeaponSubType(rs.getString("weaponSubType"));
-				weapon.setWeaponIsActive(false);
+				weapon.setWeaponIsActive(rs.getBoolean("weaponIsActive"));
 				weapons.add(weapon);
 			}
 
@@ -273,6 +273,7 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 				weapon.setWeaponType(rs.getString("weaponType"));
 				weapon.setWeaponSubType(rs.getString("weaponSubType"));
 				weapon.setWeaponDamage(rs.getInt("weaponDamage"));
+				weapon.setWeaponIsActive(rs.getBoolean("weaponIsActive"));
 				weapons.add(weapon);
 			}
 
@@ -329,7 +330,7 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 				weapon.setWeaponDamage(rs.getInt("weaponDamage"));
 				weapon.setWeaponType(rs.getString("weaponType"));
 				weapon.setWeaponSubType(rs.getString("weaponSubType"));
-				weapon.setWeaponIsActive(false);
+				weapon.setWeaponIsActive(rs.getBoolean("weaponIsActive"));
 				weapons.add(weapon);
 			}
 
