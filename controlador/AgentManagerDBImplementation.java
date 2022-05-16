@@ -386,7 +386,6 @@ public class AgentManagerDBImplementation implements AgentManager {
 		try {
 			stmt = con.prepareStatement(SEARCHAllAgents);
 			rs = stmt.executeQuery();
-			stmt.close();
 
 			while (rs.next()) {
 				agentIntro = new Agent();
@@ -402,7 +401,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 
 			if (rs != null)
 				rs.close();
-
+			stmt.close();
 			closeConnection();
 		} catch (SQLException e) {
 			String msg = "Error en recoger a todos los agentes";
