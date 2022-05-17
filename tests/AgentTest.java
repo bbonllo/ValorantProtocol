@@ -52,7 +52,7 @@ public class AgentTest {
 	@Test
 	public void testModifyAgent() {
 		// Preparar datos
-		int agentCode = 21;
+		int agentCode = 24;
 		String agentPasswd = "adadawd";
 		String agentName = "adadada";
 		String agentNationality = "adadadad";
@@ -129,8 +129,8 @@ public class AgentTest {
 	@Test
 	public void testLogin() {
 		// Preparar datos
-		int agentCode = 13;
-		String agentPasswd = "1234";
+		int agentCode = 21;
+		String agentPasswd = "adadawd";
 		AgentManager agMan = new AgentManagerDBImplementation();
 		// Llamar al método a testear
 		Agent agent = agMan.login(agentCode, agentPasswd);
