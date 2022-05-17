@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import exceptions.ExceptionManager;
 import model.Weapon;
 
 public class WeaponManagerDBImplementation implements WeaponManager {
@@ -45,7 +46,7 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 	}
 
 	@Override
-	public void addWeapon(Weapon weapon) {
+	public void addWeapon(Weapon weapon) throws ExceptionManager {
 		// TODO Auto-generated method stub
 
 		// Open the connection
@@ -61,9 +62,9 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 			stmt.setString(4, weapon.getWeaponSubType());
 			stmt.setBoolean(5, true);
 			stmt.executeUpdate();
-      
-			stmt.close();	
-      
+
+			stmt.close();
+
 		} catch (SQLException e1) {
 			System.out.println("Error en alta SQL");
 			e1.printStackTrace();
@@ -79,7 +80,7 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 	}
 
 	@Override
-	public Weapon getWeaponByName(String name) {
+	public Weapon getWeaponByName(String name) throws ExceptionManager {
 		// Variables
 		ResultSet rs = null;
 		Weapon weapon = null;
@@ -129,7 +130,7 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 	}
 
 	@Override
-	public boolean modifyWeapon(Weapon weapon) {
+	public boolean modifyWeapon(Weapon weapon) throws ExceptionManager {
 		// TODO Auto-generated method stub
 		boolean changes = false;
 
@@ -166,7 +167,7 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 	}
 
 	@Override
-	public void deleteWeapon(String name) {
+	public void deleteWeapon(String name) throws ExceptionManager {
 		// TODO Auto-generated method stub
 
 		// Open the connection
@@ -194,7 +195,7 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 	}
 
 	@Override
-	public List<Weapon> getAllWeapon() {
+	public List<Weapon> getAllWeapon() throws ExceptionManager {
 		// TODO Auto-generated method stub
 
 		// Variables
@@ -217,7 +218,7 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 				weapon.setWeaponDamage(rs.getInt("weaponDamage"));
 				weapon.setWeaponType(rs.getString("weaponType"));
 				weapon.setWeaponSubType(rs.getString("weaponSubType"));
-				weapon.setWeaponIsActive(rs.getBoolean("weaponIsActive"));
+				weapon.setWeaponIsActive(false);
 				weapons.add(weapon);
 			}
 
@@ -251,7 +252,7 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 	}
 
 	@Override
-	public List<Weapon> getAllSidearms() {
+	public List<Weapon> getAllSidearms() throws ExceptionManager {
 		// TODO Auto-generated method stub
 
 		// Variables
@@ -273,7 +274,6 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 				weapon.setWeaponType(rs.getString("weaponType"));
 				weapon.setWeaponSubType(rs.getString("weaponSubType"));
 				weapon.setWeaponDamage(rs.getInt("weaponDamage"));
-				weapon.setWeaponIsActive(rs.getBoolean("weaponIsActive"));
 				weapons.add(weapon);
 			}
 
@@ -307,7 +307,7 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 	}
 
 	@Override
-	public List<Weapon> getAllPrimary() {
+	public List<Weapon> getAllPrimary() throws ExceptionManager {
 		// TODO Auto-generated method stub
 
 		// Variables
@@ -323,14 +323,14 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 			stmt = con.prepareStatement(LISTweaponsPrimary);
 
 			rs = stmt.executeQuery();
-      
+
 			while (rs.next()) {
 				weapon = new Weapon();
 				weapon.setWeaponName(rs.getString("weaponName"));
 				weapon.setWeaponDamage(rs.getInt("weaponDamage"));
 				weapon.setWeaponType(rs.getString("weaponType"));
 				weapon.setWeaponSubType(rs.getString("weaponSubType"));
-				weapon.setWeaponIsActive(rs.getBoolean("weaponIsActive"));
+				weapon.setWeaponIsActive(false);
 				weapons.add(weapon);
 			}
 

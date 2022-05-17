@@ -17,16 +17,11 @@ public class MapManagerDBImplementation implements MapManager {
 	private ConnectionOpenClose conection = new ConnectionOpenClose();
 
 	@Override
-	public Map getMapByName(String mapName) {
+	public Map getMapByName(String mapName) throws ExceptionManager {
 		ResultSet rs = null;
 		Map mapIntro = null;
 
-		try {
-			con = conection.openConnection();
-		} catch (ExceptionManager e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		con = conection.openConnection();
 		String SEARCHMap = "SELECT * from map where mapName = ?";
 
 		try {
@@ -34,7 +29,6 @@ public class MapManagerDBImplementation implements MapManager {
 			stmt.setString(1, mapName);
 
 			rs = stmt.executeQuery();
-
 
 			while (rs.next()) {
 				mapIntro = new Map();
@@ -57,18 +51,12 @@ public class MapManagerDBImplementation implements MapManager {
 	}
 
 	@Override
-
 	public List<Map> getAllMaps() throws ExceptionManager {
 		List<Map> maps = new ArrayList<>();
 		ResultSet rs = null;
 		Map mapIntro = null;
 
-		try {
-			con = conection.openConnection();
-		} catch (ExceptionManager e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		con = conection.openConnection();
 		String SEARCHMap = "SELECT * from map";
 
 		try {
@@ -83,6 +71,8 @@ public class MapManagerDBImplementation implements MapManager {
 			}
 			if (rs != null)
 				rs.close();
+
+			conection.closeConnection(stmt, con);
 		} catch (SQLException e) {
 			String msg = "Error en recuperar todos los mapas";
 			ExceptionManager x = new ExceptionManager(msg);
@@ -92,28 +82,17 @@ public class MapManagerDBImplementation implements MapManager {
 			e.printStackTrace();
 		}
 
-		try {
-			conection.closeConnection(stmt, con);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		return maps;
 	}
 
 	@Override
-	public List<String> getAttackMissionAgents(String mapName) {
-		String ATTACKMISSIONSTADISTIC = "select a.agentName from agent a, mission m, attack_mission am where agentCode in(select agentCode from agent_on_mission group by agentCode having count(agentCode)) and m.missionCode = am.AttackmissionCode and m.mapName = ? order by a.agentCode asc limit 3";
+	public List<String> getAttackMissionAgents(String mapName) throws ExceptionManager {
+		String ATTACKMISSIONSTADISTIC = "select distinct a.agentName from agent a, mission m, attack_mission am, agent_on_mission aom where a.agentCode in(select agentCode from agent_on_mission group by agentCode having count(agentCode)) and a.agentCode=aom.agentCode and m.missionCode = am.attackMissionCode and am.attackMissionCode = aom.missionCode and m.mapName = ? order by a.agentCode asc limit 3";
 		ArrayList<String> nameAgents = new ArrayList<>();
 		ResultSet rs = null;
 		String nameAgent;
 
-		try {
-			con = conection.openConnection();
-		} catch (ExceptionManager e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		con = conection.openConnection();
 
 		try {
 			stmt = con.prepareStatement(ATTACKMISSIONSTADISTIC);
@@ -140,18 +119,13 @@ public class MapManagerDBImplementation implements MapManager {
 	}
 
 	@Override
-	public List<String> getDefendMissionAgents(String mapName) {
-		String DEFENDMISSIONSTADISTIC = "select a.agentName from agent a, mission m, defend_mission df where agentCode in(select agentCode from agent_on_mission group by agentCode having count(agentCode)) and m.missionCode = df.defendmissionCode and m.mapName = ? order by a.agentCode asc limit 3";
+	public List<String> getDefendMissionAgents(String mapName) throws ExceptionManager {
+		String DEFENDMISSIONSTADISTIC = "select distinct a.agentName from agent a, mission m, defend_mission am, agent_on_mission aom where a.agentCode in(select agentCode from agent_on_mission group by agentCode having count(agentCode)) and a.agentCode=aom.agentCode and m.missionCode = am.defendMissionCode and am.defendMissionCode = aom.missionCode and m.mapName = ? order by a.agentCode asc limit 3";
 		ArrayList<String> nameAgents = new ArrayList<>();
 		ResultSet rs = null;
 		String nameAgent;
 
-		try {
-			con = conection.openConnection();
-		} catch (ExceptionManager e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		con = conection.openConnection();
 
 		try {
 			stmt = con.prepareStatement(DEFENDMISSIONSTADISTIC);
@@ -178,17 +152,12 @@ public class MapManagerDBImplementation implements MapManager {
 	}
 
 	@Override
-	public String getAttackMissionWeapon(String mapName) {
+	public String getAttackMissionWeapon(String mapName) throws ExceptionManager {
 		String ATTACKMISSIONWEAPONSTADISTIC = "select weaponName from agent_on_mission, agent a, mission m, attack_mission am where m.missionCode = am.attackmissionCode and m.mapName = ?  group by weaponName having count(weaponName) order by weaponName desc limit 1";
 		ResultSet rs = null;
 		String weaponName = null;
 
-		try {
-			con = conection.openConnection();
-		} catch (ExceptionManager e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		con = conection.openConnection();
 
 		try {
 			stmt = con.prepareStatement(ATTACKMISSIONWEAPONSTADISTIC);
@@ -214,17 +183,12 @@ public class MapManagerDBImplementation implements MapManager {
 	}
 
 	@Override
-	public String getDefendMissionWeapon(String mapName) {
+	public String getDefendMissionWeapon(String mapName) throws ExceptionManager {
 		String DEFENDMISSIONWEAPONSTADISTIC = "select weaponName from agent_on_mission, agent a, mission m, defend_mission df where m.missionCode = df.defendmissionCode and m.mapName = ?  group by weaponName having count(weaponName) order by weaponName desc limit 1";
 		ResultSet rs = null;
 		String weaponName = null;
 
-		try {
-			con = conection.openConnection();
-		} catch (ExceptionManager e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		con = conection.openConnection();
 
 		try {
 			stmt = con.prepareStatement(DEFENDMISSIONWEAPONSTADISTIC);
@@ -250,7 +214,7 @@ public class MapManagerDBImplementation implements MapManager {
 	}
 
 	@Override
-	public List<Integer> agentPercentageMapAttack(String mapName) {
+	public List<Integer> agentPercentageMapAttack(String mapName) throws ExceptionManager {
 		String DEFENDMISSIONWEAPONSTADISTIC = "select count(am.attackMissionCode) 'MapMissionTimes' from attack_mission am, mission m where m.mapName = ? and am.attackMissionCode = m.missionCode group by attackMissionCode limit 1";
 		String TimesAgentOnAttackMissionMap = "SELECT distinct count(agM.agentCode) 'AgentMissionTimesOnMap', agM.agentCode from agent_on_mission agM, mission m, attack_mission aM, map mP where aM.attackMissionCode=m.missionCode and m.mapName=mP.mapName and m.missionCode=agM.missionCode and m.mapName= ? group by agM.agentCode order by agM.agentCode asc limit 3;";
 		ResultSet rs = null;
@@ -259,12 +223,7 @@ public class MapManagerDBImplementation implements MapManager {
 		int mapTimes = 0;
 		int percentage = 0;
 
-		try {
-			con = conection.openConnection();
-		} catch (ExceptionManager e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		con = conection.openConnection();
 
 		try {
 			stmt = con.prepareStatement(DEFENDMISSIONWEAPONSTADISTIC);
@@ -305,7 +264,7 @@ public class MapManagerDBImplementation implements MapManager {
 	}
 
 	@Override
-	public List<Integer> agentPercentageMapDefend(String mapName) {
+	public List<Integer> agentPercentageMapDefend(String mapName) throws ExceptionManager {
 		String DEFENDMISSIONWEAPONSTADISTIC = "select count(am.defendMissionCode) 'MapMissionTimes' from defend_mission am, mission m where m.mapName = ? and am.defendMissionCode = m.missionCode group by defendMissionCode limit 1";
 		String TimesAgentOnDefendMissionMap = "SELECT distinct count(agM.agentCode) 'AgentMissionTimesOnMap', agM.agentCode from agent_on_mission agM, mission m, defend_mission aM, map mP where aM.defendMissionCode=m.missionCode and m.mapName=mP.mapName and m.missionCode=agM.missionCode and m.mapName= ? group by agM.agentCode order by agM.agentCode asc limit 3";
 		ResultSet rs = null;
@@ -314,12 +273,7 @@ public class MapManagerDBImplementation implements MapManager {
 		int mapTimes = 0;
 		int percentage = 0;
 
-		try {
-			con = conection.openConnection();
-		} catch (ExceptionManager e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		con = conection.openConnection();
 
 		try {
 			stmt = con.prepareStatement(DEFENDMISSIONWEAPONSTADISTIC);

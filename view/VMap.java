@@ -3,6 +3,7 @@ package view;
 import javax.swing.JDialog;
 
 import controlador.MapManager;
+import exceptions.ExceptionManager;
 import model.Map;
 
 import javax.swing.JLabel;
@@ -53,7 +54,7 @@ public class VMap extends JDialog {
 	private List<Integer> agentPercentageMapAttack = new ArrayList<>();
 	private List<Integer> agentPercentageMapDefend = new ArrayList<>();
 
-	public VMap(MapManager map, VPestaniasAgente vPestaniasAgente, boolean b, String mapName) {
+	public VMap(MapManager map, VPestaniasAgente vPestaniasAgente, boolean b, String mapName) throws ExceptionManager {
 		mapData = map;
 		setModal(true);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(VMap.class.getResource("/resources/rotGamesLogo.png")));
@@ -231,7 +232,7 @@ public class VMap extends JDialog {
 		cargarDatos(newMap, iconMap, mapName);
 	}
 
-	private void cargarDatos(Map newMap, String iconMap, String mapName) {
+	private void cargarDatos(Map newMap, String iconMap, String mapName) throws ExceptionManager {
 		boolean attack = true;
 		boolean defend = true;
 
