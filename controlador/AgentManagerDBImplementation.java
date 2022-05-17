@@ -169,8 +169,10 @@ public class AgentManagerDBImplementation implements AgentManager {
 
 			con = conection.openConnection();
 		} catch (SQLException e1) {
-			System.out.println("Error en alta SQL");
-			e1.printStackTrace();
+
+			String error = "Agente ya existe";
+			ExceptionManager uwu = new ExceptionManager(error);
+			throw uwu;
 		}
 
 	}
@@ -259,8 +261,10 @@ public class AgentManagerDBImplementation implements AgentManager {
 
 			con = conection.openConnection();
 		} catch (SQLException e1) {
-			System.out.println("Error en alta SQL");
-			e1.printStackTrace();
+
+			String error = "ERROR AL MODIFICAR EL AGENTE";
+			ExceptionManager uwu = new ExceptionManager(error);
+			throw uwu;
 		}
 
 	}
