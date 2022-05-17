@@ -202,7 +202,9 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 	private JComboBox<String> comboBoxMissionSidearmWeapon4;
 	private JComboBox<String> comboBoxMissionPrimaryWeapon5;
 	private JComboBox<String> comboBoxMissionSidearmWeapon5;
-	private Object[] opciones = { "Si", "No" };
+	private Object[] options = { "Si", "No" };
+	private Object[] optionsActive = { "Hacer activo", "Cancelar" };
+	private Object[] optionsInActive = { "Hacer inactivo", "Cancelar" };
 	private JLabel lblMissionMapRegister;
 	private JComboBox<String> comboBoxMissionPrimaryMaps;
 	private JLabel lblNewLabel;
@@ -266,7 +268,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		btnMinimize.kEndColor = Color.WHITE;
 		btnMinimize.kFillButton = false;
 		btnMinimize.setFont(new Font("Tahoma", Font.BOLD, 12));
-		btnMinimize.setText("ï¿½");
+		btnMinimize.setText("—");
 		btnMinimize.setBounds(1826, 0, 47, 37);
 		btnMinimize.addActionListener(this);
 		btnMinimize.addMouseListener(new MouseAdapter() {
@@ -313,67 +315,6 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 				btnClose.kFillButton = false; // Hacer transparente el boton
 			}
 		});
-
-		panelMap = new JPanel();
-		panelMap.setLayout(null);
-		panelMap.setBounds(0, 74, 1770, 1006);
-		p.add(panelMap);
-
-		lblFractureMap = new JLabel("");
-		lblFractureMap.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblFractureMap.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/fracture.jpg")));
-		lblFractureMap.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-		lblFractureMap.setBounds(1115, 119, 480, 240);
-		panelMap.add(lblFractureMap);
-
-		lblAscentMap = new JLabel("");
-		lblAscentMap.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblAscentMap.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/ascent.jpg")));
-		lblAscentMap.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-		lblAscentMap.setBounds(1115, 357, 480, 480);
-		panelMap.add(lblAscentMap);
-
-		JLabel lblBreezeMap = new JLabel("");
-		lblBreezeMap.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblBreezeMap.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/breeze.jpg")));
-		lblBreezeMap.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-		lblBreezeMap.setBounds(637, 597, 480, 240);
-		panelMap.add(lblBreezeMap);
-
-		JLabel lblIceboxMap = new JLabel("");
-		lblIceboxMap.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblIceboxMap.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/icebox.jpg")));
-		lblIceboxMap.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-		lblIceboxMap.setBounds(637, 357, 480, 242);
-		panelMap.add(lblIceboxMap);
-
-		JLabel lblHeavenMap = new JLabel("");
-		lblHeavenMap.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblHeavenMap.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/heaven.jpg")));
-		lblHeavenMap.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-		lblHeavenMap.setBounds(637, 119, 480, 240);
-		panelMap.add(lblHeavenMap);
-
-		JLabel lblSplitMap = new JLabel("");
-		lblSplitMap.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblSplitMap.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/split.jpg")));
-		lblSplitMap.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-		lblSplitMap.setBounds(159, 597, 480, 240);
-		panelMap.add(lblSplitMap);
-
-		JLabel lblBindMap = new JLabel("");
-		lblBindMap.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblBindMap.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/bind.jpg")));
-		lblBindMap.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-		lblBindMap.setBounds(159, 119, 480, 480);
-		panelMap.add(lblBindMap);
-
-		JLabel lblBackgroundPanelMap = new JLabel("");
-		lblBackgroundPanelMap
-				.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/appBackgroundPanel.jpg")));
-		lblBackgroundPanelMap.setBounds(0, 0, 1920, 1006);
-		panelMap.add(lblBackgroundPanelMap);
-
 		panelMission = new JPanel();
 		panelMission.setLayout(null);
 		panelMission.setBounds(0, 74, 1770, 1006);
@@ -1293,7 +1234,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 				contAgents++;
 			}
 
-			String tituloAgentes[] = { "Agentes" };
+			String tituloAgentes[] = { "Tods los agentes" };
 			scrollPane.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			scrollPane.setBounds(1770, 74, 150, 1006);
 			p.add(scrollPane);
@@ -1591,25 +1532,25 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 
 		for (Agent newAgent : agents) {
 			if (!newAgent.isAgentIsOnMission())
-			comboBoxMissionAgent2.addItem(newAgent.getAgentName() + " // " + newAgent.getAgentCode());
+				comboBoxMissionAgent2.addItem(newAgent.getAgentName() + " // " + newAgent.getAgentCode());
 		}
 		comboBoxMissionAgent2.setSelectedIndex(-1);
 
 		for (Agent newAgent : agents) {
 			if (!newAgent.isAgentIsOnMission())
-			comboBoxMissionAgent3.addItem(newAgent.getAgentName() + " // " + newAgent.getAgentCode());
+				comboBoxMissionAgent3.addItem(newAgent.getAgentName() + " // " + newAgent.getAgentCode());
 		}
 		comboBoxMissionAgent3.setSelectedIndex(-1);
 
 		for (Agent newAgent : agents) {
 			if (!newAgent.isAgentIsOnMission())
-			comboBoxMissionAgent4.addItem(newAgent.getAgentName() + " // " + newAgent.getAgentCode());
+				comboBoxMissionAgent4.addItem(newAgent.getAgentName() + " // " + newAgent.getAgentCode());
 		}
 		comboBoxMissionAgent4.setSelectedIndex(-1);
 
 		for (Agent newAgent : agents) {
 			if (!newAgent.isAgentIsOnMission())
-			comboBoxMissionAgent5.addItem(newAgent.getAgentName() + " // " + newAgent.getAgentCode());
+				comboBoxMissionAgent5.addItem(newAgent.getAgentName() + " // " + newAgent.getAgentCode());
 		}
 		comboBoxMissionAgent5.setSelectedIndex(-1);
 
@@ -1716,7 +1657,6 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 				try {
 					List<Agent> agents = agentData.getAllAgents();
 					Collections.sort(agents);
-
 					Agent newAgent = new Agent();
 					table = (JTable) e.getSource();
 					int row = table.getSelectedRow();
@@ -1733,8 +1673,8 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 			}
 		} else if (e.getSource().equals(tableWeapons)) {
 			if (e.getClickCount() == 2) {
-				if (JOptionPane.showOptionDialog(this, "ï¿½Desea borrar o modificar este arma?", "Armas",
-						JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opciones, opciones[0]) == 0) {
+				if (JOptionPane.showOptionDialog(this, "¿Desea borrar o modificar este arma?", "Armas",
+						JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]) == 0) {
 					Weapon newWeapon = weaponData.getWeaponByName(
 							tableWeapons.getModel().getValueAt(tableWeapons.getSelectedRow(), 0).toString());
 					txtNameWeapon.setText(newWeapon.getWeaponName());

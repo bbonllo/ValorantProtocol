@@ -431,7 +431,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 				getAgent.setAgentRol(rs.getString("agentRol"));
 				getAgent.setAgentIsAdmin(rs.getBoolean("agentIsAdmin"));
 				getAgent.setAgentIsOnMission(rs.getBoolean("agentIsOnMission"));
-				getAgent.setAgentIsOnMission(rs.getBoolean("agentIsActive"));
+				getAgent.setAgentIsOnActive(rs.getBoolean("agentIsActive"));
 
 				final String SEARCHAgentsAbility = "SELECT * from ability where agentCode = ? order by orbNum asc";
 
