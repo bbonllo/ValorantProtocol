@@ -17,27 +17,10 @@ public class AgentManagerDBImplementation implements AgentManager {
 
 	private Connection con;
 	private PreparedStatement stmt;
-
-	private void openConnection() {
-		try {
-			String url = "jdbc:mysql://localhost:3306/valorant_protocol?serverTimezone=Europe/Madrid&useSSL=false";
-			con = DriverManager.getConnection(url, "root", "abcd*1234");
-		} catch (SQLException e) {
-			System.out.println("Error en la conexion");
-			e.printStackTrace();
-		}
-
-	}
-
-	private void closeConnection() throws SQLException {
-		if (stmt != null)
-			stmt.close();
-		if (con != null)
-			con.close();
-	}
+	private ConnectionOpenClose conection = new ConnectionOpenClose();
 
 	@Override
-	public Agent getAgentByID(int agentCode) {
+	public Agent getAgentByID(int agentCode) throws ExceptionManager {
 		ResultSet rs = null;
 		ResultSet rs2 = null;
 		Agent getAgent = null;
@@ -45,7 +28,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 		Ability[] agentAbilities = new Ability[4];
 		int cont = 0;
 
-		openConnection();
+		con = conection.openConnection();
 		final String SEARCHAgent = "SELECT * from Agent where agentCode = ?";
 
 		try {
@@ -93,7 +76,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 			if (rs != null)
 				rs.close();
 			stmt.close();
-			closeConnection();
+			con = conection.openConnection();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -103,7 +86,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 	}
 
 	@Override
-	public void registerAgent(Agent registerAgent) {
+	public void registerAgent(Agent registerAgent) throws ExceptionManager {
 		Ability ability1;
 		Ability ability2;
 		Ability ability3;
@@ -111,7 +94,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 		Ability[] agentAbilities = new Ability[4];
 
 		// Abrimos la conexi�n
-		this.openConnection();
+		con = conection.openConnection();
 
 		// Meto los valores del agente dentro del stmt:
 		try {
@@ -183,22 +166,17 @@ public class AgentManagerDBImplementation implements AgentManager {
 
 			stmt.executeUpdate();
 			stmt.close();
+
+			con = conection.openConnection();
 		} catch (SQLException e1) {
 			System.out.println("Error en alta SQL");
 			e1.printStackTrace();
-		} finally {
-			try {
-				this.closeConnection();
-			} catch (SQLException e) {
-				System.out.println("Error en cierre de la BD");
-				e.printStackTrace();
-			}
 		}
 
 	}
 
 	@Override
-	public void modifyAgent(Agent modifyAgent) {
+	public void modifyAgent(Agent modifyAgent) throws ExceptionManager {
 		Ability ability1;
 		Ability ability2;
 		Ability ability3;
@@ -206,7 +184,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 		Ability[] agentAbilities = new Ability[4];
 
 		// Abrimos la conexi�n
-		this.openConnection();
+		con = conection.openConnection();
 
 		// Meto los valores del agente dentro del stmt:
 		try {
@@ -279,24 +257,18 @@ public class AgentManagerDBImplementation implements AgentManager {
 			stmt.executeUpdate();
 			stmt.close();
 
+			con = conection.openConnection();
 		} catch (SQLException e1) {
 			System.out.println("Error en alta SQL");
 			e1.printStackTrace();
-		} finally {
-			try {
-				this.closeConnection();
-			} catch (SQLException e) {
-				System.out.println("Error en cierre de la BD");
-				e.printStackTrace();
-			}
 		}
 
 	}
 
 	@Override
-	public void makeAgentInactive(int agentCode) {
+	public void makeAgentInactive(int agentCode) throws ExceptionManager {
 
-		openConnection();
+		con = conection.openConnection();
 		final String deleteAgent = "update agent set agentIsActive = false where agentCode = ?";
 
 		try {
@@ -305,7 +277,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 
 			stmt.executeUpdate();
 			stmt.close();
-			closeConnection();
+			con = conection.openConnection();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -314,9 +286,9 @@ public class AgentManagerDBImplementation implements AgentManager {
 	}
 
 	@Override
-	public void makeAgentActive(int agentCode) {
+	public void makeAgentActive(int agentCode) throws ExceptionManager {
 
-		openConnection();
+		con = conection.openConnection();
 		final String addAgent = "update agent set agentIsActive = true where agentCode = ?";
 
 		try {
@@ -325,7 +297,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 
 			stmt.executeUpdate();
 			stmt.close();
-			closeConnection();
+			con = conection.openConnection();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -341,7 +313,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 		ResultSet rs = null;
 		Agent agentIntro = null;
 
-		openConnection();
+		con = conection.openConnection();
 		String SEARCHAllAgents = "SELECT * from agent order by agentCode";
 
 		try {
@@ -363,7 +335,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 			if (rs != null)
 				rs.close();
 			stmt.close();
-			closeConnection();
+			con = conection.openConnection();
 		} catch (SQLException e) {
 			String msg = "Error en recoger a todos los agentes";
 			ExceptionManager x = new ExceptionManager(msg);
@@ -373,14 +345,14 @@ public class AgentManagerDBImplementation implements AgentManager {
 	}
 
 	@Override
-	public List<Agent> getAllActiveAgents() {
+	public List<Agent> getAllActiveAgents() throws ExceptionManager {
 		// TODO Auto-generated method stub
 
 		List<Agent> activeAgents = new ArrayList<>();
 		ResultSet rs = null;
 		Agent agentIntro = null;
 
-		openConnection();
+		con = conection.openConnection();
 		String SEARCHAllAgents = "select * from agent where agentIsActive = true";
 
 		try {
@@ -402,7 +374,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 			if (rs != null)
 				rs.close();
 			stmt.close();
-			closeConnection();
+			con = conection.openConnection();
 		} catch (SQLException e) {
 			String msg = "Error en recoger a todos los agentes";
 			ExceptionManager x = new ExceptionManager(msg);
@@ -411,7 +383,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 	}
 
 	@Override
-	public Agent login(int agentCode, String passwd) {
+	public Agent login(int agentCode, String passwd) throws ExceptionManager {
 
 		ResultSet rs = null;
 		ResultSet rs2 = null;
@@ -420,7 +392,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 		AbilityUltimate abilityUltimate = new AbilityUltimate();
 		Ability[] agentAbilities = new Ability[4];
 
-		openConnection();
+		con = conection.openConnection();
 		final String SEARCHAgent = "SELECT * from Agent where agentCode = ? and agentPasswd = ?";
 
 		try {
@@ -472,7 +444,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 			if (rs != null)
 				rs.close();
 			stmt.close();
-			closeConnection();
+			con = conection.openConnection();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -481,12 +453,12 @@ public class AgentManagerDBImplementation implements AgentManager {
 	}
 
 	@Override
-	public int[] getTeammates(int agentCode) {
+	public int[] getTeammates(int agentCode) throws ExceptionManager {
 		int i = 0;
 		int[] teammates = new int[5];
 		ResultSet rs = null;
 
-		openConnection();
+		con = conection.openConnection();
 		String SEARCHteammates = "{CALL bring(?)}";
 		String getTeammates = "Select * from log_record";
 
@@ -511,7 +483,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 			if (rs != null)
 				rs.close();
 
-			closeConnection();
+			con = conection.openConnection();
 		} catch (SQLException e) {
 			String msg = "Error en recoger a todos los agentes";
 			ExceptionManager x = new ExceptionManager(msg);

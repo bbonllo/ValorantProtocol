@@ -2,24 +2,25 @@ package controlador;
 
 import java.util.List;
 
+import exceptions.ExceptionManager;
 import model.AttackMission;
 import model.DefendMission;
 import model.Mission;
 
 public interface MissionManager {
 
-	public Mission getMissionByCod(int codM);
+	public Mission getMissionByCod(int codM) throws ExceptionManager;
 
-	public int registerMission(Mission wMisson, char type);
+	public int registerMission(Mission wMisson, char type) throws ExceptionManager;
 	
-	public void sendAgentToMission(int codM, int codA, String primaryWeapon, String secondaryWeapon);
+	public void sendAgentToMission(int codM, int codA, String primaryWeapon, String secondaryWeapon) throws ExceptionManager;
 
-	public void endMission(int codM, char type);
+	public void endMission(int codM, char type) throws ExceptionManager;
 
-	public List<Mission> getAllMissions();
+	public List<Mission> getAllMissions() throws ExceptionManager;
 
-	public List<AttackMission> getAllAttackMissions();
+	public List<AttackMission> getAllAttackMissions() throws ExceptionManager;
 
-	public List<DefendMission> getAllDefendMissions();
+	public List<DefendMission> getAllDefendMissions() throws ExceptionManager;
 
 }

@@ -20,16 +20,12 @@ public class MissionManagerBDImplementation implements MissionManager {
 	private ConnectionOpenClose conection = new ConnectionOpenClose();
 
 	@Override
-	public Mission getMissionByCod(int codM) {
+	public Mission getMissionByCod(int codM) throws ExceptionManager {
 		ResultSet rs = null;
 		Mission getMission = null;
 
 		// Open the connection
-		try {
 			con = conection.openConnection();
-		} catch (ExceptionManager e1) {
-
-		}
 		String LISTMission = "SELECT * FROM MISSION WHERE missionCode = ? ";
 
 		// Code
@@ -84,7 +80,7 @@ public class MissionManagerBDImplementation implements MissionManager {
 	}
 
 	@Override
-	public int registerMission(Mission wMisson, char type) {
+	public int registerMission(Mission wMisson, char type) throws ExceptionManager {
 		ResultSet rs = null;
 		int missionCode = -1;
 
@@ -128,7 +124,8 @@ public class MissionManagerBDImplementation implements MissionManager {
 	}
 
 	@Override
-	public void sendAgentToMission(int codM, int codA, String primaryWeapon, String secondaryWeapon) {
+	public void sendAgentToMission(int codM, int codA, String primaryWeapon, String secondaryWeapon)
+			throws ExceptionManager {
 
 		String SENDagentToMission = "{CALL sendAgentToMission(?,?,?,?)}";
 
@@ -160,7 +157,7 @@ public class MissionManagerBDImplementation implements MissionManager {
 	}
 
 	@Override
-	public void endMission(int codM, char type) {
+	public void endMission(int codM, char type) throws ExceptionManager {
 		String ENDMission = "{CALL endMission(?,?)}";
 		try {
 			con = conection.openConnection();
@@ -189,7 +186,7 @@ public class MissionManagerBDImplementation implements MissionManager {
 	}
 
 	@Override
-	public List<Mission> getAllMissions() {
+	public List<Mission> getAllMissions() throws ExceptionManager {
 		List<Mission> allMissions = new ArrayList<>();
 		ResultSet rs = null;
 		ResultSet rs2 = null;
@@ -265,7 +262,7 @@ public class MissionManagerBDImplementation implements MissionManager {
 	}
 
 	@Override
-	public List<AttackMission> getAllAttackMissions() {
+	public List<AttackMission> getAllAttackMissions() throws ExceptionManager {
 		List<AttackMission> attackMissions = new ArrayList<>();
 		ResultSet rs = null;
 		AttackMission missionIntro = null;
@@ -311,7 +308,7 @@ public class MissionManagerBDImplementation implements MissionManager {
 	}
 
 	@Override
-	public List<DefendMission> getAllDefendMissions() {
+	public List<DefendMission> getAllDefendMissions() throws ExceptionManager {
 		List<DefendMission> DefendMissions = new ArrayList<>();
 		ResultSet rs = null;
 		DefendMission missionIntro = null;

@@ -17,6 +17,7 @@ import com.k33ptoo.components.KButton;
 import controlador.AgentManager;
 import controlador.MapManager;
 import controlador.WeaponManager;
+import exceptions.ExceptionManager;
 import model.Agent;
 
 import java.awt.event.MouseMotionAdapter;
@@ -315,6 +316,9 @@ public class VLogin extends JFrame implements ActionListener {
 			} catch (NumberFormatException e1) {
 				JOptionPane.showMessageDialog(this, "Usuario tiene que ser un entero", "Error",
 						JOptionPane.WARNING_MESSAGE);
+			} catch (ExceptionManager e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 	}

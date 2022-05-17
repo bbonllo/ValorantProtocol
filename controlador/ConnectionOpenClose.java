@@ -34,7 +34,7 @@ public class ConnectionOpenClose {
 		return con;
 	}
 
-	public void closeConnection(PreparedStatement stmt, Connection con) throws Exception {
+	public void closeConnection(PreparedStatement stmt, Connection con) throws SQLException {
 		if (stmt != null)
 			stmt.close();
 

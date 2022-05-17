@@ -7,22 +7,22 @@ import model.Agent;
 
 public interface AgentManager {
 
-	public Agent getAgentByID(int agentCode);
+	public Agent getAgentByID(int agentCode) throws ExceptionManager;
 
-	public Agent login(int agentCode, String passwd);
+	public Agent login(int agentCode, String passwd) throws ExceptionManager;
 
-	public void registerAgent(Agent registerAgent);
+	public void registerAgent(Agent registerAgent) throws ExceptionManager;
 
-	public void modifyAgent(Agent modifyAgent);
+	public void modifyAgent(Agent modifyAgent) throws ExceptionManager;
 
-	public void makeAgentActive(int agentCode);
+	public void makeAgentActive(int agentCode) throws ExceptionManager;
 
 	public List<Agent> getAllAgents() throws ExceptionManager;
 
-	public List<Agent> getAllActiveAgents();
+	public List<Agent> getAllActiveAgents() throws ExceptionManager;
 
-	public void makeAgentInactive(int agentCode);
+	public void makeAgentInactive(int agentCode) throws ExceptionManager;
 
-	public int[] getTeammates(int agentCode);
+	public int[] getTeammates(int agentCode) throws ExceptionManager;
 
 }

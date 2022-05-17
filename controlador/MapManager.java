@@ -1,5 +1,6 @@
 package controlador;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import exceptions.ExceptionManager;
@@ -7,7 +8,7 @@ import model.Map;
 
 public interface MapManager {
 
-	public Map getMapByName(String mapName);
+	public Map getMapByName(String mapName) throws ExceptionManager;
 
 	public List<Map> getAllMaps() throws ExceptionManager;
 
@@ -15,16 +16,16 @@ public interface MapManager {
 	 * Para estadistica de mapas
 	 */
 
-	public List<Integer> agentPercentageMapAttack(String mapName);
+	public List<Integer> agentPercentageMapAttack(String mapName) throws ExceptionManager;
 
-	public List<Integer> agentPercentageMapDefend(String mapName);
+	public List<Integer> agentPercentageMapDefend(String mapName) throws ExceptionManager;
 
-	public List<String> getAttackMissionAgents(String mapName);
+	public List<String> getAttackMissionAgents(String mapName) throws ExceptionManager;
 
-	public List<String> getDefendMissionAgents(String mapName);
+	public List<String> getDefendMissionAgents(String mapName) throws ExceptionManager;
 
-	public String getAttackMissionWeapon(String mapName);
+	public String getAttackMissionWeapon(String mapName) throws ExceptionManager;
 
-	public String getDefendMissionWeapon(String mapName);
+	public String getDefendMissionWeapon(String mapName) throws ExceptionManager;
 
 }
