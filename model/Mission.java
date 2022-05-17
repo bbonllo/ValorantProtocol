@@ -1,10 +1,7 @@
 package model;
 
-import utility.*;
-
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Arrays;
 
 public class Mission implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -18,13 +15,12 @@ public class Mission implements Serializable {
 	/*
 	 * Constructores
 	 */
-	
+
 	public Mission() {
 		super();
 	}
 
-	public Mission(int missionCode,  String mapName, LocalDate missionFI, LocalDate missionFF,
-			boolean missionFinished) {
+	public Mission(int missionCode, String mapName, LocalDate missionFI, LocalDate missionFF, boolean missionFinished) {
 		super();
 		this.missionCode = missionCode;
 		this.mapName = mapName;
@@ -36,9 +32,7 @@ public class Mission implements Serializable {
 	/*
 	 * Getters & Setters
 	 */
-	
-	
-	
+
 	public int getMissionCode() {
 		return missionCode;
 	}
@@ -58,7 +52,7 @@ public class Mission implements Serializable {
 	public LocalDate getmissionFI() {
 		return missionFI;
 	}
-	
+
 	public LocalDate getMissionFF() {
 		return missionFF;
 	}

@@ -1,4 +1,3 @@
-
 package controlador;
 
 import java.sql.CallableStatement;
@@ -8,9 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import exceptions.ExceptionManager;
 import model.Ability;
 import model.AbilityUltimate;
@@ -71,7 +68,6 @@ public class AgentManagerDBImplementation implements AgentManager {
 
 				stmt = con.prepareStatement(SEARCHAgentsAbility);
 				stmt.setInt(1, agentCode);
-				
 
 				rs2 = stmt.executeQuery();
 				while (rs2.next()) {
@@ -301,7 +297,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 	public void makeAgentInactive(int agentCode) {
 
 		openConnection();
-		final String deleteAgent = "update agent set agentIsActive = false where agentCode = ?;";
+		final String deleteAgent = "update agent set agentIsActive = false where agentCode = ?";
 
 		try {
 			stmt = con.prepareStatement(deleteAgent);
@@ -321,10 +317,10 @@ public class AgentManagerDBImplementation implements AgentManager {
 	public void makeAgentActive(int agentCode) {
 
 		openConnection();
-		final String deleteAgent = "update agent set agentIsActive = true where agentCode = ?;";
+		final String addAgent = "update agent set agentIsActive = true where agentCode = ?";
 
 		try {
-			stmt = con.prepareStatement(deleteAgent);
+			stmt = con.prepareStatement(addAgent);
 			stmt.setInt(1, agentCode);
 
 			stmt.executeUpdate();
@@ -339,7 +335,6 @@ public class AgentManagerDBImplementation implements AgentManager {
 	@Override
 	public List<Agent> getAllAgents() throws ExceptionManager {
 
-
 		// ArrayList<Agent> agentsList
 		List<Agent> agents = new ArrayList<>();
 
@@ -352,13 +347,16 @@ public class AgentManagerDBImplementation implements AgentManager {
 		try {
 			stmt = con.prepareStatement(SEARCHAllAgents);
 			rs = stmt.executeQuery();
-			
 
 			while (rs.next()) {
-
 				agentIntro = new Agent();
 				agentIntro.setAgentCode(rs.getInt("agentCode"));
 				agentIntro.setAgentName(rs.getString("agentName"));
+				agentIntro.setAgentNationality(rs.getString("agentNationality"));
+				agentIntro.setAgentRol(rs.getString("agentRol"));
+				agentIntro.setAgentIsAdmin(rs.getBoolean("agentIsAdmin"));
+				agentIntro.setAgentIsOnMission(rs.getBoolean("agentIsOnMission"));
+				agentIntro.setAgentIsOnActive(rs.getBoolean("agentIsActive"));
 				agents.add(agentIntro);
 			}
 
@@ -388,18 +386,22 @@ public class AgentManagerDBImplementation implements AgentManager {
 		try {
 			stmt = con.prepareStatement(SEARCHAllAgents);
 			rs = stmt.executeQuery();
-			stmt.close();
 
 			while (rs.next()) {
 				agentIntro = new Agent();
 				agentIntro.setAgentCode(rs.getInt("agentCode"));
 				agentIntro.setAgentName(rs.getString("agentName"));
+				agentIntro.setAgentNationality(rs.getString("agentNationality"));
+				agentIntro.setAgentRol(rs.getString("agentRol"));
+				agentIntro.setAgentIsAdmin(rs.getBoolean("agentIsAdmin"));
+				agentIntro.setAgentIsOnMission(rs.getBoolean("agentIsOnMission"));
+				agentIntro.setAgentIsOnActive(rs.getBoolean("agentIsActive"));
 				activeAgents.add(agentIntro);
 			}
 
 			if (rs != null)
 				rs.close();
-
+			stmt.close();
 			closeConnection();
 		} catch (SQLException e) {
 			String msg = "Error en recoger a todos los agentes";
@@ -436,7 +438,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 				getAgent.setAgentRol(rs.getString("agentRol"));
 				getAgent.setAgentIsAdmin(rs.getBoolean("agentIsAdmin"));
 				getAgent.setAgentIsOnMission(rs.getBoolean("agentIsOnMission"));
-				getAgent.setAgentIsOnMission(rs.getBoolean("agentIsActive"));
+				getAgent.setAgentIsOnActive(rs.getBoolean("agentIsActive"));
 
 				final String SEARCHAgentsAbility = "SELECT * from ability where agentCode = ? order by orbNum asc";
 
@@ -444,7 +446,6 @@ public class AgentManagerDBImplementation implements AgentManager {
 				stmt.setInt(1, agentCode);
 
 				rs2 = stmt.executeQuery();
-				
 
 				int cont = 0;
 				while (rs2.next()) {

@@ -9,6 +9,8 @@ public interface AgentManager {
 
 	public Agent getAgentByID(int agentCode);
 
+	public Agent login(int agentCode, String passwd);
+
 	public void registerAgent(Agent registerAgent);
 
 	public void modifyAgent(Agent modifyAgent);
@@ -18,8 +20,6 @@ public interface AgentManager {
 	public List<Agent> getAllAgents() throws ExceptionManager;
 
 	public List<Agent> getAllActiveAgents();
-
-	public Agent login(int agentCode, String passwd);
 
 	public void makeAgentInactive(int agentCode);
 

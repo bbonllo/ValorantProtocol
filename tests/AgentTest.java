@@ -142,11 +142,11 @@ public class AgentTest {
 	public void testGetTeammates() {
 		// Preparar datos
 		int agentCode = 21;
-		String agentPasswd = "adadawd";
+		// String agentPasswd = "adadawd";
 		AgentManager agMan = new AgentManagerDBImplementation();
-		//Llamar al método a testear
+		// Llamar al método a testear
 		int[] agents = agMan.getTeammates(agentCode);
-		//Preguntar por resultado assert
+		// Preguntar por resultado assert
 		assertNotNull(agents);
 	}
 }

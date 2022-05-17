@@ -2,6 +2,7 @@ package tests;
 
 import static org.junit.Assert.*;
 
+
 import java.sql.SQLException;
 
 import org.junit.After;
@@ -40,6 +41,7 @@ public class WeaponsTest {
 		testGetWeaponByName(wep, name);
 	}
 	
+
 	@Test
 	public void testAddWeapon() {
 		String name = "klok";
@@ -93,9 +95,8 @@ public class WeaponsTest {
 	public void testGetAllPrimary() {
 		WeaponManager wepMan = new WeaponManagerDBImplementation();
 		assertNotNull(wepMan.getAllPrimary());
-		}
-	
-	
+	}
+
 // Methods to control other methods
 	public void testGetWeaponByName(Weapon wep, String name) {
 		WeaponManager wepMan = new WeaponManagerDBImplementation();
