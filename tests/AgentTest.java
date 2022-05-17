@@ -15,7 +15,7 @@ import model.Agent;
 public class AgentTest {
 
 	@Test
-	public void testGetAgentByID() {
+	public void testGetAgentByID() throws ExceptionManager {
 		// Preparar datos
 		int agentCode = 10;
 		AgentManager agMan = new AgentManagerDBImplementation();
@@ -26,7 +26,7 @@ public class AgentTest {
 	}
 
 	@Test
-	public void testRegisterAgent() {
+	public void testRegisterAgent() throws ExceptionManager {
 		// Preparar datos
 		int agentCode = 23;
 		String agentPasswd = "adadawd";
@@ -50,7 +50,7 @@ public class AgentTest {
 	}
 
 	@Test
-	public void testModifyAgent() {
+	public void testModifyAgent() throws ExceptionManager {
 		// Preparar datos
 		int agentCode = 24;
 		String agentPasswd = "adadawd";
@@ -80,7 +80,7 @@ public class AgentTest {
 	}
 
 	@Test
-	public void testMakeAgentInactive() {
+	public void testMakeAgentInactive() throws ExceptionManager {
 		// Preparar datos
 		int agentCode = 21;
 		AgentManager agMan = new AgentManagerDBImplementation();
@@ -92,7 +92,7 @@ public class AgentTest {
 	}
 
 	@Test
-	public void testMakeAgentActive() {
+	public void testMakeAgentActive() throws ExceptionManager {
 		// Preparar datos
 		int agentCode = 21;
 		AgentManager agMan = new AgentManagerDBImplementation();
@@ -117,7 +117,7 @@ public class AgentTest {
 	}
 
 	@Test
-	public void testGetAllActiveAgents() {
+	public void testGetAllActiveAgents() throws ExceptionManager {
 		// Preparar datos
 		AgentManager agMan = new AgentManagerDBImplementation();
 		// Llamar al método a testear
@@ -127,7 +127,7 @@ public class AgentTest {
 	}
 
 	@Test
-	public void testLogin() {
+	public void testLogin() throws ExceptionManager {
 		// Preparar datos
 		int agentCode = 21;
 		String agentPasswd = "adadawd";
@@ -139,7 +139,7 @@ public class AgentTest {
 	}
 
 	@Test
-	public void testGetTeammates() {
+	public void testGetTeammates() throws ExceptionManager {
 		// Preparar datos
 		int agentCode = 21;
 		// String agentPasswd = "adadawd";
