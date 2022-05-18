@@ -138,6 +138,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 	private JLabel lblAgentHabilitiesOrbNum;
 	private JLabel lblAgentHabilitiesOrbNumModif;
 	private JSpinner spinnerModif;
+	private JSpinner spinner;
 	private JLabel lblAgentHabilitiesDescription4Modif;
 	private JTextArea textAreaHabilityDescription4Modif;
 	private JLabel lblAgentHabilitiesName4Modif;
@@ -151,6 +152,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 	private JTextField txtHabilityName2Modif;
 	private JLabel lblAgentHabilitiesDescription2Modif;
 	private JTextArea textAreaHabilityDescription1Modif;
+	private JTextArea textAreaHabilityDescription1;
 	private JLabel lblAgentHabilitiesDescription1Modif;
 	private JTextField txtHabilityName1Modif;
 	private JLabel lblAgentHabilitiesName1Modif;
@@ -283,7 +285,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		btnMinimize.kEndColor = Color.WHITE;
 		btnMinimize.kFillButton = false;
 		btnMinimize.setFont(new Font("Tahoma", Font.BOLD, 12));
-		btnMinimize.setText("—");
+		btnMinimize.setText("â");
 		btnMinimize.setBounds(1826, 0, 47, 37);
 		btnMinimize.addActionListener(this);
 		btnMinimize.addMouseListener(new MouseAdapter() {
@@ -330,6 +332,10 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 				btnClose.kFillButton = false; // Hacer transparente el boton
 			}
 		});
+		panelAgent = new JPanel();
+		panelAgent.setBounds(0, 74, 1770, 1006);
+		p.add(panelAgent);
+		panelAgent.setLayout(null);
 		panelWeapon = new JPanel();
 		panelWeapon.setLayout(null);
 		panelWeapon.setBounds(0, 74, 1770, 1006);
@@ -428,7 +434,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		txtDamageWeapon.setBounds(219, 261, 281, 30);
 		panelRegisterWeapon.add(txtDamageWeapon);
 
-		JLabel lblDamageWeapon = new JLabel("DaÃ±o");
+		JLabel lblDamageWeapon = new JLabel("DaÃÂ±o");
 		lblDamageWeapon.setForeground(Color.WHITE);
 		lblDamageWeapon.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
 		lblDamageWeapon.setBounds(97, 251, 112, 53);
@@ -497,6 +503,502 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		panelMission.add(panelRegisterMission);
 		panelRegisterMission.setLayout(null);
 
+		btnModifyAgent = new JButton("Modificacion");
+		btnModifyAgent.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnModifyAgent.setBorder(null);
+		btnModifyAgent.setBounds(885, 0, 177, 50);
+		btnModifyAgent.addActionListener(this);
+
+		panelModifyAgent = new JPanel();
+		panelModifyAgent.setLayout(null);
+		panelModifyAgent.setBounds(0, 50, 1770, 956);
+		panelAgent.add(panelModifyAgent);
+
+		chckbxNewCheckBoxModif = new JCheckBox("Admin?");
+		chckbxNewCheckBoxModif.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
+		chckbxNewCheckBoxModif.setOpaque(false);
+		chckbxNewCheckBoxModif.setBounds(151, 395, 182, 23);
+		panelModifyAgent.add(chckbxNewCheckBoxModif);
+
+		lblAgentHabilitiesOrbNumModif = new JLabel("Numero de orbes");
+		lblAgentHabilitiesOrbNumModif.setForeground(Color.WHITE);
+		lblAgentHabilitiesOrbNumModif.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
+		lblAgentHabilitiesOrbNumModif.setBounds(1378, 770, 149, 53);
+		panelModifyAgent.add(lblAgentHabilitiesOrbNumModif);
+
+		spinnerModif = new JSpinner();
+		spinnerModif.setBounds(1510, 782, 75, 20);
+		panelModifyAgent.add(spinnerModif);
+
+		lblAgentHabilitiesDescription4Modif = new JLabel("Descripcion de la habilidad ulti");
+		lblAgentHabilitiesDescription4Modif.setForeground(Color.WHITE);
+		lblAgentHabilitiesDescription4Modif.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
+		lblAgentHabilitiesDescription4Modif.setBounds(1378, 569, 207, 53);
+		panelModifyAgent.add(lblAgentHabilitiesDescription4Modif);
+
+		textAreaHabilityDescription4Modif = new JTextArea();
+		textAreaHabilityDescription4Modif.setWrapStyleWord(true);
+		textAreaHabilityDescription4Modif.setLineWrap(true);
+		textAreaHabilityDescription4Modif.setBounds(1378, 633, 207, 138);
+		panelModifyAgent.add(textAreaHabilityDescription4Modif);
+
+		lblAgentHabilitiesName4Modif = new JLabel("Nombre de la habilidad ulti");
+		lblAgentHabilitiesName4Modif.setForeground(Color.WHITE);
+		lblAgentHabilitiesName4Modif.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
+		lblAgentHabilitiesName4Modif.setBounds(1378, 467, 207, 53);
+		panelModifyAgent.add(lblAgentHabilitiesName4Modif);
+
+		txtHabilityName4Modif = new JTextField();
+		txtHabilityName4Modif.setColumns(10);
+		txtHabilityName4Modif.setBounds(1378, 528, 207, 30);
+		panelModifyAgent.add(txtHabilityName4Modif);
+
+		lblAgentHabilitiesName3Modif = new JLabel("Nombre de la habilidad 3");
+		lblAgentHabilitiesName3Modif.setForeground(Color.WHITE);
+		lblAgentHabilitiesName3Modif.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
+		lblAgentHabilitiesName3Modif.setBounds(998, 467, 207, 53);
+		panelModifyAgent.add(lblAgentHabilitiesName3Modif);
+
+		txtHabilityName3Modif = new JTextField();
+		txtHabilityName3Modif.setColumns(10);
+		txtHabilityName3Modif.setBounds(998, 528, 207, 30);
+		panelModifyAgent.add(txtHabilityName3Modif);
+
+		textAreaHabilityDescription3Modif = new JTextArea();
+		textAreaHabilityDescription3Modif.setWrapStyleWord(true);
+		textAreaHabilityDescription3Modif.setLineWrap(true);
+		textAreaHabilityDescription3Modif.setBounds(998, 633, 207, 138);
+		panelModifyAgent.add(textAreaHabilityDescription3Modif);
+
+		lblAgentHabilitiesDescription3Modif = new JLabel("Descripcion de la habilidad 3");
+		lblAgentHabilitiesDescription3Modif.setForeground(Color.WHITE);
+		lblAgentHabilitiesDescription3Modif.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
+		lblAgentHabilitiesDescription3Modif.setBounds(998, 569, 207, 53);
+		panelModifyAgent.add(lblAgentHabilitiesDescription3Modif);
+
+		textAreaHabilityDescription2Modif = new JTextArea();
+		textAreaHabilityDescription2Modif.setWrapStyleWord(true);
+		textAreaHabilityDescription2Modif.setLineWrap(true);
+		textAreaHabilityDescription2Modif.setBounds(1378, 294, 207, 138);
+		panelModifyAgent.add(textAreaHabilityDescription2Modif);
+
+		lblAgentHabilitiesName2Modif = new JLabel("Nombre de la habilidad 2");
+		lblAgentHabilitiesName2Modif.setForeground(Color.WHITE);
+		lblAgentHabilitiesName2Modif.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
+		lblAgentHabilitiesName2Modif.setBounds(1378, 128, 207, 53);
+		panelModifyAgent.add(lblAgentHabilitiesName2Modif);
+
+		txtHabilityName2Modif = new JTextField();
+		txtHabilityName2Modif.setColumns(10);
+		txtHabilityName2Modif.setBounds(1378, 189, 207, 30);
+		panelModifyAgent.add(txtHabilityName2Modif);
+
+		lblAgentHabilitiesDescription2Modif = new JLabel("Descripcion de la habilidad 2");
+		lblAgentHabilitiesDescription2Modif.setForeground(Color.WHITE);
+		lblAgentHabilitiesDescription2Modif.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
+		lblAgentHabilitiesDescription2Modif.setBounds(1378, 230, 207, 53);
+		panelModifyAgent.add(lblAgentHabilitiesDescription2Modif);
+
+		textAreaHabilityDescription1Modif = new JTextArea();
+		textAreaHabilityDescription1Modif.setWrapStyleWord(true);
+		textAreaHabilityDescription1Modif.setLineWrap(true);
+		textAreaHabilityDescription1Modif.setBounds(998, 294, 207, 138);
+		panelModifyAgent.add(textAreaHabilityDescription1Modif);
+
+		lblAgentHabilitiesDescription1Modif = new JLabel("Descripcion de la habilidad 1");
+		lblAgentHabilitiesDescription1Modif.setForeground(Color.WHITE);
+		lblAgentHabilitiesDescription1Modif.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
+		lblAgentHabilitiesDescription1Modif.setBounds(998, 230, 207, 53);
+		panelModifyAgent.add(lblAgentHabilitiesDescription1Modif);
+
+		txtHabilityName1Modif = new JTextField();
+		txtHabilityName1Modif.setColumns(10);
+		txtHabilityName1Modif.setBounds(998, 189, 207, 30);
+		panelModifyAgent.add(txtHabilityName1Modif);
+
+		lblAgentHabilitiesName1Modif = new JLabel("Nombre de la habilidad 1");
+		lblAgentHabilitiesName1Modif.setForeground(Color.WHITE);
+		lblAgentHabilitiesName1Modif.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
+		lblAgentHabilitiesName1Modif.setBounds(998, 128, 207, 53);
+		panelModifyAgent.add(lblAgentHabilitiesName1Modif);
+
+		lblAgentHabilitiesTitleModif = new JLabel("Habilidades del agente");
+		lblAgentHabilitiesTitleModif.setForeground(Color.WHITE);
+		lblAgentHabilitiesTitleModif.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 20));
+		lblAgentHabilitiesTitleModif.setBounds(1098, 64, 405, 53);
+		panelModifyAgent.add(lblAgentHabilitiesTitleModif);
+
+		btnModif = new JButton("Modificar agente");
+		btnModif.setForeground(Color.WHITE);
+		btnModif.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 12));
+		btnModif.setBorder(null);
+		btnModif.setBackground(Color.RED);
+		btnModif.setBounds(1584, 874, 140, 40);
+		btnModif.addActionListener(this);
+		panelModifyAgent.add(btnModif);
+
+		passwordFieldConfirmModif = new JPasswordField();
+		passwordFieldConfirmModif.setBounds(497, 535, 207, 30);
+		panelModifyAgent.add(passwordFieldConfirmModif);
+
+		passwordFieldModif = new JPasswordField();
+		passwordFieldModif.setBounds(151, 535, 207, 30);
+		panelModifyAgent.add(passwordFieldModif);
+
+		lblAgentDataPasswd2Modif = new JLabel("Confirmar contraseÃÂ±a");
+		lblAgentDataPasswd2Modif.setForeground(Color.WHITE);
+		lblAgentDataPasswd2Modif.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
+		lblAgentDataPasswd2Modif.setBounds(497, 474, 207, 53);
+		panelModifyAgent.add(lblAgentDataPasswd2Modif);
+
+		lblAgentDataPasswd1Modif = new JLabel("ContraseÃÂ±a");
+		lblAgentDataPasswd1Modif.setForeground(Color.WHITE);
+		lblAgentDataPasswd1Modif.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
+		lblAgentDataPasswd1Modif.setBounds(151, 474, 207, 53);
+		panelModifyAgent.add(lblAgentDataPasswd1Modif);
+
+		comboBoxRolModif = new JComboBox<String>();
+		comboBoxRolModif.setSelectedIndex(-1);
+		comboBoxRolModif.setBounds(497, 291, 207, 30);
+		panelModifyAgent.add(comboBoxRolModif);
+
+		lblAgentDataRolModif = new JLabel("Rol del agente");
+		lblAgentDataRolModif.setForeground(Color.WHITE);
+		lblAgentDataRolModif.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
+		lblAgentDataRolModif.setBounds(497, 230, 207, 53);
+		panelModifyAgent.add(lblAgentDataRolModif);
+
+		txtNationalityModif = new JTextField();
+		txtNationalityModif.setColumns(10);
+		txtNationalityModif.setBounds(151, 291, 207, 30);
+		panelModifyAgent.add(txtNationalityModif);
+
+		lblAgentDataNationalityModif = new JLabel("Nacionalidad del agente");
+		lblAgentDataNationalityModif.setForeground(Color.WHITE);
+		lblAgentDataNationalityModif.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
+		lblAgentDataNationalityModif.setBounds(151, 230, 207, 53);
+		panelModifyAgent.add(lblAgentDataNationalityModif);
+
+		txtNameModif = new JTextField();
+		txtNameModif.setColumns(10);
+		txtNameModif.setBounds(497, 189, 207, 30);
+		panelModifyAgent.add(txtNameModif);
+
+		lblAgentDataNameModif = new JLabel("Nombre del agente");
+		lblAgentDataNameModif.setForeground(Color.WHITE);
+		lblAgentDataNameModif.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
+		lblAgentDataNameModif.setBounds(497, 128, 207, 53);
+		panelModifyAgent.add(lblAgentDataNameModif);
+
+		txtCodeModif = new JTextField();
+		txtCodeModif.setColumns(10);
+		txtCodeModif.setBounds(151, 189, 207, 30);
+		panelModifyAgent.add(txtCodeModif);
+
+		lblAgentDataCodeModif = new JLabel("Codigo del agente");
+		lblAgentDataCodeModif.setForeground(Color.WHITE);
+		lblAgentDataCodeModif.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
+		lblAgentDataCodeModif.setBounds(151, 128, 207, 53);
+		panelModifyAgent.add(lblAgentDataCodeModif);
+
+		lblAgentDataTitleModif = new JLabel("Datos del agente");
+		lblAgentDataTitleModif.setForeground(Color.WHITE);
+		lblAgentDataTitleModif.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 20));
+		lblAgentDataTitleModif.setBounds(151, 64, 405, 53);
+		panelModifyAgent.add(lblAgentDataTitleModif);
+
+		lblAgentHabilitiesModif = new JLabel("");
+		lblAgentHabilitiesModif.setBorder(new LineBorder(Color.WHITE, 2));
+		lblAgentHabilitiesModif.setBounds(908, 25, 816, 817);
+		panelModifyAgent.add(lblAgentHabilitiesModif);
+
+		lblAgentDataModif = new JLabel("");
+		lblAgentDataModif.setBorder(new LineBorder(Color.WHITE, 2));
+		lblAgentDataModif.setBounds(44, 25, 816, 817);
+		panelModifyAgent.add(lblAgentDataModif);
+
+		lblBackgroundPanelAgentRegisterModif = new JLabel("");
+		lblBackgroundPanelAgentRegisterModif
+				.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/appBackgroundUnderPanel.jpg")));
+		lblBackgroundPanelAgentRegisterModif.setBounds(0, 0, 1770, 956);
+		panelModifyAgent.add(lblBackgroundPanelAgentRegisterModif);
+
+		panelRegisterAgent = new JPanel();
+		panelRegisterAgent.setBounds(0, 50, 1770, 956);
+		panelAgent.add(panelRegisterAgent);
+		panelRegisterAgent.setLayout(null);
+
+		lblAgentHabilitiesOrbNum = new JLabel("Numero de orbes");
+		lblAgentHabilitiesOrbNum.setForeground(Color.WHITE);
+		lblAgentHabilitiesOrbNum.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
+		lblAgentHabilitiesOrbNum.setBounds(1378, 770, 149, 53);
+		panelRegisterAgent.add(lblAgentHabilitiesOrbNum);
+
+		spinner = new JSpinner();
+		spinner.setModel(new SpinnerNumberModel(5, 5, 8, 1));
+		spinner.setBounds(1510, 782, 75, 20);
+		panelRegisterAgent.add(spinner);
+
+		lblAgentHabilitiesDescription4 = new JLabel("Descripcion de la habilidad ulti");
+		lblAgentHabilitiesDescription4.setForeground(Color.WHITE);
+		lblAgentHabilitiesDescription4.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
+		lblAgentHabilitiesDescription4.setBounds(1378, 569, 207, 53);
+		panelRegisterAgent.add(lblAgentHabilitiesDescription4);
+
+		textAreaHabilityDescription4 = new JTextArea();
+		textAreaHabilityDescription4.setWrapStyleWord(true);
+		textAreaHabilityDescription4.setLineWrap(true);
+		textAreaHabilityDescription4.setBounds(1378, 633, 207, 138);
+		panelRegisterAgent.add(textAreaHabilityDescription4);
+
+		lblAgentHabilitiesName4 = new JLabel("Nombre de la habilidad ulti");
+		lblAgentHabilitiesName4.setForeground(Color.WHITE);
+		lblAgentHabilitiesName4.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
+		lblAgentHabilitiesName4.setBounds(1378, 467, 207, 53);
+		panelRegisterAgent.add(lblAgentHabilitiesName4);
+
+		txtHabilityName4 = new JTextField();
+		txtHabilityName4.setColumns(10);
+		txtHabilityName4.setBounds(1378, 528, 207, 30);
+		panelRegisterAgent.add(txtHabilityName4);
+
+		lblAgentHabilitiesName3 = new JLabel("Nombre de la habilidad 3");
+		lblAgentHabilitiesName3.setForeground(Color.WHITE);
+		lblAgentHabilitiesName3.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
+		lblAgentHabilitiesName3.setBounds(998, 467, 207, 53);
+		panelRegisterAgent.add(lblAgentHabilitiesName3);
+
+		txtHabilityName3 = new JTextField();
+		txtHabilityName3.setColumns(10);
+		txtHabilityName3.setBounds(998, 528, 207, 30);
+		panelRegisterAgent.add(txtHabilityName3);
+
+		textAreaHabilityDescription3 = new JTextArea();
+		textAreaHabilityDescription3.setWrapStyleWord(true);
+		textAreaHabilityDescription3.setLineWrap(true);
+		textAreaHabilityDescription3.setBounds(998, 633, 207, 138);
+		panelRegisterAgent.add(textAreaHabilityDescription3);
+
+		lblAgentHabilitiesDescription3 = new JLabel("Descripcion de la habilidad 3");
+		lblAgentHabilitiesDescription3.setForeground(Color.WHITE);
+		lblAgentHabilitiesDescription3.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
+		lblAgentHabilitiesDescription3.setBounds(998, 569, 207, 53);
+		panelRegisterAgent.add(lblAgentHabilitiesDescription3);
+
+		textAreaHabilityDescription2 = new JTextArea();
+		textAreaHabilityDescription2.setWrapStyleWord(true);
+		textAreaHabilityDescription2.setLineWrap(true);
+		textAreaHabilityDescription2.setBounds(1378, 294, 207, 138);
+		panelRegisterAgent.add(textAreaHabilityDescription2);
+
+		lblAgentHabilitiesName2 = new JLabel("Nombre de la habilidad 2");
+		lblAgentHabilitiesName2.setForeground(Color.WHITE);
+		lblAgentHabilitiesName2.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
+		lblAgentHabilitiesName2.setBounds(1378, 128, 207, 53);
+		panelRegisterAgent.add(lblAgentHabilitiesName2);
+
+		txtHabilityName2 = new JTextField();
+		txtHabilityName2.setColumns(10);
+		txtHabilityName2.setBounds(1378, 189, 207, 30);
+		panelRegisterAgent.add(txtHabilityName2);
+
+		lblAgentHabilitiesDescription2 = new JLabel("Descripcion de la habilidad 2");
+		lblAgentHabilitiesDescription2.setForeground(Color.WHITE);
+		lblAgentHabilitiesDescription2.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
+		lblAgentHabilitiesDescription2.setBounds(1378, 230, 207, 53);
+		panelRegisterAgent.add(lblAgentHabilitiesDescription2);
+
+		textAreaHabilityDescription1 = new JTextArea();
+		textAreaHabilityDescription1.setBounds(998, 294, 207, 138);
+		textAreaHabilityDescription1.setLineWrap(true);
+		textAreaHabilityDescription1.setWrapStyleWord(true);
+		panelRegisterAgent.add(textAreaHabilityDescription1);
+
+		JLabel lblAgentHabilitiesDescription1 = new JLabel("Descripcion de la habilidad 1");
+		lblAgentHabilitiesDescription1.setForeground(Color.WHITE);
+		lblAgentHabilitiesDescription1.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
+		lblAgentHabilitiesDescription1.setBounds(998, 230, 207, 53);
+		panelRegisterAgent.add(lblAgentHabilitiesDescription1);
+
+		txtHabilityName1 = new JTextField();
+		txtHabilityName1.setColumns(10);
+		txtHabilityName1.setBounds(998, 189, 207, 30);
+		panelRegisterAgent.add(txtHabilityName1);
+
+		JLabel lblAgentHabilitiesName1 = new JLabel("Nombre de la habilidad 1");
+		lblAgentHabilitiesName1.setForeground(Color.WHITE);
+		lblAgentHabilitiesName1.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
+		lblAgentHabilitiesName1.setBounds(998, 128, 207, 53);
+		panelRegisterAgent.add(lblAgentHabilitiesName1);
+
+		JLabel lblAgentHabilitiesTitle = new JLabel("Habilidades del agente");
+		lblAgentHabilitiesTitle.setForeground(Color.WHITE);
+		lblAgentHabilitiesTitle.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 20));
+		lblAgentHabilitiesTitle.setBounds(1098, 64, 405, 53);
+		panelRegisterAgent.add(lblAgentHabilitiesTitle);
+
+		btnClean = new JButton("Limpiar datos");
+		btnClean.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnClean.setForeground(Color.WHITE);
+		btnClean.setBackground(new Color(255, 0, 0));
+		btnClean.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 12));
+		btnClean.setBorder(null);
+		btnClean.setBounds(1409, 874, 140, 40);
+		btnClean.addActionListener(this);
+		panelRegisterAgent.add(btnClean);
+
+		btnConfirm = new JButton("AÃÂ±adir agente");
+		btnConfirm.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnConfirm.setForeground(Color.WHITE);
+		btnConfirm.setBackground(Color.RED);
+		btnConfirm.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 12));
+		btnConfirm.setBorder(null);
+		btnConfirm.setBounds(1584, 874, 140, 40);
+		btnConfirm.addActionListener(this);
+		panelRegisterAgent.add(btnConfirm);
+
+		txtPasswd2 = new JPasswordField();
+		txtPasswd2.setBounds(497, 535, 207, 30);
+		panelRegisterAgent.add(txtPasswd2);
+
+		chckbxNewCheckBoxModif_1 = new JCheckBox("Admin?");
+		chckbxNewCheckBoxModif_1.setOpaque(false);
+		chckbxNewCheckBoxModif_1.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
+		chckbxNewCheckBoxModif_1.setBounds(151, 395, 182, 23);
+		panelRegisterAgent.add(chckbxNewCheckBoxModif_1);
+
+		txtPasswd1 = new JPasswordField();
+		txtPasswd1.setBounds(151, 535, 207, 30);
+		panelRegisterAgent.add(txtPasswd1);
+
+		lblAgentDataPasswd2 = new JLabel("Confirmar contraseÃÂ±a");
+		lblAgentDataPasswd2.setForeground(Color.WHITE);
+		lblAgentDataPasswd2.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
+		lblAgentDataPasswd2.setBounds(497, 474, 207, 53);
+		panelRegisterAgent.add(lblAgentDataPasswd2);
+
+		JLabel lblAgentDataPasswd1 = new JLabel("ContraseÃÂ±a");
+		lblAgentDataPasswd1.setForeground(Color.WHITE);
+		lblAgentDataPasswd1.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
+		lblAgentDataPasswd1.setBounds(151, 474, 207, 53);
+		panelRegisterAgent.add(lblAgentDataPasswd1);
+
+		comboBoxRol = new JComboBox<String>();
+		comboBoxRol.setModel(
+				new DefaultComboBoxModel<String>(new String[] { "Duelist", "Sentinel", "Controller", "Initiator" }));
+		comboBoxRol.setBounds(497, 291, 207, 30);
+		comboBoxRol.setSelectedIndex(-1);
+		panelRegisterAgent.add(comboBoxRol);
+
+		lblAgentDataRol = new JLabel("Rol del agente");
+		lblAgentDataRol.setForeground(Color.WHITE);
+		lblAgentDataRol.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
+		lblAgentDataRol.setBounds(497, 230, 207, 53);
+		panelRegisterAgent.add(lblAgentDataRol);
+
+		txtNationality = new JTextField();
+		txtNationality.setColumns(10);
+		txtNationality.setBounds(151, 291, 207, 30);
+		panelRegisterAgent.add(txtNationality);
+
+		lblAgentDataNationality = new JLabel("Nacionalidad del agente");
+		lblAgentDataNationality.setForeground(Color.WHITE);
+		lblAgentDataNationality.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
+		lblAgentDataNationality.setBounds(151, 230, 207, 53);
+		panelRegisterAgent.add(lblAgentDataNationality);
+
+		txtName = new JTextField();
+		txtName.setColumns(10);
+		txtName.setBounds(497, 189, 207, 30);
+		panelRegisterAgent.add(txtName);
+
+		lblAgentDataName = new JLabel("Nombre del agente");
+		lblAgentDataName.setForeground(Color.WHITE);
+		lblAgentDataName.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
+		lblAgentDataName.setBounds(497, 128, 207, 53);
+		panelRegisterAgent.add(lblAgentDataName);
+
+		txtCode = new JTextField();
+		txtCode.setBounds(151, 189, 207, 30);
+		panelRegisterAgent.add(txtCode);
+		txtCode.setColumns(10);
+
+		lblAgentDataCode = new JLabel("Codigo del agente");
+		lblAgentDataCode.setForeground(Color.WHITE);
+		lblAgentDataCode.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
+		lblAgentDataCode.setBounds(151, 128, 207, 53);
+		panelRegisterAgent.add(lblAgentDataCode);
+
+		JLabel lblAgentDataTitle = new JLabel("Datos del agente");
+		lblAgentDataTitle.setForeground(Color.WHITE);
+		lblAgentDataTitle.setBounds(151, 64, 405, 53);
+		lblAgentDataTitle.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 20));
+		panelRegisterAgent.add(lblAgentDataTitle);
+
+		lblAgentHabilities = new JLabel("");
+		lblAgentHabilities.setBorder(new LineBorder(Color.WHITE, 2));
+		lblAgentHabilities.setBounds(908, 25, 816, 817);
+		panelRegisterAgent.add(lblAgentHabilities);
+
+		JLabel lblAgentData = new JLabel("");
+		lblAgentData.setBorder(new LineBorder(Color.WHITE, 2));
+		lblAgentData.setBounds(44, 25, 816, 817);
+		panelRegisterAgent.add(lblAgentData);
+
+		lblBackgroundPanelAgentRegister = new JLabel("");
+		lblBackgroundPanelAgentRegister
+				.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/appBackgroundUnderPanel.jpg")));
+		lblBackgroundPanelAgentRegister.setBounds(0, 0, 1770, 956);
+		panelRegisterAgent.add(lblBackgroundPanelAgentRegister);
+		panelAgent.add(btnModifyAgent);
+
+		btnRegisterAgent = new JButton("Alta");
+		btnRegisterAgent.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnRegisterAgent.setBorder(null);
+		btnRegisterAgent.setBounds(708, 0, 177, 50);
+		btnRegisterAgent.addActionListener(this);
+		panelAgent.add(btnRegisterAgent);
+
+		JLabel lblBackgroundPanelAgent = new JLabel("");
+		lblBackgroundPanelAgent
+				.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/appBackgroundPanel.jpg")));
+		lblBackgroundPanelAgent.setBounds(0, 0, 1770, 1006);
+		panelAgent.add(lblBackgroundPanelAgent);
+
+		panelMission = new JPanel();
+		panelMission.setLayout(null);
+		panelMission.setBounds(0, 74, 1770, 1006);
+		p.add(panelMission);
+
+		panelHistoricMission = new JPanel();
+		panelHistoricMission.setLayout(null);
+		panelHistoricMission.setBounds(0, 50, 1770, 956);
+		panelMission.add(panelHistoricMission);
+
+		JComboBox<String> comboBoxMission = new JComboBox<String>();
+		comboBoxMission.setModel(new DefaultComboBoxModel<String>(
+				new String[] { "Todas las misiones", "Misiones de ataque", "Misiones de defensa" }));
+		comboBoxMission.setSelectedIndex(-1);
+		comboBoxMission.setBounds(128, 90, 207, 30);
+		comboBoxMission.addActionListener(this);
+		panelHistoricMission.add(comboBoxMission);
+
+		listMission = new JList();
+		listMission.setOpaque(false);
+		listMission.setBounds(128, 165, 1538, 714);
+		panelHistoricMission.add(listMission);
+
+		panelBackgroundHistoricMission = new JLabel("");
+		panelBackgroundHistoricMission
+				.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/appBackgroundUnderPanel.jpg")));
+		panelBackgroundHistoricMission.setBounds(0, 0, 1770, 956);
+		panelHistoricMission.add(panelBackgroundHistoricMission);
+
+		panelRegisterMission = new JPanel();
+		panelRegisterMission.setBounds(0, 50, 1770, 956);
+		panelMission.add(panelRegisterMission);
+		panelRegisterMission.setLayout(null);
+
 		rdbtnAttacking = new JRadioButton(imageIconAttack);
 		rdbtnAttacking.setHorizontalAlignment(SwingConstants.CENTER);
 		rdbtnAttacking.setBorderPainted(false);
@@ -508,7 +1010,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		buttonGroupAddMission.add(rdbtnAttacking);
 		panelRegisterMission.add(rdbtnAttacking);
 
-		btnConfirmMission = new JButton("Añadir agente");
+		btnConfirmMission = new JButton("AÃ±adir agente");
 		btnConfirmMission.setForeground(Color.WHITE);
 		btnConfirmMission.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 12));
 		btnConfirmMission.setBorder(null);
@@ -722,471 +1224,6 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 				.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/appBackgroundPanel.jpg")));
 		lblBackgroundPanelMission.setBounds(0, 0, 1770, 1006);
 		panelMission.add(lblBackgroundPanelMission);
-		panelAgent = new JPanel();
-		panelAgent.setBounds(0, 74, 1770, 1006);
-		p.add(panelAgent);
-		panelAgent.setLayout(null);
-
-		btnModifyAgent = new JButton("Modificacion");
-		btnModifyAgent.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnModifyAgent.setBorder(null);
-		btnModifyAgent.setBounds(885, 0, 177, 50);
-		btnModifyAgent.addActionListener(this);
-
-		panelRegisterAgent = new JPanel();
-		panelRegisterAgent.setBounds(0, 50, 1770, 956);
-		panelAgent.add(panelRegisterAgent);
-		panelRegisterAgent.setLayout(null);
-
-		lblAgentHabilitiesOrbNum = new JLabel("Numero de orbes");
-		lblAgentHabilitiesOrbNum.setForeground(Color.WHITE);
-		lblAgentHabilitiesOrbNum.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
-		lblAgentHabilitiesOrbNum.setBounds(1378, 770, 149, 53);
-		panelRegisterAgent.add(lblAgentHabilitiesOrbNum);
-
-		JSpinner spinner = new JSpinner();
-		spinner.setModel(new SpinnerNumberModel(5, 5, 8, 1));
-		spinner.setBounds(1510, 782, 75, 20);
-		panelRegisterAgent.add(spinner);
-
-		lblAgentHabilitiesDescription4 = new JLabel("Descripcion de la habilidad ulti");
-		lblAgentHabilitiesDescription4.setForeground(Color.WHITE);
-		lblAgentHabilitiesDescription4.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
-		lblAgentHabilitiesDescription4.setBounds(1378, 569, 207, 53);
-		panelRegisterAgent.add(lblAgentHabilitiesDescription4);
-
-		textAreaHabilityDescription4 = new JTextArea();
-		textAreaHabilityDescription4.setWrapStyleWord(true);
-		textAreaHabilityDescription4.setLineWrap(true);
-		textAreaHabilityDescription4.setBounds(1378, 633, 207, 138);
-		panelRegisterAgent.add(textAreaHabilityDescription4);
-
-		lblAgentHabilitiesName4 = new JLabel("Nombre de la habilidad ulti");
-		lblAgentHabilitiesName4.setForeground(Color.WHITE);
-		lblAgentHabilitiesName4.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
-		lblAgentHabilitiesName4.setBounds(1378, 467, 207, 53);
-		panelRegisterAgent.add(lblAgentHabilitiesName4);
-
-		txtHabilityName4 = new JTextField();
-		txtHabilityName4.setColumns(10);
-		txtHabilityName4.setBounds(1378, 528, 207, 30);
-		panelRegisterAgent.add(txtHabilityName4);
-
-		lblAgentHabilitiesName3 = new JLabel("Nombre de la habilidad 3");
-		lblAgentHabilitiesName3.setForeground(Color.WHITE);
-		lblAgentHabilitiesName3.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
-		lblAgentHabilitiesName3.setBounds(998, 467, 207, 53);
-		panelRegisterAgent.add(lblAgentHabilitiesName3);
-
-		txtHabilityName3 = new JTextField();
-		txtHabilityName3.setColumns(10);
-		txtHabilityName3.setBounds(998, 528, 207, 30);
-		panelRegisterAgent.add(txtHabilityName3);
-
-		textAreaHabilityDescription3 = new JTextArea();
-		textAreaHabilityDescription3.setWrapStyleWord(true);
-		textAreaHabilityDescription3.setLineWrap(true);
-		textAreaHabilityDescription3.setBounds(998, 633, 207, 138);
-		panelRegisterAgent.add(textAreaHabilityDescription3);
-
-		lblAgentHabilitiesDescription3 = new JLabel("Descripcion de la habilidad 3");
-		lblAgentHabilitiesDescription3.setForeground(Color.WHITE);
-		lblAgentHabilitiesDescription3.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
-		lblAgentHabilitiesDescription3.setBounds(998, 569, 207, 53);
-		panelRegisterAgent.add(lblAgentHabilitiesDescription3);
-
-		textAreaHabilityDescription2 = new JTextArea();
-		textAreaHabilityDescription2.setWrapStyleWord(true);
-		textAreaHabilityDescription2.setLineWrap(true);
-		textAreaHabilityDescription2.setBounds(1378, 294, 207, 138);
-		panelRegisterAgent.add(textAreaHabilityDescription2);
-
-		lblAgentHabilitiesName2 = new JLabel("Nombre de la habilidad 2");
-		lblAgentHabilitiesName2.setForeground(Color.WHITE);
-		lblAgentHabilitiesName2.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
-		lblAgentHabilitiesName2.setBounds(1378, 128, 207, 53);
-		panelRegisterAgent.add(lblAgentHabilitiesName2);
-
-		txtHabilityName2 = new JTextField();
-		txtHabilityName2.setColumns(10);
-		txtHabilityName2.setBounds(1378, 189, 207, 30);
-		panelRegisterAgent.add(txtHabilityName2);
-
-		lblAgentHabilitiesDescription2 = new JLabel("Descripcion de la habilidad 2");
-		lblAgentHabilitiesDescription2.setForeground(Color.WHITE);
-		lblAgentHabilitiesDescription2.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
-		lblAgentHabilitiesDescription2.setBounds(1378, 230, 207, 53);
-		panelRegisterAgent.add(lblAgentHabilitiesDescription2);
-
-		JTextArea textAreaHabilityDescription1 = new JTextArea();
-		textAreaHabilityDescription1.setBounds(998, 294, 207, 138);
-		textAreaHabilityDescription1.setLineWrap(true);
-		textAreaHabilityDescription1.setWrapStyleWord(true);
-		panelRegisterAgent.add(textAreaHabilityDescription1);
-
-		JLabel lblAgentHabilitiesDescription1 = new JLabel("Descripcion de la habilidad 1");
-		lblAgentHabilitiesDescription1.setForeground(Color.WHITE);
-		lblAgentHabilitiesDescription1.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
-		lblAgentHabilitiesDescription1.setBounds(998, 230, 207, 53);
-		panelRegisterAgent.add(lblAgentHabilitiesDescription1);
-
-		txtHabilityName1 = new JTextField();
-		txtHabilityName1.setColumns(10);
-		txtHabilityName1.setBounds(998, 189, 207, 30);
-		panelRegisterAgent.add(txtHabilityName1);
-
-		JLabel lblAgentHabilitiesName1 = new JLabel("Nombre de la habilidad 1");
-		lblAgentHabilitiesName1.setForeground(Color.WHITE);
-		lblAgentHabilitiesName1.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
-		lblAgentHabilitiesName1.setBounds(998, 128, 207, 53);
-		panelRegisterAgent.add(lblAgentHabilitiesName1);
-
-		JLabel lblAgentHabilitiesTitle = new JLabel("Habilidades del agente");
-		lblAgentHabilitiesTitle.setForeground(Color.WHITE);
-		lblAgentHabilitiesTitle.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 20));
-		lblAgentHabilitiesTitle.setBounds(1098, 64, 405, 53);
-		panelRegisterAgent.add(lblAgentHabilitiesTitle);
-
-		btnClean = new JButton("Limiar datos");
-		btnClean.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnClean.setForeground(Color.WHITE);
-		btnClean.setBackground(new Color(255, 0, 0));
-		btnClean.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 12));
-		btnClean.setBorder(null);
-		btnClean.setBounds(1409, 874, 140, 40);
-		btnClean.addActionListener(this);
-		panelRegisterAgent.add(btnClean);
-
-		btnConfirm = new JButton("AÃ±adir agente");
-		btnConfirm.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnConfirm.setForeground(Color.WHITE);
-		btnConfirm.setBackground(Color.RED);
-		btnConfirm.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 12));
-		btnConfirm.setBorder(null);
-		btnConfirm.setBounds(1584, 874, 140, 40);
-		btnConfirm.addActionListener(this);
-		panelRegisterAgent.add(btnConfirm);
-
-		txtPasswd2 = new JPasswordField();
-		txtPasswd2.setBounds(497, 535, 207, 30);
-		panelRegisterAgent.add(txtPasswd2);
-
-		chckbxNewCheckBoxModif_1 = new JCheckBox("Admin?");
-		chckbxNewCheckBoxModif_1.setOpaque(false);
-		chckbxNewCheckBoxModif_1.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
-		chckbxNewCheckBoxModif_1.setBounds(151, 395, 182, 23);
-		panelRegisterAgent.add(chckbxNewCheckBoxModif_1);
-
-		txtPasswd1 = new JPasswordField();
-		txtPasswd1.setBounds(151, 535, 207, 30);
-		panelRegisterAgent.add(txtPasswd1);
-
-		lblAgentDataPasswd2 = new JLabel("Confirmar contraseÃ±a");
-		lblAgentDataPasswd2.setForeground(Color.WHITE);
-		lblAgentDataPasswd2.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
-		lblAgentDataPasswd2.setBounds(497, 474, 207, 53);
-		panelRegisterAgent.add(lblAgentDataPasswd2);
-
-		JLabel lblAgentDataPasswd1 = new JLabel("ContraseÃ±a");
-		lblAgentDataPasswd1.setForeground(Color.WHITE);
-		lblAgentDataPasswd1.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
-		lblAgentDataPasswd1.setBounds(151, 474, 207, 53);
-		panelRegisterAgent.add(lblAgentDataPasswd1);
-
-		comboBoxRol = new JComboBox<String>();
-		comboBoxRol.setModel(
-				new DefaultComboBoxModel<String>(new String[] { "Duelist", "Sentinel", "Controller", "Initiator" }));
-		comboBoxRol.setBounds(497, 291, 207, 30);
-		comboBoxRol.setSelectedIndex(-1);
-		panelRegisterAgent.add(comboBoxRol);
-
-		lblAgentDataRol = new JLabel("Rol del agente");
-		lblAgentDataRol.setForeground(Color.WHITE);
-		lblAgentDataRol.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
-		lblAgentDataRol.setBounds(497, 230, 207, 53);
-		panelRegisterAgent.add(lblAgentDataRol);
-
-		txtNationality = new JTextField();
-		txtNationality.setColumns(10);
-		txtNationality.setBounds(151, 291, 207, 30);
-		panelRegisterAgent.add(txtNationality);
-
-		lblAgentDataNationality = new JLabel("Nacionalidad del agente");
-		lblAgentDataNationality.setForeground(Color.WHITE);
-		lblAgentDataNationality.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
-		lblAgentDataNationality.setBounds(151, 230, 207, 53);
-		panelRegisterAgent.add(lblAgentDataNationality);
-
-		txtName = new JTextField();
-		txtName.setColumns(10);
-		txtName.setBounds(497, 189, 207, 30);
-		panelRegisterAgent.add(txtName);
-
-		lblAgentDataName = new JLabel("Nombre del agente");
-		lblAgentDataName.setForeground(Color.WHITE);
-		lblAgentDataName.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
-		lblAgentDataName.setBounds(497, 128, 207, 53);
-		panelRegisterAgent.add(lblAgentDataName);
-
-		txtCode = new JTextField();
-		txtCode.setBounds(151, 189, 207, 30);
-		panelRegisterAgent.add(txtCode);
-		txtCode.setColumns(10);
-
-		lblAgentDataCode = new JLabel("Codigo del agente");
-		lblAgentDataCode.setForeground(Color.WHITE);
-		lblAgentDataCode.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
-		lblAgentDataCode.setBounds(151, 128, 207, 53);
-		panelRegisterAgent.add(lblAgentDataCode);
-
-		JLabel lblAgentDataTitle = new JLabel("Datos del agente");
-		lblAgentDataTitle.setForeground(Color.WHITE);
-		lblAgentDataTitle.setBounds(151, 64, 405, 53);
-		lblAgentDataTitle.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 20));
-		panelRegisterAgent.add(lblAgentDataTitle);
-
-		lblAgentHabilities = new JLabel("");
-		lblAgentHabilities.setBorder(new LineBorder(Color.WHITE, 2));
-		lblAgentHabilities.setBounds(908, 25, 816, 817);
-		panelRegisterAgent.add(lblAgentHabilities);
-
-		JLabel lblAgentData = new JLabel("");
-		lblAgentData.setBorder(new LineBorder(Color.WHITE, 2));
-		lblAgentData.setBounds(44, 25, 816, 817);
-		panelRegisterAgent.add(lblAgentData);
-
-		lblBackgroundPanelAgentRegister = new JLabel("");
-		lblBackgroundPanelAgentRegister
-				.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/appBackgroundUnderPanel.jpg")));
-		lblBackgroundPanelAgentRegister.setBounds(0, 0, 1770, 956);
-		panelRegisterAgent.add(lblBackgroundPanelAgentRegister);
-
-		panelModifyAgent = new JPanel();
-		panelModifyAgent.setLayout(null);
-		panelModifyAgent.setBounds(0, 50, 1770, 956);
-		panelAgent.add(panelModifyAgent);
-
-		chckbxNewCheckBoxModif = new JCheckBox("Admin?");
-		chckbxNewCheckBoxModif.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
-		chckbxNewCheckBoxModif.setOpaque(false);
-		chckbxNewCheckBoxModif.setBounds(151, 395, 182, 23);
-		panelModifyAgent.add(chckbxNewCheckBoxModif);
-
-		lblAgentHabilitiesOrbNumModif = new JLabel("Numero de orbes");
-		lblAgentHabilitiesOrbNumModif.setForeground(Color.WHITE);
-		lblAgentHabilitiesOrbNumModif.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
-		lblAgentHabilitiesOrbNumModif.setBounds(1378, 770, 149, 53);
-		panelModifyAgent.add(lblAgentHabilitiesOrbNumModif);
-
-		spinnerModif = new JSpinner();
-		spinnerModif.setBounds(1510, 782, 75, 20);
-		panelModifyAgent.add(spinnerModif);
-
-		lblAgentHabilitiesDescription4Modif = new JLabel("Descripcion de la habilidad ulti");
-		lblAgentHabilitiesDescription4Modif.setForeground(Color.WHITE);
-		lblAgentHabilitiesDescription4Modif.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
-		lblAgentHabilitiesDescription4Modif.setBounds(1378, 569, 207, 53);
-		panelModifyAgent.add(lblAgentHabilitiesDescription4Modif);
-
-		textAreaHabilityDescription4Modif = new JTextArea();
-		textAreaHabilityDescription4Modif.setWrapStyleWord(true);
-		textAreaHabilityDescription4Modif.setLineWrap(true);
-		textAreaHabilityDescription4Modif.setBounds(1378, 633, 207, 138);
-		panelModifyAgent.add(textAreaHabilityDescription4Modif);
-
-		lblAgentHabilitiesName4Modif = new JLabel("Nombre de la habilidad ulti");
-		lblAgentHabilitiesName4Modif.setForeground(Color.WHITE);
-		lblAgentHabilitiesName4Modif.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
-		lblAgentHabilitiesName4Modif.setBounds(1378, 467, 207, 53);
-		panelModifyAgent.add(lblAgentHabilitiesName4Modif);
-
-		txtHabilityName4Modif = new JTextField();
-		txtHabilityName4Modif.setColumns(10);
-		txtHabilityName4Modif.setBounds(1378, 528, 207, 30);
-		panelModifyAgent.add(txtHabilityName4Modif);
-
-		lblAgentHabilitiesName3Modif = new JLabel("Nombre de la habilidad 3");
-		lblAgentHabilitiesName3Modif.setForeground(Color.WHITE);
-		lblAgentHabilitiesName3Modif.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
-		lblAgentHabilitiesName3Modif.setBounds(998, 467, 207, 53);
-		panelModifyAgent.add(lblAgentHabilitiesName3Modif);
-
-		txtHabilityName3Modif = new JTextField();
-		txtHabilityName3Modif.setColumns(10);
-		txtHabilityName3Modif.setBounds(998, 528, 207, 30);
-		panelModifyAgent.add(txtHabilityName3Modif);
-
-		textAreaHabilityDescription3Modif = new JTextArea();
-		textAreaHabilityDescription3Modif.setWrapStyleWord(true);
-		textAreaHabilityDescription3Modif.setLineWrap(true);
-		textAreaHabilityDescription3Modif.setBounds(998, 633, 207, 138);
-		panelModifyAgent.add(textAreaHabilityDescription3Modif);
-
-		lblAgentHabilitiesDescription3Modif = new JLabel("Descripcion de la habilidad 3");
-		lblAgentHabilitiesDescription3Modif.setForeground(Color.WHITE);
-		lblAgentHabilitiesDescription3Modif.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
-		lblAgentHabilitiesDescription3Modif.setBounds(998, 569, 207, 53);
-		panelModifyAgent.add(lblAgentHabilitiesDescription3Modif);
-
-		textAreaHabilityDescription2Modif = new JTextArea();
-		textAreaHabilityDescription2Modif.setWrapStyleWord(true);
-		textAreaHabilityDescription2Modif.setLineWrap(true);
-		textAreaHabilityDescription2Modif.setBounds(1378, 294, 207, 138);
-		panelModifyAgent.add(textAreaHabilityDescription2Modif);
-
-		lblAgentHabilitiesName2Modif = new JLabel("Nombre de la habilidad 2");
-		lblAgentHabilitiesName2Modif.setForeground(Color.WHITE);
-		lblAgentHabilitiesName2Modif.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
-		lblAgentHabilitiesName2Modif.setBounds(1378, 128, 207, 53);
-		panelModifyAgent.add(lblAgentHabilitiesName2Modif);
-
-		txtHabilityName2Modif = new JTextField();
-		txtHabilityName2Modif.setColumns(10);
-		txtHabilityName2Modif.setBounds(1378, 189, 207, 30);
-		panelModifyAgent.add(txtHabilityName2Modif);
-
-		lblAgentHabilitiesDescription2Modif = new JLabel("Descripcion de la habilidad 2");
-		lblAgentHabilitiesDescription2Modif.setForeground(Color.WHITE);
-		lblAgentHabilitiesDescription2Modif.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
-		lblAgentHabilitiesDescription2Modif.setBounds(1378, 230, 207, 53);
-		panelModifyAgent.add(lblAgentHabilitiesDescription2Modif);
-
-		textAreaHabilityDescription1Modif = new JTextArea();
-		textAreaHabilityDescription1Modif.setWrapStyleWord(true);
-		textAreaHabilityDescription1Modif.setLineWrap(true);
-		textAreaHabilityDescription1Modif.setBounds(998, 294, 207, 138);
-		panelModifyAgent.add(textAreaHabilityDescription1Modif);
-
-		lblAgentHabilitiesDescription1Modif = new JLabel("Descripcion de la habilidad 1");
-		lblAgentHabilitiesDescription1Modif.setForeground(Color.WHITE);
-		lblAgentHabilitiesDescription1Modif.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
-		lblAgentHabilitiesDescription1Modif.setBounds(998, 230, 207, 53);
-		panelModifyAgent.add(lblAgentHabilitiesDescription1Modif);
-
-		txtHabilityName1Modif = new JTextField();
-		txtHabilityName1Modif.setColumns(10);
-		txtHabilityName1Modif.setBounds(998, 189, 207, 30);
-		panelModifyAgent.add(txtHabilityName1Modif);
-
-		lblAgentHabilitiesName1Modif = new JLabel("Nombre de la habilidad 1");
-		lblAgentHabilitiesName1Modif.setForeground(Color.WHITE);
-		lblAgentHabilitiesName1Modif.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
-		lblAgentHabilitiesName1Modif.setBounds(998, 128, 207, 53);
-		panelModifyAgent.add(lblAgentHabilitiesName1Modif);
-
-		lblAgentHabilitiesTitleModif = new JLabel("Habilidades del agente");
-		lblAgentHabilitiesTitleModif.setForeground(Color.WHITE);
-		lblAgentHabilitiesTitleModif.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 20));
-		lblAgentHabilitiesTitleModif.setBounds(1098, 64, 405, 53);
-		panelModifyAgent.add(lblAgentHabilitiesTitleModif);
-
-		btnModif = new JButton("Modificar agente");
-		btnModif.setForeground(Color.WHITE);
-		btnModif.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 12));
-		btnModif.setBorder(null);
-		btnModif.setBackground(Color.RED);
-		btnModif.setBounds(1584, 874, 140, 40);
-		panelModifyAgent.add(btnModif);
-
-		passwordFieldConfirmModif = new JPasswordField();
-		passwordFieldConfirmModif.setBounds(497, 535, 207, 30);
-		panelModifyAgent.add(passwordFieldConfirmModif);
-
-		passwordFieldModif = new JPasswordField();
-		passwordFieldModif.setBounds(151, 535, 207, 30);
-		panelModifyAgent.add(passwordFieldModif);
-
-		lblAgentDataPasswd2Modif = new JLabel("Confirmar contraseÃ±a");
-		lblAgentDataPasswd2Modif.setForeground(Color.WHITE);
-		lblAgentDataPasswd2Modif.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
-		lblAgentDataPasswd2Modif.setBounds(497, 474, 207, 53);
-		panelModifyAgent.add(lblAgentDataPasswd2Modif);
-
-		lblAgentDataPasswd1Modif = new JLabel("ContraseÃ±a");
-		lblAgentDataPasswd1Modif.setForeground(Color.WHITE);
-		lblAgentDataPasswd1Modif.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
-		lblAgentDataPasswd1Modif.setBounds(151, 474, 207, 53);
-		panelModifyAgent.add(lblAgentDataPasswd1Modif);
-
-		comboBoxRolModif = new JComboBox<String>();
-		comboBoxRolModif.setSelectedIndex(-1);
-		comboBoxRolModif.setBounds(497, 291, 207, 30);
-		panelModifyAgent.add(comboBoxRolModif);
-
-		lblAgentDataRolModif = new JLabel("Rol del agente");
-		lblAgentDataRolModif.setForeground(Color.WHITE);
-		lblAgentDataRolModif.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
-		lblAgentDataRolModif.setBounds(497, 230, 207, 53);
-		panelModifyAgent.add(lblAgentDataRolModif);
-
-		txtNationalityModif = new JTextField();
-		txtNationalityModif.setColumns(10);
-		txtNationalityModif.setBounds(151, 291, 207, 30);
-		panelModifyAgent.add(txtNationalityModif);
-
-		lblAgentDataNationalityModif = new JLabel("Nacionalidad del agente");
-		lblAgentDataNationalityModif.setForeground(Color.WHITE);
-		lblAgentDataNationalityModif.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
-		lblAgentDataNationalityModif.setBounds(151, 230, 207, 53);
-		panelModifyAgent.add(lblAgentDataNationalityModif);
-
-		txtNameModif = new JTextField();
-		txtNameModif.setColumns(10);
-		txtNameModif.setBounds(497, 189, 207, 30);
-		panelModifyAgent.add(txtNameModif);
-
-		lblAgentDataNameModif = new JLabel("Nombre del agente");
-		lblAgentDataNameModif.setForeground(Color.WHITE);
-		lblAgentDataNameModif.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
-		lblAgentDataNameModif.setBounds(497, 128, 207, 53);
-		panelModifyAgent.add(lblAgentDataNameModif);
-
-		txtCodeModif = new JTextField();
-		txtCodeModif.setColumns(10);
-		txtCodeModif.setBounds(151, 189, 207, 30);
-		panelModifyAgent.add(txtCodeModif);
-
-		lblAgentDataCodeModif = new JLabel("Codigo del agente");
-		lblAgentDataCodeModif.setForeground(Color.WHITE);
-		lblAgentDataCodeModif.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 14));
-		lblAgentDataCodeModif.setBounds(151, 128, 207, 53);
-		panelModifyAgent.add(lblAgentDataCodeModif);
-
-		lblAgentDataTitleModif = new JLabel("Datos del agente");
-		lblAgentDataTitleModif.setForeground(Color.WHITE);
-		lblAgentDataTitleModif.setFont(new Font("DINNextLTPro-Regular", Font.BOLD, 20));
-		lblAgentDataTitleModif.setBounds(151, 64, 405, 53);
-		panelModifyAgent.add(lblAgentDataTitleModif);
-
-		lblAgentHabilitiesModif = new JLabel("");
-		lblAgentHabilitiesModif.setBorder(new LineBorder(Color.WHITE, 2));
-		lblAgentHabilitiesModif.setBounds(908, 25, 816, 817);
-		panelModifyAgent.add(lblAgentHabilitiesModif);
-
-		lblAgentDataModif = new JLabel("");
-		lblAgentDataModif.setBorder(new LineBorder(Color.WHITE, 2));
-		lblAgentDataModif.setBounds(44, 25, 816, 817);
-		panelModifyAgent.add(lblAgentDataModif);
-
-		lblBackgroundPanelAgentRegisterModif = new JLabel("");
-		lblBackgroundPanelAgentRegisterModif
-				.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/appBackgroundUnderPanel.jpg")));
-		lblBackgroundPanelAgentRegisterModif.setBounds(0, 0, 1770, 956);
-		panelModifyAgent.add(lblBackgroundPanelAgentRegisterModif);
-		panelAgent.add(btnModifyAgent);
-
-		btnRegisterAgent = new JButton("Alta");
-		btnRegisterAgent.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnRegisterAgent.setBorder(null);
-		btnRegisterAgent.setBounds(708, 0, 177, 50);
-		btnRegisterAgent.addActionListener(this);
-		panelAgent.add(btnRegisterAgent);
-
-		JLabel lblBackgroundPanelAgent = new JLabel("");
-		lblBackgroundPanelAgent
-				.setIcon(new ImageIcon(VPestaniasAgente.class.getResource("/resources/appBackgroundPanel.jpg")));
-		lblBackgroundPanelAgent.setBounds(0, 0, 1770, 1006);
-		panelAgent.add(lblBackgroundPanelAgent);
 
 		panelMap = new JPanel();
 		panelMap.setLayout(null);
@@ -1285,7 +1322,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		 */
 
 		/*
-		 * Boton pestaÃ±a Agente
+		 * Boton pestaÃÂ±a Agente
 		 */
 		btnAgent = new JButton("Agente");
 		btnAgent.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -1299,7 +1336,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		p.add(btnAgent);
 
 		/*
-		 * Boton pestaÃ±a Mision
+		 * Boton pestaÃÂ±a Mision
 		 */
 		btnMission = new JButton("Mision");
 		btnMission.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -1312,7 +1349,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		p.add(btnMission);
 
 		/*
-		 * Boton pestaÃ±a Arma
+		 * Boton pestaÃÂ±a Arma
 		 */
 		btnWeapon = new JButton("Arma");
 		btnWeapon.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -1325,7 +1362,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		p.add(btnWeapon);
 
 		/*
-		 * Boton pestaÃ±a Mapa
+		 * Boton pestaÃÂ±a Mapa
 		 */
 		btnMap = new JButton("Mapa");
 		btnMap.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -1598,6 +1635,10 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 			passwordFieldConfirmModif.setEditable(false);
 			passwordFieldModif.setText("Ponme10PLS");
 			passwordFieldModif.setEditable(false);
+			txtHabilityName1Modif.setEditable(false);
+			txtHabilityName2Modif.setEditable(false);
+			txtHabilityName3Modif.setEditable(false);
+			txtHabilityName4Modif.setEditable(false);
 		} else if (e.getSource().equals(btnRegisterMission)) {
 			panelRegisterMission.setVisible(true);
 			panelHistoricMission.setVisible(false);
@@ -1614,6 +1655,61 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 			lblDamageSubtype.setVisible(false);
 		} else if (e.getSource().equals(comboBoxWeaponType)) {
 			cargarTablaWeapons();
+		} else if (e.getSource().equals(btnModif)) {
+			if (txtCodeModif.getText().isEmpty() || txtNationalityModif.getText().isEmpty()
+					|| comboBoxRolModif.getSelectedIndex() == -1 || txtHabilityName1Modif.getText().isEmpty()
+					|| txtHabilityName2Modif.getText().isEmpty() || txtHabilityName3Modif.getText().isEmpty()
+					|| txtHabilityName4Modif.getText().isEmpty()
+					|| textAreaHabilityDescription1Modif.getText().isEmpty()
+					|| textAreaHabilityDescription2Modif.getText().isEmpty()
+					|| textAreaHabilityDescription3Modif.getText().isEmpty()
+					|| textAreaHabilityDescription4Modif.getText().isEmpty()) {
+
+				JOptionPane.showMessageDialog(p, "Hay campos vacios", "Agente", JOptionPane.INFORMATION_MESSAGE);
+			} else {
+				String passwd1 = new String(passwordFieldModif.getPassword());
+				Agent newAgent = new Agent();
+				Ability ability1 = new Ability();
+				Ability ability2 = new Ability();
+				Ability ability3 = new Ability();
+				AbilityUltimate ability4 = new AbilityUltimate();
+				Ability[] agentAbilities = new Ability[4];
+
+				newAgent.setAgentCode(Integer.parseInt(txtCodeModif.getText()));
+				newAgent.setAgentName(txtNameModif.getText());
+				newAgent.setAgentNationality(txtNationalityModif.getText());
+				newAgent.setAgentRol(comboBoxRolModif.getSelectedItem().toString());
+				newAgent.setAgentIsAdmin(chckbxNewCheckBoxModif_1.isSelected());
+				newAgent.setAgentIsOnActive(true);
+				newAgent.setAgentIsOnMission(false);
+				newAgent.setAgentPasswd(passwd1);
+				ability1.setAbilityName(txtHabilityName1Modif.getText());
+				ability1.setAbilityDescription(textAreaHabilityDescription1Modif.getText());
+				ability2.setAbilityName(txtHabilityName2Modif.getText());
+				ability2.setAbilityDescription(textAreaHabilityDescription2Modif.getText());
+				ability3.setAbilityName(txtHabilityName3Modif.getText());
+				ability3.setAbilityDescription(textAreaHabilityDescription3Modif.getText());
+				ability4.setAbilityName(txtHabilityName4Modif.getText());
+				ability4.setAbilityDescription(textAreaHabilityDescription4Modif.getText());
+				ability4.setAbilityUltimateRequiredOrbs((int) (spinnerModif.getValue()));
+				
+				agentAbilities[0] = ability1;
+				agentAbilities[1] = ability2;
+				agentAbilities[2] = ability3;
+				agentAbilities[3] = ability4;
+
+				newAgent.setAgentAbilities(agentAbilities);
+				
+				try {
+					agentData.modifyAgent(newAgent);
+					JOptionPane.showMessageDialog(this, "Agente modificado correctamente", "Agente", JOptionPane.INFORMATION_MESSAGE);
+					cargarTablaAgents(p);
+				} catch (ExceptionManager e2) {
+
+					JOptionPane.showMessageDialog(p, e2.getMessage(), "Agente", JOptionPane.INFORMATION_MESSAGE);
+				}
+
+			}
 		} else if (e.getSource().equals(btnAddWeapon)) {
 			if (!(txtNameWeapon.getText()).isEmpty() && !(txtDamageWeapon.getText()).isEmpty()
 					&& rdbtnWeaponSidearm.isSelected()) {
@@ -1644,7 +1740,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 			cargarTablaWeapons();
 		} else if (e.getSource().equals(btnDeleteWeapon)) {
 			if (!(txtNameWeapon.getText()).isEmpty()) {
-				if (JOptionPane.showConfirmDialog(this, "�Estas seguro de querer borrar este arma?", "Borrado",
+				if (JOptionPane.showConfirmDialog(this, "¿Estas seguro de querer borrar este arma?", "Borrado",
 						JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == 0)
 					try {
 						weaponData.deleteWeapon(txtNameWeapon.getText());
@@ -1708,7 +1804,71 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 			cargarTablaAgents(p);
 		} else if (e.getSource().equals(btnConfirmMission)) {
 			aniadirMission();
+		} else if (e.getSource().equals(btnConfirm)) {
+			registerAgent();
 		}
+	}
+
+	private void registerAgent() {
+		if (txtName.getText().isEmpty() || txtCode.getText().isEmpty() || txtNationality.getText().isEmpty()
+				|| comboBoxRol.getSelectedIndex() == -1 || txtPasswd1.getPassword().toString().isEmpty()
+				|| txtPasswd2.getPassword().toString().isEmpty() || txtHabilityName1.getText().isEmpty()
+				|| txtHabilityName2.getText().isEmpty() || txtHabilityName3.getText().isEmpty()
+				|| txtHabilityName4.getText().isEmpty() || textAreaHabilityDescription1.getText().isEmpty()
+				|| textAreaHabilityDescription2.getText().isEmpty() || textAreaHabilityDescription3.getText().isEmpty()
+				|| textAreaHabilityDescription4.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(this, "Hay campos vacios", "Agente", JOptionPane.INFORMATION_MESSAGE);
+		} else {
+			String passwd1 = new String(txtPasswd1.getPassword());
+			String passwd2 = new String(txtPasswd2.getPassword());
+			System.out.println(passwd1);
+			if (passwd1.equals(passwd2)) {
+				Agent newAgent = new Agent();
+				Ability ability1 = new Ability();
+				Ability ability2 = new Ability();
+				Ability ability3 = new Ability();
+				AbilityUltimate ability4 = new AbilityUltimate();
+				Ability[] agentAbilities = new Ability[4];
+
+				newAgent.setAgentCode(Integer.parseInt(txtCode.getText()));
+				newAgent.setAgentName(txtName.getText());
+				newAgent.setAgentNationality(txtNationality.getText());
+				newAgent.setAgentRol(comboBoxRol.getSelectedItem().toString());
+				newAgent.setAgentIsAdmin(chckbxNewCheckBoxModif_1.isSelected());
+				newAgent.setAgentIsOnActive(true);
+				newAgent.setAgentIsOnMission(false);
+				newAgent.setAgentPasswd(passwd1);
+				ability1.setAbilityName(txtHabilityName1.getText());
+				ability1.setAbilityDescription(textAreaHabilityDescription1.getText());
+				ability2.setAbilityName(txtHabilityName2.getText());
+				ability2.setAbilityDescription(textAreaHabilityDescription2.getText());
+				ability3.setAbilityName(txtHabilityName3.getText());
+				ability3.setAbilityDescription(textAreaHabilityDescription3.getText());
+				ability4.setAbilityName(txtHabilityName4.getText());
+				ability4.setAbilityDescription(textAreaHabilityDescription4.getText());
+				ability4.setAbilityUltimateRequiredOrbs((int) (spinner.getValue()));
+
+				agentAbilities[0] = ability1;
+				agentAbilities[1] = ability2;
+				agentAbilities[2] = ability3;
+				agentAbilities[3] = ability4;
+
+				newAgent.setAgentAbilities(agentAbilities);
+
+				// newAgent.
+				try {
+					agentData.registerAgent(newAgent);
+					cargarTablaAgents(p);
+				} catch (ExceptionManager e) {
+
+					JOptionPane.showMessageDialog(this, e.getMessage(), "Agente", JOptionPane.INFORMATION_MESSAGE);
+				}
+			} else {
+				JOptionPane.showMessageDialog(this, "CONTRASEÑAS NO COINCIDEN", "Agente",
+						JOptionPane.INFORMATION_MESSAGE);
+			}
+		}
+
 	}
 
 	private void aniadirMission() {
@@ -1880,7 +2040,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 							VPestaniasAgente.class.getResource("/resources/rotGamesLogo100x52.png"));
 					newAgent = agents.get(row);
 					if (newAgent.isAgentIsOnActive()) {
-						if (JOptionPane.showOptionDialog(this, "¿Desea dar de baja al agente?",
+						if (JOptionPane.showOptionDialog(this, "Â¿Desea dar de baja al agente?",
 								newAgent.getAgentName() + " " + newAgent.getAgentCode(), JOptionPane.YES_NO_OPTION,
 								JOptionPane.INFORMATION_MESSAGE, newIcon, optionsInActive, optionsInActive[0]) == 0) {
 							if (newAgent.isAgentIsOnMission()) {
@@ -1898,7 +2058,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 							JOptionPane.showMessageDialog(this, "El agente seguira activo", "Agente",
 									JOptionPane.INFORMATION_MESSAGE);
 					} else {
-						if (JOptionPane.showOptionDialog(this, "¿Desea dar de alta al agente?",
+						if (JOptionPane.showOptionDialog(this, "Â¿Desea dar de alta al agente?",
 								newAgent.getAgentName() + " " + newAgent.getAgentCode(), JOptionPane.YES_NO_OPTION,
 								JOptionPane.INFORMATION_MESSAGE, newIcon, optionsActive, optionsActive[0]) == 0) {
 							agentData.makeAgentActive(newAgent.getAgentCode());
@@ -1935,7 +2095,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 					e1.printStackTrace();
 				}
 				if (newWeapon.isWeaponIsActive()) {
-					if (JOptionPane.showOptionDialog(this, "¿Desea borrar o modificar este arma?", "Armas",
+					if (JOptionPane.showOptionDialog(this, "Â¿Desea borrar o modificar este arma?", "Armas",
 							JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options,
 							options[0]) == 0) {
 
@@ -1960,7 +2120,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 						btnDeleteWeapon.setEnabled(true);
 					}
 				} else {
-					if (JOptionPane.showOptionDialog(this, "�Desea dar de alta a este arma?", "Armas",
+					if (JOptionPane.showOptionDialog(this, "¿Desea dar de alta a este arma?", "Armas",
 							JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options,
 							options[0]) == 0) {
 						try {
@@ -2072,7 +2232,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		List<Weapon> weaponsPrimary = null;
 		List<Weapon> weaponsSidearms = null;
 
-		String tituloWeapons[] = { "Nombre", "Tipo", "Subtipo", "DaÃ±o  (Cabeza / Cuerpo / Piernas)" };
+		String tituloWeapons[] = { "Nombre", "Tipo", "Subtipo", "DaÃÂ±o  (Cabeza / Cuerpo / Piernas)" };
 		scrollPaneWeapons.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		scrollPaneWeapons.setBounds(600, 100, 1150, 778);
 		panelBackgroundRegisterWeapon.add(scrollPaneWeapons);
@@ -2217,7 +2377,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 	}
 
 	private void clearTableWeapons() {
-		String tituloWeapons[] = { "Nombre", "Tipo", "Subtipo", "Daño  (Cabeza / Cuerpo / Piernas)" };
+		String tituloWeapons[] = { "Nombre", "Tipo", "Subtipo", "DaÃ±o  (Cabeza / Cuerpo / Piernas)" };
 		tableWeapons = new JTable(null, tituloWeapons) {
 			/*
 			 * 
