@@ -199,7 +199,6 @@ public class AgentManagerDBImplementation implements AgentManager {
 			stmt.setInt(4, modifyAgent.getAgentCode());
 
 			stmt.executeUpdate();
-			stmt.close();
 
 			agentAbilities = modifyAgent.getAgentAbilities();
 
@@ -211,57 +210,56 @@ public class AgentManagerDBImplementation implements AgentManager {
 			// INSERTAR HABILIDADES DEL AGENTE
 
 			// HABILIDAD 1
-			final String INSERTAbility1 = "update ability set AbilityName = ?, AbilityDescription = ? where agentCode = ?";
+			final String UPDATEAbility1 = "update ability set AbilityDescription = ? where agentCode = ? and AbilityName = ?";
+			PreparedStatement stmt2;
+			stmt2 = con.prepareStatement(UPDATEAbility1);
 
-			stmt = con.prepareStatement(INSERTAbility1);
+			stmt2.setString(1, ability1.getAbilityDescription());
+			stmt2.setInt(2, modifyAgent.getAgentCode());
+			stmt2.setString(3, ability1.getAbilityName());
 
-			stmt.setString(1, ability1.getAbilityName());
-			stmt.setString(2, ability1.getAbilityDescription());
-			stmt.setInt(3, modifyAgent.getAgentCode());
-
-			stmt.executeUpdate();
-			stmt.close();
+			stmt2.executeUpdate();
 
 			// HABILIDAD 2
-			final String INSERTAbility2 = "update ability set AbilityName = ?, AbilityDescription = ? where agentCode = ?";
+			final String UPDATEAbility2 = "update ability set AbilityDescription = ? where agentCode = ? and AbilityName = ?";
+			PreparedStatement stmt3;
+			stmt3 = con.prepareStatement(UPDATEAbility2);
 
-			stmt = con.prepareStatement(INSERTAbility2);
+			stmt3.setString(1, ability2.getAbilityDescription());
+			stmt3.setInt(2, modifyAgent.getAgentCode());
+			stmt3.setString(3, ability2.getAbilityName());
 
-			stmt.setString(1, ability2.getAbilityName());
-			stmt.setString(2, ability2.getAbilityDescription());
-			stmt.setInt(3, modifyAgent.getAgentCode());
-
-			stmt.executeUpdate();
-			stmt.close();
+			stmt3.executeUpdate();
 
 			// HABILIDAD 3
-			final String INSERTAbility3 = "update ability set AbilityName = ?, AbilityDescription = ? where agentCode = ?";
+			final String UPDATEAbility3 = "update ability set AbilityDescription = ? where agentCode = ? and AbilityName = ?";
+			PreparedStatement stmt4;
+			stmt4 = con.prepareStatement(UPDATEAbility3);
 
-			stmt = con.prepareStatement(INSERTAbility3);
-
-			stmt.setString(1, ability3.getAbilityName());
-			stmt.setString(2, ability3.getAbilityDescription());
-			stmt.setInt(3, modifyAgent.getAgentCode());
-
-			stmt.executeUpdate();
-			stmt.close();
+			stmt4.setString(1, ability3.getAbilityDescription());
+			stmt4.setInt(2, modifyAgent.getAgentCode());
+			stmt4.setString(3, ability3.getAbilityName());
+			stmt4.executeUpdate();
 
 			// HABILIDAD ULTIMATE
-			final String INSERTAbility4 = "update ability set AbilityName = ?, AbilityDescription = ?, orbNum = ? where agentCode = ?";
+			final String UPDATEAbility4 = "update ability set AbilityDescription = ?, orbNum = ? where agentCode = ? and AbilityName = ?";
+			PreparedStatement stmt5;
+			stmt5 = con.prepareStatement(UPDATEAbility4);
 
-			stmt = con.prepareStatement(INSERTAbility4);
+			stmt5.setString(1, ability4.getAbilityDescription());
+			stmt5.setInt(2, ability4.getAbilityUltimateRequiredOrbs());
+			stmt5.setInt(3, modifyAgent.getAgentCode());
+			stmt5.setString(4, ability4.getAbilityName());
 
-			stmt.setString(1, ability4.getAbilityName());
-			stmt.setString(2, ability4.getAbilityDescription());
-			stmt.setInt(3, ability4.getAbilityUltimateRequiredOrbs());
-			stmt.setInt(4, modifyAgent.getAgentCode());
+			stmt5.executeUpdate();
 
-			stmt.executeUpdate();
-			stmt.close();
-
-			con = conection.openConnection();
+			conection.closeConnection(stmt, con);
+			conection.closeConnection(stmt2, con);
+			conection.closeConnection(stmt3, con);
+			conection.closeConnection(stmt4, con);
+			conection.closeConnection(stmt5, con);
 		} catch (SQLException e1) {
-
+			e1.printStackTrace();
 			String error = "ERROR AL MODIFICAR EL AGENTE";
 			ExceptionManager uwu = new ExceptionManager(error);
 			throw uwu;
@@ -283,8 +281,9 @@ public class AgentManagerDBImplementation implements AgentManager {
 			stmt.close();
 			con = conection.openConnection();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String error = "ERROR AL HACER EL AGENTE INACTIVO";
+			ExceptionManager uwu = new ExceptionManager(error);
+			throw uwu;
 		}
 
 	}
@@ -303,8 +302,9 @@ public class AgentManagerDBImplementation implements AgentManager {
 			stmt.close();
 			con = conection.openConnection();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String error = "ERROR AL PONER EL AGENTE EN ACTIVO";
+			ExceptionManager uwu = new ExceptionManager(error);
+			throw uwu;
 		}
 	}
 
@@ -380,7 +380,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 			stmt.close();
 			con = conection.openConnection();
 		} catch (SQLException e) {
-			String msg = "Error en recoger a todos los agentes";
+			String msg = "Error en recoger a todos los agentes en activo";
 			ExceptionManager x = new ExceptionManager(msg);
 		}
 		return activeAgents;
@@ -450,8 +450,9 @@ public class AgentManagerDBImplementation implements AgentManager {
 			stmt.close();
 			con = conection.openConnection();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String error = "error en el login";
+			ExceptionManager uwu = new ExceptionManager(error);
+			throw uwu;
 		}
 		return getAgent;
 	}
@@ -489,7 +490,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 
 			con = conection.openConnection();
 		} catch (SQLException e) {
-			String msg = "Error en recoger a todos los agentes";
+			String msg = "Error en recoger a los agentes del equipo";
 			ExceptionManager x = new ExceptionManager(msg);
 		}
 		return teammates;
