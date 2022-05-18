@@ -26,7 +26,7 @@ public class WeaponsTest {
 
 	@Test
 	public void testModifyWeapon() throws ExceptionManager {
-		assertFalse(wepMan.modifyWeapon(wep));
+		assertTrue(wepMan.modifyWeapon(wep));
 	}
 
 	@Test
@@ -48,6 +48,12 @@ public class WeaponsTest {
 	@Test
 	public void testGetAllPrimary() throws ExceptionManager {
 		assertNotNull(wepMan.getAllPrimary());
+	}
+	
+	@Test
+	public void testActivateWeapon() throws ExceptionManager {
+		wepMan.activateWeapon(name);
+		testGetWeaponByName(name);
 	}
 
 // Methods to control other methods
