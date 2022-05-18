@@ -13,6 +13,8 @@ public interface WeaponManager {
 	public boolean modifyWeapon(Weapon weapon) throws ExceptionManager;
 
 	public void deleteWeapon(String name) throws ExceptionManager;
+	
+	public void activateWeapon(String name) throws ExceptionManager;
 
 	public List<Weapon> getAllWeapon() throws ExceptionManager;
 
