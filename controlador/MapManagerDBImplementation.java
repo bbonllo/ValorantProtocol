@@ -43,9 +43,6 @@ public class MapManagerDBImplementation implements MapManager {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		return mapIntro;
 	}
@@ -77,9 +74,6 @@ public class MapManagerDBImplementation implements MapManager {
 			String msg = "Error en recuperar todos los mapas";
 			ExceptionManager x = new ExceptionManager(msg);
 			throw x;
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 
 		return maps;
@@ -109,9 +103,6 @@ public class MapManagerDBImplementation implements MapManager {
 				rs.close();
 			conection.closeConnection(stmt, con);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -144,9 +135,6 @@ public class MapManagerDBImplementation implements MapManager {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		return nameAgents;
 	}
@@ -175,9 +163,6 @@ public class MapManagerDBImplementation implements MapManager {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		return weaponName;
 	}
@@ -204,9 +189,6 @@ public class MapManagerDBImplementation implements MapManager {
 				rs.close();
 			conection.closeConnection(stmt, con);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -256,9 +238,6 @@ public class MapManagerDBImplementation implements MapManager {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		return codTop3Agents;
 	}
@@ -305,9 +284,6 @@ public class MapManagerDBImplementation implements MapManager {
 				rs.close();
 			conection.closeConnection(stmt, con);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

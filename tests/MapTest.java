@@ -2,25 +2,37 @@ package tests;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
+import org.junit.Before;
 import org.junit.Test;
 
 import controlador.MapManager;
 import controlador.MapManagerDBImplementation;
 import exceptions.ExceptionManager;
+import model.Map;
 
 public class MapTest {
+	
+	@Before
+	public void setUp() {
+		String mapName = "Juan";
+		String mapDesc = "afafgagag";
+		Map map = new Map(mapName, mapDesc);
+	}
 
 	@Test
 	public void testGetMapByName() throws ExceptionManager {
 		String name = "Split";
 		MapManager newMap = new MapManagerDBImplementation();
-		assertNotNull(newMap.getMapByName(name));
+		assertNotNull(newMap.getMapByName(name).getMapName());
 	}
 
 	@Test
 	public void testGetAllMaps() throws ExceptionManager {
 		MapManager newMap = new MapManagerDBImplementation();
-		assertNotNull(newMap.getAllMaps());
+		ArrayList<Map> maps = (ArrayList<Map>) newMap.getAllMaps();
+		assertNotNull(maps.get(0).getMapDesc());
 	}
 
 	@Test
@@ -32,7 +44,7 @@ public class MapTest {
 
 	@Test
 	public void testGetDefendMissionAgents() throws ExceptionManager {
-		String name = "Split";
+		String name = "Haven";
 		MapManager newMap = new MapManagerDBImplementation();
 		assertNotNull(newMap.getDefendMissionAgents(name));
 	}
@@ -46,7 +58,7 @@ public class MapTest {
 
 	@Test
 	public void testGetDefendMissionWeapon() throws ExceptionManager {
-		String name = "Split";
+		String name = "Haven";
 		MapManager newMap = new MapManagerDBImplementation();
 		assertNotNull(newMap.getDefendMissionWeapon(name));
 	}
@@ -60,7 +72,7 @@ public class MapTest {
 
 	@Test
 	public void testAgentPercentageMapDefend() throws ExceptionManager {
-		String name = "Split";
+		String name = "Haven";
 		MapManager newMap = new MapManagerDBImplementation();
 		assertNotNull(newMap.agentPercentageMapDefend(name));
 	}
