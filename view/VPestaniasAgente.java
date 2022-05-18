@@ -364,6 +364,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		btnModifyWeapon.setBackground(Color.RED);
 		btnModifyWeapon.setBounds(122, 753, 112, 30);
 		btnModifyWeapon.setEnabled(false);
+		btnModifyWeapon.addActionListener(this);
 		panelRegisterWeapon.add(btnModifyWeapon);
 
 		btnDeleteWeapon = new JButton("Borrar arma");
@@ -1616,29 +1617,75 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		} else if (e.getSource().equals(btnAddWeapon)) {
 			if (!(txtNameWeapon.getText()).isEmpty() && !(txtDamageWeapon.getText()).isEmpty()
 					&& rdbtnWeaponSidearm.isSelected()) {
-
+				try {
+					weaponData.addWeapon(new Weapon(txtNameWeapon.getText(),
+							Integer.parseInt(txtDamageWeapon.getText()), "Secondary", "Pistol", true));
+					JOptionPane.showMessageDialog(this, "Arma creada correctamente", "Arma",
+							JOptionPane.INFORMATION_MESSAGE);
+				} catch (NumberFormatException | ExceptionManager e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			} else if (!(txtNameWeapon.getText()).isEmpty() && !(txtDamageWeapon.getText()).isEmpty()
 					&& rdbtnWeaponPrimary.isSelected() && comboBoxWeaponSubtype.getSelectedIndex() != -1) {
-
+				try {
+					weaponData
+							.addWeapon(new Weapon(txtNameWeapon.getText(), Integer.parseInt(txtDamageWeapon.getText()),
+									"Primary", comboBoxWeaponSubtype.getSelectedItem().toString(), true));
+					JOptionPane.showMessageDialog(this, "Arma creada correctamente", "Arma",
+							JOptionPane.INFORMATION_MESSAGE);
+				} catch (NumberFormatException | ExceptionManager e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			} else {
 				JOptionPane.showMessageDialog(this, "Campos sin rellenar", "Error", JOptionPane.WARNING_MESSAGE);
 			}
+			cargarTablaWeapons();
 		} else if (e.getSource().equals(btnDeleteWeapon)) {
 			if (!(txtNameWeapon.getText()).isEmpty()) {
-				
-			}else{
+				if (JOptionPane.showConfirmDialog(this, "¿Estas seguro de querer borrar este arma?", "Borrado",
+						JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == 0)
+					try {
+						weaponData.deleteWeapon(txtNameWeapon.getText());
+						JOptionPane.showMessageDialog(this, "Arma borrada correctamente", "Arma",
+								JOptionPane.INFORMATION_MESSAGE);
+					} catch (ExceptionManager e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+			} else {
 				JOptionPane.showMessageDialog(this, "Campos sin rellenar", "Error", JOptionPane.WARNING_MESSAGE);
 			}
+			cargarTablaWeapons();
 		} else if (e.getSource().equals(btnModifyWeapon)) {
 			if (!(txtNameWeapon.getText()).isEmpty() && !(txtDamageWeapon.getText()).isEmpty()
 					&& rdbtnWeaponSidearm.isSelected()) {
-
+				try {
+					weaponData.modifyWeapon(new Weapon(txtNameWeapon.getText(),
+							Integer.parseInt(txtDamageWeapon.getText()), "Secondary", "Pistol", true));
+					JOptionPane.showMessageDialog(this, "Arma modificada correctamente", "Arma",
+							JOptionPane.INFORMATION_MESSAGE);
+				} catch (NumberFormatException | ExceptionManager e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			} else if (!(txtNameWeapon.getText()).isEmpty() && !(txtDamageWeapon.getText()).isEmpty()
 					&& rdbtnWeaponPrimary.isSelected() && comboBoxWeaponSubtype.getSelectedIndex() != -1) {
-
+				try {
+					weaponData.modifyWeapon(
+							new Weapon(txtNameWeapon.getText(), Integer.parseInt(txtDamageWeapon.getText()), "Primary",
+									comboBoxWeaponSubtype.getSelectedItem().toString(), true));
+					JOptionPane.showMessageDialog(this, "Arma modificada correctamente", "Arma",
+							JOptionPane.INFORMATION_MESSAGE);
+				} catch (NumberFormatException | ExceptionManager e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			} else {
 				JOptionPane.showMessageDialog(this, "Campos sin rellenar", "Error", JOptionPane.WARNING_MESSAGE);
 			}
+			cargarTablaWeapons();
 		} else if (e.getSource().equals(comboBoxMissionMaps)) {
 			try {
 				String newMap = comboBoxMissionMaps.getSelectedItem().toString();
@@ -1870,33 +1917,60 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 			}
 		} else if (e.getSource().equals(tableWeapons)) {
 			if (e.getClickCount() == 2) {
-				if (JOptionPane.showOptionDialog(this, "Â¿Desea borrar o modificar este arma?", "Armas",
-						JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]) == 0) {
-					Weapon newWeapon = null;
+				Weapon newWeapon = null;
+				try {
+					String[] newWeaponName = tableWeapons.getModel().getValueAt(tableWeapons.getSelectedRow(), 0)
+							.toString().split(" ");
+					newWeapon = weaponData.getWeaponByName(newWeaponName[1]);
+				} catch (ArrayIndexOutOfBoundsException e1) {
 					try {
 						newWeapon = weaponData.getWeaponByName(
 								tableWeapons.getModel().getValueAt(tableWeapons.getSelectedRow(), 0).toString());
-					} catch (ExceptionManager e1) {
+					} catch (ExceptionManager e2) {
 						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						e2.printStackTrace();
 					}
-					txtNameWeapon.setText(newWeapon.getWeaponName());
-					txtDamageWeapon.setText(newWeapon.getWeaponDamage() + "");
-					if (newWeapon.getWeaponType().equalsIgnoreCase("Primary")) {
-						rdbtnWeaponPrimary.setSelected(true);
-						rdbtnWeaponSidearm.setSelected(false);
+				} catch (ExceptionManager e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				if (newWeapon.isWeaponIsActive()) {
+					if (JOptionPane.showOptionDialog(this, "Â¿Desea borrar o modificar este arma?", "Armas",
+							JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options,
+							options[0]) == 0) {
 
-						comboBoxWeaponSubtype.setSelectedItem(newWeapon.getWeaponSubType());
-						comboBoxWeaponSubtype.setVisible(true);
-						lblDamageSubtype.setVisible(true);
-					} else {
-						rdbtnWeaponPrimary.setSelected(false);
-						rdbtnWeaponSidearm.setSelected(true);
+						txtNameWeapon.setText(newWeapon.getWeaponName());
+						txtDamageWeapon.setText(newWeapon.getWeaponDamage() + "");
+						if (newWeapon.getWeaponType().equalsIgnoreCase("Primary")) {
+							rdbtnWeaponPrimary.setSelected(true);
+							rdbtnWeaponSidearm.setSelected(false);
 
-						comboBoxWeaponSubtype.setVisible(false);
-						lblDamageSubtype.setVisible(false);
+							comboBoxWeaponSubtype.setSelectedItem(newWeapon.getWeaponSubType());
+							comboBoxWeaponSubtype.setVisible(true);
+							lblDamageSubtype.setVisible(true);
+						} else {
+							rdbtnWeaponPrimary.setSelected(false);
+							rdbtnWeaponSidearm.setSelected(true);
+
+							comboBoxWeaponSubtype.setVisible(false);
+							lblDamageSubtype.setVisible(false);
+						}
+						btnAddWeapon.setEnabled(false);
+						btnModifyWeapon.setEnabled(true);
+						btnDeleteWeapon.setEnabled(true);
 					}
-					btnAddWeapon.setEnabled(false);
+				} else {
+					if (JOptionPane.showOptionDialog(this, "¿Desea dar de alta a este arma?", "Armas",
+							JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options,
+							options[0]) == 0) {
+						try {
+							weaponData.activateWeapon(newWeapon.getWeaponName());
+						} catch (ExceptionManager e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						cargarTablaWeapons();
+					}
 				}
 			}
 		} else if (e.getSource().equals(lblBreezeMap)) {
@@ -2013,12 +2087,21 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 			}
 			matrizTablaArmas = new String[weapons.size()][4];
 			for (Weapon newWeapon : weapons) {
-				matrizTablaArmas[contWeapons][0] = newWeapon.getWeaponName();
-				matrizTablaArmas[contWeapons][1] = newWeapon.getWeaponType();
-				matrizTablaArmas[contWeapons][2] = newWeapon.getWeaponSubType();
-				matrizTablaArmas[contWeapons][3] = (newWeapon.getWeaponDamage() * 4) + " // "
-						+ newWeapon.getWeaponDamage() + " // " + ((newWeapon.getWeaponDamage() * 85) / 100);
-				contWeapons++;
+				if (newWeapon.isWeaponIsActive()) {
+					matrizTablaArmas[contWeapons][0] = newWeapon.getWeaponName();
+					matrizTablaArmas[contWeapons][1] = newWeapon.getWeaponType();
+					matrizTablaArmas[contWeapons][2] = newWeapon.getWeaponSubType();
+					matrizTablaArmas[contWeapons][3] = (newWeapon.getWeaponDamage() * 4) + " // "
+							+ newWeapon.getWeaponDamage() + " // " + ((newWeapon.getWeaponDamage() * 85) / 100);
+					contWeapons++;
+				} else {
+					matrizTablaArmas[contWeapons][0] = "X " + newWeapon.getWeaponName() + " X";
+					matrizTablaArmas[contWeapons][1] = newWeapon.getWeaponType();
+					matrizTablaArmas[contWeapons][2] = newWeapon.getWeaponSubType();
+					matrizTablaArmas[contWeapons][3] = (newWeapon.getWeaponDamage() * 4) + " // "
+							+ newWeapon.getWeaponDamage() + " // " + ((newWeapon.getWeaponDamage() * 85) / 100);
+					contWeapons++;
+				}
 			}
 			break;
 		case 1:
@@ -2030,13 +2113,23 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 			}
 			matrizTablaArmas = new String[weaponsPrimary.size()][4];
 			for (Weapon newWeapon : weaponsPrimary) {
-				matrizTablaArmas[contWeapons][0] = newWeapon.getWeaponName();
-				matrizTablaArmas[contWeapons][1] = newWeapon.getWeaponType();
-				matrizTablaArmas[contWeapons][2] = newWeapon.getWeaponSubType();
-				matrizTablaArmas[contWeapons][3] = (newWeapon.getWeaponDamage() * 4) + " // "
-						+ newWeapon.getWeaponDamage() + " // " + ((newWeapon.getWeaponDamage() * 85) / 100);
-				contWeapons++;
+				if (newWeapon.isWeaponIsActive()) {
+					matrizTablaArmas[contWeapons][0] = newWeapon.getWeaponName();
+					matrizTablaArmas[contWeapons][1] = newWeapon.getWeaponType();
+					matrizTablaArmas[contWeapons][2] = newWeapon.getWeaponSubType();
+					matrizTablaArmas[contWeapons][3] = (newWeapon.getWeaponDamage() * 4) + " // "
+							+ newWeapon.getWeaponDamage() + " // " + ((newWeapon.getWeaponDamage() * 85) / 100);
+					contWeapons++;
+				} else {
+					matrizTablaArmas[contWeapons][0] = "X " + newWeapon.getWeaponName() + " X";
+					matrizTablaArmas[contWeapons][1] = newWeapon.getWeaponType();
+					matrizTablaArmas[contWeapons][2] = newWeapon.getWeaponSubType();
+					matrizTablaArmas[contWeapons][3] = (newWeapon.getWeaponDamage() * 4) + " // "
+							+ newWeapon.getWeaponDamage() + " // " + ((newWeapon.getWeaponDamage() * 85) / 100);
+					contWeapons++;
+				}
 			}
+
 			break;
 		case 2:
 			try {
@@ -2047,12 +2140,21 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 			}
 			matrizTablaArmas = new String[weaponsSidearms.size()][4];
 			for (Weapon newWeapon : weaponsSidearms) {
-				matrizTablaArmas[contWeapons][0] = newWeapon.getWeaponName();
-				matrizTablaArmas[contWeapons][1] = newWeapon.getWeaponType();
-				matrizTablaArmas[contWeapons][2] = newWeapon.getWeaponSubType();
-				matrizTablaArmas[contWeapons][3] = (newWeapon.getWeaponDamage() * 4) + " // "
-						+ newWeapon.getWeaponDamage() + " // " + ((newWeapon.getWeaponDamage() * 85) / 100);
-				contWeapons++;
+				if (newWeapon.isWeaponIsActive()) {
+					matrizTablaArmas[contWeapons][0] = newWeapon.getWeaponName();
+					matrizTablaArmas[contWeapons][1] = newWeapon.getWeaponType();
+					matrizTablaArmas[contWeapons][2] = newWeapon.getWeaponSubType();
+					matrizTablaArmas[contWeapons][3] = (newWeapon.getWeaponDamage() * 4) + " // "
+							+ newWeapon.getWeaponDamage() + " // " + ((newWeapon.getWeaponDamage() * 85) / 100);
+					contWeapons++;
+				} else {
+					matrizTablaArmas[contWeapons][0] = "X " + newWeapon.getWeaponName() + " X";
+					matrizTablaArmas[contWeapons][1] = newWeapon.getWeaponType();
+					matrizTablaArmas[contWeapons][2] = newWeapon.getWeaponSubType();
+					matrizTablaArmas[contWeapons][3] = (newWeapon.getWeaponDamage() * 4) + " // "
+							+ newWeapon.getWeaponDamage() + " // " + ((newWeapon.getWeaponDamage() * 85) / 100);
+					contWeapons++;
+				}
 			}
 			break;
 
