@@ -197,18 +197,18 @@ public class MapManagerDBImplementation implements MapManager {
 
 	@Override
 	public List<Integer> agentPercentageMapAttack(String mapName) throws ExceptionManager {
-		String DEFENDMISSIONWEAPONSTADISTIC = "select count(am.attackMissionCode) 'MapMissionTimes' from attack_mission am, mission m where m.mapName = ? and am.attackMissionCode = m.missionCode group by attackMissionCode limit 1";
-		String TimesAgentOnAttackMissionMap = "SELECT distinct count(agM.agentCode) 'AgentMissionTimesOnMap', agM.agentCode from agent_on_mission agM, mission m, attack_mission aM, map mP where aM.attackMissionCode=m.missionCode and m.mapName=mP.mapName and m.missionCode=agM.missionCode and m.mapName= ? group by agM.agentCode order by agM.agentCode asc limit 3;";
+		String ATTACKMISSIONWEAPONSTADISTIC = "select count(m.mapName) 'MapMissionTimes' from mission m where m.mapName = ? and m.MissionCode in (select attackMissionCode from attack_mission) group by mapName limit 1";
+		String TimesAgentOnAttackMissionMap = "SELECT distinct count(agM.agentCode) 'AgentMissionTimesOnMap', agM.agentCode from agent_on_mission agM, mission m, attack_mission aM, map mP where aM.attackMissionCode=m.missionCode and m.mapName=mP.mapName and m.missionCode=agM.missionCode and m.mapName= ? group by agM.agentCode order by agM.agentCode asc limit 3";
 		ResultSet rs = null;
 		ResultSet rs2 = null;
 		List<Integer> codTop3Agents = new ArrayList<>();
 		int mapTimes = 0;
-		int percentage = 0;
+		float percentage = 0;
 
 		con = conection.openConnection();
 
 		try {
-			stmt = con.prepareStatement(DEFENDMISSIONWEAPONSTADISTIC);
+			stmt = con.prepareStatement(ATTACKMISSIONWEAPONSTADISTIC);
 			stmt.setString(1, mapName);
 
 			rs = stmt.executeQuery();
@@ -226,7 +226,7 @@ public class MapManagerDBImplementation implements MapManager {
 				while (rs2.next()) {
 					percentage = rs2.getInt("AgentMissionTimesOnMap");
 					percentage = (((percentage / 2) / mapTimes) * 100);
-					codTop3Agents.add(percentage);
+					codTop3Agents.add((int) percentage);
 				}
 
 				if (rs2 != null)
@@ -244,13 +244,13 @@ public class MapManagerDBImplementation implements MapManager {
 
 	@Override
 	public List<Integer> agentPercentageMapDefend(String mapName) throws ExceptionManager {
-		String DEFENDMISSIONWEAPONSTADISTIC = "select count(am.defendMissionCode) 'MapMissionTimes' from defend_mission am, mission m where m.mapName = ? and am.defendMissionCode = m.missionCode group by defendMissionCode limit 1";
+		String DEFENDMISSIONWEAPONSTADISTIC = "select count(m.mapName) 'MapMissionTimes' from mission m where m.mapName = ? and m.MissionCode in (select defendMissionCode from defend_mission) group by mapName limit 1";
 		String TimesAgentOnDefendMissionMap = "SELECT distinct count(agM.agentCode) 'AgentMissionTimesOnMap', agM.agentCode from agent_on_mission agM, mission m, defend_mission aM, map mP where aM.defendMissionCode=m.missionCode and m.mapName=mP.mapName and m.missionCode=agM.missionCode and m.mapName= ? group by agM.agentCode order by agM.agentCode asc limit 3";
 		ResultSet rs = null;
 		ResultSet rs2 = null;
 		List<Integer> codTop3Agents = new ArrayList<>();
 		int mapTimes = 0;
-		int percentage = 0;
+		float percentage = 0;
 
 		con = conection.openConnection();
 
@@ -273,7 +273,7 @@ public class MapManagerDBImplementation implements MapManager {
 				while (rs2.next()) {
 					percentage = rs2.getInt("AgentMissionTimesOnMap");
 					percentage = (((percentage / 2) / mapTimes) * 100);
-					codTop3Agents.add(percentage);
+					codTop3Agents.add((int) percentage);
 				}
 
 				if (rs2 != null)

@@ -25,8 +25,8 @@ public class MissionManagerBDImplementation implements MissionManager {
 		Mission getMission = null;
 
 		// Open the connection
-			con = conection.openConnection();
-		String LISTMission = "SELECT * FROM MISSION WHERE missionCode = ? ";
+		con = conection.openConnection();
+		String LISTMission = "SELECT * FROM MISSION, defend_mission, attack_mission WHERE missionCode = ? ";
 
 		// Code
 
@@ -34,7 +34,6 @@ public class MissionManagerBDImplementation implements MissionManager {
 			stmt = con.prepareStatement(LISTMission);
 			stmt.setInt(1, codM);
 			rs = stmt.executeQuery();
-			stmt.close();
 
 			if (rs.next()) {
 				getMission = new AttackMission();
@@ -51,10 +50,9 @@ public class MissionManagerBDImplementation implements MissionManager {
 			stmt = con.prepareStatement(LISTMission);
 			stmt.setInt(1, codM);
 			rs = stmt.executeQuery();
-			stmt.close();
 
 			if (rs.next()) {
-				getMission.setmapName(rs.getString("mapName"));
+				getMission.setMapName(rs.getString("mapName"));
 				getMission.setMissionFI((rs.getDate("missionSD").toLocalDate()));
 				getMission.setMissionFF((rs.getDate("missionFD").toLocalDate()));
 				getMission.setmissionFinished(rs.getBoolean("missionFinished"));
@@ -80,7 +78,7 @@ public class MissionManagerBDImplementation implements MissionManager {
 	}
 
 	@Override
-	public int registerMission(Mission wMisson, char type) throws ExceptionManager {
+	public int registerMission(Mission wMisson, String type) throws ExceptionManager {
 		ResultSet rs = null;
 		int missionCode = -1;
 
@@ -88,30 +86,25 @@ public class MissionManagerBDImplementation implements MissionManager {
 		String getMissionCode = "select Max(missionCode) from mission";
 		try {
 			con = conection.openConnection();
-
 		} catch (ExceptionManager e1) {
-
+			e1.printStackTrace();
 		}
 
 		try {
-			CallableStatement cst = con.prepareCall(INSERTMission);
-			cst.setString(1, wMisson.getmapName());
-			cst.setDate(2, Date.valueOf(wMisson.getmissionFI()));
-			cst.setDate(3, Date.valueOf(wMisson.getMissionFF()));
-			cst.setLong(4, type);
-			cst.execute();
-			cst.close();
+			stmt = con.prepareCall(INSERTMission);
+			stmt.setString(1, wMisson.getMapName());
+			stmt.setDate(2, Date.valueOf(wMisson.getMissionFI()));
+			stmt.setDate(3, Date.valueOf(wMisson.getMissionFF()));
+			stmt.setNString(4, type);
+			stmt.execute();
 			stmt = con.prepareStatement(getMissionCode);
 			rs = stmt.executeQuery();
-			stmt.close();
 
 			if (rs.next()) {
 				missionCode = rs.getInt("Max(missionCode)");
-
 			}
-
 		} catch (SQLException e) {
-
+			e.printStackTrace();
 		}
 
 		try {
@@ -133,7 +126,7 @@ public class MissionManagerBDImplementation implements MissionManager {
 			con = conection.openConnection();
 
 		} catch (ExceptionManager e1) {
-
+			e1.printStackTrace();
 		}
 
 		try {
@@ -157,23 +150,23 @@ public class MissionManagerBDImplementation implements MissionManager {
 	}
 
 	@Override
-	public void endMission(int codM, char type) throws ExceptionManager {
+	public void endMission(int codM, String type) throws ExceptionManager {
 		String ENDMission = "{CALL endMission(?,?)}";
 		try {
 			con = conection.openConnection();
 
 		} catch (ExceptionManager e1) {
-
+			e1.printStackTrace();
 		}
 
 		try {
 			CallableStatement cst = con.prepareCall(ENDMission);
 			cst.setInt(1, codM);
-			cst.setLong(2, type);
+			cst.setString(2, type);
 			cst.execute();
 			cst.close();
 		} catch (SQLException e) {
-
+			e.printStackTrace();
 		}
 
 		try {
@@ -198,18 +191,18 @@ public class MissionManagerBDImplementation implements MissionManager {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		String SEARCHAttackMission = "SELECT m.*, am.* from mission m, attack_mission am";
-		String SEARCHDeffendMission = "SELECT m.*, dm.* from mission m, defend_mission dm";
+
+		String SEARCHAttackMission = "SELECT distinct m.*, am.* from mission m, attack_mission am where missionCode = attackMissionCode";
+		String SEARCHDeffendMission = "SELECT distinct m.*, dm.* from mission m, defend_mission dm where missionCode = defendMissionCode";
 
 		try {
 			stmt = con.prepareStatement(SEARCHAttackMission);
 			rs = stmt.executeQuery();
-			stmt.close();
 
 			while (rs.next()) {
 				missionIntro = new AttackMission();
 				missionIntro.setMissionCode(rs.getInt("missionCode"));
-				missionIntro.setmapName(rs.getString("mapName"));
+				missionIntro.setMapName(rs.getString("mapName"));
 				missionIntro.setMissionFF(rs.getDate("missionSD").toLocalDate());
 				missionIntro.setMissionFI(rs.getDate("missionFD").toLocalDate());
 				missionIntro.setmissionFinished(rs.getBoolean("missionFinished"));
@@ -217,27 +210,26 @@ public class MissionManagerBDImplementation implements MissionManager {
 				allMissions.add(missionIntro);
 			}
 
-			if (rs != null)
-				rs.close();
-
 		} catch (SQLException e) {
-
+			e.printStackTrace();
 		}
 		try {
 			stmt = con.prepareStatement(SEARCHDeffendMission);
 			rs2 = stmt.executeQuery();
-			stmt.close();
 
 			while (rs2.next()) {
 				missionIntro = new DefendMission();
-				missionIntro.setMissionCode(rs.getInt("missionCode"));
-				missionIntro.setmapName(rs.getString("mapName"));
-				missionIntro.setMissionFF(rs.getDate("missionSD").toLocalDate());
-				missionIntro.setMissionFI(rs.getDate("missionFD").toLocalDate());
-				missionIntro.setmissionFinished(rs.getBoolean("missionFinished"));
-				((DefendMission) missionIntro).setdefendedRadianite(rs.getInt("defendedRadianite"));
+				missionIntro.setMissionCode(rs2.getInt("missionCode"));
+				missionIntro.setMapName(rs2.getString("mapName"));
+				missionIntro.setMissionFF(rs2.getDate("missionSD").toLocalDate());
+				missionIntro.setMissionFI(rs2.getDate("missionFD").toLocalDate());
+				missionIntro.setmissionFinished(rs2.getBoolean("missionFinished"));
+				((DefendMission) missionIntro).setdefendedRadianite(rs2.getInt("defendedRadianite"));
 				allMissions.add(missionIntro);
 			}
+
+			if (rs != null)
+				rs.close();
 
 			if (rs2 != null)
 				rs2.close();
@@ -273,17 +265,16 @@ public class MissionManagerBDImplementation implements MissionManager {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		String SEARCHAttackMission = "SELECT m.*, am.* from mission m, attack_mission am";
+		String SEARCHAttackMission = "SELECT m.*, am.* from mission m, attack_mission am where missionCode = attackMissionCode";
 
 		try {
 			stmt = con.prepareStatement(SEARCHAttackMission);
 			rs = stmt.executeQuery();
-			stmt.close();
 
 			while (rs.next()) {
 				missionIntro = new AttackMission();
 				missionIntro.setMissionCode(rs.getInt("missionCode"));
-				missionIntro.setmapName(rs.getString("mapName"));
+				missionIntro.setMapName(rs.getString("mapName"));
 				missionIntro.setMissionFF(rs.getDate("missionSD").toLocalDate());
 				missionIntro.setMissionFI(rs.getDate("missionFD").toLocalDate());
 				missionIntro.setmissionFinished(rs.getBoolean("missionFinished"));
@@ -319,17 +310,16 @@ public class MissionManagerBDImplementation implements MissionManager {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		String SEARCHDeffendMission = "SELECT m.*, dm.* from mission m, defend_mission dm";
+		String SEARCHDeffendMission = "SELECT m.*, dm.* from mission m, defend_mission dm where missionCode = defendMissionCode";
 
 		try {
 			stmt = con.prepareStatement(SEARCHDeffendMission);
 			rs = stmt.executeQuery();
-			stmt.close();
 
 			while (rs.next()) {
 				missionIntro = new DefendMission();
 				missionIntro.setMissionCode(rs.getInt("missionCode"));
-				missionIntro.setmapName(rs.getString("mapName"));
+				missionIntro.setMapName(rs.getString("mapName"));
 				missionIntro.setMissionFF(rs.getDate("missionSD").toLocalDate());
 				missionIntro.setMissionFI(rs.getDate("missionFD").toLocalDate());
 				missionIntro.setmissionFinished(rs.getBoolean("missionFinished"));

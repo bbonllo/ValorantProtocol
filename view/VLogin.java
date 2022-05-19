@@ -16,6 +16,7 @@ import com.k33ptoo.components.KButton;
 
 import controlador.AgentManager;
 import controlador.MapManager;
+import controlador.MissionManager;
 import controlador.WeaponManager;
 import exceptions.ExceptionManager;
 import model.Agent;
@@ -39,6 +40,7 @@ public class VLogin extends JFrame implements ActionListener {
 	private AgentManager agentData;
 	private MapManager mapData;
 	private WeaponManager weaponData;
+	private MissionManager missionData;
 	private JPanel contentPane;
 	private JTextField txtUser;
 	private JPasswordField txtPasswd;
@@ -65,10 +67,11 @@ public class VLogin extends JFrame implements ActionListener {
 	 * @param weapon
 	 */
 
-	public VLogin(MapManager map, AgentManager agent, WeaponManager weapon) {
+	public VLogin(MapManager map, AgentManager agent, WeaponManager weapon, MissionManager mission) {
 		agentData = agent;
 		mapData = map;
 		weaponData = weapon;
+		missionData = mission;
 		setIconImage(Toolkit.getDefaultToolkit().getImage(VLogin.class.getResource("/resources/rotGamesLogo.png")));
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -307,7 +310,7 @@ public class VLogin extends JFrame implements ActionListener {
 							JOptionPane.INFORMATION_MESSAGE);
 				} else if (loginAgent.isAgentIsAdmin() == true) {
 					VPestaniasAgente vPestaniasAgente = new VPestaniasAgente(loginAgent, mapData, agentData,
-							weaponData);
+							weaponData, missionData);
 					vPestaniasAgente.setVisible(true);
 					this.dispose();
 				} else {
