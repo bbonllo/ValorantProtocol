@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import controlador.WeaponManager;
 import controlador.WeaponManagerDBImplementation;
+import exceptions.ExceptionManager;
 import model.Weapon;
 
 public class WeaponsTest {
@@ -18,39 +19,45 @@ public class WeaponsTest {
 	WeaponManager wepMan = new WeaponManagerDBImplementation();
 
 	@Test
-	public void testAddWeapon() {
+	public void testAddWeapon() throws ExceptionManager {
 		wepMan.addWeapon(wep);
 		testGetWeaponByName(name);
 	}
 
 	@Test
-	public void testModifyWeapon() {
-		assertFalse(wepMan.modifyWeapon(wep));
+	public void testModifyWeapon() throws ExceptionManager {
+		assertTrue(wepMan.modifyWeapon(wep));
 	}
 
 	@Test
-	public void testDeleteWeapon() {
+	public void testDeleteWeapon() throws ExceptionManager {
 		wepMan.deleteWeapon(name);
 		testGetWeaponByName(name);
 	}
 
 	@Test
-	public void testGetAllWeapon() {
+	public void testGetAllWeapon() throws ExceptionManager {
 		assertNotNull(wepMan.getAllWeapon());
 	}
 
 	@Test
-	public void testGetAllSidearms() {
+	public void testGetAllSidearms() throws ExceptionManager {
 		assertNotNull(wepMan.getAllSidearms());
 	}
 
 	@Test
-	public void testGetAllPrimary() {
+	public void testGetAllPrimary() throws ExceptionManager {
 		assertNotNull(wepMan.getAllPrimary());
+	}
+	
+	@Test
+	public void testActivateWeapon() throws ExceptionManager {
+		wepMan.activateWeapon(name);
+		testGetWeaponByName(name);
 	}
 
 // Methods to control other methods
-	public void testGetWeaponByName(String name) {
+	public void testGetWeaponByName(String name) throws ExceptionManager {
 		assertNotEquals(wep, wepMan.getWeaponByName(name));
 	}
 }
