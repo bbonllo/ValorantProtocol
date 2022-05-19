@@ -296,7 +296,7 @@ public class VLogin extends JFrame implements ActionListener {
 
 	private void login() {
 		if (txtUser.getText().isEmpty() || txtPasswd.getPassword().length == 0) {
-			JOptionPane.showMessageDialog(this, "Campo usuario o contraseÃ±a no rellenado", "Error",
+			JOptionPane.showMessageDialog(this, "Campo usuario o contraseña no rellenado", "Error",
 					JOptionPane.INFORMATION_MESSAGE);
 		} else {
 			try {
@@ -314,10 +314,10 @@ public class VLogin extends JFrame implements ActionListener {
 					vPestaniasAgente.setVisible(true);
 					this.dispose();
 				} else {
-					JOptionPane.showMessageDialog(this, "no eres admin friki", "uwu", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(this, "El usuario introducido no es administrador", "Error", JOptionPane.WARNING_MESSAGE);
 				}
 			} catch (NumberFormatException e1) {
-				JOptionPane.showMessageDialog(this, "Usuario tiene que ser un entero", "Error",
+				JOptionPane.showMessageDialog(this, "El nombre de usuario tiene que ser un entero", "Error",
 						JOptionPane.WARNING_MESSAGE);
 			} catch (ExceptionManager e) {
 				// TODO Auto-generated catch block
