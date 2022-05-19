@@ -29,6 +29,11 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 	final String ACTIVATEweapon = "UPDATE weapon set weaponIsActive=true WHERE weaponName = ?";
 
 	@Override
+	/**
+	 * Insertar un arma
+	 * @param weapon arma a ingresar
+	 * @throws ExceptionManager ExceptionManager
+	 */
 	public void addWeapon(Weapon weapon) throws ExceptionManager {
 		// TODO Auto-generated method stub
 
@@ -63,6 +68,11 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 	}
 
 	@Override
+	/**
+	 * buscar un arma por su nombre 
+	 * @param name nombre del arma a buscar
+	 * @throws ExceptionManager ExceptionManager
+	 */
 	public Weapon getWeaponByName(String name) throws ExceptionManager {
 		// Variables
 		ResultSet rs = null;
@@ -113,6 +123,12 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 	}
 
 	@Override
+	/**
+	 * modificar un arma
+	 * @param weapon arma a modificar
+	 * @return changes boolean que te devuelve si se ha modificado o no
+	 * @throws ExceptionManager ExceptionManager
+	 */
 	public boolean modifyWeapon(Weapon weapon) throws ExceptionManager {
 		// TODO Auto-generated method stub
 		boolean changes = false;
@@ -150,6 +166,11 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 	}
 
 	@Override
+	/**
+	 * Borrado del arma 
+	 * @param name nombre del arma que se desea borrar
+	 * @throws ExceptionManager ExceptionManager
+	 */
 	public void deleteWeapon(String name) throws ExceptionManager {
 		// TODO Auto-generated method stub
 
@@ -178,6 +199,11 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 	}
 
 	@Override
+	/**
+	 * Listado de todas las armas
+	 * @return weapons Listado
+	 * @throws ExceptionManager ExceptionManager
+	 */
 	public List<Weapon> getAllWeapon() throws ExceptionManager {
 		// TODO Auto-generated method stub
 
@@ -235,6 +261,11 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 	}
 
 	@Override
+	/**
+	 * Listado de todas las armas secundarias
+	 * @return weapons Listado
+	 * @throws ExceptionManager ExceptionManager
+	 */
 	public List<Weapon> getAllSidearms() throws ExceptionManager {
 		// TODO Auto-generated method stub
 
@@ -291,6 +322,11 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 	}
 
 	@Override
+	/**
+	 * Listado de todas las armas primarias
+	 * @return weapons Listado
+	 * @throws ExceptionManager ExceptionManager
+	 */
 	public List<Weapon> getAllPrimary() throws ExceptionManager {
 		// TODO Auto-generated method stub
 
@@ -348,6 +384,11 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 	}
 
 	@Override
+	/**
+	 * Activar un arma inavilitada
+	 * @param name nombre del arma inavilitada
+	 * @throws ExceptionManager ExceptionManager
+	 */
 	public void activateWeapon(String name) throws ExceptionManager {
 		// TODO Auto-generated method stub
 

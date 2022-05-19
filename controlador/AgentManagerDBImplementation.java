@@ -20,6 +20,12 @@ public class AgentManagerDBImplementation implements AgentManager {
 	private ConnectionOpenClose conection = new ConnectionOpenClose();
 
 	@Override
+	/**
+	 * Busqueda de agente por ID
+	 * @param agentCode ID del agente a buscar
+	 * @return getAgent encontrado (Si no es encontrado null)
+	 * @throws ExceptionManager ExceptionManager
+	 */
 	public Agent getAgentByID(int agentCode) throws ExceptionManager {
 		ResultSet rs = null;
 		ResultSet rs2 = null;
@@ -86,6 +92,11 @@ public class AgentManagerDBImplementation implements AgentManager {
 	}
 
 	@Override
+	/**
+	 * Registro de un agente
+	 * @param registerAgent agente que se quiere registrar
+	 * @throws ExceptionManager ExceptionManager
+	 */
 	public void registerAgent(Agent registerAgent) throws ExceptionManager {
 		Ability ability1;
 		Ability ability2;
@@ -176,6 +187,11 @@ public class AgentManagerDBImplementation implements AgentManager {
 	}
 
 	@Override
+	/**
+	 * Modificacion de un agente
+	 * @param modifyAgent
+	 * @throws ExceptionManager ExceptionManager
+	 */
 	public void modifyAgent(Agent modifyAgent) throws ExceptionManager {
 		Ability ability1;
 		Ability ability2;
@@ -266,6 +282,11 @@ public class AgentManagerDBImplementation implements AgentManager {
 	}
 
 	@Override
+	/**
+	 * Poner un agente inactivo con su ID
+	 * @param agentCode ID del agente
+	 * @throws ExceptionManager ExceptionManager
+	 */
 	public void makeAgentInactive(int agentCode) throws ExceptionManager {
 
 		con = conection.openConnection();
@@ -286,6 +307,11 @@ public class AgentManagerDBImplementation implements AgentManager {
 	}
 
 	@Override
+	/**
+	 * Poner un agente activo con su ID
+	 * @param agentCode ID del agente
+	 * @throws ExceptionManager ExceptionManager
+	 */
 	public void makeAgentActive(int agentCode) throws ExceptionManager {
 
 		con = conection.openConnection();
@@ -305,6 +331,11 @@ public class AgentManagerDBImplementation implements AgentManager {
 	}
 
 	@Override
+	/**
+	 * Listado de todos los agentes
+	 * @return agents Un List de los agentes
+	 * @throws ExceptionManager ExceptionManager
+	 */
 	public List<Agent> getAllAgents() throws ExceptionManager {
 
 		// ArrayList<Agent> agentsList
@@ -345,6 +376,11 @@ public class AgentManagerDBImplementation implements AgentManager {
 	}
 
 	@Override
+	/**
+	 * Listado de todos los agentes activos
+	 * @return activeAgents Un List de los agentes activos
+	 * @throws ExceptionManager ExceptionManager
+	 */
 	public List<Agent> getAllActiveAgents() throws ExceptionManager {
 		// TODO Auto-generated method stub
 
@@ -383,6 +419,13 @@ public class AgentManagerDBImplementation implements AgentManager {
 	}
 
 	@Override
+	/**
+	 * LogIn de un agente
+	 * @param agentCode ID del agente
+	 * @param passwd contraseña del agente
+	 * @return getAgent Agente logueado
+	 * @throws ExceptionManager ExceptionManager
+	 */
 	public Agent login(int agentCode, String passwd) throws ExceptionManager {
 
 		ResultSet rs = null;
@@ -453,6 +496,12 @@ public class AgentManagerDBImplementation implements AgentManager {
 	}
 
 	@Override
+	/**
+	 * Listado de los compañeros de un agente a su codigo
+	 * @param agenCode ID del agente
+	 * @return teammates int[] de los ID de sus compañeros
+	 * @throws ExceptionManager ExceptionManager
+	 */
 	public int[] getTeammates(int agentCode) throws ExceptionManager {
 		int i = 0;
 		int[] teammates = new int[5];
