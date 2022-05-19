@@ -17,6 +17,12 @@ public class MapManagerDBImplementation implements MapManager {
 	private ConnectionOpenClose conection = new ConnectionOpenClose();
 
 	@Override
+	/**
+	 * Busqueda de mapa con su nombre
+	 * @param mapName nombre del mapa a buscar
+	 * @return mapIntro mapa encontrado
+	 * @throws ExceptionManager ExceptionManager
+	 */
 	public Map getMapByName(String mapName) throws ExceptionManager {
 		ResultSet rs = null;
 		Map mapIntro = null;
@@ -48,6 +54,11 @@ public class MapManagerDBImplementation implements MapManager {
 	}
 
 	@Override
+	/**
+	 * Listado de todos los mapas
+	 * @return maps El listado
+	 * @throws ExceptionManager ExceptionManager
+	 */
 	public List<Map> getAllMaps() throws ExceptionManager {
 		List<Map> maps = new ArrayList<>();
 		ResultSet rs = null;
@@ -80,6 +91,12 @@ public class MapManagerDBImplementation implements MapManager {
 	}
 
 	@Override
+	/**
+	 * Listado de todos los agentes en misiones de ataque
+	 * @param mapName nombre del mapa de ataque a buscar
+	 * @return nameAgents Listado del nombre de los agentes encontrados en misiones en ese mapa
+	 * @throws ExceptionManager ExceptionManager
+	 */
 	public List<String> getAttackMissionAgents(String mapName) throws ExceptionManager {
 		String ATTACKMISSIONSTADISTIC = "select distinct a.agentName from agent a, mission m, attack_mission am, agent_on_mission aom where a.agentCode in(select agentCode from agent_on_mission group by agentCode having count(agentCode)) and a.agentCode=aom.agentCode and m.missionCode = am.attackMissionCode and am.attackMissionCode = aom.missionCode and m.mapName = ? order by a.agentCode asc limit 3";
 		ArrayList<String> nameAgents = new ArrayList<>();
@@ -110,6 +127,12 @@ public class MapManagerDBImplementation implements MapManager {
 	}
 
 	@Override
+	/**
+	 * Listado de todos los agentes en misiones de defensa
+	 * @param mapName nombre del mapa de ataque a buscar
+	 * @return nameAgents Listado del nombre de los agentes encontrados en misiones en ese mapa
+	 * @throws ExceptionManager ExceptionManager
+	 */
 	public List<String> getDefendMissionAgents(String mapName) throws ExceptionManager {
 		String DEFENDMISSIONSTADISTIC = "select distinct a.agentName from agent a, mission m, defend_mission am, agent_on_mission aom where a.agentCode in(select agentCode from agent_on_mission group by agentCode having count(agentCode)) and a.agentCode=aom.agentCode and m.missionCode = am.defendMissionCode and am.defendMissionCode = aom.missionCode and m.mapName = ? order by a.agentCode asc limit 3";
 		ArrayList<String> nameAgents = new ArrayList<>();
@@ -140,6 +163,12 @@ public class MapManagerDBImplementation implements MapManager {
 	}
 
 	@Override
+	/**
+	 * Arma mas usada en mapas de misiones de ataque
+	 * @param mapName nombre del mapa en la que quiere buscar
+	 * @return weaponName nombre del arma mas usada en ese mapa
+	 * @throws ExceptionManager ExceptionManager
+	 */
 	public String getAttackMissionWeapon(String mapName) throws ExceptionManager {
 		String ATTACKMISSIONWEAPONSTADISTIC = "select weaponName from agent_on_mission, agent a, mission m, attack_mission am where m.missionCode = am.attackmissionCode and m.mapName = ?  group by weaponName having count(weaponName) order by weaponName desc limit 1";
 		ResultSet rs = null;
@@ -168,6 +197,12 @@ public class MapManagerDBImplementation implements MapManager {
 	}
 
 	@Override
+	/**
+	 * Arma mas usada en mapas de misiones de defensa
+	 * @param mapName nombre del mapa en la que quiere buscar
+	 * @return weaponName nombre del arma mas usada en ese mapa
+	 * @throws ExceptionManager ExceptionManager
+	 */
 	public String getDefendMissionWeapon(String mapName) throws ExceptionManager {
 		String DEFENDMISSIONWEAPONSTADISTIC = "select weaponName from agent_on_mission, agent a, mission m, defend_mission df where m.missionCode = df.defendmissionCode and m.mapName = ?  group by weaponName having count(weaponName) order by weaponName desc limit 1";
 		ResultSet rs = null;
@@ -196,6 +231,12 @@ public class MapManagerDBImplementation implements MapManager {
 	}
 
 	@Override
+	/**
+	 * Listado de los agentes mas usado en los mapas de misiones de ataque
+	 * @param mapName mapa a buscar 
+	 * @return codTop3Agents Listado de los 3 agentes mas usados con su porcentaje
+	 * @throws ExceptionManager ExceptionManager
+	 */
 	public List<Integer> agentPercentageMapAttack(String mapName) throws ExceptionManager {
 		String DEFENDMISSIONWEAPONSTADISTIC = "select count(am.attackMissionCode) 'MapMissionTimes' from attack_mission am, mission m where m.mapName = ? and am.attackMissionCode = m.missionCode group by attackMissionCode limit 1";
 		String TimesAgentOnAttackMissionMap = "SELECT distinct count(agM.agentCode) 'AgentMissionTimesOnMap', agM.agentCode from agent_on_mission agM, mission m, attack_mission aM, map mP where aM.attackMissionCode=m.missionCode and m.mapName=mP.mapName and m.missionCode=agM.missionCode and m.mapName= ? group by agM.agentCode order by agM.agentCode asc limit 3;";
@@ -243,6 +284,12 @@ public class MapManagerDBImplementation implements MapManager {
 	}
 
 	@Override
+	/**
+	 * Listado de los agentes mas usado en los mapas de misiones de defensa
+	 * @param mapName nombre del mapa a buscar
+	 * @return codTop3Agents Listado de los 3 agentes mas usados con su porcentaje
+	 * @throws ExceptionManager ExceptionManager
+	 */
 	public List<Integer> agentPercentageMapDefend(String mapName) throws ExceptionManager {
 		String DEFENDMISSIONWEAPONSTADISTIC = "select count(am.defendMissionCode) 'MapMissionTimes' from defend_mission am, mission m where m.mapName = ? and am.defendMissionCode = m.missionCode group by defendMissionCode limit 1";
 		String TimesAgentOnDefendMissionMap = "SELECT distinct count(agM.agentCode) 'AgentMissionTimesOnMap', agM.agentCode from agent_on_mission agM, mission m, defend_mission aM, map mP where aM.defendMissionCode=m.missionCode and m.mapName=mP.mapName and m.missionCode=agM.missionCode and m.mapName= ? group by agM.agentCode order by agM.agentCode asc limit 3";
