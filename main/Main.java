@@ -1,24 +1,24 @@
 package main;
 
 import controlador.AgentManager;
-import controlador.AgentManagerDBImplementation;
+import controlador.DataFactoryMap;
+import controlador.DataFactoryMission;
+import controlador.DataFactoryWeapon;
+import controlador.DataFactoryAgent;
 import controlador.MapManager;
-import controlador.MapManagerDBImplementation;
 import controlador.MissionManager;
-import controlador.MissionManagerBDImplementation;
 import controlador.ViewManager;
 import controlador.ViewManagerImplementation;
 import controlador.WeaponManager;
-import controlador.WeaponManagerDBImplementation;
 
 public class Main {
 
 	public static void main(String[] args) {
 		// Data manipulation
-		MapManager map = new MapManagerDBImplementation();
-		AgentManager agent = new AgentManagerDBImplementation();
-		WeaponManager weapon = new WeaponManagerDBImplementation();
-		MissionManager mission = new MissionManagerBDImplementation();
+		MapManager map = DataFactoryMap.getMapData();
+		AgentManager agent = DataFactoryAgent.getAgentData();
+		WeaponManager weapon = DataFactoryWeapon.getWeaponData();
+		MissionManager mission = DataFactoryMission.getMissionData();
 
 		// View manipulation
 		ViewManager view = new ViewManagerImplementation();

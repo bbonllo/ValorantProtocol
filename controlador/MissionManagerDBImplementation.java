@@ -14,7 +14,7 @@ import model.AttackMission;
 import model.DefendMission;
 import model.Mission;
 
-public class MissionManagerBDImplementation implements MissionManager {
+public class MissionManagerDBImplementation implements MissionManager {
 	private Connection con;
 	private PreparedStatement stmt;
 	private ConnectionOpenClose conection = new ConnectionOpenClose();
