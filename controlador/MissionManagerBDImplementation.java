@@ -20,6 +20,12 @@ public class MissionManagerBDImplementation implements MissionManager {
 	private ConnectionOpenClose conection = new ConnectionOpenClose();
 
 	@Override
+	/**
+	 * Buscar mision por su codigo 
+	 * @param codM codigo de la mision a buscar
+	 * @return getMission mission encontrada
+	 * @throws ExceptionManager ExceptionManager
+	 */
 	public Mission getMissionByCod(int codM) throws ExceptionManager {
 		ResultSet rs = null;
 		Mission getMission = null;
@@ -78,6 +84,13 @@ public class MissionManagerBDImplementation implements MissionManager {
 	}
 
 	@Override
+	/**
+	 * Registra mision enviandole una mision y caracter tipo
+	 * @param vMisson mision a registrar 
+	 * @param type tipo de mision que se desea registrar
+	 * @return missionCode el codigo de la mision registrada
+	 * @throws ExceptionManager ExceptionManager
+	 */
 	public int registerMission(Mission wMisson, String type) throws ExceptionManager {
 		ResultSet rs = null;
 		int missionCode = -1;
@@ -117,6 +130,14 @@ public class MissionManagerBDImplementation implements MissionManager {
 	}
 
 	@Override
+	/**
+	 * Enviar agente a una mission con su codigo y sus respectivas armas
+	 * @param codM codigo de la mision a la que desea mandar su agente 
+	 * @param codA codigo del agente que desea mandar de mision
+	 * @param primaryWeapon el arma principal del agente 
+	 * @param secondaryWeapon el arma secundaria del agente
+	 * @throws ExceptionManager ExceptionManager
+	 */
 	public void sendAgentToMission(int codM, int codA, String primaryWeapon, String secondaryWeapon)
 			throws ExceptionManager {
 
@@ -150,6 +171,12 @@ public class MissionManagerBDImplementation implements MissionManager {
 	}
 
 	@Override
+	/**
+	 * Terminar mision
+	 * @param codM codigo de la mision que desea terminar
+	 * @param type tipo de la mision
+	 * @throws ExceptionManager ExceptionManager
+	 */
 	public void endMission(int codM, String type) throws ExceptionManager {
 		String ENDMission = "{CALL endMission(?,?)}";
 		try {
@@ -179,6 +206,11 @@ public class MissionManagerBDImplementation implements MissionManager {
 	}
 
 	@Override
+	/**
+	 * Listado de todas las misiones
+	 * @return allMissions Listado
+	 *  @throws ExceptionManager ExceptionManager
+	 */
 	public List<Mission> getAllMissions() throws ExceptionManager {
 		List<Mission> allMissions = new ArrayList<>();
 		ResultSet rs = null;
@@ -254,6 +286,11 @@ public class MissionManagerBDImplementation implements MissionManager {
 	}
 
 	@Override
+	/**
+	 * Listado de todas las misiones de ataque
+	 * @return attackMissions listado
+	 * @throws ExceptionManager ExceptionManager
+	 */
 	public List<AttackMission> getAllAttackMissions() throws ExceptionManager {
 		List<AttackMission> attackMissions = new ArrayList<>();
 		ResultSet rs = null;
@@ -299,6 +336,11 @@ public class MissionManagerBDImplementation implements MissionManager {
 	}
 
 	@Override
+	/**
+	 * Listado de todas las misiones de defensa
+	 * @return DefendMissions listado
+	 * @throws ExceptionManager ExceptionManager
+	 */
 	public List<DefendMission> getAllDefendMissions() throws ExceptionManager {
 		List<DefendMission> DefendMissions = new ArrayList<>();
 		ResultSet rs = null;
