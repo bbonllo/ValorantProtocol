@@ -10,7 +10,7 @@ import exceptions.ExceptionManager;
 import model.Weapon;
 
 public class WeaponsTest {
-	String name = "Ares";
+	String name = "cloack";
 	int weaponDamage = 30;
 	String weaponType = "Primary";
 	String weaponSubType = "Machine gun";
