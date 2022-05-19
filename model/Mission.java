@@ -41,15 +41,15 @@ public class Mission implements Serializable {
 		this.missionCode = missionCode;
 	}
 
-	public String getmapName() {
+	public String getMapName() {
 		return mapName;
 	}
 
-	public void setmapName(String mapName) {
+	public void setMapName(String mapName) {
 		this.mapName = mapName;
 	}
 
-	public LocalDate getmissionFI() {
+	public LocalDate getMissionFI() {
 		return missionFI;
 	}
 

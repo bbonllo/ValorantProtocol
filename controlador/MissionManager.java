@@ -11,11 +11,11 @@ public interface MissionManager {
 
 	public Mission getMissionByCod(int codM) throws ExceptionManager;
 
-	public int registerMission(Mission wMisson, char type) throws ExceptionManager;
+	public int registerMission(Mission wMisson, String type) throws ExceptionManager;
 	
 	public void sendAgentToMission(int codM, int codA, String primaryWeapon, String secondaryWeapon) throws ExceptionManager;
 
-	public void endMission(int codM, char type) throws ExceptionManager;
+	public void endMission(int codM, String type) throws ExceptionManager;
 
 	public List<Mission> getAllMissions() throws ExceptionManager;
 
