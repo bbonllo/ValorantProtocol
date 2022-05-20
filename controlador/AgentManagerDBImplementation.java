@@ -85,7 +85,9 @@ public class AgentManagerDBImplementation implements AgentManager {
 			con = conection.openConnection();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String error = "error al recuperar del agente";
+			ExceptionManager uwu = new ExceptionManager(error);
+			throw uwu;
 		}
 		return getAgent;
 
@@ -422,8 +424,10 @@ public class AgentManagerDBImplementation implements AgentManager {
 			stmt.close();
 			con = conection.openConnection();
 		} catch (SQLException e) {
-			String msg = "Error en recoger a todos los agentes en activo";
-			ExceptionManager x = new ExceptionManager(msg);
+			// TODO Auto-generated catch block
+			String error = "Error al recoger informacion del mapa selecionado";
+			ExceptionManager uwu = new ExceptionManager(error);
+			throw uwu;
 		}
 		return activeAgents;
 	}
@@ -547,8 +551,10 @@ public class AgentManagerDBImplementation implements AgentManager {
 
 			con = conection.openConnection();
 		} catch (SQLException e) {
-			String msg = "Error en recoger a los agentes del equipo";
-			ExceptionManager x = new ExceptionManager(msg);
+			// TODO Auto-generated catch block
+			String error = "Error al recoger informacion del mapa selecionado";
+			ExceptionManager uwu = new ExceptionManager(error);
+			throw uwu;
 		}
 		return teammates;
 	}

@@ -74,11 +74,9 @@ public class MissionManagerDBImplementation implements MissionManager {
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String error = "Error al recoger informacion sobre la mision";
+			ExceptionManager uwu = new ExceptionManager(error);
+			throw uwu;
 		}
 
 		return getMission;
@@ -126,7 +124,9 @@ public class MissionManagerDBImplementation implements MissionManager {
 			conection.closeConnection(stmt, con);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String error = "Error al registrar agente";
+			ExceptionManager uwu = new ExceptionManager(error);
+			throw uwu;
 		}
 		return missionCode;
 	}
@@ -169,7 +169,10 @@ public class MissionManagerDBImplementation implements MissionManager {
 			conection.closeConnection(stmt, con);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String error = "Error al enviar agentes a la mision";
+			ExceptionManager uwu = new ExceptionManager(error);
+			throw uwu;
+
 		}
 	}
 
@@ -204,7 +207,10 @@ public class MissionManagerDBImplementation implements MissionManager {
 			conection.closeConnection(stmt, con);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			// TODO Auto-generated catch block
+			String error = "Error al terminar la mision";
+			ExceptionManager uwu = new ExceptionManager(error);
+			throw uwu;
 		}
 
 	}
@@ -226,7 +232,10 @@ public class MissionManagerDBImplementation implements MissionManager {
 			con = conection.openConnection();
 		} catch (ExceptionManager e1) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			// TODO Auto-generated catch block
+			String error = "Error al abrir la conexion";
+			ExceptionManager uwu = new ExceptionManager(error);
+			throw uwu;
 		}
 
 		String SEARCHAttackMission = "SELECT distinct m.*, am.* from mission m, attack_mission am where missionCode = attackMissionCode";
@@ -248,7 +257,10 @@ public class MissionManagerDBImplementation implements MissionManager {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			// TODO Auto-generated catch block
+			String error = "Error al recoger misiones de ataque";
+			ExceptionManager uwu = new ExceptionManager(error);
+			throw uwu;
 		}
 		try {
 			stmt = con.prepareStatement(SEARCHDeffendMission);
@@ -276,15 +288,17 @@ public class MissionManagerDBImplementation implements MissionManager {
 		catch (Exception e) {
 			String msg = "Error en recuperar las misiones de defensa";
 			ExceptionManager x = new ExceptionManager(msg);
-			e.printStackTrace();
-			// throw x;
+			throw x;
 		}
 
 		try {
 			conection.closeConnection(stmt, con);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			// TODO Auto-generated catch block
+			String error = "Error al cerrar conexion";
+			ExceptionManager uwu = new ExceptionManager(error);
+			throw uwu;
 		}
 
 		return allMissions;
@@ -306,7 +320,9 @@ public class MissionManagerDBImplementation implements MissionManager {
 			con = conection.openConnection();
 		} catch (ExceptionManager e1) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			String error = "Error al abrir la DB";
+			ExceptionManager uwu = new ExceptionManager(error);
+			throw uwu;
 		}
 		String SEARCHAttackMission = "SELECT m.*, am.* from mission m, attack_mission am where missionCode = attackMissionCode";
 
@@ -332,11 +348,8 @@ public class MissionManagerDBImplementation implements MissionManager {
 		} catch (SQLException e) {
 			String msg = "Error en recuperar las misiones de ataque";
 			ExceptionManager x = new ExceptionManager(msg);
-			e.printStackTrace();
-			// throw x;
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
+			throw x;
 		}
 		return attackMissions;
 	}
@@ -357,7 +370,9 @@ public class MissionManagerDBImplementation implements MissionManager {
 			con = conection.openConnection();
 		} catch (ExceptionManager e1) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			String error = "error al abrir la conexion a la DB";
+			ExceptionManager uwu = new ExceptionManager(error);
+			throw uwu;
 		}
 		String SEARCHDeffendMission = "SELECT m.*, dm.* from mission m, defend_mission dm where missionCode = defendMissionCode";
 
@@ -381,13 +396,9 @@ public class MissionManagerDBImplementation implements MissionManager {
 
 			conection.closeConnection(stmt, con);
 		} catch (SQLException e) {
-			String msg = "Error en recuperar las misiones de ataque";
+			String msg = "Error en recuperar las misiones de denfesa";
 			ExceptionManager x = new ExceptionManager(msg);
-			e.printStackTrace();
-			// throw x;
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw x;
 		}
 		return DefendMissions;
 	}

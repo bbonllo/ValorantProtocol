@@ -297,7 +297,6 @@ public class VLogin extends JFrame implements ActionListener {
 
 	/**
 	 * Metodo para comprobar que las credenciales introducidas son correctas
-	 * 
 	 */
 	private void login() {
 		if (txtUser.getText().isEmpty() || txtPasswd.getPassword().length == 0) {
@@ -327,8 +326,8 @@ public class VLogin extends JFrame implements ActionListener {
 						JOptionPane.WARNING_MESSAGE);
 			} catch (ExceptionManager e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+				JOptionPane.showMessageDialog(this, e.getMessage(), "Error",
+						JOptionPane.INFORMATION_MESSAGE);			}
 		}
 	}
 }

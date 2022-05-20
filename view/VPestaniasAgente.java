@@ -1422,7 +1422,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 			}
 		} catch (ExceptionManager e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(p, e.getMessage(), "ERROR", JOptionPane.INFORMATION_MESSAGE);
 		}
 
 	}
@@ -1499,10 +1499,12 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 			tableHeaderAgents.setEnabled(false);
 		} catch (ExceptionManager e1) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			JOptionPane.showMessageDialog(p, e1.getMessage(), "ERROR", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
-
+/**
+ * metodo para limpiar la tabla de agentes
+ */
 	private void clearTableAgents() {
 		String tituloAgentes[] = { "Tods los agentes" };
 		table = new JTable(null, tituloAgentes) {
@@ -1526,7 +1528,10 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		};
 		table.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 	}
-
+/***
+ * metodo para buscar armas por nombre
+ * @param weaponName envias el nombre del arma para poder buscarlo
+ */
 	private void searchWeapon(String weaponName) {
 		try {
 			if (weaponData.getWeaponByName(weaponName) == null) {
@@ -1540,7 +1545,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 			}
 		} catch (ExceptionManager e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(p, e.getMessage(), "ERROR", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 
@@ -1601,7 +1606,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 				}
 			} catch (ExceptionManager e1) {
 				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				JOptionPane.showMessageDialog(p, e1.getMessage(), "ERROR", JOptionPane.INFORMATION_MESSAGE);
 			}
 			comboBoxModif.setSelectedIndex(0);
 			Object[] options = new Object[] {};
@@ -1625,10 +1630,10 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 				newAgent = agentData.getAgentByID(Integer.parseInt(separatedGetAgent[2]));
 			} catch (NumberFormatException e1) {
 				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				JOptionPane.showMessageDialog(p, e1.getMessage(), "ERROR", JOptionPane.INFORMATION_MESSAGE);
 			} catch (ExceptionManager e1) {
 				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				JOptionPane.showMessageDialog(p, e1.getMessage(), "ERROR", JOptionPane.INFORMATION_MESSAGE);
 			}
 
 			Ability[] newArrayHabilities = newAgent.getAgentAbilities();
@@ -1731,7 +1736,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 					cargarTablaAgents(p);
 				} catch (ExceptionManager e2) {
 
-					JOptionPane.showMessageDialog(p, e2.getMessage(), "Agente", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(p, e2.getMessage(), "ERROR", JOptionPane.INFORMATION_MESSAGE);
 				}
 
 			}
@@ -1745,7 +1750,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 							JOptionPane.INFORMATION_MESSAGE);
 				} catch (NumberFormatException | ExceptionManager e1) {
 					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(p, e1.getMessage(), "ERROR", JOptionPane.INFORMATION_MESSAGE);
 				}
 			} else if (!(txtNameWeapon.getText()).isEmpty() && !(txtDamageWeapon.getText()).isEmpty()
 					&& rdbtnWeaponPrimary.isSelected() && comboBoxWeaponSubtype.getSelectedIndex() != -1) {
@@ -1757,7 +1762,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 							JOptionPane.INFORMATION_MESSAGE);
 				} catch (NumberFormatException | ExceptionManager e1) {
 					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(p, e1.getMessage(), "ERROR", JOptionPane.INFORMATION_MESSAGE);
 				}
 			} else {
 				JOptionPane.showMessageDialog(this, "Campos sin rellenar", "Error", JOptionPane.WARNING_MESSAGE);
@@ -1773,7 +1778,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 								JOptionPane.INFORMATION_MESSAGE);
 					} catch (ExceptionManager e1) {
 						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						JOptionPane.showMessageDialog(p, e1.getMessage(), "ERROR", JOptionPane.INFORMATION_MESSAGE);
 					}
 			} else {
 				JOptionPane.showMessageDialog(this, "Campos sin rellenar", "Error", JOptionPane.WARNING_MESSAGE);
@@ -1789,7 +1794,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 							JOptionPane.INFORMATION_MESSAGE);
 				} catch (NumberFormatException | ExceptionManager e1) {
 					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(p, e1.getMessage(), "ERROR", JOptionPane.INFORMATION_MESSAGE);
 				}
 			} else if (!(txtNameWeapon.getText()).isEmpty() && !(txtDamageWeapon.getText()).isEmpty()
 					&& rdbtnWeaponPrimary.isSelected() && comboBoxWeaponSubtype.getSelectedIndex() != -1) {
@@ -1801,7 +1806,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 							JOptionPane.INFORMATION_MESSAGE);
 				} catch (NumberFormatException | ExceptionManager e1) {
 					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(p, e1.getMessage(), "ERROR", JOptionPane.INFORMATION_MESSAGE);
 				}
 			} else {
 				JOptionPane.showMessageDialog(this, "Campos sin rellenar", "Error", JOptionPane.WARNING_MESSAGE);
@@ -1835,7 +1840,9 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 			clean();
 		}
 	}
-
+/**
+ * metodo para registrar agentes en la base de datos, comprobamos que todos los campos esten llenos y que no haya valores duplicados
+ */
 	private void registerAgent() {
 		if (txtName.getText().isEmpty() || txtCode.getText().isEmpty() || txtNationality.getText().isEmpty()
 				|| comboBoxRol.getSelectedIndex() == -1 || txtPasswd1.getPassword().toString().isEmpty()
@@ -1887,7 +1894,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 							JOptionPane.INFORMATION_MESSAGE);
 				} catch (ExceptionManager e) {
 
-					JOptionPane.showMessageDialog(this, e.getMessage(), "Agente", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(this, e.getMessage(), "ERROR", JOptionPane.INFORMATION_MESSAGE);
 				}
 			} else {
 				JOptionPane.showMessageDialog(this, "CONTRASEÑAS NO COINCIDEN", "Agente",
@@ -1896,7 +1903,9 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		}
 
 	}
-
+/**
+ * metodo para recoger todos los valores de la ventana y demos de alta una mision en la base de datos + todos los agentes que van a dicha mision
+ */
 	private void aniadirMission() {
 		Mission newMission;
 		String tipo;
@@ -1951,7 +1960,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 			try {
 				codMission = missionData.registerMission(newMission, tipo);
 			} catch (ExceptionManager e) { // TODO Auto-generated catch block
-				e.printStackTrace();
+				JOptionPane.showMessageDialog(p, e.getMessage(), "ERROR", JOptionPane.INFORMATION_MESSAGE);
 			}
 
 			try {
@@ -1974,12 +1983,15 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 						JOptionPane.INFORMATION_MESSAGE);
 			} catch (NumberFormatException | ExceptionManager e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				JOptionPane.showMessageDialog(p, e.getMessage(), "ERROR", JOptionPane.INFORMATION_MESSAGE);
 			}
 			cargarComboBoxes();
 		}
 	}
 
+	/**
+	 * metodo para eliminar y volver a cargar los comboboxes de la ventana misiones
+	 */
 	private void cargarComboBoxes() {
 
 		comboBoxMissionAgent1.removeAllItems();
@@ -2011,7 +2023,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 			agents = agentData.getAllActiveAgents();
 		} catch (ExceptionManager e1) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			JOptionPane.showMessageDialog(p, e1.getMessage(), "ERROR", JOptionPane.INFORMATION_MESSAGE);
 		}
 		Collections.sort(agents);
 
@@ -2055,7 +2067,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 			sidearmsWeapons = weaponData.getAllSidearms();
 		} catch (ExceptionManager e1) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			JOptionPane.showMessageDialog(p, e1.getMessage(), "ERROR", JOptionPane.INFORMATION_MESSAGE);
 		}
 
 		/*
@@ -2124,7 +2136,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 			maps = mapData.getAllMaps();
 		} catch (ExceptionManager e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(p, e.getMessage(), "ERROR", JOptionPane.INFORMATION_MESSAGE);
 		}
 
 		for (Map newMap : maps) {
@@ -2180,7 +2192,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 					}
 				} catch (ExceptionManager e1) {
 					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(p, e1.getMessage(), "ERROR", JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
 		} else if (e.getSource().equals(tableWeapons)) {
@@ -2196,11 +2208,11 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 								tableWeapons.getModel().getValueAt(tableWeapons.getSelectedRow(), 0).toString());
 					} catch (ExceptionManager e2) {
 						// TODO Auto-generated catch block
-						e2.printStackTrace();
+						JOptionPane.showMessageDialog(p, e2.getMessage(), "ERROR", JOptionPane.INFORMATION_MESSAGE);
 					}
 				} catch (ExceptionManager e1) {
 					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(p, e1.getMessage(), "ERROR", JOptionPane.INFORMATION_MESSAGE);
 				}
 				if (newWeapon.isWeaponIsActive()) {
 					if (JOptionPane.showOptionDialog(this, "¿Desea borrar o modificar este arma?", "Armas",
@@ -2235,7 +2247,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 							weaponData.activateWeapon(newWeapon.getWeaponName());
 						} catch (ExceptionManager e1) {
 							// TODO Auto-generated catch block
-							e1.printStackTrace();
+							JOptionPane.showMessageDialog(p, e1.getMessage(), "ERROR", JOptionPane.INFORMATION_MESSAGE);
 						}
 						cargarTablaWeapons();
 					}
@@ -2243,64 +2255,32 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 			}
 		} else if (e.getSource().equals(lblBreezeMap)) {
 			String mapName = "Breeze";
-			try {
-				abrirVMap(mapName);
-			} catch (ExceptionManager e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			abrirVMap(mapName);
 		} else if (e.getSource().equals(lblBindMap)) {
 			String mapName = "Bind";
-			try {
-				abrirVMap(mapName);
-			} catch (ExceptionManager e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			abrirVMap(mapName);
 		} else if (e.getSource().equals(lblIceboxMap)) {
 			String mapName = "Icebox";
-			try {
-				abrirVMap(mapName);
-			} catch (ExceptionManager e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			abrirVMap(mapName);
 		} else if (e.getSource().equals(lblSplitMap)) {
 			String mapName = "Split";
-			try {
-				abrirVMap(mapName);
-			} catch (ExceptionManager e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			abrirVMap(mapName);
 		} else if (e.getSource().equals(lblHavenMap)) {
 			String mapName = "Haven";
-			try {
-				abrirVMap(mapName);
-			} catch (ExceptionManager e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			abrirVMap(mapName);
 		} else if (e.getSource().equals(lblAscentMap)) {
 			String mapName = "Ascent";
-			try {
-				abrirVMap(mapName);
-			} catch (ExceptionManager e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			abrirVMap(mapName);
 		} else if (e.getSource().equals(lblFractureMap)) {
 			String mapName = "Fracture";
-			try {
-				abrirVMap(mapName);
-			} catch (ExceptionManager e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			abrirVMap(mapName);
 		}
 	}
-
-	private void abrirVMap(String mapName) throws ExceptionManager {
+/**
+ * abrimos la informacion de cada mapa al clickar en la foto de esta
+ * @param mapName enviamos el nombre para hacer un select en la BD que nos permita crear una estadistica por cada mapa
+ */
+	private void abrirVMap(String mapName) {
 		VMap vMap = new VMap(mapData, this, true, mapName);
 		vMap.setVisible(true);
 	}
@@ -2328,7 +2308,9 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		// TODO Auto-generated method stub
 
 	}
-
+/**
+ * metodo donde selecionamos la mision y nos muestra un JOptionPane que nos pregunta si queremos terminar dicha mision
+ */
 	private void acabarMision() {
 		Mission newMission = new Mission();
 		String[] selectedItem = listMission.getSelectedValue().toString().split("  //  ");
@@ -2345,7 +2327,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 							cargarComboBoxes();
 						} catch (ExceptionManager e1) {
 							// TODO Auto-generated catch block
-							e1.printStackTrace();
+							JOptionPane.showMessageDialog(p, e1.getMessage(), "ERROR", JOptionPane.INFORMATION_MESSAGE);
 						}
 				}
 			} else {
@@ -2359,16 +2341,19 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 							cargarComboBoxes();
 						} catch (ExceptionManager e1) {
 							// TODO Auto-generated catch block
-							e1.printStackTrace();
+							JOptionPane.showMessageDialog(p, e1.getMessage(), "ERROR", JOptionPane.INFORMATION_MESSAGE);
 						}
 				}
 			}
 		} catch (NumberFormatException | ExceptionManager e1) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			JOptionPane.showMessageDialog(p, e1.getMessage(), "ERROR", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
-
+/**
+ * metodo donde cargamos todas las armas de nuestra BD en una tabla
+ * tambien podremos seleccionar si queremos listar todas las armas, las primarias o las secundarias
+ */
 	private void cargarTablaWeapons() {
 		String matrizTablaArmas[][] = null;
 		if (tableWeapons != null) {
@@ -2391,7 +2376,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 				weapons = weaponData.getAllWeapon();
 			} catch (ExceptionManager e2) {
 				// TODO Auto-generated catch block
-				e2.printStackTrace();
+				JOptionPane.showMessageDialog(p, e2.getMessage(), "ERROR", JOptionPane.INFORMATION_MESSAGE);
 			}
 			matrizTablaArmas = new String[weapons.size()][4];
 			for (Weapon newWeapon : weapons) {
@@ -2417,7 +2402,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 				weaponsPrimary = weaponData.getAllPrimary();
 			} catch (ExceptionManager e1) {
 				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				JOptionPane.showMessageDialog(p, e1.getMessage(), "ERROR", JOptionPane.INFORMATION_MESSAGE);
 			}
 			matrizTablaArmas = new String[weaponsPrimary.size()][4];
 			for (Weapon newWeapon : weaponsPrimary) {
@@ -2444,7 +2429,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 				weaponsSidearms = weaponData.getAllSidearms();
 			} catch (ExceptionManager e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				JOptionPane.showMessageDialog(p, e.getMessage(), "ERROR", JOptionPane.INFORMATION_MESSAGE);
 			}
 			matrizTablaArmas = new String[weaponsSidearms.size()][4];
 			for (Weapon newWeapon : weaponsSidearms) {
@@ -2524,6 +2509,9 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 
 	}
 
+	/**
+	 * metodo para limpiar la tabla de armas
+	 */
 	private void clearTableWeapons() {
 		String tituloWeapons[] = { "Nombre", "Tipo", "Subtipo", "Daño  (Cabeza / Cuerpo / Piernas)" };
 		tableWeapons = new JTable(null, tituloWeapons) {
@@ -2546,7 +2534,9 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 			}
 		};
 	}
-
+/**
+ * metodo para limpiar todo en la pestaña de registrar agente
+ */
 	private void clean() {
 		txtCodeModif.setText("");
 		txtNameModif.setText("");

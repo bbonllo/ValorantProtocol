@@ -79,7 +79,7 @@ public class VMap extends JDialog {
 			defendWeapon = "/resources/" + mapData.getDefendMissionWeapon(mapName) + ".png";
 		} catch (ExceptionManager e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.INFORMATION_MESSAGE);
 		}
 
 		lblWeaponDefendName = new JLabel("");
@@ -245,6 +245,7 @@ public class VMap extends JDialog {
 	}
 
 	/**
+	 * Metodo de carga de datos de estadistica
 	 * 
 	 * @param newMap  Objeto tipo Map con los datos del mapa pedido
 	 * @param iconMap Icono del mapa
@@ -273,7 +274,7 @@ public class VMap extends JDialog {
 				}
 			} catch (ExceptionManager e1) {
 				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				JOptionPane.showMessageDialog(this, e1.getMessage(), "Error", JOptionPane.INFORMATION_MESSAGE);
 			}
 		} else
 			attack = false;
@@ -296,7 +297,7 @@ public class VMap extends JDialog {
 				}
 			} catch (ExceptionManager e1) {
 				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				JOptionPane.showMessageDialog(this, e1.getMessage(), "Error", JOptionPane.INFORMATION_MESSAGE);
 			}
 
 		} else

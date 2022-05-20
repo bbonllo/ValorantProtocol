@@ -10,5 +10,4 @@ public interface ViewManager {
 	 * @param mission MissionManager
 	 */
 	public void openView(MapManager map, AgentManager agent, WeaponManager weapon, MissionManager mission);
-
 }

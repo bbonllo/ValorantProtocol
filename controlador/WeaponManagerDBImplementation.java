@@ -54,15 +54,19 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 			stmt.close();
 
 		} catch (SQLException e1) {
-			System.out.println("Error en alta SQL");
-			e1.printStackTrace();
+			// TODO Auto-generated catch block
+			String error = "Error al REGISTRAR ARMA";
+			ExceptionManager uwu = new ExceptionManager(error);
+			throw uwu;
 		} finally {
 			try {
 				// Close the connection
 				conection.closeConnection(stmt, con);
 			} catch (SQLException e) {
-				System.out.println("Error en cierre de la BD");
-				e.printStackTrace();
+				// TODO Auto-generated catch block
+				String error = "Error al cerrar BD";
+				ExceptionManager uwu = new ExceptionManager(error);
+				throw uwu;
 			}
 		}
 	}
@@ -96,28 +100,29 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 				weapon = null;
 
 		} catch (SQLException e1) {
-			System.out.println("Error en alta SQL");
-			e1.printStackTrace();
+			// TODO Auto-generated catch block
+			String error = "Error al recoger un arma por su nombre";
+			ExceptionManager uwu = new ExceptionManager(error);
+			throw uwu;
 		} finally {
 			// Cerramos ResultSet
 			if (rs != null) {
 				try {
 					rs.close();
 				} catch (SQLException ex) {
-					System.out.println("Error en cierre del ResultSet");
+					// TODO Auto-generated catch block
+					String error = "Error al cerrar RS";
+					ExceptionManager uwu = new ExceptionManager(error);
+					throw uwu;
 				}
-			}
-			try {
-				stmt.close();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
 			}
 			try {
 				conection.closeConnection(stmt, con);
 			} catch (SQLException e) {
-				System.out.println("Error en el cierre de la BD");
-				e.printStackTrace();
+				// TODO Auto-generated catch block
+				String error = "Error al cerrar la conexion";
+				ExceptionManager uwu = new ExceptionManager(error);
+				throw uwu;
 			}
 		}
 		return weapon;
@@ -153,15 +158,19 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 				stmt.close();
 			}
 		} catch (SQLException e1) {
-			System.out.println("Error en la modificacion SQL");
-			e1.printStackTrace();
+			// TODO Auto-generated catch block
+			String error = "Error al modificar el arma";
+			ExceptionManager uwu = new ExceptionManager(error);
+			throw uwu;
 		} finally {
 			try {
 				// Close Connection
 				conection.closeConnection(stmt, con);
 			} catch (SQLException e) {
-				System.out.println("Error en cierre de la BD");
-				e.printStackTrace();
+				// TODO Auto-generated catch block
+				String error = "Error al cerrar BD";
+				ExceptionManager uwu = new ExceptionManager(error);
+				throw uwu;
 			}
 		}
 		return changes;
@@ -188,15 +197,19 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 			stmt.close();
 
 		} catch (SQLException e1) {
-			System.out.println("Error en la modificacion SQL");
-			e1.printStackTrace();
+			// TODO Auto-generated catch block
+			String error = "Error al BORRAR el arma";
+			ExceptionManager uwu = new ExceptionManager(error);
+			throw uwu;
 		} finally {
 			try {
 				// Close Connection
 				conection.closeConnection(stmt, con);
 			} catch (SQLException e) {
-				System.out.println("Error en cierre de la BD");
-				e.printStackTrace();
+				// TODO Auto-generated catch block
+				String error = "Error al cerrar BD";
+				ExceptionManager uwu = new ExceptionManager(error);
+				throw uwu;
 			}
 		}
 	}
@@ -236,29 +249,30 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 			}
 
 		} catch (SQLException e) {
-			System.out.println("Error de SQL");
-			e.printStackTrace();
+			// TODO Auto-generated catch block
+			String error = "Error al recoger TODAS las armas";
+			ExceptionManager uwu = new ExceptionManager(error);
+			throw uwu;
 		} finally {
 			// Close ResultSet
 			if (rs != null) {
 				try {
 					rs.close();
 				} catch (SQLException ex) {
-					System.out.println("Error en cierre del ResultSet");
+					// TODO Auto-generated catch block
+					String error = "Error al cerrar el rs";
+					ExceptionManager uwu = new ExceptionManager(error);
+					throw uwu;
 				}
-			}
-			try {
-				stmt.close();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
 			}
 			try {
 				// Close Connection
 				conection.closeConnection(stmt, con);
 			} catch (SQLException e) {
-				System.out.println("Error en el cierre de la BD");
-				e.printStackTrace();
+				// TODO Auto-generated catch block
+				String error = "Error al cerrar BD";
+				ExceptionManager uwu = new ExceptionManager(error);
+				throw uwu;
 			}
 		}
 		return weapons;
@@ -298,15 +312,19 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 			}
 
 		} catch (SQLException e) {
-			System.out.println("Error de SQL");
-			e.printStackTrace();
+			// TODO Auto-generated catch block
+			String error = "error al recoger todas las armas secundarias";
+			ExceptionManager uwu = new ExceptionManager(error);
+			throw uwu;
 		} finally {
 			// Close ResultSet
 			if (rs != null) {
 				try {
 					rs.close();
 				} catch (SQLException ex) {
-					System.out.println("Error en cierre del ResultSet");
+					String error = "Error al cerrar RS";
+					ExceptionManager uwu = new ExceptionManager(error);
+					throw uwu;
 				}
 			}
 			try {
@@ -319,8 +337,10 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 				// Close connection
 				conection.closeConnection(stmt, con);
 			} catch (SQLException e) {
-				System.out.println("Error en el cierre de la BD");
-				e.printStackTrace();
+				// TODO Auto-generated catch block
+				String error = "ERROR al cerrar BD";
+				ExceptionManager uwu = new ExceptionManager(error);
+				throw uwu;
 			}
 		}
 		return weapons;
@@ -361,29 +381,30 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 			}
 
 		} catch (SQLException e) {
-			System.out.println("Error de SQL");
-			e.printStackTrace();
+			// TODO Auto-generated catch block
+			String error = "Error al recoger todas las armas primarias";
+			ExceptionManager uwu = new ExceptionManager(error);
+			throw uwu;
 		} finally {
 			// Close ResultSet
 			if (rs != null) {
 				try {
 					rs.close();
 				} catch (SQLException ex) {
-					System.out.println("Error en cierre del ResultSet");
+					// TODO Auto-generated catch block
+					String error = "Error al cerrar RS";
+					ExceptionManager uwu = new ExceptionManager(error);
+					throw uwu;
 				}
-			}
-			try {
-				stmt.close();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
 			}
 			try {
 				// Close connection
 				conection.closeConnection(stmt, con);
 			} catch (SQLException e) {
-				System.out.println("Error en el cierre de la BD");
-				e.printStackTrace();
+				// TODO Auto-generated catch block
+				String error = "Error al cerrar BD";
+				ExceptionManager uwu = new ExceptionManager(error);
+				throw uwu;
 			}
 		}
 		return weapons;
@@ -410,15 +431,19 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 			stmt.close();
 
 		} catch (SQLException e1) {
-			System.out.println("Error en la modificacion SQL");
-			e1.printStackTrace();
+			// TODO Auto-generated catch block
+			String error = "Error al dar de baja una mision";
+			ExceptionManager uwu = new ExceptionManager(error);
+			throw uwu;
 		} finally {
 			try {
 				// Close Connection
 				conection.closeConnection(stmt, con);
 			} catch (SQLException e) {
-				System.out.println("Error en cierre de la BD");
-				e.printStackTrace();
+				// TODO Auto-generated catch block
+				String error = "Error al cerrar conexion BD";
+				ExceptionManager uwu = new ExceptionManager(error);
+				throw uwu;
 			}
 		}
 	}

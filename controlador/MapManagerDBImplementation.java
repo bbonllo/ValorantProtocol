@@ -49,7 +49,9 @@ public class MapManagerDBImplementation implements MapManager {
 			conection.closeConnection(stmt, con);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String error = "Error al recoger informacion del mapa selecionado";
+			ExceptionManager uwu = new ExceptionManager(error);
+			throw uwu;
 		}
 		return mapIntro;
 	}
@@ -124,8 +126,9 @@ public class MapManagerDBImplementation implements MapManager {
 				rs.close();
 			conection.closeConnection(stmt, con);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String error = "Error al reocoger la informacion sobre las msisiones de ataque";
+			ExceptionManager uwu = new ExceptionManager(error);
+			throw uwu;
 		}
 		return nameAgents;
 	}
@@ -163,7 +166,9 @@ public class MapManagerDBImplementation implements MapManager {
 			conection.closeConnection(stmt, con);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String error = "Error al recoger la informacion sobre las misiones de defensa";
+			ExceptionManager uwu = new ExceptionManager(error);
+			throw uwu;
 		}
 		return nameAgents;
 	}
@@ -198,7 +203,9 @@ public class MapManagerDBImplementation implements MapManager {
 			conection.closeConnection(stmt, con);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String error = "Error al recoger la informacion sobre las misiones de ataque";
+			ExceptionManager uwu = new ExceptionManager(error);
+			throw uwu;
 		}
 		return weaponName;
 	}
@@ -233,7 +240,9 @@ public class MapManagerDBImplementation implements MapManager {
 			conection.closeConnection(stmt, con);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String error = "Error al recoger la informacion sobre las misiones de defensa";
+			ExceptionManager uwu = new ExceptionManager(error);
+			throw uwu;
 		}
 		return weaponName;
 	}
@@ -286,8 +295,9 @@ public class MapManagerDBImplementation implements MapManager {
 				rs.close();
 			conection.closeConnection(stmt, con);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String error = "Error al generar la estadistica de ataque";
+			ExceptionManager uwu = new ExceptionManager(error);
+			throw uwu;
 		}
 		return codTop3Agents;
 	}
@@ -341,8 +351,9 @@ public class MapManagerDBImplementation implements MapManager {
 				rs.close();
 			conection.closeConnection(stmt, con);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String error = "Error al generar la estadistica de defensa";
+			ExceptionManager uwu = new ExceptionManager(error);
+			throw uwu;
 		}
 		return codTop3Agents;
 	}
