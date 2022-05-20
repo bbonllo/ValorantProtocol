@@ -21,6 +21,7 @@ public class WeaponsTest {
 	@Test
 	/**
 	 * Testeo de la insercion de un arma
+	 * 
 	 * @throws ExceptionManager
 	 */
 	public void testAddWeapon() throws ExceptionManager {
@@ -31,6 +32,7 @@ public class WeaponsTest {
 	@Test
 	/**
 	 * Testeo de la modificacion de un arma
+	 * 
 	 * @throws ExceptionManager
 	 */
 	public void testModifyWeapon() throws ExceptionManager {
@@ -40,6 +42,7 @@ public class WeaponsTest {
 	@Test
 	/**
 	 * Testeo del borrado de un arma
+	 * 
 	 * @throws ExceptionManager
 	 */
 	public void testDeleteWeapon() throws ExceptionManager {
@@ -47,36 +50,40 @@ public class WeaponsTest {
 		testGetWeaponByName(name);
 	}
 
-	@Test
+	@Test 
 	/**
 	 * Testeo del listado de todas las armas
+	 * 
 	 * @throws ExceptionManager
 	 */
 	public void testGetAllWeapon() throws ExceptionManager {
 		assertNotNull(wepMan.getAllWeapon());
 	}
 
-	@Test
+	@Test 
 	/**
 	 * Testeo del listado de las armas secundarias
+	 * 
 	 * @throws ExceptionManager
 	 */
 	public void testGetAllSidearms() throws ExceptionManager {
 		assertNotNull(wepMan.getAllSidearms());
 	}
 
-	@Test
+	@Test 
 	/**
 	 * Testeo del listado de las armas primarias
+	 * 
 	 * @throws ExceptionManager
 	 */
 	public void testGetAllPrimary() throws ExceptionManager {
 		assertNotNull(wepMan.getAllPrimary());
 	}
-	
-	@Test
+
+	@Test 
 	/**
 	 * Testeo de la activacion de un arma borrada anteriormente
+	 * 
 	 * @throws ExceptionManager
 	 */
 	public void testActivateWeapon() throws ExceptionManager {
@@ -87,6 +94,7 @@ public class WeaponsTest {
 // Methods to control other methods
 	/**
 	 * Metodo complementario para testear otros metodos que no devuelven nada
+	 * 
 	 * @param name
 	 * @throws ExceptionManager
 	 */

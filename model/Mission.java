@@ -65,7 +65,7 @@ public class Mission implements Serializable {
 		this.missionFI = missionFI;
 	}
 
-	public boolean ismissionFinished() {
+	public boolean isMissionFinished() {
 		return missionFinished;
 	}
 

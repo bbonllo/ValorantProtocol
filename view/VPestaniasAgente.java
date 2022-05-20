@@ -1391,9 +1391,16 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 				listMission.setForeground(new Color(0, 0, 0));
 				dlm = new DefaultListModel<>();
 				for (int i = 0; i < allMissions.size(); i++) {
-					dlm.addElement(allMissions.get(i).getMapName() + "  //  " + allMissions.get(i).getMissionCode()
-							+ "  //  " + allMissions.get(i).getMissionFI().toString() + "  //  "
-							+ allMissions.get(i).getMissionFF().toString());
+					if (!allMissions.get(i).isMissionFinished()) {
+						dlm.addElement(allMissions.get(i).getMapName() + "  //  " + allMissions.get(i).getMissionCode()
+								+ "  //  " + allMissions.get(i).getMissionFI().toString() + "  //  "
+								+ allMissions.get(i).getMissionFF().toString());
+					} else {
+						dlm.addElement(
+								"X  " + allMissions.get(i).getMapName() + "  //  " + allMissions.get(i).getMissionCode()
+										+ "  //  " + allMissions.get(i).getMissionFI().toString() + "  //  "
+										+ allMissions.get(i).getMissionFF().toString() + "  X");
+					}
 				}
 				listMission.setModel(dlm);
 				break;
@@ -1401,10 +1408,17 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 				listMission.setForeground(new Color(62, 80, 166));
 				dlm = new DefaultListModel<>();
 				for (int i = 0; i < allAttackMissions.size(); i++) {
-					dlm.addElement(
-							allAttackMissions.get(i).getMapName() + "  //  " + allAttackMissions.get(i).getMissionCode()
-									+ "  //  " + allAttackMissions.get(i).getMissionFI().toString() + "  //  "
-									+ allAttackMissions.get(i).getMissionFF().toString());
+					if (allAttackMissions.get(i).isMissionFinished()) {
+						dlm.addElement("X  " + allAttackMissions.get(i).getMapName() + "  //  "
+								+ allAttackMissions.get(i).getMissionCode() + "  //  "
+								+ allAttackMissions.get(i).getMissionFI().toString() + "  //  "
+								+ allAttackMissions.get(i).getMissionFF().toString() + "  X");
+					} else {
+						dlm.addElement(allAttackMissions.get(i).getMapName() + "  //  "
+								+ allAttackMissions.get(i).getMissionCode() + "  //  "
+								+ allAttackMissions.get(i).getMissionFI().toString() + "  //  "
+								+ allAttackMissions.get(i).getMissionFF().toString());
+					}
 				}
 				listMission.setModel(dlm);
 				break;
@@ -1412,10 +1426,17 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 				listMission.setForeground(new Color(185, 5, 5));
 				dlm = new DefaultListModel<>();
 				for (int i = 0; i < allDefendMissions.size(); i++) {
-					dlm.addElement(
-							allDefendMissions.get(i).getMapName() + "  //  " + allDefendMissions.get(i).getMissionCode()
-									+ "  //  " + allDefendMissions.get(i).getMissionFI().toString() + "  //  "
-									+ allDefendMissions.get(i).getMissionFF().toString());
+					if (allDefendMissions.get(i).isMissionFinished()) {
+						dlm.addElement("X  " + allDefendMissions.get(i).getMapName() + "  //  "
+								+ allDefendMissions.get(i).getMissionCode() + "  //  "
+								+ allDefendMissions.get(i).getMissionFI().toString() + "  //  "
+								+ allDefendMissions.get(i).getMissionFF().toString() + "  X");
+					} else {
+						dlm.addElement(allDefendMissions.get(i).getMapName() + "  //  "
+								+ allDefendMissions.get(i).getMissionCode() + "  //  "
+								+ allDefendMissions.get(i).getMissionFI().toString() + "  //  "
+								+ allDefendMissions.get(i).getMissionFF().toString());
+					}
 				}
 				listMission.setModel(dlm);
 				break;
@@ -1429,6 +1450,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 
 	/**
 	 * Metodo para cargar la tabla agentes
+	 * 
 	 * @param p Panel sobre el que funciona la tabla
 	 */
 	private void cargarTablaAgents(JPanel p) {
@@ -1502,9 +1524,10 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 			JOptionPane.showMessageDialog(p, e1.getMessage(), "ERROR", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
-/**
- * metodo para limpiar la tabla de agentes
- */
+
+	/**
+	 * Metodo para limpiar la tabla de agentes
+	 */
 	private void clearTableAgents() {
 		String tituloAgentes[] = { "Tods los agentes" };
 		table = new JTable(null, tituloAgentes) {
@@ -1528,10 +1551,12 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		};
 		table.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 	}
-/***
- * metodo para buscar armas por nombre
- * @param weaponName envias el nombre del arma para poder buscarlo
- */
+
+	/***
+	 * metodo para buscar armas por nombre
+	 * 
+	 * @param weaponName envias el nombre del arma para poder buscarlo
+	 */
 	private void searchWeapon(String weaponName) {
 		try {
 			if (weaponData.getWeaponByName(weaponName) == null) {
@@ -1840,9 +1865,11 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 			clean();
 		}
 	}
-/**
- * metodo para registrar agentes en la base de datos, comprobamos que todos los campos esten llenos y que no haya valores duplicados
- */
+
+	/**
+	 * metodo para registrar agentes en la base de datos, comprobamos que todos los
+	 * campos esten llenos y que no haya valores duplicados
+	 */
 	private void registerAgent() {
 		if (txtName.getText().isEmpty() || txtCode.getText().isEmpty() || txtNationality.getText().isEmpty()
 				|| comboBoxRol.getSelectedIndex() == -1 || txtPasswd1.getPassword().toString().isEmpty()
@@ -1903,9 +1930,11 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		}
 
 	}
-/**
- * metodo para recoger todos los valores de la ventana y demos de alta una mision en la base de datos + todos los agentes que van a dicha mision
- */
+
+	/**
+	 * metodo para recoger todos los valores de la ventana y demos de alta una
+	 * mision en la base de datos + todos los agentes que van a dicha mision
+	 */
 	private void aniadirMission() {
 		Mission newMission;
 		String tipo;
@@ -2276,10 +2305,13 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 			abrirVMap(mapName);
 		}
 	}
-/**
- * abrimos la informacion de cada mapa al clickar en la foto de esta
- * @param mapName enviamos el nombre para hacer un select en la BD que nos permita crear una estadistica por cada mapa
- */
+
+	/**
+	 * abrimos la informacion de cada mapa al clickar en la foto de esta
+	 * 
+	 * @param mapName enviamos el nombre para hacer un select en la BD que nos
+	 *                permita crear una estadistica por cada mapa
+	 */
 	private void abrirVMap(String mapName) {
 		VMap vMap = new VMap(mapData, this, true, mapName);
 		vMap.setVisible(true);
@@ -2308,16 +2340,18 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		// TODO Auto-generated method stub
 
 	}
-/**
- * metodo donde selecionamos la mision y nos muestra un JOptionPane que nos pregunta si queremos terminar dicha mision
- */
+
+	/**
+	 * metodo donde selecionamos la mision y nos muestra un JOptionPane que nos
+	 * pregunta si queremos terminar dicha mision
+	 */
 	private void acabarMision() {
 		Mission newMission = new Mission();
 		String[] selectedItem = listMission.getSelectedValue().toString().split("  //  ");
 		try {
 			newMission = missionData.getMissionByCod(Integer.parseInt(selectedItem[1]));
 			if (newMission instanceof AttackMission) {
-				if (!newMission.ismissionFinished()) {
+				if (!newMission.isMissionFinished()) {
 					if (JOptionPane.showConfirmDialog(this, "¿Estas seguro de terminar esta mision?", "Mision",
 							JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == 0)
 						try {
@@ -2329,9 +2363,10 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 							// TODO Auto-generated catch block
 							JOptionPane.showMessageDialog(p, e1.getMessage(), "ERROR", JOptionPane.INFORMATION_MESSAGE);
 						}
+					cargarMisiones(0);
 				}
 			} else {
-				if (!newMission.ismissionFinished()) {
+				if (!newMission.isMissionFinished()) {
 					if (JOptionPane.showConfirmDialog(this, "¿Estas seguro de terminar esta mision?", "Mision",
 							JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == 0)
 						try {
@@ -2343,6 +2378,7 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 							// TODO Auto-generated catch block
 							JOptionPane.showMessageDialog(p, e1.getMessage(), "ERROR", JOptionPane.INFORMATION_MESSAGE);
 						}
+					cargarMisiones(0);
 				}
 			}
 		} catch (NumberFormatException | ExceptionManager e1) {
@@ -2350,10 +2386,12 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 			JOptionPane.showMessageDialog(p, e1.getMessage(), "ERROR", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
-/**
- * metodo donde cargamos todas las armas de nuestra BD en una tabla
- * tambien podremos seleccionar si queremos listar todas las armas, las primarias o las secundarias
- */
+
+	/**
+	 * metodo donde cargamos todas las armas de nuestra BD en una tabla tambien
+	 * podremos seleccionar si queremos listar todas las armas, las primarias o las
+	 * secundarias
+	 */
 	private void cargarTablaWeapons() {
 		String matrizTablaArmas[][] = null;
 		if (tableWeapons != null) {
@@ -2534,9 +2572,10 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 			}
 		};
 	}
-/**
- * metodo para limpiar todo en la pestaña de registrar agente
- */
+
+	/**
+	 * metodo para limpiar todo en la pestaña de registrar agente
+	 */
 	private void clean() {
 		txtCodeModif.setText("");
 		txtNameModif.setText("");
