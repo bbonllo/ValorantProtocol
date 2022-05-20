@@ -3,7 +3,11 @@ package controlador;
 public class DataFactoryMap {
 	private static MapManager data;
 
-	public static synchronized MapManager getMapData() {
+	/**
+	 * Carga la variable data, si esta no esta cargada previamente
+	 * @return data Modelo de datos de tipo Mapa {@link MapManager}
+	 */
+	public static MapManager getMapData() {
 		if (data == null) {
 			data = new MapManagerDBImplementation();
 		}

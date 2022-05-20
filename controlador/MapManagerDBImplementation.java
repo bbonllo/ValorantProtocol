@@ -19,6 +19,7 @@ public class MapManagerDBImplementation implements MapManager {
 	@Override
 	/**
 	 * Busqueda de mapa con su nombre
+	 * 
 	 * @param mapName nombre del mapa a buscar
 	 * @return mapIntro mapa encontrado
 	 * @throws ExceptionManager ExceptionManager
@@ -56,6 +57,7 @@ public class MapManagerDBImplementation implements MapManager {
 	@Override
 	/**
 	 * Listado de todos los mapas
+	 * 
 	 * @return maps El listado
 	 * @throws ExceptionManager ExceptionManager
 	 */
@@ -93,8 +95,10 @@ public class MapManagerDBImplementation implements MapManager {
 	@Override
 	/**
 	 * Listado de todos los agentes en misiones de ataque
+	 * 
 	 * @param mapName nombre del mapa de ataque a buscar
-	 * @return nameAgents Listado del nombre de los agentes encontrados en misiones en ese mapa
+	 * @return nameAgents Listado del nombre de los agentes encontrados en misiones
+	 *         en ese mapa
 	 * @throws ExceptionManager ExceptionManager
 	 */
 	public List<String> getAttackMissionAgents(String mapName) throws ExceptionManager {
@@ -129,8 +133,10 @@ public class MapManagerDBImplementation implements MapManager {
 	@Override
 	/**
 	 * Listado de todos los agentes en misiones de defensa
+	 * 
 	 * @param mapName nombre del mapa de ataque a buscar
-	 * @return nameAgents Listado del nombre de los agentes encontrados en misiones en ese mapa
+	 * @return nameAgents Listado del nombre de los agentes encontrados en misiones
+	 *         en ese mapa
 	 * @throws ExceptionManager ExceptionManager
 	 */
 	public List<String> getDefendMissionAgents(String mapName) throws ExceptionManager {
@@ -165,6 +171,7 @@ public class MapManagerDBImplementation implements MapManager {
 	@Override
 	/**
 	 * Arma mas usada en mapas de misiones de ataque
+	 * 
 	 * @param mapName nombre del mapa en la que quiere buscar
 	 * @return weaponName nombre del arma mas usada en ese mapa
 	 * @throws ExceptionManager ExceptionManager
@@ -199,6 +206,7 @@ public class MapManagerDBImplementation implements MapManager {
 	@Override
 	/**
 	 * Arma mas usada en mapas de misiones de defensa
+	 * 
 	 * @param mapName nombre del mapa en la que quiere buscar
 	 * @return weaponName nombre del arma mas usada en ese mapa
 	 * @throws ExceptionManager ExceptionManager
@@ -233,7 +241,8 @@ public class MapManagerDBImplementation implements MapManager {
 	@Override
 	/**
 	 * Listado de los agentes mas usado en los mapas de misiones de ataque
-	 * @param mapName mapa a buscar 
+	 * 
+	 * @param mapName mapa a buscar
 	 * @return codTop3Agents Listado de los 3 agentes mas usados con su porcentaje
 	 * @throws ExceptionManager ExceptionManager
 	 */
@@ -286,6 +295,7 @@ public class MapManagerDBImplementation implements MapManager {
 	@Override
 	/**
 	 * Listado de los agentes mas usado en los mapas de misiones de defensa
+	 * 
 	 * @param mapName nombre del mapa a buscar
 	 * @return codTop3Agents Listado de los 3 agentes mas usados con su porcentaje
 	 * @throws ExceptionManager ExceptionManager

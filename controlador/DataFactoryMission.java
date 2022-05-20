@@ -3,7 +3,11 @@ package controlador;
 public class DataFactoryMission {
 	private static MissionManager data;
 
-	public static synchronized MissionManager getMissionData() {
+	/**
+	 * Carga la variable data, si esta no esta cargada previamente.
+	 * @return data Modelo de datos de tipo Mision {@link MissionManager}
+	 */
+	public static MissionManager getMissionData() {
 		if (data == null) {
 			data = new MissionManagerDBImplementation();
 		}

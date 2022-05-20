@@ -30,6 +30,7 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 	@Override
 	/**
 	 * Insertar un arma
+	 * 
 	 * @param weapon arma a ingresar
 	 * @throws ExceptionManager ExceptionManager
 	 */
@@ -68,7 +69,8 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 
 	@Override
 	/**
-	 * buscar un arma por su nombre 
+	 * buscar un arma por su nombre
+	 * 
 	 * @param name nombre del arma a buscar
 	 * @throws ExceptionManager ExceptionManager
 	 */
@@ -124,6 +126,7 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 	@Override
 	/**
 	 * modificar un arma
+	 * 
 	 * @param weapon arma a modificar
 	 * @return changes boolean que te devuelve si se ha modificado o no
 	 * @throws ExceptionManager ExceptionManager
@@ -166,7 +169,8 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 
 	@Override
 	/**
-	 * Borrado del arma 
+	 * Borrado del arma
+	 * 
 	 * @param name nombre del arma que se desea borrar
 	 * @throws ExceptionManager ExceptionManager
 	 */
@@ -200,6 +204,7 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 	@Override
 	/**
 	 * Listado de todas las armas
+	 * 
 	 * @return weapons Listado
 	 * @throws ExceptionManager ExceptionManager
 	 */
@@ -262,6 +267,7 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 	@Override
 	/**
 	 * Listado de todas las armas secundarias
+	 * 
 	 * @return weapons Listado
 	 * @throws ExceptionManager ExceptionManager
 	 */
@@ -323,6 +329,7 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 	@Override
 	/**
 	 * Listado de todas las armas primarias
+	 * 
 	 * @return weapons Listado
 	 * @throws ExceptionManager ExceptionManager
 	 */
@@ -385,6 +392,7 @@ public class WeaponManagerDBImplementation implements WeaponManager {
 	@Override
 	/**
 	 * Activar un arma inavilitada
+	 * 
 	 * @param name nombre del arma inavilitada
 	 * @throws ExceptionManager ExceptionManager
 	 */

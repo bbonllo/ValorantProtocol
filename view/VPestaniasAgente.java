@@ -241,9 +241,10 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 	 * Create the frame.
 	 * 
 	 * @param loginAgent
+	 * @param map
+	 * @param agent
 	 * @param weapon
-	 * @param agentData
-	 * @param mapData
+	 * @param mission
 	 */
 	public VPestaniasAgente(Agent loginAgent, MapManager map, AgentManager agent, WeaponManager weapon,
 			MissionManager mission) {
@@ -1370,6 +1371,11 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 		cargarMisiones(0);
 	}
 
+	/**
+	 * Metodo que carga las misiones
+	 * 
+	 * @param tipo Variable tipo int que recive el index de un combobox
+	 */
 	private void cargarMisiones(int tipo) {
 		List<Mission> allMissions = null;
 		List<AttackMission> allAttackMissions = null;
@@ -1421,6 +1427,10 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 
 	}
 
+	/**
+	 * Metodo para cargar la tabla agentes
+	 * @param p Panel sobre el que funciona la tabla
+	 */
 	private void cargarTablaAgents(JPanel p) {
 		if (table != null)
 			clearTableAgents();
@@ -1960,7 +1970,8 @@ public class VPestaniasAgente extends JFrame implements ActionListener, MouseLis
 				missionData.sendAgentToMission(codMission, Integer.parseInt(separatedGetAgent5[2]),
 						comboBoxMissionPrimaryWeapon5.getSelectedItem().toString(),
 						comboBoxMissionSidearmWeapon5.getSelectedItem().toString());
-				JOptionPane.showMessageDialog(this, "Mision creada correctamente", "Mision", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(this, "Mision creada correctamente", "Mision",
+						JOptionPane.INFORMATION_MESSAGE);
 			} catch (NumberFormatException | ExceptionManager e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

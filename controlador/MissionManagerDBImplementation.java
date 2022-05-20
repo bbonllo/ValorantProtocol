@@ -21,7 +21,8 @@ public class MissionManagerDBImplementation implements MissionManager {
 
 	@Override
 	/**
-	 * Buscar mision por su codigo 
+	 * Buscar mision por su codigo
+	 * 
 	 * @param codM codigo de la mision a buscar
 	 * @return getMission mission encontrada
 	 * @throws ExceptionManager ExceptionManager
@@ -86,8 +87,9 @@ public class MissionManagerDBImplementation implements MissionManager {
 	@Override
 	/**
 	 * Registra mision enviandole una mision y caracter tipo
-	 * @param vMisson mision a registrar 
-	 * @param type tipo de mision que se desea registrar
+	 * 
+	 * @param vMisson mision a registrar
+	 * @param type    tipo de mision que se desea registrar
 	 * @return missionCode el codigo de la mision registrada
 	 * @throws ExceptionManager ExceptionManager
 	 */
@@ -132,9 +134,10 @@ public class MissionManagerDBImplementation implements MissionManager {
 	@Override
 	/**
 	 * Enviar agente a una mission con su codigo y sus respectivas armas
-	 * @param codM codigo de la mision a la que desea mandar su agente 
-	 * @param codA codigo del agente que desea mandar de mision
-	 * @param primaryWeapon el arma principal del agente 
+	 * 
+	 * @param codM            codigo de la mision a la que desea mandar su agente
+	 * @param codA            codigo del agente que desea mandar de mision
+	 * @param primaryWeapon   el arma principal del agente
 	 * @param secondaryWeapon el arma secundaria del agente
 	 * @throws ExceptionManager ExceptionManager
 	 */
@@ -173,6 +176,7 @@ public class MissionManagerDBImplementation implements MissionManager {
 	@Override
 	/**
 	 * Terminar mision
+	 * 
 	 * @param codM codigo de la mision que desea terminar
 	 * @param type tipo de la mision
 	 * @throws ExceptionManager ExceptionManager
@@ -208,8 +212,9 @@ public class MissionManagerDBImplementation implements MissionManager {
 	@Override
 	/**
 	 * Listado de todas las misiones
+	 * 
 	 * @return allMissions Listado
-	 *  @throws ExceptionManager ExceptionManager
+	 * @throws ExceptionManager ExceptionManager
 	 */
 	public List<Mission> getAllMissions() throws ExceptionManager {
 		List<Mission> allMissions = new ArrayList<>();
@@ -288,6 +293,7 @@ public class MissionManagerDBImplementation implements MissionManager {
 	@Override
 	/**
 	 * Listado de todas las misiones de ataque
+	 * 
 	 * @return attackMissions listado
 	 * @throws ExceptionManager ExceptionManager
 	 */
@@ -338,6 +344,7 @@ public class MissionManagerDBImplementation implements MissionManager {
 	@Override
 	/**
 	 * Listado de todas las misiones de defensa
+	 * 
 	 * @return DefendMissions listado
 	 * @throws ExceptionManager ExceptionManager
 	 */

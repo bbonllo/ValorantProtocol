@@ -12,7 +12,10 @@ import controlador.ViewManagerImplementation;
 import controlador.WeaponManager;
 
 public class Main {
-
+	/**
+	 * Metodo que inicia toda la aplicacion
+	 * @param args Array para los parametros de la linea de comandos
+	 */
 	public static void main(String[] args) {
 		// Data manipulation
 		MapManager map = DataFactoryMap.getMapData();

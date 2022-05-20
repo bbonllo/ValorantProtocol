@@ -21,9 +21,6 @@ import javax.swing.SwingConstants;
 import javax.swing.JProgressBar;
 
 public class VMap extends JDialog {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private MapManager mapData;
 	private JLabel lblMapName;
@@ -54,21 +51,36 @@ public class VMap extends JDialog {
 	private List<Integer> agentPercentageMapAttack = new ArrayList<>();
 	private List<Integer> agentPercentageMapDefend = new ArrayList<>();
 
-	public VMap(MapManager map, VPestaniasAgente vPestaniasAgente, boolean b, String mapName) throws ExceptionManager {
+	/**
+	 * Create the frame.
+	 * 
+	 * @param map              Modelo de dato de mapa
+	 * @param vPestaniasAgente Ventana modal
+	 * @param b                Booleana a true que la ventana sea modal
+	 * @param mapName          Nombre del mapa para carga de imagenes y datos
+	 */
+	public VMap(MapManager map, VPestaniasAgente vPestaniasAgente, boolean b, String mapName) {
 		mapData = map;
 		setModal(true);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(VMap.class.getResource("/resources/rotGamesLogo.png")));
 		setBounds(300, 100, 1300, 900);
 		getContentPane().setLayout(null);
 
-		Map newMap = mapData.getMapByName(mapName);
-		String iconMap = "/resources/Loading_Screen_" + newMap.getMapName() + ".jpg";
-		agentNamesAttack = mapData.getAttackMissionAgents(mapName);
-		agentNamesDefend = mapData.getDefendMissionAgents(mapName);
-		agentPercentageMapAttack = mapData.agentPercentageMapAttack(mapName);
-		agentPercentageMapDefend = mapData.agentPercentageMapDefend(mapName);
-		attackWeapon = "/resources/" + mapData.getAttackMissionWeapon(mapName) + ".png";
-		defendWeapon = "/resources/" + mapData.getDefendMissionWeapon(mapName) + ".png";
+		Map newMap = null;
+		String iconMap = null;
+		try {
+			newMap = mapData.getMapByName(mapName);
+			iconMap = "/resources/Loading_Screen_" + newMap.getMapName() + ".jpg";
+			agentNamesAttack = mapData.getAttackMissionAgents(mapName);
+			agentNamesDefend = mapData.getDefendMissionAgents(mapName);
+			agentPercentageMapAttack = mapData.agentPercentageMapAttack(mapName);
+			agentPercentageMapDefend = mapData.agentPercentageMapDefend(mapName);
+			attackWeapon = "/resources/" + mapData.getAttackMissionWeapon(mapName) + ".png";
+			defendWeapon = "/resources/" + mapData.getDefendMissionWeapon(mapName) + ".png";
+		} catch (ExceptionManager e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		lblWeaponDefendName = new JLabel("");
 		lblWeaponDefendName.setHorizontalAlignment(SwingConstants.CENTER);
@@ -232,42 +244,59 @@ public class VMap extends JDialog {
 		cargarDatos(newMap, iconMap, mapName);
 	}
 
-	private void cargarDatos(Map newMap, String iconMap, String mapName) throws ExceptionManager {
+	/**
+	 * 
+	 * @param newMap  Objeto tipo Map con los datos del mapa pedido
+	 * @param iconMap Icono del mapa
+	 * @param mapName Nombre del mapa
+	 */
+	private void cargarDatos(Map newMap, String iconMap, String mapName) {
 		boolean attack = true;
 		boolean defend = true;
 
 		if (agentNamesAttack.size() != 0) {
-			lblAttackAgentName3.setText(agentNamesAttack.get(2) + " - " + agentPercentageMapAttack.get(2) + "%");
-			lblAttackAgentName2.setText(agentNamesAttack.get(1) + " - " + agentPercentageMapAttack.get(1) + "%");
-			lblAttackAgentName1.setText(agentNamesAttack.get(0) + " - " + agentPercentageMapAttack.get(0) + "%");
-			progressBarAttackAgent3.setValue(agentPercentageMapAttack.get(2));
-			progressBarAttackAgent2.setValue(agentPercentageMapAttack.get(1));
-			progressBarAttackAgent1.setValue(agentPercentageMapAttack.get(0));
-			lblWeaponAttackName.setText(mapData.getAttackMissionWeapon(mapName));
 			try {
-				lblWeaponAttack.setIcon(new ImageIcon(VMap.class.getResource(attackWeapon)));
-			} catch (NullPointerException e) {
-				JOptionPane.showMessageDialog(this, "Arma",
-						"Todavia no existe imagen para " + mapData.getAttackMissionWeapon(mapName),
-						JOptionPane.INFORMATION_MESSAGE);
+				lblAttackAgentName3.setText(agentNamesAttack.get(2) + " - " + agentPercentageMapAttack.get(2) + "%");
+				lblAttackAgentName2.setText(agentNamesAttack.get(1) + " - " + agentPercentageMapAttack.get(1) + "%");
+				lblAttackAgentName1.setText(agentNamesAttack.get(0) + " - " + agentPercentageMapAttack.get(0) + "%");
+				progressBarAttackAgent3.setValue(agentPercentageMapAttack.get(2));
+				progressBarAttackAgent2.setValue(agentPercentageMapAttack.get(1));
+				progressBarAttackAgent1.setValue(agentPercentageMapAttack.get(0));
+				lblWeaponAttackName.setText(mapData.getAttackMissionWeapon(mapName));
+
+				try {
+					lblWeaponAttack.setIcon(new ImageIcon(VMap.class.getResource(attackWeapon)));
+				} catch (NullPointerException e) {
+					JOptionPane.showMessageDialog(this, "Arma",
+							"Todavia no existe imagen para " + mapData.getAttackMissionWeapon(mapName),
+							JOptionPane.INFORMATION_MESSAGE);
+				}
+			} catch (ExceptionManager e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
 		} else
 			attack = false;
 
 		if (agentNamesDefend.size() != 0) {
-			lblDefendAgentName3.setText(agentNamesDefend.get(2) + " - " + agentPercentageMapDefend.get(2) + "%");
-			lblDefendAgentName2.setText(agentNamesDefend.get(1) + " - " + agentPercentageMapDefend.get(1) + "%");
-			lblDefendAgentName1.setText(agentNamesDefend.get(0) + " - " + agentPercentageMapDefend.get(0) + "%");
-			progressBarDefendAgent3.setValue(agentPercentageMapDefend.get(2));
-			progressBarDefendAgent2.setValue(agentPercentageMapDefend.get(1));
-			progressBarDefendAgent1.setValue(agentPercentageMapDefend.get(0));
-			lblWeaponDefendName.setText(mapData.getDefendMissionWeapon(mapName));
 			try {
-				lblWeaponDefend.setIcon(new ImageIcon(VMap.class.getResource(defendWeapon)));
-			} catch (NullPointerException e) {
-				JOptionPane.showMessageDialog(this, "Arma",
-						"Todavia no existe imagen para " + mapData.getDefendMissionWeapon(mapName),
-						JOptionPane.INFORMATION_MESSAGE);
+				lblDefendAgentName3.setText(agentNamesDefend.get(2) + " - " + agentPercentageMapDefend.get(2) + "%");
+				lblDefendAgentName2.setText(agentNamesDefend.get(1) + " - " + agentPercentageMapDefend.get(1) + "%");
+				lblDefendAgentName1.setText(agentNamesDefend.get(0) + " - " + agentPercentageMapDefend.get(0) + "%");
+				progressBarDefendAgent3.setValue(agentPercentageMapDefend.get(2));
+				progressBarDefendAgent2.setValue(agentPercentageMapDefend.get(1));
+				progressBarDefendAgent1.setValue(agentPercentageMapDefend.get(0));
+				lblWeaponDefendName.setText(mapData.getDefendMissionWeapon(mapName));
+				try {
+					lblWeaponDefend.setIcon(new ImageIcon(VMap.class.getResource(defendWeapon)));
+				} catch (NullPointerException e) {
+					JOptionPane.showMessageDialog(this, "Arma",
+							"Todavia no existe imagen para " + mapData.getDefendMissionWeapon(mapName),
+							JOptionPane.INFORMATION_MESSAGE);
+				}
+			} catch (ExceptionManager e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
 
 		} else

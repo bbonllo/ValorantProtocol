@@ -21,6 +21,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 	@Override
 	/**
 	 * Busqueda de agente por ID
+	 * 
 	 * @param agentCode ID del agente a buscar
 	 * @return getAgent encontrado (Si no es encontrado null)
 	 * @throws ExceptionManager ExceptionManager
@@ -93,6 +94,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 	@Override
 	/**
 	 * Registro de un agente
+	 * 
 	 * @param registerAgent agente que se quiere registrar
 	 * @throws ExceptionManager ExceptionManager
 	 */
@@ -190,6 +192,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 	@Override
 	/**
 	 * Modificacion de un agente
+	 * 
 	 * @param modifyAgent
 	 * @throws ExceptionManager ExceptionManager
 	 */
@@ -285,6 +288,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 	@Override
 	/**
 	 * Poner un agente inactivo con su ID
+	 * 
 	 * @param agentCode ID del agente
 	 * @throws ExceptionManager ExceptionManager
 	 */
@@ -311,6 +315,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 	@Override
 	/**
 	 * Poner un agente activo con su ID
+	 * 
 	 * @param agentCode ID del agente
 	 * @throws ExceptionManager ExceptionManager
 	 */
@@ -336,6 +341,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 	@Override
 	/**
 	 * Listado de todos los agentes
+	 * 
 	 * @return agents Un List de los agentes
 	 * @throws ExceptionManager ExceptionManager
 	 */
@@ -381,6 +387,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 	@Override
 	/**
 	 * Listado de todos los agentes activos
+	 * 
 	 * @return activeAgents Un List de los agentes activos
 	 * @throws ExceptionManager ExceptionManager
 	 */
@@ -424,8 +431,9 @@ public class AgentManagerDBImplementation implements AgentManager {
 	@Override
 	/**
 	 * LogIn de un agente
+	 * 
 	 * @param agentCode ID del agente
-	 * @param passwd contraseña del agente
+	 * @param passwd    contraseña del agente
 	 * @return getAgent Agente logueado
 	 * @throws ExceptionManager ExceptionManager
 	 */
@@ -502,6 +510,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 	@Override
 	/**
 	 * Listado de los compañeros de un agente a su codigo
+	 * 
 	 * @param agenCode ID del agente
 	 * @return teammates int[] de los ID de sus compañeros
 	 * @throws ExceptionManager ExceptionManager

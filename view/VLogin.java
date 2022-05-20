@@ -65,6 +65,7 @@ public class VLogin extends JFrame implements ActionListener {
 	 * @param map
 	 * @param agent
 	 * @param weapon
+	 * @param mission
 	 */
 
 	public VLogin(MapManager map, AgentManager agent, WeaponManager weapon, MissionManager mission) {
@@ -294,6 +295,10 @@ public class VLogin extends JFrame implements ActionListener {
 		}
 	}
 
+	/**
+	 * Metodo para comprobar que las credenciales introducidas son correctas
+	 * 
+	 */
 	private void login() {
 		if (txtUser.getText().isEmpty() || txtPasswd.getPassword().length == 0) {
 			JOptionPane.showMessageDialog(this, "Campo usuario o contraseña no rellenado", "Error",
@@ -309,12 +314,13 @@ public class VLogin extends JFrame implements ActionListener {
 					JOptionPane.showMessageDialog(this, "Credenciales incorrectas", "Error",
 							JOptionPane.INFORMATION_MESSAGE);
 				} else if (loginAgent.isAgentIsAdmin() == true) {
-					VPestaniasAgente vPestaniasAgente = new VPestaniasAgente(loginAgent, mapData, agentData,
-							weaponData, missionData);
+					VPestaniasAgente vPestaniasAgente = new VPestaniasAgente(loginAgent, mapData, agentData, weaponData,
+							missionData);
 					vPestaniasAgente.setVisible(true);
 					this.dispose();
 				} else {
-					JOptionPane.showMessageDialog(this, "El usuario introducido no es administrador", "Error", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(this, "El usuario introducido no es administrador", "Error",
+							JOptionPane.WARNING_MESSAGE);
 				}
 			} catch (NumberFormatException e1) {
 				JOptionPane.showMessageDialog(this, "El nombre de usuario tiene que ser un entero", "Error",
