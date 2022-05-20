@@ -72,6 +72,10 @@ import java.awt.event.FocusEvent;
 import javax.swing.SpinnerDateModel;
 import javax.swing.JList;
 
+/**
+ * @author Grupo-E
+ *
+ */
 public class VPestaniasAgente extends JFrame implements ActionListener, MouseListener {
 	private static final long serialVersionUID = 1L;
 	private AgentManager agentData;

@@ -13,14 +13,18 @@ import model.Ability;
 import model.AbilityUltimate;
 import model.Agent;
 
+/**
+ * @author Grupo-E
+ *
+ */
 public class AgentTest {
 
-	@Test
 	/**
 	 * Testeo de obtencion de agente por su ID
 	 * 
 	 * @throws ExceptionManager
 	 */
+	@Test
 	public void testGetAgentByID() throws ExceptionManager {
 		// Preparar datos
 		int agentCode = 10;
@@ -31,12 +35,12 @@ public class AgentTest {
 		assertNotNull(ag);
 	}
 
-	@Test(expected = ExceptionManager.class)
 	/**
 	 * Testeo del registro de un agente
 	 * 
 	 * @throws ExceptionManager
 	 */
+	@Test(expected = ExceptionManager.class)
 	public void testRegisterAgent() throws ExceptionManager {
 		// Preparar datos
 		int agentCode = 23;
@@ -60,12 +64,12 @@ public class AgentTest {
 		assertFalse(ag.isAgentIsOnActive());
 	}
 
-	@Test
 	/**
 	 * Testeo de la modificacion de un agente
 	 * 
 	 * @throws ExceptionManager
 	 */
+	@Test
 	public void testModifyAgent() throws ExceptionManager {
 		// Preparar datos
 		int agentCode = 21;
@@ -95,12 +99,12 @@ public class AgentTest {
 		assertNotNull(ag.getAgentCode());
 	}
 
-	@Test
 	/**
 	 * Testeo de la conversion de un agente a inactivo
 	 * 
 	 * @throws ExceptionManager
 	 */
+	@Test
 	public void testMakeAgentInactive() throws ExceptionManager {
 		// Preparar datos
 		int agentCode = 21;
@@ -112,12 +116,12 @@ public class AgentTest {
 		assertFalse(ag.isAgentIsOnActive());
 	}
 
-	@Test
 	/**
 	 * Testeo de la conversion de un agente a activo
 	 * 
 	 * @throws ExceptionManager
 	 */
+	@Test
 	public void testMakeAgentActive() throws ExceptionManager {
 		// Preparar datos
 		int agentCode = 21;
@@ -129,12 +133,12 @@ public class AgentTest {
 		assertFalse(ag.isAgentIsOnActive());
 	}
 
-	@Test
 	/**
 	 * Testeo del listado de todos los agentes
 	 * 
 	 * @throws ExceptionManager
 	 */
+	@Test
 	public void testGetAllAgents() throws ExceptionManager {
 		// Preparar datos
 		AgentManager agMan = new AgentManagerDBImplementation();
@@ -147,12 +151,12 @@ public class AgentTest {
 
 	}
 
-	@Test
 	/**
 	 * Testeo del listado de todos los agentes activos
 	 * 
 	 * @throws ExceptionManager
 	 */
+	@Test
 	public void testGetAllActiveAgents() throws ExceptionManager {
 		// Preparar datos
 		AgentManager agMan = new AgentManagerDBImplementation();
@@ -162,12 +166,12 @@ public class AgentTest {
 		assertNotNull(agents);
 	}
 
-	@Test
 	/**
 	 * Testeo de logeo del agente
 	 * 
 	 * @throws ExceptionManager
 	 */
+	@Test
 	public void testLogin() throws ExceptionManager {
 		// Preparar datos
 		int agentCode = 13;
@@ -179,12 +183,12 @@ public class AgentTest {
 		assertNotNull(agent);
 	}
 
-	@Test(expected = ExceptionManager.class)
 	/**
 	 * Testeo del listado de los compañeros de un agente
 	 * 
 	 * @throws ExceptionManager
 	 */
+	@Test(expected = ExceptionManager.class)
 	public void testGetTeammates() throws ExceptionManager {
 		// Preparar datos
 		int agentCode = 1;

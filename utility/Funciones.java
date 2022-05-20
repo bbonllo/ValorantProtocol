@@ -2,8 +2,18 @@ package utility;
 
 import java.time.LocalDateTime;
 
+/**
+ * @author Grupo-E
+ *
+ */
 public class Funciones {
 
+	/**
+	 * Metodo que comprueba que la fecha introducida es posterior a la de hoy
+	 * 
+	 * @param dateTimeMission Fecha a comprobar
+	 * @return Booleana si es correcta true si no false
+	 */
 	public static boolean checkDateTime(String dateTimeMission) {
 		boolean isCorrect = false;
 		LocalDateTime localDate = LocalDateTime.now();

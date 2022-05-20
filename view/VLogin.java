@@ -35,6 +35,10 @@ import javax.swing.border.LineBorder;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+/**
+ * @author Grupo-E
+ *
+ */
 public class VLogin extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private AgentManager agentData;

@@ -1,7 +1,5 @@
 package model;
 
-
-
 public class Ability {
 
 	private String abilityName;

@@ -20,6 +20,10 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JProgressBar;
 
+/**
+ * @author Grupo-E
+ *
+ */
 public class VMap extends JDialog {
 	private static final long serialVersionUID = 1L;
 	private MapManager mapData;

@@ -5,13 +5,25 @@ import java.awt.Component;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
+/**
+ * @author Grupo-E
+ *
+ */
 public class RowsRenderer extends DefaultTableCellRenderer {
 	/**
 		 * 
 		 */
 	private static final long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
 	private int columna;
 
+	/**
+	 * Permite cargar los datos en la variable columna
+	 * 
+	 * @param Colpatron Int con la columna seleccionada
+	 */
 	public RowsRenderer(int Colpatron) {
 		this.columna = Colpatron;
 	}
