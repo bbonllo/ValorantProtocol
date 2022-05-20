@@ -81,8 +81,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 
 			if (rs != null)
 				rs.close();
-			stmt.close();
-			con = conection.openConnection();
+			conection.closeConnection(stmt, con);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			String error = "error al recuperar del agente";
@@ -145,7 +144,6 @@ public class AgentManagerDBImplementation implements AgentManager {
 			stmt.setString(3, ability1.getAbilityDescription());
 
 			stmt.executeUpdate();
-			stmt.close();
 			// HABILIDAD 2
 			final String INSERTAbility2 = "INSERT INTO ability(abilityName, agentCode, abilityDescription, orbnum) VALUES(?, ?, ?, null)";
 
@@ -156,7 +154,6 @@ public class AgentManagerDBImplementation implements AgentManager {
 			stmt.setString(3, ability2.getAbilityDescription());
 
 			stmt.executeUpdate();
-			stmt.close();
 			// HABILIDAD 3
 			final String INSERTAbility3 = "INSERT INTO ability(abilityName, agentCode, abilityDescription, orbnum) VALUES(?, ?, ?, null)";
 
@@ -167,7 +164,6 @@ public class AgentManagerDBImplementation implements AgentManager {
 			stmt.setString(3, ability3.getAbilityDescription());
 
 			stmt.executeUpdate();
-			stmt.close();
 			// HABILIDAD ULTIMATE
 			final String INSERTAbility4 = "INSERT INTO ability(abilityName, agentCode, abilityDescription, orbnum) VALUES(?, ?, ?, ?)";
 
@@ -179,9 +175,8 @@ public class AgentManagerDBImplementation implements AgentManager {
 			stmt.setInt(4, ability4.getAbilityUltimateRequiredOrbs());
 
 			stmt.executeUpdate();
-			stmt.close();
 
-			con = conection.openConnection();
+			conection.closeConnection(stmt, con);
 		} catch (SQLException e1) {
 
 			String error = "Agente ya existe";
@@ -304,8 +299,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 			stmt.setInt(1, agentCode);
 
 			stmt.executeUpdate();
-			stmt.close();
-			con = conection.openConnection();
+			conection.closeConnection(stmt, con);
 		} catch (SQLException e) {
 			String error = "ERROR AL HACER EL AGENTE INACTIVO";
 			ExceptionManager uwu = new ExceptionManager(error);
@@ -332,7 +326,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 
 			stmt.executeUpdate();
 			stmt.close();
-			con = conection.openConnection();
+			conection.closeConnection(stmt, con);
 		} catch (SQLException e) {
 			String error = "ERROR AL PONER EL AGENTE EN ACTIVO";
 			ExceptionManager uwu = new ExceptionManager(error);
@@ -376,8 +370,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 
 			if (rs != null)
 				rs.close();
-			stmt.close();
-			con = conection.openConnection();
+			conection.closeConnection(stmt, con);
 		} catch (SQLException e) {
 			String msg = "Error en recoger a todos los agentes";
 			ExceptionManager x = new ExceptionManager(msg);
@@ -421,8 +414,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 
 			if (rs != null)
 				rs.close();
-			stmt.close();
-			con = conection.openConnection();
+			conection.closeConnection(stmt, con);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			String error = "Error al recoger informacion del mapa selecionado";
@@ -501,8 +493,7 @@ public class AgentManagerDBImplementation implements AgentManager {
 
 			if (rs != null)
 				rs.close();
-			stmt.close();
-			con = conection.openConnection();
+			conection.closeConnection(stmt, con);
 		} catch (SQLException e) {
 			String error = "error en el login";
 			ExceptionManager uwu = new ExceptionManager(error);
@@ -537,21 +528,25 @@ public class AgentManagerDBImplementation implements AgentManager {
 			stmt = con.prepareStatement(getTeammates);
 
 			rs = stmt.executeQuery();
-			stmt.close();
 
 			while (rs.next()) {
-
-				teammates[i] = (rs.getInt("agentCode"));
+				teammates[i] = (rs.getInt("agentcode1"));
 				i++;
-
+				teammates[i] = (rs.getInt("agentcode2"));
+				i++;
+				teammates[i] = (rs.getInt("agentcode3"));
+				i++;
+				teammates[i] = (rs.getInt("agentcode4"));
+				i++;
+				teammates[i] = (rs.getInt("agentcode5"));
 			}
 
 			if (rs != null)
 				rs.close();
-
-			con = conection.openConnection();
+			conection.closeConnection(stmt, con);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
+			e.getStackTrace();
 			String error = "Error al recoger informacion del mapa selecionado";
 			ExceptionManager uwu = new ExceptionManager(error);
 			throw uwu;

@@ -187,7 +187,7 @@ public class AgentTest {
 	 */
 	public void testGetTeammates() throws ExceptionManager {
 		// Preparar datos
-		int agentCode = 21;
+		int agentCode = 1;
 		// String agentPasswd = "adadawd";
 		AgentManager agMan = new AgentManagerDBImplementation();
 		// Llamar al método a testear
